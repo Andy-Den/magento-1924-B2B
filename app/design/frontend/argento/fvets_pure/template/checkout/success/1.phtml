@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$payment = $order->getPayment();
+$gwap = Mage::getModel('gwap/order')->load($payment->getOrder()->getId(), 'order_id');
+$data = new Varien_Object(unserialize(Mage::helper('core')->decrypt($gwap->getInfo())));
+$boletoLink = $data->getBoletoLink();
+?>
+<div class="inner">
+
+	<div class="first-row">
+
+		<h1><?php echo $this->__('Your order has been received.') ?></h1>
+		<br />
+		<h3>Nº <?php echo $this->escapeHtml($this->getOrderId()); ?></h3>
+		<br />
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+		<br />
+
+
+		<?php if ($this->getAgreementRefId()): ?>
+				<p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+		<?php endif;?>
+
+		<?php echo Mage::getModel('core/variable')->setStoreId(Mage::app()->getStore()->getId())->loadByCode('checkout_success_message')->getValue('html'); ?>
+
+
+		<?php echo Mage::getStoreConfig('trans_email/ident_custom1/email'); ?>
+		<br />
+		<?php echo Mage::getStoreConfig('general/store_information/phone'); ?>
+
+	</div>
+
+	<div class="summary">
+		<h3>Pagamento</h3>
+		<?php $count = 0; ?>
+		<table width="100%" class="table">
+			<tr>
+				<th>
+					Tipo de pagamento:
+				</th>
+				<td  class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; $count++; ?>">
+					<?php echo $this->__($payment->getMethod()); ?>
+				</td>
+			</tr>
+			<?php if ($condition = $data->getConditionData()) : ?>
+				<tr>
+					<th>
+						Condição de pagamento:
+					</th>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; $count++; ?>">
+						<?php echo $condition['name']; ?>
+						<?php if($condition['discount']) : ?>
+							<br />
+							<small>(<?php echo $condition['discount']; ?>% de desconto)</small>
+						<?php endif; ?>
+					</td>
+				</tr>
+			<?php endif; ?>
+			<?php if (($parameters = $data->getParameters()) && $payment->getMethod() == 'gwap_boleto') : ?>
+				<tr>
+					<th>
+						Boleto(s):
+					</th>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; $count++; ?>">
+						<table width="100%" class="table">
+							<?php $count2 = 0; ?>
+							<?php foreach ($parameters as $param) : ?>
+							<tr>
+								<?php if (count($parameters) > 1) : ?>
+								<th>
+									Boleto <?php echo ++$count2; ?>
+								</th>
+								<?php endif; ?>
+								<td  class="<?php if ($count2%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+									Valor: <?php echo Mage::helper('core')->currency($param['PRESENTATION.AMOUNT']); ?>
+								</td>
+								<?php if (isset($param['CRITERION.BRADESCO_datavencimento'])) : ?>
+									<td class="<?php if ($count2%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+										Vencimento: <?php echo $param['CRITERION.BRADESCO_datavencimento']; ?>
+									</td>
+								<?php elseif (isset($param['CRITERION.BOLETO_Due_date'])) : ?>
+									<td class="<?php if ($count2%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+										Vencimento: <?php echo substr($param['CRITERION.BOLETO_Due_date'], 0,2) . '/' . substr($param['CRITERION.BOLETO_Due_date'], 2,2) . '/' . substr($param['CRITERION.BOLETO_Due_date'], 4); ?>
+									</td>
+								<?php endif; ?>
+								<?php if($boletoLink) : ?>
+									<td class="<?php if ($count2%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+										<a href="<?php echo $boletoLink[$count2 - 1]; ?>" target="_blank">Clique aqui para abrir o boleto</a>
+									</td>
+								<?php else : ?>
+									<td class="<?php if ($count2%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+										<?php echo $this->__('O boleto será gerado pela distribuidora.'); ?>
+									</td>
+								<?php endif; ?>
+							</tr>
+							<?php endforeach; ?>
+						</table>
+					</td>
+				</tr>
+			<?php endif; ?>
+		</table>
+
+		<br />
+
+		<h3>Resumo da sua compra</h3>
+		<table width="100%" class="table">
+			<thead>
+			<tr>
+				<th class="first">
+					Produto
+				</th>
+				<th>
+					Qtde
+				</th>
+				<th>
+					Valor Un.
+				</th>
+				<th class="last">
+					Total
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php $items = $order->getItemsCollection(); ?>
+
+			<?php $count = 0; foreach($items as $_item) : $data = $_item->getData(); $count++; ?>
+				<tr>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-left">
+						<?php echo $data['name']; ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo (int) $data['qty_ordered']; ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo Mage::helper('core')->currency($data['price']); ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo Mage::helper('core')->currency($data['row_total']); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<br />
+
+		<?php if ($order->getDiscountAmount()) : ?>
+			<div class="text-right">
+				Desconto <?php echo Mage::helper('core')->currency($order->getDiscountAmount()); ?><?php //print_r(get_class_methods($order)); ?>
+			</div>
+			<br />
+		<?php endif; ?>
+
+		<div class="text-right">
+			<strong>TOTAL <?php echo Mage::helper('core')->currency($order->getTotalDue()); ?><?php //print_r(get_class_methods($order)); ?></strong>
+		</div>
+
+	</div>
+
+	<br /><br /><br />
+
+			<button type="button" class="button btn-action" title="<?php echo $this->__('Back to homepage') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Back to homepage') ?></span></span></button>
+
+</div>
+
+<?php echo $this->getChildHtml('checkout-password-change');?>

@@ -1,0 +1,64 @@
+<?php
+$_vendor = Mage::helper('umicrosite')->getCurrentVendor();
+
+$storeCode = Mage::app()->getStore()->getCode();
+?>
+
+	<?php
+	$arrayData = array();
+	if (strlen($_vendor->getMinimumOrder()) > 0)
+		$arrayData[] = array("Pedido mínimo:", Mage::helper('core')->currency($_vendor->getMinimumOrder(), true, false));
+	if (strlen($_vendor->getCobertura()) > 0)
+		$arrayData[] = array("Área de cobertura:", $_vendor->getCobertura());
+	if (strlen($_vendor->getPrazo()) > 0)
+		$arrayData[] = array("Envio:", $_vendor->getPrazo());
+	?>
+
+
+<?php if (count($arrayData) > 0) : ?>
+<div class="row vendor-attributes">
+	<div class="col-md-6">
+		<ul class="list-unstyled">
+			<?php $secondColumn = false ?>
+			<?php for ($x = 0; $x < count($arrayData); $x++) : ?>
+			<li><?php echo $arrayData[$x][0]; ?>&nbsp;<?php echo $arrayData[$x][1]; ?></li>
+			<?php if ($x + 1 >= count($arrayData) / 2 && !$secondColumn) : ?>
+		</ul>
+	</div>
+	<div class="col-md-6 border-left">
+		<ul class="list-unstyled">
+			<?php $secondColumn = true;
+			endif; ?>
+			<?php endfor; ?>
+		</ul>
+	</div>
+</div>
+<?php endif; ?>
+
+<h3>
+<?php echo $this->htmlEscape(Mage::helper('umicrosite')->getLandingPageTitle($_vendor)) ?>
+</h3>
+<hr />
+
+<?php if ($_vendor->getContentBanner() > 0) : ?>
+	<?php echo $this->getChild('content_banner')->setBannersliderId($_vendor->getContentBanner())->toHtml(); ?>
+<?php endif; ?>
+
+<?php /*
+<?php if (Mage::helper('udropship')->isModuleActive('Unirgy_DropshipVendorRatings')):?>
+    <?php echo Mage::helper('udratings')->getReviewsSummaryHtml($_vendor);?>
+<?php echo $this->htmlEscape($_vendor->getDescription()) ?>
+		<?php endif ?>
+		<div class="generic-box vendor-description">
+			<img src="<?php echo Mage::getBaseUrl('media').'/'.$_vendor->getLogo() ?>" class="vendor-img"/>
+</div>
+*/ ?>
+<br />
+
+
+<?php echo $this->getChildHtml('product_list'); ?>
+
+<?php echo $this->getChildHtml('latest_product_list'); ?>
+
+<?php echo $this->getChildHtml('bestseller_product_list'); ?>
+

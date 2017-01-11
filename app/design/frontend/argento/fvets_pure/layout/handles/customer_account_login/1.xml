@@ -1,0 +1,15 @@
+<include_layout version="0.1.0">
+    <customer_account_login>
+        <update handle="page_one_column" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_login/1.less</name></action>
+        </reference>
+        <reference name="header">
+            <remove name="headerLogin"/>
+        </reference>
+        <reference name="customer_form_login">
+            <!--action method="setTemplate"><template>customer/form/login/1.phtml</template></action-->
+            <action method="setTemplate"><template>ds/privatesales/login/1.phtml</template></action>
+        </reference>
+    </customer_account_login>
+</include_layout>

@@ -1,0 +1,40 @@
+<?php $conditions = $this->getConditions(); ?>
+<?php $salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep(); ?>
+<?php $storeName = Mage::getStoreConfig('general/store_information/name');?>
+
+<ul class="payment-condition">
+     <div class="block-header">
+            2 - <?php echo $this->__('Select the payment conditions'); ?>
+ </div>
+        <?php $count = 0; ?>
+    <?php if(count($conditions) > 0): ?>
+  <?php foreach ($conditions as $condition) : ?>
+        <li class="clearfix">
+         <label>
+                       <input type="radio" onclick="checkoutShowNextFrame(<?php echo $salesrep ? $salesrep->getId() : ''; ?>)" name="fvets_quote_conditions[<?php echo $salesrep ? $salesrep->getId() : ''; ?>]" <?php if($count++ == 0) : ?>checked="checked"<?php endif; ?> value="<?php echo $condition->getId(); ?>" />
+                  <?php echo $condition->getName(); ?>
+            <?php if ($condition->getDiscount()): ?>
+                <?php $conditionDiscountText = Mage::getStoreConfig('payment_condition/general/condition_discount_text'); ?>
+                <?php if (!$conditionDiscountText) { ?>
+                    (<?php echo $condition->getDiscount(); ?>% de desconto)
+                <?php } else { ?>
+                    <?php echo str_replace('%s', $condition->getDiscount(), $conditionDiscountText); ?>
+                <?php } ?>
+            <?php endif; ?>
+
+            <?php if ($condition->getIncrease()): ?>
+                <?php $conditionIncreaseText = Mage::getStoreConfig('payment_condition/general/condition_increase_text'); ?>
+                <?php if (!$conditionIncreaseText) { ?>
+                    (<?php echo $condition->getIncrease(); ?>% de acréscimo)
+                <?php } else { ?>
+                    <?php echo str_replace('%s', $condition->getIncrease(), $conditionIncreaseText); ?>
+                <?php } ?>
+                      <?php endif; ?>
+               </label>
+      </li>
+ <?php endforeach; ?>
+ <?php else: ?>
+        <li class="clearfix"><?php echo "As condições de pagamento serão analisadas pela Distribuidora $storeName"?></li>
+    <?php endif; ?>
+</ul>
+

@@ -1,0 +1,209 @@
+<?php
+$time = rand(0, time());
+$block_data = $this->getBlockData();
+$banners = $block_data['banners'];
+$width = $block_data['block']['width'];
+
+if ($block_data['block']['sort_type'] == '0')
+	shuffle($banners);
+?>
+
+<div class="brand-slide row">
+	<div class="col-md-1">
+		<a href="javascript://" class="BannerSliderNext">
+			<i class="fa fa-chevron-left"></i>
+		</a>
+	</div>
+	<div class="col-md-10">
+		<div class="bannersBrands<?php echo $time; ?>">
+			<ul class="ul1"></ul>
+			<ul class="ul2"></ul>
+		</div>
+	</div>
+	<div class="col-md-1">
+		<a href="javascript://" class="BannerSliderPrev">
+			<i class="fa fa-chevron-right"></i>
+		</a>
+	</div>
+</div>
+
+<script>
+	var image;
+	var brands = new Array();
+
+<?php foreach ($banners as $banner) : ?>
+	image = new Image();
+	image.src = "<?php echo $this->getBannerImage($banner['image']); ?>";
+	image.alt = "<?php echo $banner['image_alt'];?>";
+	brands.push(new Array(image, "<?php echo $banner['click_url']?>", "<?php echo $this->getTarget($banner['tartget'])?>"));
+<?php endforeach; ?>
+
+	var width = jQuery('.bannersBrands<?php echo $time; ?>').width();
+	var html = '';
+	var sum = 0;
+	var index = 0;
+	var count = 0;
+	var lastDirection;
+	var first = true;
+	var colIndex = 0;
+	var timeOut = null;
+
+	function getBannerHtml(direction)
+	{
+
+		clearTimeout(timeOut);
+
+		htmlPrev = '';
+
+		var log = '';
+
+		var firstInteraction = true;
+		while(sum + <?php echo $width; ?> < width) {
+			if (direction == 'next')
+			{
+				if (lastDirection == 'prev')
+					index = colIndex;
+				index++;
+				if (brands[index] == undefined)
+					index = 0;
+			}
+			else
+			{
+				if (lastDirection == 'next')
+					index = colIndex;
+				index--;
+				if (brands[index] == undefined)
+					index = brands.length - 1;
+			}
+
+			if (firstInteraction) {
+				colIndex = index;
+				firstInteraction = false;
+			}
+
+
+			sum += <?php echo $width; ?>;
+			html += '<li><a href="'+brands[index][1]+'" target="'+brands[index][2]+'"><img src="'+brands[index][0].src+'" alt="'+brands[index][0].alt+'" width="<?php echo $width; ?>" /></a></li>';
+			log += ' ' + index;
+
+			count++;
+			lastDirection = direction;
+		}
+
+		var ul1 = jQuery('.bannersBrands<?php echo $time; ?> .ul1');
+		var ul2 = jQuery('.bannersBrands<?php echo $time; ?> .ul2');
+
+		if (first) {
+			jQuery(ul1).html(html);
+			jQuery(ul2).css({'left' : jQuery('.bannersBrands<?php echo $time; ?>').width()});
+		}
+
+		jQuery(ul2).html(html);
+
+		if (direction == 'next' && !first) {
+			jQuery(ul1).css({"left": 0});
+			jQuery(ul2).css({"left": jQuery('.bannersBrands<?php echo $time; ?>').width()});
+			jQuery(ul1).animate({"left": -jQuery('.bannersBrands<?php echo $time; ?>').width()},1000);
+			jQuery(ul2).animate({"left": 0},1000,function() {
+				jQuery(ul1).removeClass('ul1');
+				jQuery(ul1).addClass('ul2');
+				jQuery(ul2).removeClass('ul2');
+				jQuery(ul2).addClass('ul1');
+				//jQuery(ul2).css({'left' : 0});
+				//jQuery(ul1).css({'left' : jQuery('.bannersBrands<?php echo $time; ?>').width()});
+			});
+		}
+
+		if (direction == 'prev' && !first) {
+			jQuery(ul1).css({"left": 0});
+			jQuery(ul2).css({"left": -jQuery('.bannersBrands<?php echo $time; ?>').width()});
+			jQuery(ul1).animate({"left": jQuery('.bannersBrands<?php echo $time; ?>').width()},1000);
+			jQuery(ul2).animate({"left": 0},1000,function() {
+				jQuery(ul1).removeClass('ul1');
+				jQuery(ul1).addClass('ul2');
+				jQuery(ul2).removeClass('ul2');
+				jQuery(ul2).addClass('ul1');
+				//jQuery(ul2).css({'left' : 0});
+				//jQuery(ul1).css({'left' : jQuery('.bannersBrands<?php echo $time; ?>').width()});
+			});
+		}
+
+		jQuery(ul2).css({'width' : jQuery('.bannersBrands<?php echo $time; ?>').width()});
+
+
+
+		jQuery('.bannersBrands<?php echo $time; ?> ul li').css({'width' : + (100 * (jQuery('.bannersBrands<?php echo $time; ?>').width() / count)) / jQuery('.bannersBrands<?php echo $time; ?>').width() + '%'})
+
+		sum = 0;
+		html = '';
+		count = 0;
+		first = false;
+
+
+		timeOut = setTimeout(function() {getBannerHtml(direction)}, 10000);
+
+	}
+
+	jQuery('.BannerSliderNext').bind({
+		click : function(event) {
+			event.preventDefault();
+			getBannerHtml('next');
+		}
+	})
+
+	jQuery('.BannerSliderPrev').bind({
+		click : function(event) {
+			event.preventDefault();
+			getBannerHtml('prev');
+		}
+	})
+
+	jQuery(document).ready(function() {
+		getBannerHtml('next');
+	})
+
+</script>
+
+<style>
+
+	.bannersBrands<?php echo $time; ?> {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.bannersBrands<?php echo $time; ?> ul{
+		margin:0 auto;
+		padding:0;
+		list-style:none;
+		width: 100%;
+	}
+
+	.bannersBrands<?php echo $time; ?> ul li{
+		display:inline-block;
+		text-align: center;
+	}
+
+	.bannersBrands<?php echo $time; ?> .ul1 {
+		position: relative;
+		z-index: 1;
+	}
+
+	.bannersBrands<?php echo $time; ?> .ul2 {
+		top:0;
+		background: white;
+		position: absolute;
+	}
+
+	.brand-slide .BannerSliderNext, .brand-slide .BannerSliderPrev {
+		text-align: center;
+		display: block;
+		padding:35px 0;
+	}
+
+	.brand-slide .fa {
+		font-size:30px;
+		color:#8f8f8f;
+	}
+</style>
+
+<div class="clear"></div>

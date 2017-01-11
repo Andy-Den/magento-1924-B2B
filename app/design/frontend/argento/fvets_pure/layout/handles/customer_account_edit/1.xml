@@ -1,0 +1,10 @@
+<include_layout version="0.1.0">
+    <customer_account_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/customer/form/edit.js</name></action>
+        </reference>
+        <reference name="customer_edit">
+            <action method="setTemplate"><template>customer/account/edit/1.phtml</template></action>
+        </reference>
+    </customer_account_edit>
+</include_layout>

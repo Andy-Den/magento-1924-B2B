@@ -1,0 +1,240 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ * 
+ * 
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * http://www.e-commercewebdesign.co.uk/blog/magento/getting-store-and-website-model-collections.php
+ */
+
+?>
+<div class="entry-edit">
+<div class="entry-edit-head">
+	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Website Permissions') ?></h4>
+</div>
+<h2>Websites</h2>
+<?php
+$stores = Mage::getModel('core/store')->getCollection();
+$websites = Mage::getModel('core/website')->getCollection();
+$model = Mage::registry('permissions_user');
+$userId = $model->getUserId();
+$keyarray=array();
+$web = array();
+$storearr = array();
+$connection 		= Mage::getSingleton('core/resource')->getConnection('core_write');
+$userWebsiteTable 	= Mage::getConfig()->getTablePrefix()."user_website";
+$select = $connection->select()->from($userWebsiteTable, array('*')) ->where('userid=?', $userId);
+$rowsArray = $connection->fetchAll($select); // return all rows
+foreach($rowsArray as $each) {
+	$web[] = $each['websiteid'];
+	$store=  explode(',' , $each['store_ids']);
+	foreach($store as $eachstore) {
+		$storearr[] = $eachstore;
+	}
+}
+
+foreach($websites as $website) {	
+	$websiteid = $website['website_id'];
+	$website_model = Mage::getModel('core/website');
+	$storeGroupIds = $website_model->load($websiteid)->getGroupIds();
+	$store_ids = $website_model->load($websiteid)->getStoreIds();
+	if($store_ids != null){ 
+	$_allWebsiteIds[] = $website['website_id'];
+	?>
+		<h3>
+			<input onclick="validateWebsite(<?php echo $website->getId(); ?>);" type="checkbox" name="websites_id[]" <?php if (in_array($website->getId(), $web)) {?> checked="checked" <?php } ?> value="<?php echo $website->getId();?>" id="website_id_<?php echo $website->getId();?>" />
+			
+			<?php
+			echo $website->getName()."<br/>";	
+			$newStore_ids = '';
+			$a = 0;
+			foreach($storeGroupIds as $groupId):
+				$a++;
+				$store_data =  Mage::getModel('core/store_group')->load($groupId);
+				$web_store_id = "'".$website->getId()."-".$groupId."'";
+				$newStore_ids = $newStore_ids;
+				if($a != 1){
+				$newStore_ids = $newStore_ids.";";
+				}
+				$newStore_ids = $newStore_ids.$groupId;
+				?>
+				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="store_id[<?php echo $website->getId();?>][]" <?php if (in_array($groupId, $storearr)) {?> checked="checked" <?php } ?>  value="<?php echo $groupId;?>" onclick="websiteSelected(<?php echo $web_store_id;?>);" id="store_id_<?php echo $groupId;?>" />
+				<?php echo $store_data->getName(); ?>
+				<br/>
+			<?php  
+			endforeach; 
+			$newWeb_store_id[] = "wId:".$website->getId()."-gIds:".$newStore_ids.""; 
+			?>
+		</h3>
+		<span id="website-div-<?php echo $website->getId();?>"></span>
+	<?php } ?>
+<?php } ?>
+
+<p>
+	<br><div id="website-div"><input type="hidden" class="required-entry" /></div>
+</p>  
+</div>
+	
+<script>
+var allWebIds	= <?php echo json_encode($_allWebsiteIds); ?>;
+for(j=0; j < allWebIds.length; j++){
+	var webCheckbox = document.getElementById('website_id_'+allWebIds[j]).checked;
+	if(webCheckbox){ document.getElementById('website-div').innerHTML=''; }
+}
+
+function validateWebsite(webId){	
+	var cWebId		= webId;
+	var webId 		= 'website_id_'+cWebId;
+	var webNewId	= 'website-div-'+cWebId;
+	var checkboxnewwebstoreid;
+	var checkboxnewwebid;	
+	var chkBoxNewWebId;	
+	var checkboxnewgroupid;	
+	var chkBoxNewGroupId;
+	var websiteNewCheckVal;
+	var groupNewMsg;
+	var websiteNewMsg = '';
+	var groupNewCheckVal;
+	var allNewWebStoreIds = <?php echo json_encode($newWeb_store_id); ?>;
+	for(d=0; d < allNewWebStoreIds.length; d++){
+		checkboxnewwebstoreid		= allNewWebStoreIds[d].split("-");
+		checkboxnewwebid			= checkboxnewwebstoreid[0].split(":");	
+		chkBoxNewWebId				= checkboxnewwebid[1];	
+		checkboxnewgroupid			= checkboxnewwebstoreid[1].split(":");	
+		chkBoxNewGroupId			= checkboxnewgroupid[1].split(";");
+		websiteNewCheckVal 			= document.getElementById('website_id_'+chkBoxNewWebId).checked;
+		if(websiteNewCheckVal ==true){ websiteNewMsg = 'Checked'; }
+		groupNewMsg	= '';
+		if(chkBoxNewWebId == cWebId){	
+			for(g=0; g < chkBoxNewGroupId.length; g++){
+				groupNewCheckVal	= document.getElementById('store_id_'+chkBoxNewGroupId[g]).checked;
+				if(groupNewCheckVal == true){
+					groupNewMsg = 'Checked';
+				}		
+			}
+			if(websiteNewCheckVal == false && groupNewMsg == 'Checked'){
+				document.getElementById(webNewId).innerHTML = '<input type="hidden" class="required-entry" />';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == true && groupNewMsg == ''){
+				document.getElementById(webNewId).innerHTML = '<input type="hidden" class="required-entry" />';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == true && groupNewMsg == 'Checked'){
+				document.getElementById(webNewId).innerHTML = '';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == false && groupNewMsg == ''){
+				document.getElementById(webNewId).innerHTML = '';
+				document.getElementById('website-div').innerHTML = '';
+			}
+		}
+	}	
+	if(websiteNewMsg == ''){
+		document.getElementById('website-div').innerHTML = '<input type="hidden" class="required-entry" />';
+	}
+}
+
+</script>
+
+<script>
+function websiteSelected(id){
+	var ids			= id.split('-');
+	var webId 		= 'website_id_'+ids[0];
+	var webNewId	= 'website-div-'+ids[0];
+	var storeWebId	= 'store_id_'+ids[1];
+	var websiteCheck = document.getElementById(webId).checked;
+	var storeCheck = document.getElementById(storeWebId).checked;
+	if(storeCheck == true){
+		if(websiteCheck == false){
+			document.getElementById(webId).checked = 'checked';
+		}
+	}
+	
+	var webMsg	= '';
+	var allNewWebStoreIds = <?php echo json_encode($newWeb_store_id); ?>;
+	for(d=0; d < allNewWebStoreIds.length; d++){
+		var checkboxnewwebstoreid		= allNewWebStoreIds[d].split("-");
+		var checkboxnewwebid			= checkboxnewwebstoreid[0].split(":");	
+		var chkBoxNewWebId				= checkboxnewwebid[1];	
+		var checkboxnewgroupid			= checkboxnewwebstoreid[1].split(":");	
+		var chkBoxNewGroupId			= checkboxnewgroupid[1].split(";");
+		var websiteNewCheckVal 			= document.getElementById('website_id_'+chkBoxNewWebId).checked;
+		var groupNewMsg	= '';
+		if(websiteNewCheckVal == true){ webMsg	= 'Checked'; }
+		if(chkBoxNewWebId == ids[0]){	
+			for(g=0; g < chkBoxNewGroupId.length; g++){
+				var groupNewCheckVal	= document.getElementById('store_id_'+chkBoxNewGroupId[g]).checked;
+				if(groupNewCheckVal == true){
+					groupNewMsg = 'Checked';
+				}		
+			}
+			if(websiteNewCheckVal == false && groupNewMsg == 'Checked'){
+				document.getElementById(webNewId).innerHTML = '<input type="hidden" class="required-entry" />';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == true && groupNewMsg == ''){
+				document.getElementById(webNewId).innerHTML = '<input type="hidden" class="required-entry" />';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == true && groupNewMsg == 'Checked'){
+				document.getElementById(webNewId).innerHTML = '';
+				document.getElementById('website-div').innerHTML = '';
+			}
+			if(websiteNewCheckVal == false && groupNewMsg == ''){
+				document.getElementById(webNewId).innerHTML = '';
+				document.getElementById('website-div').innerHTML = '';
+			}
+		}
+	}	
+	if(webMsg == ''){ 
+		document.getElementById('website-div').innerHTML = '<input type="hidden" class="required-entry" />'; 
+	}
+}
+</script>
+<script type="text/javascript">
+//<![CDATA[
+    var productWebsiteCheckboxes = $$('.website-checkbox');
+
+    for(var i=0;i<productWebsiteCheckboxes.length;i++){
+        Event.observe(productWebsiteCheckboxes[i], 'click', toggleStoreFromChoosers);
+    }
+
+    function toggleStoreFromChoosers(event){
+        var element = Event.element(event);
+        var selects = $('product_website_'+element.value+'_data').getElementsBySelector('select');
+        var selectBlocks = $('product_website_'+element.value+'_data').getElementsByClassName('website-'+element.value+'-select');
+        for (var i=0; i<selects.length; i++) {
+            selects[i].disabled=!element.checked;
+        }
+        for (var i=0; i<selectBlocks.length; i++) {
+            if (element.checked) {
+                selectBlocks[i].show();
+            }
+            else {
+                selectBlocks[i].hide();
+            }
+        }
+    }
+//]]>
+</script>

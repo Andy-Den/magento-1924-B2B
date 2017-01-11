@@ -1,0 +1,61 @@
+</div>
+	</div>
+		</div>
+
+
+<div class="blocklinks-vetcenter block-highlight">
+
+	<div class="inner default-page-width">
+		<?php if ($this->getBlockTitle()) :	?>
+			<h2 class="title"><?php echo $this->getBlockTitle(); ?></h2>
+		<?php endif; ?>
+
+		<?php if ($this->getBlockSubtitle()) : ?>
+			<h3 class="subtitle"><?php echo $this->getBlockSubtitle(); ?></h3>
+			<br><br><br>
+		<?php endif ?>
+
+		<ul class="block-content">
+			<li>
+				<ul class="left-col">
+					<li>
+						<div class="icon"><i class="fa <?php echo $this->getLeftLine1Fontawesome(); ?>"></i></div>
+						<div class="text"><?php echo $this->getLeftLine1Text(); ?></div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="icon"><i class="fa <?php echo $this->getLeftLine2Fontawesome(); ?>"></i></div>
+						<div class="text"><?php echo $this->getLeftLine2Text(); ?></div>
+						<div class="clear"></div>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="center-col">
+					<li>
+						<img src="<?php echo $this->getCenterImage(); ?>" />
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="right-col">
+					<li>
+						<div class="icon"><i class="fa <?php echo $this->getRightLine1Fontawesome(); ?>"></i></div>
+						<div class="text"><?php echo $this->getRightLine1Text(); ?></div>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<div class="icon"><i class="fa <?php echo $this->getRightLine2Fontawesome(); ?>"></i></div>
+						<div class="text"><?php echo $this->getRightLine2Text(); ?></div>
+						<div class="clear"></div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div class="main-container container col1-layout content-page-width">
+	<div class="main">
+		<div class="col-main">

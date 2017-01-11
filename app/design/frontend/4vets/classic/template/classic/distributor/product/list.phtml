@@ -1,0 +1,69 @@
+<div class="distributors-list">
+	<strong><?php echo $this->__('Find a distributor for your region'); ?></strong>
+
+	<div>
+		<?php echo $this->getChildHtml('selector'); ?>
+	</div>
+
+	<div class="tabs-content2">
+		<div id="product-vendors-contents">
+			<table id="product-vendors-table" class="data-table" >
+				<thead>
+				<tr>
+					<th class="first"><?php echo $this->__('Distributor') ?></th>
+					<th><?php echo $this->__('Buy Online') ?></th>
+					<th class="last"><?php echo $this->__('Contact') ?></th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->getDistributors() as $distributor) : ?>
+					<tr id="product_vendors_row" class="vendor <?php foreach ($distributor->getSelectedRegions() as $region) : echo $region->getCode() . ' '; endforeach; ?>">
+						<td class="first">
+							<div class="seller-info dont-break-out">
+								<strong><?php echo $distributor->getName(); ?></strong>
+								<?php if ($distributor->getWebsiteUrl()) : ?>
+									<span class="available-online"><?php echo $this->__('Available online'); ?> <small><i class="fa fa-check"></i></small></span>
+								<?php endif; ?>
+							</div>
+						</td>
+						<td class="dont-break-out">
+							<?php if ($distributor->getWebsiteUrl()) : ?>
+								<a href="<?php echo $distributor->getWebsiteUrl(); ?>" target="_blank"><?php echo trim($distributor->getWebsiteUrl(), 'http://'); ?></a></strong>
+							<?php else: ?>
+								<?php echo $this->__('No information available'); ?>
+							<?php endif; ?>
+						</td>
+						<td class="last dont-break-out">
+							<?php echo $distributor->getTelephone(); ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				<tr class="no-distributor-available" style="display: none;">
+					<th colspan="3">
+						<?php echo $this->__('No distributors available'); ?>
+					</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<style>
+		#product-vendors-table tbody tr {
+			display:none;
+		}
+		<?php if (Mage::getModel('core/cookie')->get('customer-region')) : ?>
+		#product-vendors-table .<?php echo Mage::getModel('core/cookie')->get('customer-region'); ?> {
+			display: table-row;
+		}
+		<?php endif; ?>
+	</style>
+
+	<script>
+		<?php if($this->getDistributors()->count() == 0) : ?>
+		jQuery(document).ready(function () {
+			jQuery('#product-vendors-table tr').hide();
+			jQuery('#product-vendors-table tr.no-distributor-available').show();
+		});
+		<?php endif; ?>
+	</script>
+</div>

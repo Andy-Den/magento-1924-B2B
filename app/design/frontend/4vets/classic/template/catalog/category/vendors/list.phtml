@@ -1,0 +1,53 @@
+<div class="row">
+	<?php
+
+	$vendors = Mage::helper('vendor')->getVendorsUnique();
+
+
+	$vendors_by_letters = array();
+
+	foreach ($vendors as $vendor) {
+		$vendors_by_letters[substr($vendor->getVendorSharedName(), 0, 1)][] = $vendor;
+	}
+
+
+	$lines = ceil(count($vendors_by_letters) / 4);
+
+	$line = 0;
+
+	$array_lines = array();
+
+
+	foreach ($vendors_by_letters as $letter => $vendors) {
+		if (!isset($array_lines[$line])) { $array_lines[$line] = ''; }
+		$array_lines[$line] .= '<div class="col-md-3">';
+		$array_lines[$line] .= '<h5>'.$letter.'</h5>';
+		$array_lines[$line] .= '<ul>';
+		foreach ($vendors as $vendor) {
+			$array_lines[$line] .= '<li><a href="'.$vendor->getUrlKey().'" alt="Portal do vendedor">'.$vendor->getVendorSharedName().'</a></li>';
+		}
+		$array_lines[$line] .= '</ul>';
+		$array_lines[$line] .= '</div>';
+
+		if ($line + 1 >= $lines) {
+			$line = 0;
+			array_shift($vendors_by_letters);
+			$lines = ceil(count($vendors_by_letters) / 4);
+		} else {
+			$line++;
+		}
+
+	}
+
+
+	foreach ($array_lines  as $line) {
+		echo '<div class="row">';
+		echo $line;
+		echo '</div>';
+		echo '<div class="clear"></div>';
+	}
+
+
+	?>
+
+</div>

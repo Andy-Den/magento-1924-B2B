@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var $this Mage_Sales_Block_Order_Totals
+ * @see Mage_Sales_Block_Order_Totals
+ */
+?>
+<?php
+    $totals = count($this->getTotals());
+    $count = 0;
+    $sum = 0;
+?>
+<?php $obsCheckoutSuccess = Mage::getStoreConfig('checkout_split/general/checkout_success_total_obs');?>
+
+<div class="tbody">
+    <div class="tr">
+        <?php foreach ($this->getTotals() as $_code => $_total): ?>
+            <div class="td col-sm-6">
+                <?php if ($_total->getBlockName()): ?>
+                    <?php echo $this->getChildHtml($_total->getBlockName(), false); ?>
+                <?php else:?>
+                    <span class="text-highlight">
+                        <?php echo $this->escapeHtml($_total->getLabel());?>
+                    </span>
+                    <span class="text-highlight-regular">
+                        <?php echo $this->formatValue($_total) ?><?php if ('total' == strtolower($_total->getLabel()) && $obsCheckoutSuccess):?>*<?php endif;?>
+                        </span>
+                <?php endif?>
+            </div>
+            <?php $count++; ?>
+        <?php endforeach?>
+        <div class="clear"></div>
+    </div>
+</div>

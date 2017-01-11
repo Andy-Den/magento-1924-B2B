@@ -1,0 +1,31 @@
+<?php $salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep(); ?>
+
+<?php if ($this->canApplyMsrp()): ?>
+	<div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
+<?php else: ?>
+	<div class="shopping-cart-totals-table">
+		<table id="shopping-cart-totals-table">
+			<col />
+			<col width="1" />
+			<tbody>
+			<?php echo $this->renderTotals(); ?>
+			</tbody>
+			<tfoot>
+			<?php echo $this->renderTotals('footer'); ?>
+			</tfoot>
+		</table>
+	</div>
+<?php endif; ?>
+
+
+<script>
+	//<![CDATA[
+	//var total = <?php echo $this->getTotal();?>;
+	if(payment<?php echo $salesrep->getId(); ?>.reloadcallback){
+		var url = '<?php echo $this->getUrl('onestepcheckout/ajax/paymentrefresh', array('_secure'=>true)); ?>';
+		paymentrefresh(url);
+		payment<?php echo $salesrep->getId(); ?>.countreload = 0;
+		payment<?php echo $salesrep->getId(); ?>.reloadcallback = false;
+	}
+	//]]>
+</script>

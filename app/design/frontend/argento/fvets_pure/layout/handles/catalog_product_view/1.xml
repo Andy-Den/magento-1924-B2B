@@ -1,0 +1,50 @@
+<include_layout version="0.1.0">
+    <catalog_product_view>
+        <update handle="page_one_column"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_product_view/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/view/addtocart/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/price/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/view/media/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/1.less</name></action>
+
+            <action method="addJs"><script>fvets/varien/product.js</script></action>
+
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customerlocator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/css/easyslide.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/highlight.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+        </reference>
+        <reference name="product.info">
+            <action method="setTemplate"><template>catalog/product/view/1.phtml</template></action>
+        </reference>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate"><template>catalog/product/view/addtocart/1.phtml</template></action>
+        </reference>
+        <update handle="product_info_soldtogetherorder_1"></update>
+        <update handle="product_info_soldtogethercustomer_1"></update>
+        <reference name="product.review.form">
+            <action method="setTemplate"><template>review/form/1.phtml</template></action>
+        </reference>
+        <reference name="askit_tabbed.child0">
+            <action method="setTemplate"><template>catalog/product/view/additional/askit/question/form/1.phtml</template></action>
+        </reference>
+        <reference name="product.info.additional">
+            <remove name="product.quote" />
+        </reference>
+        <update handle="block_product_view_tabs_1"></update>
+    </catalog_product_view>
+</include_layout>

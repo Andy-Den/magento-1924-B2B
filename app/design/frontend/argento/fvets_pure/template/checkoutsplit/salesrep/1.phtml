@@ -1,0 +1,93 @@
+<?php
+
+$collection  = $this->getAllVisibleSalesrep();
+
+if (count($collection) < 1)
+{
+	return;
+}
+
+?>
+
+<div class="checkout-salesreps">
+				<div class="two-columns">
+					<div class="first column">
+						<?php $count = 0; ?>
+						<?php foreach($collection as $salesrep) : ?>
+							<div class="salesrep salesrep-<?php echo $salesrep->getId(); ?>" data-salesrep="<?php echo $salesrep->getId(); ?>">
+								<i class="fa fa-caret-right fa-3x" <?php if ($count > 0) : ?>style="display: none"<?php endif; ?>></i>
+								<div class="image">
+									<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 67, 67); ?>" height="67" width="67" />
+								</div>
+								<div class="info">
+									<div class="name"><?php echo $this->escapeHtml($salesrep->getName()); ?></div>
+									<div class="email"><?php echo $this->escapeHtml($salesrep->getEmail()); ?></div>
+									<div class="telephone"><?php echo $this->escapeHtml($salesrep->getTelephone()); ?></div>
+								</div>
+								<div class="clear"></div>
+								<div class="popup">
+									<i class="fa fa-angle-up fa-stack-2x"></i>
+									<div class="clear"></div>
+									<br />
+
+								</div>
+								<div class="clear"></div>
+								<?php if(($count + 1) < count($collection)) : ?>
+									<br />
+									<hr />
+								<?php endif; ?>
+								<br />
+							</div>
+							<?php $count++; ?>
+						<?php endforeach; ?>
+					</div>
+
+					<div class="last column">
+						<?php if($this->getParentBlock()->settings['enable_comments']): ?>
+							<?php $count = 0; ?>
+							<?php foreach($collection as $salesrep) : ?>
+								<div class="onestepcheckout-conditions onestepcheckout-conditions-<?php echo $salesrep->getId(); ?>" <?php if ($count > 0) : ?>style="display: none"<?php endif; ?>>
+									<div class="salesrep-name">
+										<?php echo $this->__('Special Conditions'); ?> (<?php $array = explode(' ', $salesrep->getName()); echo array_shift($array); ?>)
+									</div>
+									<br />
+									<div>
+										Marca(s):
+										<?php $_brands = $salesrep->getSelectedCategories(); ?>
+										<?php $html = array(); ?>
+										<?php if (count($_brands) > 0) : ?>
+											<?php foreach($_brands as $_brand) : ?>
+												<?php $html[] = $this->escapeHtml($_brand->getName()); ?>
+											<?php endforeach; ?>
+										<?php endif; ?>
+										<?php echo implode(', ', $html); ?>
+									</div>
+									<br />
+									<div><textarea class="condition" rows="10" placeholder="<?php echo $this->__("Possui condições especiais? Descreva aqui essas condições"); ?>" name="onestepcheckout_conditions[<?php echo $salesrep->getId(); ?>]"><?php if(isset($_POST['onestepcheckout_comments'])) { echo Mage::helper('core')->escapeHtml($_POST['onestepcheckout_comments']); } ?></textarea></div>
+								</div>
+								<?php $count++; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+					<div class="clear"></div>
+
+				</div>
+
+				<div class="clear"></div>
+
+</div>
+
+
+<script>
+	jQuery(document).ready(function()
+	{
+		jQuery('.salesrep').click(function()
+		{
+			var id = jQuery(this).data('salesrep');
+			jQuery('.onestepcheckout-conditions').hide();
+			jQuery('.onestepcheckout-conditions-'+id).show();
+			jQuery('.salesrep .fa-caret-right').hide();
+			jQuery('.salesrep-'+id+' .fa-caret-right').show();
+		})
+	});
+</script>

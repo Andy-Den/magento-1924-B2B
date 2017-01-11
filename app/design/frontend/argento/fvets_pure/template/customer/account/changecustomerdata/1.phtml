@@ -1,0 +1,395 @@
+<?php
+$_fvetsCoreHelper = Mage::helper('fvets_core');
+?>
+
+
+<div class="account-create">
+<h1><?php echo $this->__('Alterar dados Do Cliente') ?></h1>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo Mage::getUrl('customer/account/searchcustomer') ?>" method="post" id="form-search-customer">
+	<div class="fieldset">
+		<label
+			for="search-customer"><?php echo $this->__('Pesquisar cliente por CPF, CNPJ, E-Mail, ID ERP ou Razão Social'); ?></label>
+
+		<div class="input-box">
+			<input type="text" name="search-customer" id="search-customer"
+						 value=""
+						 title="<?php echo $this->__('Pesquisar cliente') ?>" class="input-text required-entry"/>
+		</div>
+	</div>
+
+	<div class="search-button">
+		<button type="submit" title="<?php echo $this->__('Pesquisar cliente') ?>" class="button btn-action">
+			<span><span><?php echo $this->__('Pesquisar cliente') ?></span></span></button>
+	</div>
+</form>
+<?php $customer = $this->getCustomer(); ?>
+<?php if ($customer)
+{
+	$isUserAdmin = Mage::helper('fvets_customer')->isLoggedUserAdminAttendant();
+	$allowedFieldsToEdit = Mage::helper('fvets_customer')->getAllowedFieldsToEdit($isUserAdmin);
+	?>
+
+	<form action="<?php echo Mage::getUrl('customer/account/changeCustomerDataPost') ?>" method="post"
+				id="form-validate">
+	<input type="hidden" id="customer_id" name="customer_id" value="<?php echo $customer->getId() ?>"/>
+
+	<div class="fieldset">
+	<ul class="form-list">
+
+	<h3>Dados Pessoais</h3>
+
+	<li class="fields">
+		<div class="field">
+			<label for="origem" class="required"><em>*</em><?php echo $this->__('Origem') ?></label>
+			<input type="text" name="origem" id="origem" disabled
+						 title="<?php echo $this->__('Origem') ?>" class="input-text"
+						 value="<?php echo $this->escapeHtml($customer->getOrigem()) ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="id_4vets" class="required"><em>*</em><?php echo $this->__('ID 4VETS') ?></label>
+			<input type="text" name="id_4vets" id="id_4vets" disabled
+						 title="<?php echo $this->__('ID 4VETS') ?>" class="input-text"
+						 value="<?php echo $this->escapeHtml($customer->getId()) ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="id_erp" class="required"><em>*</em><?php echo $this->__('ID ERP') ?></label>
+			<input type="text" name="id_erp" id="id_erp" <?php echo (!in_array('id_erp', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('ID ERP') ?>" class="input-text"
+						 value="<?php echo $this->escapeHtml($customer->getIdErp()) ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="name" class="required"><em>*</em><?php echo $this->__('Nome') ?></label>
+			<input type="text" name="name" id="name" <?php echo (!in_array('name', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('Nome') ?>" class="input-text"
+						 value="<?php echo $customer->getFirstname() . ' ' . $customer->getLastname() ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="razao_social" class="required"><em>*</em><?php echo $this->__('Razão Social') ?></label>
+			<input type="text" name="razao_social" id="razao_social" <?php echo (!in_array('razao_social', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('Razão Social') ?>" class="input-text"
+						 value="<?php echo $customer->getRazaoSocial() ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="inscricao_estadual" class="required"><em>*</em><?php echo $this->__('Inscrição Estadual') ?></label>
+			<input type="text" name="inscricao_estadual" id="inscricao_estadual" <?php echo (!in_array('inscricao_estadual', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('Inscrição Estadual') ?>" class="input-text"
+						 value="<?php echo $customer->getInscricaoEstadual() ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="cnpj" class="required"><em>*</em><?php echo $this->__('CNPJ') ?></label>
+			<input type="text" name="cnpj" id="cnpj" <?php echo (!in_array('cnpj', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('CNPJ') ?>" class="input-text"
+						 value="<?php echo $customer->getCnpj() ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="cpf" class="required"><em>*</em><?php echo $this->__('CPF') ?></label>
+			<input type="text" name="cpf" id="cpf" <?php echo (!in_array('cpf', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 title="<?php echo $this->__('CPF') ?>" class="input-text"
+						 value="<?php echo $customer->getCpf() ?>"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<br><br><h3>Endereço</h3>
+
+	<?php
+	$customerAddress = $customer->getAddresses();
+	if (!$customerAddress || count($customerAddress) <= 0)
+	{
+		echo '<span>Não há endereços cadastrados para este cliente</span>';
+	} else
+	{
+		?>
+
+		<?php foreach ($customerAddress as $address)
+	{
+		$customerAddress = $address->toArray();
+		$street = explode("\n", $customerAddress['street'])[0];
+		$numero = explode("\n", $customerAddress['street'])[1];
+		$streetArray = explode("\n", $customerAddress['street']);
+		$complemento = array_key_exists(3, $streetArray) ? $streetArray[3] : "";
+		$bairro = $customerAddress['bairro'];
+		$city = $customerAddress['city'];
+		$regionId = (isset($customerAddress['region_id']) ? $customerAddress['region_id'] : '');
+		$cep = $customerAddress['postcode'];
+		$telefone = $customerAddress['telephone'];
+		break;
+	}?>
+
+		<li class="fields">
+			<div class="field">
+				<label for="street" class="required"><em>*</em><?php echo $this->__('RUA') ?></label>
+				<input type="text" name="street" id="street" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('RUA') ?>" class="input-text"
+							 value="<?php echo $street ?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+		<li class="fields">
+			<div class="field">
+				<label for="numero" class="required"><em>*</em><?php echo $this->__('Número') ?></label>
+				<input type="text" name="numero" id="numero" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('Número') ?>" class="input-text"
+							 value="<?php echo $numero ?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+		<li class="fields">
+			<div class="field">
+				<label for="complemento" class="required"><em>*</em><?php echo $this->__('Complemento') ?></label>
+				<input type="text" name="complemento" id="complemento" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('Complemento') ?>" class="input-text"
+							 value="<?php echo $complemento ?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+		<li class="fields">
+			<div class="field">
+				<label for="bairro" class="required"><em>*</em><?php echo $this->__('Bairro') ?></label>
+				<input type="text" name="bairro" id="bairro" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('Bairro') ?>" class="input-text"
+							 value="<?php echo $bairro ?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+		<li class="fields">
+			<div class="field">
+				<label for="city" class="required"><em>*</em><?php echo $this->__('Cidade') ?></label>
+				<input type="text" name="city" id="city" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('Cidade') ?>" class="input-text"
+							 value="<?php echo $city?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+
+		<li class="fields">
+			<div class="field">
+				<label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+
+				<div class="input-box">
+					<select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+									class="validate-select">
+						<option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+						<?php
+						$this->setData('country_id', 'BR'); // or 'FR'..., default is 'US'
+						$regions = $this->getRegionCollection();
+						foreach ($regions as $region)
+						{
+							echo "<option value=$region[region_id]>" . $region['default_name'] . "</option>";
+						}
+						?>
+
+					</select>
+					<script type="text/javascript">
+						document.getElementById('region_id').value=<?php echo $regionId; ?>
+					</script>
+				</div>
+			</div>
+		</li>
+
+		<li class="fields">
+			<div class="field">
+				<label for="cep" class="required"><em>*</em><?php echo $this->__('CEP') ?></label>
+				<input type="text" name="postcode" id="postcode" <?php echo (!in_array('address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+							 title="<?php echo $this->__('CEP') ?>" class="input-text"
+							 value="<?php echo $cep ?>"/>
+			</div>
+			<div class="field"></div>
+		</li>
+	<?php } ?>
+
+	<br><br><h3>Informações Adicionais</h3>
+
+	<!--					Atendente comercial - ADMIN-->
+	<?php
+	if ($isUserAdmin)
+	{
+		?>
+		<li class="fields">
+			<div class="field control">
+				<div class="input-box control">
+					<label for="is_active"><?php echo $this->__('Status') ?></label><br>
+					<select id="is_active" name="is_active[]" title="Status">
+						<option value="0" <?php echo($customer->getIsActive() == '0' ? " selected='selected'" : ''); ?>>
+							Inativo
+						</option>
+						<option value="1" <?php echo($customer->getIsActive() == '1' ? " selected='selected'" : ''); ?>>
+							Ativo
+						</option>
+					</select>
+				</div>
+			</div>
+		</li>
+	<?php } ?>
+
+	<?php if(!$customer->getBlockAllinStatus()) : ?>
+
+	<li class="fields">
+		<div class="field control">
+			<div class="input-box control">
+				<input type="checkbox" name="allin_active[]"
+							 id="allin_active" <?php echo($customer->getFvetsAllinStatus() == 'V' ? ' checked' : ''); ?>
+							<?php echo (!in_array('allin_active', $allowedFieldsToEdit) ? "disabled" : "") ?>
+					/>
+				<label for="allin_active"><?php echo $this->__('Conta ativa para Allin?') ?></label>
+			</div>
+		</div>
+	</li>
+
+	<?php else : ?>
+		<li class="fields">
+			<div class="field control">
+				<div class="input-box control">
+					<label for="allin_active"><?php echo $this->__('Você não pode mudar o status do allin dessa pessoa') ?></label>
+				</div>
+			</div>
+		</li>
+	<?php endif; ?>
+	<li class="fields">
+		<div class="field">
+			<label for="email_address" class="required"><em>*</em><?php echo $this->__('Email Atual') ?></label>
+			<input type="text" name="email" id="email_address" disabled
+						 value="<?php echo $this->escapeHtml($customer->getEmail()) ?>"
+						 title="<?php echo $this->__('Email Atual') ?>" class="input-text required-entry"/>
+		</div>
+		<div class="field"></div>
+	</li>
+	<li class="fields">
+		<div class="field">
+			<label for="second_email_address" class="required"><em>*</em><?php echo $this->__('Email Secundário') ?></label>
+			<input type="text" name="second_email_address" id="second_email_address" disabled
+						 value="<?php echo $this->escapeHtml($customer->getSecondEmail()) ?>"
+						 title="<?php echo $this->__('Email Secundário') ?>" class="input-text required-entry"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<?php if (null !== $customer->getSecondEmail() && trim($customer->getSecondEmail()) != '') : ?>
+
+		<li class="fields">
+			<div class="field control">
+				<div class="input-box control">
+					<input type="checkbox" name="status_secondary_email[]"
+								 id="status_secondary_email" <?php echo($customer->getStatusSecondaryEmail() != 'I' ? ' checked' : ''); ?>
+						<?php echo (!in_array('status_secondary_email', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						/>
+					<label for="status_secondary_email"><?php echo $this->__('Email secundário válido?') ?></label>
+				</div>
+			</div>
+		</li>
+
+	<?php endif; ?>
+
+	<li class="fields">
+		<div class="field">
+			<label for="new_email_address"
+						 class="required"><em>*</em><?php echo $this->__('Novo Email') ?></label>
+			<input type="text" id="new_email_address" name="new_email_address" <?php echo (!in_array('new_email_address', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 value="<?php echo $this->escapeHtml($this->getFormData()->getNewEmailAddress()) ?>"
+						 title="<?php echo $this->__('Novo Email') ?>"
+						 class="input-text validate-email required-entry"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="telefone"><?php echo $this->__('Telefone') ?></label>
+			<input type="text" name="telefone" id="telefone" <?php echo (!in_array('telefone', $allowedFieldsToEdit) ? "disabled" : "") ?>
+						 value="<?php echo $this->escapeHtml($customer->getTelefone()) ?>"
+						 title="<?php echo $this->__('Telefone') ?>" class="input-text"/>
+		</div>
+		<div class="field"></div>
+	</li>
+
+	<li class="fields">
+		<div class="field control">
+			<table>
+				<tr>
+					<td>
+						<label for="store_view"><?php echo $this->__('Grupo de Acesso') ?></label><br>
+						<select name="store_view[]" id="store_view" multiple="multiple" tabindex="1" <?php echo (!in_array('store_view', $allowedFieldsToEdit) ? "disabled" : "") ?>>
+							<?php $websiteId = $customer->getWebsiteId();
+							$stores = Mage::getModel('core/store')->getCollection()->addFieldToFilter('website_id', $websiteId);
+							$customerStores = explode(',', $customer->getStoreView());
+							?>
+							<?php foreach ($stores as $store)
+							{ ?>
+								<option
+									value="<?php echo $store->getId() ?>" <?php echo in_array($store->getId(), $customerStores) ? 'selected' : '' ?>><?php echo $store->getName() ?></option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</li>
+	<li class="fields">
+		<div class="field control">
+			<table>
+				<tr>
+					<td>
+						<label for="fvets_salesrep"><?php echo $this->__('Representante') ?></label><br>
+						<select name="fvets_salesrep[]" id="fvets_salesrep" multiple="multiple" tabindex="1" <?php echo (!in_array('fvets_salesrep', $allowedFieldsToEdit) ? "disabled" : "") ?>>
+							<?php $reps = Mage::getModel('fvets_salesrep/salesrep')->getCollection()->addStoresToFilter($customerStores);
+							$customerReps = explode(',', $customer->getFvetsSalesrep());
+							?>
+							<?php foreach ($reps as $rep)
+							{ ?>
+								<option
+									value="<?php echo $rep->getId() ?>" <?php echo in_array($rep->getId(), $customerReps) ? 'selected' : '' ?>><?php echo $rep->getName() ?></option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</li>
+
+	<li class="fields">
+		<div class="field">
+			<label for="notes" class="required"><em>*</em><?php echo $this->__('Observações') ?></label>
+			<textarea name="notes" id="notes" <?php echo (!in_array('notes', $allowedFieldsToEdit) ? "disabled" : "") ?>
+								title="<?php echo $this->__('Observações') ?>"
+								class="input-text required-entry"><?php echo $this->escapeHtml($customer->getNotes()) ?></textarea>
+		</div>
+		<div class="field"></div>
+	</li>
+	</ul>
+	</div>
+	<div>
+		<button type="submit" title="<?php echo $this->__('Save') ?>" class="button btn-action">
+			<span><span><?php echo $this->__('Save') ?></span></span></button>
+	</div>
+	</form>
+<?php } ?>
+</div>

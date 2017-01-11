@@ -1,0 +1,35 @@
+<div class="header-container">
+	<div class="header container default-page-width">
+		<?php if ($this->getUseBrandLogo()): ?>
+			<div class="brand-logo">
+				<a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $this->getBrandLogo(true); ?>" alt="<?php echo $this->getBrandLogoAlt() ?>" /></a>
+				<div class="clear"></div>
+			</div>
+		<?php endif; ?>
+		<div class="vendor-logo">
+			<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+			<div class="clear"></div>
+		</div>
+
+		<div class="sub-header">
+			<div class="top-container">
+
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_callout')->toHtml() ?>
+			</div>
+		</div>
+
+		<div class="inner logged-out">
+			<?php echo $this->getChildHtml('headerLogin'); ?>
+		</div>
+	</div>
+
+	<?php echo $this->getChildHtml('topContainer'); ?>
+</div>
+
+<?php echo $this->getChildHtml('header_mobile'); ?>
+
+<?php echo $this->getChildHtml('institutionals_menu'); ?>
+
+<div class="clear"></div>
+
+<?php echo $this->getChildHtml('loginBox'); ?>

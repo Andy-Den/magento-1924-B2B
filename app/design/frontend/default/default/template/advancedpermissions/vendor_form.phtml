@@ -1,0 +1,204 @@
+<?php
+$venderConfig = Mage::getStoreConfig('advancedpermissions/settings/displayvendorform');
+			
+if(empty($venderConfig) || $venderConfig == '0'){
+	header('Location:'.$this->getUrl());
+	die();
+}
+
+?>
+<div class="account-create">
+	<div class="page-title">
+	<h1>Create a Vendor Account</h1>
+	</div>
+	
+	<form id="vendor-form-validate" method="post" action="<?php echo $this->getUrl("advancedpermissions/vendor/save/"); ?>">
+	
+	<div class="fieldset">
+		<input type="hidden" value="" name="success_url">
+		<input type="hidden" value="" name="error_url">
+		<h2 class="legend">Vendor Information</h2>
+		<ul class="form-list">
+			<li class="fields">
+				<div class="customer-name">
+					<div class="field name-firstname">
+						<label class="required" for="firstname"><em>*</em>First Name</label>
+						<div class="input-box">
+							<input type="text" class="input-text required-entry" maxlength="255" title="First Name" value="" name="firstname" id="firstname">
+						</div>
+					</div>
+					
+					<div class="field name-lastname">
+						<label class="required" for="lastname"><em>*</em>Last Name</label>
+						<div class="input-box">
+							<input type="text" class="input-text required-entry" maxlength="255" title="Last Name" value="" name="lastname" id="lastname">
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+					<label class="required" for="email_address"><em>*</em>Email Address</label>
+					<div class="input-box">
+						<input type="text" class="input-text validate-email required-entry" title="Email Address" value="" onchange="emailvalidate(this.value);" id="email_address" name="email">
+						<div id="emailmsg"></div>
+					</div>
+				</div>
+		
+				<div class="field">
+					<label class="required" for="password"><em>&nbsp;</em>&nbsp;</label>
+					<div class="input-box">
+						<div id="emailloader" style="display:none;"><img src="<?php echo $this->getSkinUrl('advancedpermissions/images/loader.gif');?>"></div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="fieldset">
+	<h2 class="legend">Login Information</h2>
+	<ul class="form-list">
+		<li class="fields">
+			<div class="field">
+				<label class="required" for="email_address"><em>*</em>User Name</label>
+				<div class="input-box">
+					<input type="text" class="input-text required-entry" title="User Name" value="" onchange="usernamevalidate(this.value);" id="user_name" name="username">
+					<div id="usernamemsg"></div>
+				</div>
+			</div>
+			
+			<div class="field">
+				<label class="required" for="password"><em>&nbsp;</em>&nbsp;</label>
+				<div class="input-box">
+					<div id="usernameloader" style="display:none;"><img src="<?php echo $this->getSkinUrl('advancedpermissions/images/loader.gif');?>"></div>
+				</div>
+			</div>
+		</li>
+		<li class="fields">	
+			<div class="field">
+				<label class="required" for="password"><em>*</em>Password</label>
+				<div class="input-box">
+					<input type="password" class="input-text required-entry validate-password" title="Password" id="password" name="password">
+				</div>
+			</div>
+			
+			<div class="field">
+				<label class="required" for="confirmation"><em>*</em>Confirm Password</label>
+				<div class="input-box">
+					<input type="password" class="input-text required-entry validate-cpassword" id="confirmation" title="Confirm Password" name="confirmation">
+				</div>
+			</div>
+		</li>
+	</ul>
+	
+	<input type="hidden" value="<?php echo Mage::app()->getStore()->getStoreId(); ?>" name="currentstore" />
+	<input type="hidden" value="<?php echo Mage::app()->getStore()->getWebsiteId(); ?>" name="currentwebsite" />
+
+	<script type="text/javascript">
+	//&lt;![CDATA[
+	function toggleRememberMepopup(event){
+	if($('remember-me-popup')){
+	var viewportHeight = document.viewport.getHeight(),
+	docHeight      = $$('body')[0].getHeight(),
+	height         = docHeight &gt; viewportHeight ? docHeight : viewportHeight;
+	$('remember-me-popup').toggle();
+	$('window-overlay').setStyle({ height: height + 'px' }).toggle();
+	}
+	Event.stop(event);
+	}
+
+	document.observe("dom:loaded", function() {
+	new Insertion.Bottom($$('body')[0], $('window-overlay'));
+	new Insertion.Bottom($$('body')[0], $('remember-me-popup'));
+
+	$$('.remember-me-popup-close').each(function(element){
+	Event.observe(element, 'click', toggleRememberMepopup);
+	})
+	$$('#remember-me-box a').each(function(element) {
+	Event.observe(element, 'click', toggleRememberMepopup);
+	});
+	});
+	//]]&gt;
+	</script>
+	</div>
+	<div class="buttons-set">
+	<p class="required">* Required Fields</p>
+	<?php /* ?><p class="back-link"><a class="back-link" href="<?php echo $_SERVER['HTTP_REFERER']?>"><small>« </small>Back</a></p><?php */ ?>
+	<button class="button" title="Submit" type="submit"><span><span>Submit</span></span></button>
+	</div>
+	</form>
+	<script type="text/javascript">
+	//&lt;![CDATA[
+	var dataForm = new VarienForm('vendor-form-validate', true);
+	//]]&gt;
+	</script>
+	
+	<script type="text/javascript">
+	//&lt;![CDATA[
+	function emailvalidate(value)
+	{
+		var email = value;
+		if(email){
+		
+			var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			if (filter.test(email)) {
+			   jQuery('#emailmsg').html('');
+			}
+			else {
+			   var emailcheck = "<span style='color:#FA5858; font-weight:bold;'>'"+email+"' is not a valid email address, please enter valid email address.</span>";
+			   jQuery('#emailmsg').html(emailcheck);
+			   return false;
+			}
+		
+			var url = '<?php echo $this->getUrl()?>'+'advancedpermissions/vendor/validate/';
+			
+			jQuery('#emailloader').show();
+			new Ajax.Request(url,
+				{
+				method:'post',
+				parameters:{email:email},
+				onSuccess: function(transport){
+					var response = transport.responseText;
+					if(response == 'emailmatch'){
+						var msg = "<span style='color:#FA5858; font-weight:bold;'>'"+email+"' email address already exists, please choose another email address.</span>";
+						jQuery('#emailmsg').html(msg);
+					} else if(response == 'emailnotmatch'){
+						jQuery('#emailmsg').html('');
+					}				
+					jQuery('#emailloader').hide();
+					
+				},
+				onFailure: function() { alert('Something went wrong...') }		
+			});
+		}
+	}
+	
+	function usernamevalidate(uvalue)
+	{
+		var username = uvalue;
+		if(username){		
+			var url = '<?php echo $this->getUrl()?>'+'advancedpermissions/vendor/validate/';
+			jQuery('#usernameloader').show();
+			new Ajax.Request(url,
+				{
+				method:'post',
+				parameters:{username:username},
+				onSuccess: function(transport){
+					var response = transport.responseText;
+					if(response == 'usernamematch'){
+						var msg = "<span style='color:#FA5858; font-weight:bold;'>'"+username+"' username already exists, please choose another username.</span>";
+						jQuery('#usernamemsg').html(msg);
+					} else if(response == 'usernamenotmatch'){
+						jQuery('#usernamemsg').html('');
+					}				
+					jQuery('#usernameloader').hide();
+					
+				},
+				onFailure: function() { alert('Something went wrong...') }		
+			});
+		}
+	}
+	
+	//]]&gt;
+	</script>
+	
+</div>

@@ -1,0 +1,109 @@
+<div>
+
+	<?php if (Mage::helper('dynamicsitemap')->showCMS() || Mage::helper('dynamicsitemap')->showXMLSitemap()): ?>
+	<h1><?php echo $this->__('Our Main Site Pages'); ?></h1>
+<hr/>
+	<div class="row">
+		<ul class="list-unstyled col-md-3">
+			<?php if (Mage::helper('dynamicsitemap')->showCMS()): ?>
+				<?php echo $this->getCreareCMSPages(); // prints out our cms page ?>
+			<?php endif; ?>
+			<?php if (Mage::helper('dynamicsitemap')->showXMLSitemap()): ?>
+				<?php $sitemap = Mage::getModel('sitemap/sitemap')->load(1); ?>
+				<?php $sitemapfilename = $sitemap->getSitemapFilename(); ?>
+				<?php if ($sitemapfilename != ""): ?>
+					<li><a href="<?php echo Mage::getBaseUrl() . $sitemapfilename; ?>" title="XML Sitemap">XML Sitemap</a></li>
+				<?php endif; ?>
+			<?php endif; ?>
+		</ul>
+		<?php endif; ?>
+		<?php if (Mage::helper('dynamicsitemap')->showAccount() || Mage::helper('dynamicsitemap')->showContact()): ?>
+			<ul class="list-unstyled col-md-6">
+				<?php if (Mage::helper('dynamicsitemap')->showContact()): ?>
+					<li><a href="<?php echo Mage::getBaseUrl(); ?>contacts" title="Contact"><?php echo $this->__('Contact'); ?></a></li>
+				<?php endif; ?>
+				<?php if (Mage::helper('dynamicsitemap')->showAccount()): ?>
+					<?php
+					if ($this->helper('customer')->isLoggedIn()) {
+						echo '<li><a href="' . Mage::getBaseUrl() . 'customer/account/index/" title="Account">' . $this->__('Account') . '</a></li>';
+						echo '<li><a href="' . Mage::getBaseUrl() . 'customer/account/logout/" title="Log Out">' . $this->__('Log Out') . '</a></li>';
+					} else {
+						echo '<li><a href="' . Mage::getBaseUrl() . 'customer/account/" title="Register/Log In">' . $this->__('Register/Log In') . '</a></li>';
+					}
+					?>
+					<li><a href="<?php echo Mage::getBaseUrl(); ?>catalogsearch/advanced" title="Advanced Search"><?php echo $this->__('Advanced Search'); ?></a></li>
+				<?php endif; ?>
+			</ul>
+		<?php endif; ?>
+	</div>
+	<?php if (Mage::helper('dynamicsitemap')->showCategories()): ?>
+		<div class="sitempan">
+			<br/>
+
+			<h1><?php echo $this->__('Our Categories'); ?></h1>
+			<hr/>
+			<?php $_helper = Mage::helper('catalog/category') ?>
+			<?php $_categories = $_helper->getStoreCategories() ?>
+			<?php if (count($_categories) > 0): ?>
+				<div>
+					<?php foreach ($_categories as $_category): ?>
+						<?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+						<?php if ($_category->getUrlKey() == 'busque-por-marca'): ?>
+							<h1>Marcas</h1>
+							<hr>
+							<?php echo $this->getChildHtml('brands_list'); ?>
+							<br /><br />
+						<?php elseif($_category->getUrlKey() == 'fornecedores') : ?>
+							<h1>Fornecedores</h1>
+							<hr>
+							<?php echo $this->getChildHtml('vendors_list'); ?>
+							<br /><br />
+						<?php else: ?>
+						<?php //echo $_category->isEnabled(); ?>
+						<div>
+						<a href="<?php echo $_helper->getCategoryUrl($_category) ?>" title="<?php echo $_category->getName() ?>"><h3><?php echo $_category->getName() ?></h3>
+						</a>
+							<?php $_subcategories = $_category->getChildrenCategories() ?>
+							<?php if (count($_subcategories) > 0): ?>
+								<div class="row">
+								<?php $count = 1; ?>
+								<?php foreach ($_subcategories as $_subcategory): ?>
+									<div class="col-md-3">
+										<?php $_nextcategory = Mage::getModel('catalog/category')->load($_subcategory->getId()) ?>
+
+										<?php $_nextsubcategories = $_nextcategory->getChildrenCategories() ?>
+										<a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>" title="<?php echo $_subcategory->getName() ?>">
+											<strong><?php echo $_subcategory->getName() ?></strong>
+										</a>
+										<?php if (count($_nextsubcategories) > 0): ?>
+											<ul class="list-unstyled">
+												<?php foreach ($_nextsubcategories as $_nextsubcat): ?>
+													<li>
+														<a href="<?php echo $_helper->getCategoryUrl($_nextsubcat) ?>"
+															 title="<?php echo $_subcategory->getName() ?> - <?php echo $_nextsubcat->getName() ?>">
+															<?php echo $_nextsubcat->getName() ?>
+														</a>
+													</li>
+
+												<?php endforeach; ?>
+											</ul>
+										<?php endif; ?>
+
+									</div>
+									<?php if ($count++ == 4): ?>
+										</div>
+										<div class="row">
+										<?php $count = 1; endif; ?>
+
+								<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
+							</div>
+							<br /><br />
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
+</div>

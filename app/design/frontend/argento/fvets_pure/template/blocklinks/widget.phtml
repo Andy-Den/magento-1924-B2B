@@ -1,0 +1,17 @@
+<?php
+
+	$widget = Mage::getModel('widget/widget_instance')->load($this->getWidgetId());
+
+	$widget = $this
+		->getLayout()
+		->createBlock($widget->getType(),
+			$widget->getTitle(),
+			$widget->getWidgetParameters());
+
+	if ($widget) {
+		$widget->setData(array_merge($this->getData(), $widget->getData()));
+		echo $widget->toHtml();
+	}
+
+
+?>

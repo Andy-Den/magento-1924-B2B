@@ -1,0 +1,63 @@
+.checkout-onepage-success .main-container * {
+    font-size: 14px;
+    color: #8F8F8F;
+    font-weight: lighter;
+}
+
+.checkout-onepage-success .main-container .price {
+    font-size:1em;
+}
+
+.checkout-onepage-success .main-container h1 {
+    color:#7ea0a6;
+    font-weight: bold;
+    font-size:1.286em;
+}
+
+.checkout-onepage-success .main-container h2 {
+    color:#00afe3;
+    font-weight: bold;
+    font-size:1em;
+}
+
+.checkout-onepage-success .main-container h3 {
+    color:#7ea0a6;
+    font-weight: bold;
+    font-size:1em;
+}
+
+.checkout-onepage-success .main-container hr {
+    border-width:1px;
+    border-color:#e8e8e8;
+}
+
+.checkout-onepage-success .main-container strong {
+    font-weight: bold;
+}
+
+.checkout-onepage-success .main-container table {
+    border: 2px solid #E8E8E8;
+}
+
+.checkout-onepage-success .main-container table th{
+    background: #7ea0a6;
+    color:#FFFFFF;
+    padding:5px;
+}
+
+.checkout-onepage-success .main-container table th.first{
+    border-top-left-radius: 5px;
+}
+
+.checkout-onepage-success .main-container table th.last{
+    border-top-right-radius: 5px;
+}
+
+.checkout-onepage-success .main-container table td{
+    border:none;
+    font-size: 0.857em;
+}
+
+.checkout-onepage-success .main-container table .odd {
+    background: #f1f1f1;
+}

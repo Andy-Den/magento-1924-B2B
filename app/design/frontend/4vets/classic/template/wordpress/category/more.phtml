@@ -1,0 +1,15 @@
+<?php 
+	$categories = $this->getSubCategories();	
+?>
+<?php if (count($categories) > 0) :?>
+<h1 class="block-title">Mais tópicos</h1>
+
+<div class="row blog-home-pupular_box">
+	<?php foreach($categories as $category): ?>
+	<div class="popular_row">
+		<a href="<?php echo $category->getUrl();?>"><?php echo $category->getName();?></a>
+	</div>
+	<hr class="popular_hr" />
+	<?php endforeach; ?>
+</div>
+<?php endif; ?>

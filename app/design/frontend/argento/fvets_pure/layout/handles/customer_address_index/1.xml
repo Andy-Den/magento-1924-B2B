@@ -1,0 +1,7 @@
+<include_layout version="0.1.0">
+    <customer_address_index>
+        <reference name="address_book">
+            <action method="setTemplate"><template>customer/address/book/1.phtml</template></action>
+        </reference>
+    </customer_address_index>
+</include_layout>

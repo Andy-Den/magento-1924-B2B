@@ -1,0 +1,21 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+
+$posts = $this->getPosts();
+//$countposts = count($posts);
+//$counter = 0;
+//var_dump(get_class($this));
+?>
+
+<div class="page-title">
+	<h1>Todos os posts</h1>
+</div>
+
+<?php if ($postList = trim($this->getPostListHtml())): ?>
+	<?php echo $postList ?>
+<?php endif; ?>

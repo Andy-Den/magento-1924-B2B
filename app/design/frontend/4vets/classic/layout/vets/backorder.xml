@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+    	<remove name="header" />
+	</default>
+    <backorder_index_success>
+    	<reference name="root">
+		    <action method="setTemplate"><template>page/1column.phtml</template></action>
+    	</reference>
+    	<remove name="header" />
+    	<reference name="content">
+    		<block type="Vets_Backorder_Block_Success"  name="success" as="success">
+    	</reference>
+    </backorder_index_success>
+</layout>

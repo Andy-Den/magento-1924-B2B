@@ -1,0 +1,30 @@
+<div class="header-mobile">
+	<div class="top">
+		<div class="logos">
+			<?php if ($this->getUseBrandLogo()): ?>
+				<div class="brand-logo">
+					<a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $this->getBrandLogo(true); ?>" alt="<?php echo $this->getBrandLogoAlt() ?>" /></a>
+					<div class="clear"></div>
+				</div>
+			<?php endif; ?>
+			<div class="vendor-logo">
+				<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="header-login">
+			<div class="registered-users">
+				<ul class="form-list">
+					<li class="login-span">
+						<button title="Entre no site" id="login" class="login button btn-lessAction" href="#"><span><span><?php echo $this->__('Login'); ?></span></span></button>
+					</li>
+					<li class="signin-span">
+						<button onclick="" title="Cadastre-se" class="button btn-action button-register">
+							<span><span><?php echo $this->__('Cadastre-se'); ?></span></span></button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

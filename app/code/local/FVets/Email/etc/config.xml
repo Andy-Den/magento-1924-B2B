@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Email>
+            <version>1.0.0</version>
+        </FVets_Email>
+    </modules>
+    <global>
+        <models>
+            <fvets_email>
+                <class>FVets_Email_Model</class>
+            </fvets_email>
+            <core>
+                <rewrite>
+                    <email_template>FVets_Email_Model_Email_Template</email_template>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>

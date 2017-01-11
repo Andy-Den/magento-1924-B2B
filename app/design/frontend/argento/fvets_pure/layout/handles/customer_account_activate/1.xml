@@ -1,0 +1,14 @@
+<include_layout version="0.1.0">
+    <customer_account_activate>
+        <update handle="page_one_column"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_activate/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_customer/account_activate" name="activate.customer" template="customer/account/activate/1.phtml" />
+        </reference>
+        <reference name="header">
+            <remove name="headerLogin"/>
+        </reference>
+    </customer_account_activate>
+</include_layout>

@@ -1,0 +1,99 @@
+<div class="cart">
+	<h1><?php echo $this->__('My Cart') ?></h1>
+	<?php if(!$this->hasError()): ?>
+		<div class="title-buttons">
+			<?php if($this->getContinueShoppingUrl()): ?>
+				<a href="<?php echo $this->getContinueShoppingUrl() ?>" class="btn-continue"><?php echo $this->__('Continue Shopping') ?></a>
+			<?php endif; ?>
+			<ul class="checkout-types">
+				<?php foreach ($this->getMethods('top_methods') as $method): ?>
+					<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+						<li><?php echo $methodHtml; ?></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	<?php endif; ?>
+	<div class="clear"></div>
+	<?php
+	//#biscoito :  Quando tem um produto pelo menos, há um representante. Se deixar essa mensagem ela irá aparecer duas vezes.
+	// Quando não há produtos, então pelo menos essa mensagem deverá aparecer.
+	?>
+	<?php if (!$this->getQuote()->hasItems()) : ?>
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php endif; ?>
+	<?php $this->getMessagesBlock()->getMessageCollection()->clear(); ?>
+	<?php echo $this->getChildHtml('split'); ?>
+
+	<hr class="hundred" />
+
+	<br /><br /><br />
+
+	<?php echo $this->getChildHtml('coupon') ?>
+	<?php echo $this->getChildHtml('giftcards') ?>
+	<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+
+	<div class="totals">
+		<?php echo $this->getChildHtml('totals'); ?>
+		<?php if(!$this->hasError()): ?>
+			<ul class="checkout-types">
+				<?php foreach ($this->getMethods('methods') as $method): ?>
+					<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+						<li><?php echo $methodHtml; ?></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	</div>
+
+	<div class="clear"></div>
+
+	<?php echo $this->getChildHtml('crosssell') ?>
+
+
+</div>
+
+
+<script type="text/javascript">
+	bindCartQty();
+</script>
+
+<?php
+/*
+ * Ajax para deixar o continuar o checkout sem o respectivo representante.
+ */
+?>
+<script>
+	//jQuery(document).ready(function() {
+		jQuery('.allowCheckoutWithoutOrder').click(function() {
+			var url = "<?php echo $this->getUrl('checkoutsplit/ajax/allowCheckoutWithoutOrder', array('_secure'=>true)); ?>";
+			var parameters = {
+				salesrep: jQuery(this).data('salesrep'),
+				status: jQuery(this).prop('checked'),
+				'handles[]' : <?php echo json_encode(Mage::app()->getLayout()->getUpdate()->getHandles()); ?>
+			}
+			AjaxPro.spinner.show();
+			new Ajax.Request(url, {
+				method: 'post',
+				dataType: 'json',
+				onSuccess: function(transport)    {
+					if(transport.status == 200)
+					{
+						AjaxPro.spinner.hide()
+						jQuery('.cart').html(transport.responseText);
+					}
+				},
+				parameters: parameters
+			});
+		});
+
+	function hideContinueOrderCheckboxIfOnlyOneRep() {
+		if (jQuery('.cart .fieldset').length == 1) {
+			jQuery('.divAllowCheckoutWithoutOrder').hide();
+		}
+	}
+
+	hideContinueOrderCheckboxIfOnlyOneRep();
+	//});
+</script>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Core>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core />
+                <FVets_MultipleHandles />
+                <Mage_Core />
+                <Aschroder_SMTPPro />
+                <Ebizmarts_Mandrill />
+            </depends>
+        </FVets_Core>
+    </modules>
+</config>

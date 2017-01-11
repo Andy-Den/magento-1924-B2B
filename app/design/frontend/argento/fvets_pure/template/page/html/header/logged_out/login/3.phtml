@@ -1,0 +1,19 @@
+<div class="header-login">
+	<div class="registered-users">
+		<ul class="form-list">
+			<li class="login-span">
+				<button href="#" class="login button btn-lessAction" id="login" title="<?php echo $this->__('Entre no site'); ?>"><span><span><?php echo $this->__('Entre no site'); ?></span></span></button>
+			</li>
+			<li class="or">
+				<span>ou</span>
+			</li>
+			<li class="signin-span">
+				<button id="button-register" class="button btn-lessAction btn-action" title="<?php echo $this->__('Register yourself'); ?>"
+								onclick="window.location='<?php echo Mage::helper('customer')->getRegisterUrl(); ?>'">
+					<span><span><?php echo $this->__('Register yourself'); ?></span></span></button>
+			</li>
+		</ul>
+	</div>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $this->getMessagesBlock()->getMessageCollection()->clear(); ?>

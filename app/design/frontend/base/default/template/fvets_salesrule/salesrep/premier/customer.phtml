@@ -1,0 +1,89 @@
+<?php $_customer = $this->getCustomer(); ?>
+<?php $_ruleIds = $this->getSelectedSalesruleCollection()->getAllIds(); ?>
+<!-- Page Title -->
+<div class="page-title">
+	<h2><?php echo $_customer->getFirstname() . ' ' . $_customer->getLastname(); ?></h2>
+</div>
+<br />
+<div>
+	<h4>Selecione as promoções que o cliente tem direito.</h4>
+</div>
+<br />
+<form action="<?php echo $this->getUrl('salesrule/salesrep/premierCustomerSave'); ?>" name="premier_save_form" id="premier_save_form" onsubmit="return premierSaveFormSubmit()">
+	<input type="hidden" name="customer_id" value="<?php echo $_customer->getId(); ?>" />
+	<table id="my-person-table" class="data-table">
+		<colgroup>
+			<col width="1">
+			<col>
+			<col>
+			<col>
+			<col>
+		</colgroup>
+		<thead>
+		<tr class="first last">
+			<th></th>
+			<th><?php echo $this->__('Name')?></th>
+			<th><?php echo $this->__('Description')?></th>
+			<!--th></th-->
+			<th><?php echo $this->__('From')?></th>
+			<th><?php echo $this->__('To')?></th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php $_lastGroup = ''; ?>
+		<?php foreach($this->getSalesruleCollection() as $_rule): ?>
+
+			<?php if ($_rule->getGroup() != $_lastGroup) : ?>
+				<tr class="first">
+					<th colspan="6">
+						<?php echo Mage::helper('fvets_attributemenu')->getAttributeOptionValueByOptionId($_rule->getGroup(), 'premier_policy_group'); ?>
+					</th>
+				</tr>
+				<?php $_lastGroup = $_rule->getGroup(); ?>
+			<?php endif; ?>
+
+			<tr>
+				<td><input type="radio" name="premier[<?php echo $_rule->getGroup(); ?>]" value="<?php echo $_rule->getId(); ?>" <?php if (in_array($_rule->getId(), $_ruleIds)) : ?> checked="checked" <?php endif; ?> /></td>
+				<td><?php echo $_rule->getData('name')?></td>
+				<td><?php echo $_rule->getData('description')?></td>
+				<!--td><?php echo $_rule->getData('attribute_id')?></td-->
+				<td><?php echo $_rule->getData('from')?></td>
+				<td><?php echo $_rule->getData('to')?></td>
+			</tr>
+		<?php endforeach ?>
+		</tbody>
+	</table>
+
+	<br />
+	<br />
+	<div class="right">
+		<button class="button  btn-action"><span><span>Salvar</span></span></button>
+	</div>
+</form>
+
+<script>
+	doAnim("#premier_customer_data", "flash");
+
+	function premierSaveFormSubmit()
+	{
+		console.log('<?php echo $this->getUrl('salesrule/salesrep/premierCustomerSave'); ?>');
+		console.log(jQuery('#premier_save_form').serialize());
+		jQuery.ajax({
+			url: "<?php echo $this->getUrl('salesrule/salesrep/premierCustomerSave'); ?>",
+			data: jQuery('#premier_save_form').serialize(),
+			method: 'post',
+			beforeSend: function() {
+				jQuery('.loading-overlay').show();
+			},
+			success: function(data) {
+				jQuery('#premier_customer_data').html(data);
+				jQuery('.loading-overlay').hide();
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert('Desculpe, houve um erro!');
+				jQuery('.loading-overlay').hide();
+			}
+		});
+		return false;
+	}
+</script>

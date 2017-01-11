@@ -1,0 +1,184 @@
+/* One Step Checkout */
+
+/*#onestepcheckout-form .group-select {
+    padding:0;
+}
+
+#onestepcheckout-form fieldset.group-select {
+    padding:0
+}*/
+
+h1.onestepcheckout-title {
+    color:#262626;
+    text-transform: none;
+    font-size: 30px;
+}
+
+p.onestepcheckout-description {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+div.onestepcheckout-threecolumns div.onestepcheckout-column-left {
+    padding-right: 15px;
+    width: 32%;
+}
+
+p.onestepcheckout-numbers {
+    padding-left: 0;
+    background: none;
+    text-transform: none;
+}
+
+p.onestepcheckout-numbers:before {
+    background: none repeat scroll 0 0 #8f8f8f;
+    color: white;
+    margin-right: 10px;
+    padding: 5px 12px;
+}
+
+p.onestepcheckout-numbers-1:before {
+    content:"1";
+}
+
+p.onestepcheckout-numbers-2:before {
+    content:"2";
+}
+
+p.onestepcheckout-numbers-3:before {
+    content:"3";
+}
+
+p.onestepcheckout-numbers-4:before {
+    content:"4";
+}
+
+p.onestepcheckout-numbers-5:before {
+    content:"5";
+}
+
+div.onestepcheckout-comments {
+    margin-top:50px;
+}
+
+div.onestepcheckout-comments textarea {
+    width: 100%;
+}
+
+div.onestepcheckout-place-order-wrapper {
+    text-align:left;
+}
+
+.onestepcheckout-summary th {
+    font-weight: bold;
+    border-color: #8f8f8f;
+}
+
+.onestepcheckout-totals td, .onestepcheckout-summary td {
+    border-color: #8f8f8f;
+}
+
+.onestepcheckout-summary th, .onestepcheckout-summary, .onestepcheckout-summary td, .onestepcheckout-totals td {
+    padding:10px 0;
+}
+
+.onestepcheckout-coupons input#id_couponcode {
+    width: 100%;
+    margin:5px 0 10px;
+}
+
+#onestepcheckout-form label {
+    font-weight:bold;
+}
+
+#billing_address_list li {
+    font-size: 14px;
+}
+
+#billing_address_list label{
+    font-weight: normal;
+}
+
+#billing_address_list input.input-text {
+    width: 100%;
+    margin-top: 5px;
+}
+
+#billing_address_list .input-inscricao_estadual {
+    float:left;
+    width: 49%;
+}
+
+#billing_address_list .input-address-short:nth-of-type(2n+0),
+#billing_address_list .input-inscricao_estadual:nth-of-type(2n+0) {
+    margin-left: 2%;
+}
+
+#billing_address_list .input-inscricao_estadual:nth-of-type(2n+0) {
+    padding-top: 26px;
+}
+
+table.onestepcheckout-totals tr.grand-total td {
+    text-transform:uppercase;
+    border-bottom: 0;
+}
+
+.checkout-agreements .agree a {
+    text-decoration: none;
+}
+
+.checkout-agreements .agree a:hover {
+    text-decoration: underline;
+}
+
+.checkout-onepage-success .col-main {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.checkout-onepage-success .col-main:before {
+    content:" ";
+    background-image: url(../../images/icons.png);
+    background-position:  0 -44px;
+    width: 92px;
+    height: 93px;
+    display: inline-block;
+    float: left;
+    margin-right: 25px;
+}
+
+.checkout-onepage-success .col-main .inner .first-row{
+    display: inline-block;
+}
+
+.checkout-onepage-success .col-main .inner .summary{
+    margin-top:50px;
+}
+
+.checkout-onepage-success .col-main .inner .summary h3{
+    margin-bottom: 10px;
+}
+
+.checkout-onepage-success .col-main .inner .summary .table {
+    border:1px solid #8f8f8f;
+    border-radius: 5px
+}
+
+.checkout-onepage-success .col-main .inner .summary .table th{
+    background: #294E87;
+    color:white;
+    text-align: center;
+    padding:5px;
+}
+
+
+.checkout-onepage-success .col-main .inner .summary .table td{
+    background: #f3f3f3;
+    padding:10px;
+}
+
+.checkout-onepage-success .col-main .inner .summary .table td.even{
+    background: white;
+}
+

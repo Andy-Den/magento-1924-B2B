@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Shopping Cart'); ?>
+<?php if($_product->isSaleable() && Mage::helper('privatesales')->canShowPricesAndAddToCartButton()): ?>
+	<div class="add-to-box">
+		<div class="add-to-cart">
+			<?php if(!$_product->isGrouped()): ?>
+				<div class="text">
+					<?php echo $this->__('Quantity'); ?>:
+				</div>
+				<div class="divQtd">
+					<?php $increments = ($_product->getQtyIncrements()) ? $_product->getQtyIncrements() : 1; ?>
+					<input type='button' value='-' class='qtyminus' field='qty-<?php echo $_product->getId(); ?>'  />
+					<input type='text' name='quantity' value='<?php echo $increments; ?>' data-increments="<?php echo $increments; ?>" class='qty' id="qty-<?php echo $_product->getId(); ?>"/>
+					<input type='button' value='+' class='qtyplus' field='qty-<?php echo $_product->getId(); ?>'  />
+				</div>
+				<div class="btnAddCart"><button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="addToCart('<?php echo $this->getAddToCartUrl($_product) ?>', <?php echo $_product->getId(); ?>)"><span><span><?php echo $buttonTitle ?></span></span></button></div>
+			<?php endif; ?>
+			<?php if ($_product->getQtyIncrements() && $_product->getQtyIncrements() > 1) : ?>
+				<br />
+				<div class="increment-message"><?php echo $this->__('disponível somente em múltiplos de '); ?> <?php echo $_product->getQtyIncrements(); ?> (<?php echo $_product->getQtyIncrements(); ?>, <?php echo $_product->getQtyIncrements() * 2; ?>, <?php echo $_product->getQtyIncrements() * 3; ?>...)</div>
+			<?php endif; ?>
+			<?php echo $this->getChildHtml('', true, true) ?>
+		</div>
+	</div>
+<?php endif; ?>

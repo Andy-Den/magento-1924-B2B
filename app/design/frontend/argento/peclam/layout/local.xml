@@ -1,0 +1,199 @@
+<layout version="0.1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="../../fvets_pure/layout/handles/default/1.xml" />
+
+    <default ifhandle="customer_logged_in">
+        <update handle="header_logged_in_1" />
+        <update handle="catalog_topnav_1" />
+        <update handle="header_cart_1" />
+        <update handle="footer_logged_in_1" />
+    </default>
+
+    <default ifhandle="customer_logged_out">
+        <update handle="header_logged_out_2" />
+        <update handle="footer_logged_out_1" />
+    </default>
+
+    <cms_index_index ifhandle="customer_logged_in">
+
+        <reference name="head">
+            <action method="setTitle"><title>Distribuidor Online</title></action>
+            <action method="addItem"><type>skin_css</type><name>css/custom.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+        </reference>
+
+        <reference name="content">
+            <remove name="cms_page" />
+            <block type="cms/block" name="logged_home_page">
+                <action method="setBlockId"><block_id>logged_homepage</block_id></action>
+            </block>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/homepage.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/tabBuilder.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/slider.js</name></action>
+        </reference>
+    </cms_index_index>
+
+    <cms_index_index ifhandle="customer_logged_out">
+
+        <reference name="head">
+            <action method="setTitle"><title>Distribuidor Online</title></action>
+            <action method="addItem"><type>skin_css</type><name>css/custom.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/homepage.js</name></action>
+
+            <!-- remover css não usados pelo peclam -->
+            <action method="removeItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customer_locator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/ajaxsearch.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabel.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabels-tooltip.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/highlight.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/styles-ee.css</name></action>
+        </reference>
+
+        <reference name="content">
+            <remove name="cms_page" />
+            <block type="cms/block" name="notlogged_home_page">
+                <action method="setBlockId"><block_id>notlogged_homepage</block_id></action>
+            </block>
+        </reference>
+
+        <reference name="header">
+            <remove name="headerLogin"/>
+        </reference>
+    </cms_index_index>
+
+    <xi:include href="../../fvets_pure/layout/handles/cms_page/1.xml" />
+
+    <!--  Catalog -->
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_product_view/1.xml" />
+
+    <catalog_category_view>
+        <update handle="page_two_columns_left"/>
+    </catalog_category_view>
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_category_layered/2.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_result_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_result/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/salesrule_mix_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/suggestpage_view/1.xml" />
+
+    <!-- Cart -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_cart_index/1.xml" />
+
+    <!-- Checkout -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_onepage_success/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/onestepcheckout_index_index/2.xml" />
+
+    <contacts_index_index>
+        <update handle="page_one_column"/>
+    </contacts_index_index>
+
+    <!-- Customer -->
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_create/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_edit/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_login/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_changecustomerdata/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_activate/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_resetpassword/1.xml" />
+
+    <customer_account_logoutsuccess>
+        <update handle="page_one_column" />
+    </customer_account_logoutsuccess>
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_newsletter/1.xml" />
+    <customer_account_newsletter>
+        <reference name="head">
+            <action method="setTitle"><title>Distribuidor Online</title></action>
+            <action method="addItem"><type>skin_css</type><name>css/custom.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+        </reference>
+
+        <reference name="content">
+            <remove name="cms_page" />
+            <block type="cms/block" name="notlogged_home_page">
+                <action method="setBlockId"><block_id>notlogged_homepage</block_id></action>
+            </block>
+        </reference>
+
+        <reference name="header">
+            <remove name="headerLogin"/>
+        </reference>
+
+        <remove name="customer.address" />
+    </customer_account_newsletter>
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_forgotpassword/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_address_index/1.xml" />
+
+    <newsletter_manage_index>
+        <update handle="cms_index_index" />
+    </newsletter_manage_index>
+
+    <!-- Review -->
+
+    <review_product_list>
+        <update handle="page_one_column"/>
+    </review_product_list>
+
+    <review_product_view>
+        <update handle="page_one_column"/>
+    </review_product_view>
+
+    <tag_list_index>
+        <update handle="page_one_column"/>
+    </tag_list_index>
+
+    <!-- Sales -->
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_history/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_view/1.xml" />
+
+    <!--highlights-->
+
+    <xi:include href="../../fvets_pure/layout/handles/highlight_index_index/1.xml" />
+
+    <!-- modules -->
+    <askit_core>
+        <update handle="page_one_column"/>
+    </askit_core>
+</layout>

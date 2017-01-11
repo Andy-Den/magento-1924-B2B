@@ -1,0 +1,7 @@
+<include_layout version="0.1.0">
+    <catalogsearch_advanced_index>
+        <reference name="catalogsearch_advanced_form">
+            <action method="setTemplate"><template>catalogsearch/advanced/form/1.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_index>
+</include_layout>

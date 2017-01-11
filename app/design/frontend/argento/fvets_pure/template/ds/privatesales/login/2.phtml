@@ -1,0 +1,82 @@
+<?php
+/**
+ * Customer Login Template for Community Edition 1.7
+ *
+ * @author     Design:Slider GbR <magento@design-slider.de>
+ * @copyright  (C)Design:Slider GbR <www.design-slider.de>
+ * @license    OSL <http://opensource.org/licenses/osl-3.0.php>
+ * @link       http://www.design-slider.de/magento-onlineshop/magento-extensions/private-sales/
+ * @package    DS_PrivateSales
+ */
+
+$helper = Mage::helper('privatesales');
+/* @var $helper DS_PrivateSales_Helper_Data */
+
+$canShowRegPanel = $helper->canShowRegistrationLoginPanel();
+$customRegPanel = ($helper->getShowRegistrationLoginPanel()==2);
+$customRegHeader = $helper->getRegistrationPanelHeader();
+$customRegText = $helper->getRegistrationPanelText();
+$canShowRegButton = $helper->canShowRegistrationPanelButton();
+$customButtonText = $helper->getRegistrationPanelButtonText();
+$isForgotPasswordEnabled = $helper->canShowForgotPassword();
+$isRegistrationEnabled = $helper->canShowRegistration();
+?>
+
+<div class="account-login">
+	<?php /* Extensions placeholder */ ?>
+	<?php echo $this->getChildHtml('customer.form.login.extra')?>
+	<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+		<?php echo $this->getBlockHtml('formkey'); ?>
+		<div>
+			<div class="registered-users">
+				<div class="content">
+					<h3><?php echo Mage::helper('customer')->__('Please Login') ?></h3>
+
+					<ul class="form-list">
+						<li>
+							<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+						</li>
+						<li>
+							<div class="input-box">
+								<input placeholder="digite seu email" type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo Mage::helper('customer')->__('Email Address') ?>" />
+							</div>
+						</li>
+						<li>
+							<div class="input-box">
+								<input placeholder="digite sua senha" type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo Mage::helper('customer')->__('Password') ?>" />
+							</div>
+						</li>
+						<?php echo $this->getChildHtml('form.additional.info'); ?>
+					</ul>
+					<div>
+						<?php if ($isForgotPasswordEnabled): ?>
+							<a href="<?php echo $this->getForgotPasswordUrl() ?>"><?php echo Mage::helper('customer')->__('Forgot Your Password?') ?></a>
+							<br /><br />
+						<?php endif; ?>
+						<button type="submit" class="button" title="<?php echo Mage::helper('customer')->__('Sign In') ?>" name="send" id="send2"><span><span><?php echo Mage::helper('customer')->__('Sign In') ?></span></span></button>
+					</div>
+					<?php $canShowRegPanel = true; ?>
+					<?php if ($canShowRegPanel): ?>
+						<div class="new-users">
+							<h4><span>OU</span></h4>
+							<hr />
+							<div class="clear"></div>
+							<span>Ainda não possui cadastro na Pec-Lam?<br/>Não perca tempo!</span>
+							<br/><br/>
+								<?php if (!$customRegPanel || $canShowRegButton): ?>
+									<button type="button" title="<?php echo ($customRegPanel && strlen($customButtonText)) ? $customButtonText : Mage::helper('customer')->__('Register') ?>" class="button button-register" onclick="window.location='<?php echo $this->getCreateAccountUrl() ?>';"><span><span><?php echo ($customRegPanel && strlen($customButtonText)) ? $customButtonText : Mage::helper('customer')->__('Register') ?></span></span></button>
+								<?php else: ?>
+									<button type="button" class="button" style="visibility:hidden;" disabled="disabled"><span><span></span></span></button>
+								<?php endif; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		//<![CDATA[
+		var dataForm = new VarienForm('login-form', true);
+		//]]>
+	</script>
+</div>

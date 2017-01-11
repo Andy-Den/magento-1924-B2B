@@ -1,0 +1,47 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = Mage::helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<table id="details-table" class="data-table">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Product Name') ?></th>
+            <th><?php echo $this->__('Subtotal') ?></th>
+            
+            <!-- Warehouse -->
+            <?php if ($config->isInformationVisible()) : ?>
+            <th class="a-center"><?php echo $helper->__('Warehouse') ?></th>
+            <?php endif; ?>
+            <!-- End Warehouse -->
+            
+        </tr>
+    </thead>
+<?php echo $this->getChildHtml('totals'); ?>
+    <tbody>
+        <?php foreach($this->getItems() as $_item): ?>
+            <?php echo $this->getItemHtml($_item) ?>
+        <?php endforeach ?>
+    </tbody>
+</table>

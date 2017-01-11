@@ -1,0 +1,120 @@
+/* Cart */
+.cart { margin:0; }
+.cart #products-cart-list { margin: 0 0 15px; }
+.cart #products-cart-list li { padding: 7px 0; }
+.cart #products-cart-list li.even { background: #f6f6f6; }
+.cart .page-title .btn-continue { float: left; clear: left; margin-top: 5px; }
+.cart .cart-collaterals .col-2 { width:100%; }
+.cart .product-image { width: 90px; }
+.cart .product-shop,
+.cart-headers .col-shop { margin-left: 100px; }
+.cart .col-description,
+.cart .col-wishlist,
+.cart .col-unit-price,
+.cart .cart-qty,
+.cart .col-total-price,
+.cart .col-delete-item { float: left; }
+
+.cart .col-description { width: 45%; }
+.cart .col-wishlist { width: 10%; }
+.cart .col-unit-price,
+.cart .col-total-price { width: 15%; padding: 0 5px; }
+.cart .cart-qty { width: 10%; }
+.cart .cart-qty .btn-update-qty { margin-top: 5px; }
+
+.cart-headers { border-bottom: 1px solid #eee; padding: 7px 0 7px; font-weight: bold; background: #eaeaea; }
+.cart-header-item { display: none; }
+
+.cart .cart-price-list li { padding-top: 0 !important; }
+
+.cart .shipping-crosssell { width: 72%; }
+.cart .shipping-crosssell .col-1 { float: right; }
+.cart .shipping-crosssell .col-2 { float: left; }
+
+.cart .shipping { font-size:12px; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 7px; }
+.cart .shipping h2 { font-size:15px; font-weight: bold; }
+.cart .shipping select { width:100%; }
+.cart .shipping .form-list .input-box { width: auto; }
+.cart .shipping .form-list .input-text { width: 100%; }
+.cart .shipping .buttons-set { margin-top:5px; text-align:right; }
+.cart .totals { font-size:12px; font-size:12px; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 10px; width: 23%; }
+.cart .totals #shopping-cart-totals-table { float: right; }
+.cart .totals .checkout-types { margin: 10px 0 0; }
+.cart .totals strong { font-size:14px; }
+.cart .checkout-types { float: right; }
+.cart .totals .checkout-types { clear: both; display: block; }
+.cart .checkout-types li:last-child {  }
+.cart .checkout-types li { text-align:center; margin: 0 0 5px; }
+.cart .checkout-types .paypal-or { clear:both; display:block; }
+.cart .checkout-types .btn-checkout span {  }
+.cart .shopping-continue {float:left; padding-top:4px; font-size:12px; }
+
+.cart .totals .btn-remove,
+#checkout-review-table .btn-remove { float: right; margin: 3px 0 0 5px; }
+
+button.btn-checkout::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
+button.btn-checkout { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+button.btn-checkout { overflow:visible; width:auto; border:0; padding:0; margin:0; background:transparent; cursor:pointer; }
+button.btn-checkout span,
+button.btn-checkout:hover span,
+button.btn-checkout:active span {
+    background: url(../images/btn_actions.gif) no-repeat 0 0;
+    display: block;
+    font-weight: bold;
+    font-size:15px;
+    height: 40px;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: none !important;
+    border: none;
+    border-radius: 0;
+    color: #fff;
+    padding: 0 0 0 8px;
+}
+button.btn-checkout span span,
+button.btn-checkout:hover span span,
+button.btn-checkout:active span span {
+    background: url(../images/btn_actions.gif) no-repeat 100% 0;
+    border: none;
+    padding: 0 20px 0 12px !important;
+}
+
+.discount, .giftcard { margin-bottom:15px; font-size:12px; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 15px 5px 7px; }
+.discount h2, .giftcard h2 { font-size:14px; font-weight: bold; }
+.discount label, .giftcard label { clear:both; display:block; margin-bottom:5px; }
+.discount .input-box {  }
+.discount .input-text, .giftcard .input-text { width: 100%; background: #fff; padding: 6px 0 5px; }
+.discount .buttons-set {}
+.discount .button, .giftcard .button { margin: 0 5px 10px; }
+
+.cart .crosssell { margin: 0; border: 1px solid #d4d4d4; border-radius: 5px; background: #f6f6f6; padding: 5px 7px; }
+.cart .crosssell h2,
+.cart .crosssell .h2 { font-size: 13px; font-weight: bold; }
+.cart .crosssell .price-box { margin: 4px 0; }
+.cart .crosssell .product-image { width: 90px; height: 90px; }
+#crosssell-products-list h3,
+#crosssell-products-list .h3 { font-size: 13px; }
+#crosssell-products-list .item { padding: 5px 0; border-bottom: 1px solid #CCCCCC; overflow: hidden; }
+#crosssell-products-list .last { border: none; padding-bottom: 0; }
+#crosssell-products-list .product-image { float: left; }
+#crosssell-products-list .product-details { margin-left: 100px; }
+#crosssell-products-list .product-name,
+#crosssell-products-list .price-box { margin-bottom: 3px; }
+#crosssell-products-list .add-to-links { font-size: 11px; margin: 3px 0; }
+
+.wishlist-list .item-options,
+.cart-list .item-options,
+.multiship-list .item-options,
+.multiple-checkout .item-options { font-size: 11px; }
+.wishlist-list .item-options dt,
+.cart-list .item-options dt,
+.multiship-list .item-options dt,
+.multiple-checkout .item-options dt { float: left; font-weight: bold; margin-right: 3px; }
+.wishlist-list .item-options dt:after,
+.cart-list .item-options dt:after,
+.multiship-list .item-options dt:after,
+.multiple-checkout .item-options dt:after { content: ':'; }
+.wishlist-list .item-options dd,
+.cart-list .item-options dd,
+.multiship-list .item-options dd,
+.multiple-checkout .item-options dd {  }

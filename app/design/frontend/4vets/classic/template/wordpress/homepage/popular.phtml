@@ -1,0 +1,14 @@
+<?php 
+	$posts = $this->getPopularPosts();	
+?>
+
+<h1 class="block-title">Posts mais populares</h1>
+
+<div class="row blog-home-pupular_box">
+	<?php foreach($posts as $post): ?>
+	<div class="popular_row">
+		<a href="<?php echo $post->getUrl();?>"><?php echo $post->getPostTitle();?></a>
+	</div>
+	<hr class="popular_hr" />
+	<?php endforeach; ?>
+</div>

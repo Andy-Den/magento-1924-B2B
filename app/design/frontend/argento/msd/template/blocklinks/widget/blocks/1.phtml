@@ -1,0 +1,97 @@
+<?php $uId = 'id' . rand(0, time()); ?>
+
+<?php $_qty_blocks = 6; ?>
+
+<div class="blocklinks-blocks block-highlight <?php echo $uId; ?><?php echo ($this->getBlockClass() ? ' ' . $this->getBlockClass() : '') ?>">
+
+	<?php if ($this->getBlockTitle())
+	{
+		?>
+		<h2 class="title"><?php echo $this->getBlockTitle(); ?></h2>
+	<?php } ?>
+	<?php if ($this->getBlockSubtitle())
+	{ ?>
+		<h3 class="subtitle"><?php echo $this->getBlockSubtitle(); ?></h3>
+	<?php } ?>
+
+	<div class="block-content">
+		<ul class="grid cols-<?php echo $this->getBlockCols(); ?>">
+			<?php for ($_i = 1; $_i <= $_qty_blocks; $_i++) : ?>
+
+				<?php
+					if (!($this->{"getBlock" . $_i . "Image"}()) && !($this->{"getBlock" . $_i . "Link"}()) && !($this->{"getBlock" . $_i . "Title"}()) && !($this->{"getBlock" . $_i . "Text"}()) && !($this->{"getBlock" . $_i . "Fontawesome"}())) {
+						break;
+					}
+				?>
+
+				<li class="item <?php echo $this->{"getBlock" . $_i . "Image"}() ? 'with-image' : 'with-awesome' ?>" style="background:url(<?php echo $this->{"getBlock" . $_i . "Image"}(); ?>) no-repeat center center">
+					<div class="prolabel-wrapper">
+						<a class="category-image" title="<?php echo $this->{"getBlock" . $_i . "Title"}(); ?>"
+							 href="<?php echo $this->{"getBlock" . $_i . "Link"}(); ?>">
+
+							<?php if(($this->{"getBlock" . $_i . "Image"}())) { ?>
+
+							<?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . $this->{"getBlock" . $_i . "Image"}())) : ?>
+								<?php list($width, $height) = getimagesize($_SERVER['DOCUMENT_ROOT'] . $this->{"getBlock" . $_i . "Image"}()); ?>
+							<?php endif; ?>
+
+							<?php } else { ?>
+								<div class="icon-awesome">
+									<i class="<?php echo $this->{"getBlock" . $_i . "Fontawesome"}(); ?>"></i>
+								</div>
+							<?php }?>
+						</a>
+					</div>
+					<h4 class="block-title">
+						<a title="<?php echo $this->{"getBlock" . $_i . "Title"}(); ?>"
+							 href="<?php echo $this->{"getBlock" . $_i . "Link"}(); ?>">
+							<?php echo $this->{"getBlock" . $_i . "Title"}(); ?>
+						</a>
+					</h4>
+
+					<div class="blocklinks-text">
+						<?php echo $this->{"getBlock" . $_i . "Text"}(); ?>
+					</div>
+				</li>
+				<?php if ($_i %  $this->getBlockCols() == 0) :?>
+					<div class="clear"></div>
+				<?php endif; ?>
+			<?php endfor; ?>
+		</ul>
+		<script type="text/javascript">decorateGeneric($$('ul.categories-grid'), ['odd', 'even', 'first', 'last'])</script>
+		<div class="clear"></div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	jQuery(document).ready(function () {
+		jQuery(document).bind('resizeBoxes', function () {
+			var firstElement = jQuery('.<?php echo $uId; ?> .grid .item').first();
+			var lenght = <?php echo $this->getBlockCols(); ?>;
+
+			var index = 0;
+
+			var line = 1;
+
+			jQuery('.<?php echo $uId; ?> .grid .item').each(function () {
+
+				if (index == 0) {
+					jQuery(this).addClass('first');
+				}
+				else {
+					jQuery(this).addClass('middle');
+				}
+
+				index++;
+
+				jQuery(this).addClass('line' + line);
+
+				if (index == lenght) {
+					index = 0;
+					line++;
+					jQuery(this).addClass('last').removeClass('middle');
+				}
+			});
+		})
+	});
+</script>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_AttributeMenu extension
+ * 
+ * @category       FVets
+ * @package        FVets_AttributeMenu
+ * @copyright      Copyright (c) 2015
+ */
+--> 
+<layout>
+    <adminhtml_attributemenu_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>catalog/fvets_attributemenu/attributemenu</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_attributemenu/adminhtml_attributemenu" name="attributemenu" />
+
+        </reference>
+    </adminhtml_attributemenu_index>
+    <adminhtml_attributemenu_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_attributemenu/adminhtml_attributemenu_grid" name="attributemenu_grid"/>
+        </block>
+    </adminhtml_attributemenu_grid>
+    <!-- Attributemenu add/edit action -->
+    <adminhtml_attributemenu_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>catalog/fvets_attributemenu/attributemenu</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_attributemenu/adminhtml_attributemenu_edit" name="attributemenu_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_attributemenu/adminhtml_attributemenu_edit_tabs" name="attributemenu_tabs"></block>
+        </reference>
+    </adminhtml_attributemenu_edit>
+
+    <adminhtml_attributemenu_getattributeoptions>
+        <reference name="content">
+            <block type="fvets_attributemenu/adminhtml_attributemenu_edit_tab_values_default" name="attributemenu_value" />
+        </reference>
+    </adminhtml_attributemenu_getattributeoptions>
+
+</layout>

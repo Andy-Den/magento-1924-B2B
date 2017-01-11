@@ -1,0 +1,104 @@
+<!--@subject Bem-vindo, {{if customer.name != "- -"}}{{htmlescape var=$customer.name}}{{else}}{{htmlescape var=$customer.razao_social}}{{/if}}! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/mail/topo.jpg\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var customer.email":"Customer Email",
+"htmlescape var=$customer.password":"Customer Password"}
+@-->
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top" class="logo" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left; background-color: #f1f1f1;padding-bottom: 10px; padding-left: 30px;">
+                            <br>
+                            <a href="{{store url=""}}" target="_blank"><img style="width: 200px;" src="{{skin url="images/email/logo_email.png" _area='frontend'}}"/></a>
+                            <br>
+                        </td>
+                        <td valign="top" class="logo" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: right; background-color: #f1f1f1;padding: 30px;">
+                            <span><strong>Seu login:</strong>{{var customer.email}}</span>
+                            <br/>
+                            <a style="color: #2f2f2f;" href="{{store url=""}}">Faça seu login</span></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" class="welcome" width="650" style="margin-top: 0px;text-align: center;padding: 0px 0 0px 0;background-color: #dad1d2;">
+                    <tr>
+                        <td valign="top" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;">
+                            <img src="{{skin url="images/email/main-img-old-cli.png" _area='frontend'}}" width="100%"/>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" class="umalinha" width="650" style="margin-top: 0px;text-align: center;padding: 10px 0 10px 0;background-color: #f1f1f1;">
+                    <tr>
+                        <td valign="top" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;width = &quot;300&quot;: ;">
+                            <br>
+                            <b><h3>COMECE A COMPRAR DE MANEIRA RÁPIDA E FÁCIL, NO SEU TEMPO, DO SEU JEITO.</h3></b>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" class="passos" width="650" style="margin-top: 0px;text-align: center;padding: 10px 0 10px 0;">
+                    <tr>
+                        <td valign="top" class="left" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: right;padding: 10px;">
+                            <img style="width: 300px;" src="{{skin url="images/email/faca-seu-login.png" _area='frontend'}}"/>
+                        </td>
+                        <td valign="top" class="right" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left;padding: 10px;width: 300px;">
+                            <br>
+                            <label style="font-size: 16px;font-weight: bold;">Passo nr. 1</label><br><br>
+                            <span style="font-size: 14px;color: #6c645c;">Acesse <b><a href="{{store url=""}}" alt="{{var store.getFrontendName()}}" target="_blank">NOSSO SITE</a></b> e faça seu login</span>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" class="passos" width="650" style="border-top: solid 1px #424242;margin-top: 0px;text-align: center;padding: 10px 0 10px 0;">
+                    <tr>
+                        <td valign="top" class="left" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: right;padding: 10px;">
+                            <img style="width: 300px;" src="{{skin url="images/email/50-itens-carrinho.png" _area='frontend'}}"/>
+                        </td>
+                        <td valign="top" class="right" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left;padding: 10px;width: 300px;">
+                            <br>
+                            <label style="font-size: 16px;font-weight: bold;">Passo nr. 2</label><br><br>
+                            <span style="font-size: 14px;color: #6c645c;">Insira todos os produtos que sua loja precisa em seu carrinho de compras.</span>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" class="passos" width="650" style="border-top: solid 1px #424242;margin-top: 0px;text-align: center;padding: 10px 0 10px 0;">
+                    <tr>
+                        <td valign="top" class="left" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: right;padding: 10px;">
+                            <img style="width: 300px;" src="{{skin url="images/email/checkout.png" _area='frontend'}}"/>
+                        </td>
+                        <td valign="top" class="right" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left;padding: 10px;width: 300px;">
+                            <br>
+                            <label style="font-size: 16px;font-weight: bold;">Passo nr. 3</label><br><br>
+                            <span style="font-size: 14px;color: #6c645c;">Preencha os dados de entrega e cobrança e condições especiais. Feche o seu pedido e receba tudo em casa.</span>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                {{block type='fvets_salesrep/email' area='frontend' template='email/sales_rep.phtml' customer_id=$customer.id}}
+                <table cellspacing="0" cellpadding="0" border="0" class="passos" width="650" style="border-top: solid 1px #424242;margin-top: 0px;text-align: center;padding: 10px 0 10px 0;">
+                    <tr>
+                        <td valign="top" class="left" style="text-align: center;width: 300px;color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;padding: 10px;">
+                            <label style="font-size: 16px;font-weight: bold;">Dúvidas?</label><br><br>
+                            <span style="font-size: 14px;color: #6c645c;">Você pode entrar em contato através do nosso e-mail ou telefone.</span>
+                            <br>
+                        </td>
+                        <td valign="top" class="right" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left;padding: 10px;width: 300px;">
+                            <br>
+                            <label style="font-size: 16px;font-weight: bold;"><a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a></label><br>
+                            <label style="font-size: 16px;font-weight: bold;">{{config path='general/store_information/phone'}}</label><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

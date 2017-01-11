@@ -1,0 +1,24 @@
+<config>
+    <sections>
+        <catalog module="catalog">
+            <groups>
+                <price>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <group_as_normal translate="label comment">
+                            <label>Show group price as normal price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </group_as_normal>
+                    </fields>
+                </price>
+            </groups>
+        </catalog>
+    </sections>
+</config>

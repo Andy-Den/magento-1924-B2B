@@ -1,0 +1,68 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<?php $helper               = $this->helper('warehouse') ?>
+<?php $element              = $this->getElement(); ?>
+<?php $product              = $this->getProduct(); ?>
+<?php $elementHtmlId        = $element->getHtmlId(); ?>
+<?php $elementName          = $element->getName(); ?>
+<?php $elementClass         = $element->getClass(); ?>
+<?php $elementReadonly      = $element->getReadonly(); ?>
+<?php $shippingCarriers     = $this->getShippingCarriers() ?>
+<tr>
+    <td colspan="10" class="grid stock-shipping-carrier">
+    <table cellspacing="0" class="data border" id="stock_shipping_carrier_table">
+        <col />
+        <col width="280" />
+        <thead>
+            <tr class="headings">
+                <th><?php echo $helper->__('Warehouse'); ?></th>
+                <th>
+                    <?php echo $helper->__('Shipping Methods'); ?><br/>
+                    <?php echo $helper->__('[GLOBAL]') ?>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="<?php echo $elementHtmlId ?>_container">
+            <?php foreach ($this->getValues() as $item) : ?>
+            <?php $stockId = $item['stock_id']; ?>
+            <?php $shippingCarrier = $item['shipping_carrier']; ?>
+            <?php $useDefault = $item['use_default']; ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][stock_id]" value="<?php echo $stockId ?>"/>
+                    <?php echo $helper->getWarehouseTitleByStockId($stockId) ?>
+                </td>
+                <td class="nobr">
+                    <select class="<?php echo $elementClass ?> select multiselect shipping-carrier" name="<?php echo $elementName ?>[<?php echo $stockId ?>][shipping_carrier][]"<?php if ($useDefault) : ?> disabled="disabled"<?php endif; ?> size="5" multiple="multiple">
+                        <?php foreach ($this->getShippingCarriers() as $_shippingCarrier) : ?>
+                        <option value="<?php echo $_shippingCarrier['value'] ?>"<?php if (in_array($_shippingCarrier['value'], $shippingCarrier)) : ?> selected="selected"<?php endif; ?>><?php echo $_shippingCarrier['label'] ?></option>
+                        <?php endforeach; ?>
+                    </select>&nbsp;
+                    <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_default]" value="1"<?php if ($useDefault) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                    <label class="normal"><?php echo $helper->__('Default') ?></label>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    </td>
+</tr>

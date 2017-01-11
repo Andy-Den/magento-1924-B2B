@@ -1,0 +1,59 @@
+<?php
+$block_data = $this->getBlockData();
+$blocks = $block_data['block'];
+$banners = $block_data['banners'];
+$click_url = $this->getUrl('bannerslider/index/click');
+?>
+<script src="<?php echo $this->getJsUrl('magestore/bannerslider/idangerous.swiper-2.2.min.js') ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/idangerous.swiper.css') ?>" media="all" />
+<div class="brand-slide">
+	<div class="next-slide" onclick="myCarousel.swipeNext()"><i class="fa fa-chevron-right"></i></div>
+	<div class="previous-slide" onclick="myCarousel.swipePrev()"><i class="fa fa-chevron-left"></i></div>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+	        <?php foreach ($banners as $banner): ?>
+			 <div class="swiper-slide">
+			 	 <a href="<?php echo $banner['click_url']?>" target="<?php echo $this->getTarget($banner['tartget'])?>" style="display:block;" ><img alt="<?php echo $banner['image_alt'];?>" src="<?php echo $this->getBannerImage($banner['image']); ?>"/></a>
+			 </div>
+	        <?php endforeach; ?>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var slidePerView = parseInt(jQuery('.magestore-bannerslider').width() / 150);
+	var myCarousel = jQuery('.magestore-bannerslider .swiper-container').swiper({
+		mode:'horizontal',
+		loop: true,
+		autoplay: 2000,
+		slidesPerView: slidePerView,
+		calculateHeight: true,
+		updateOnImagesReady: true,
+		autoResize: true,
+		loopAdditionalSlides: 8
+
+	});
+
+	jQuery(document).ready(function(){
+		jQuery('.magestore-bannerslider .swiper-container').bind({
+			mouseenter: function(){
+				myCarousel.stopAutoplay();
+			},
+			mouseleave: function(){
+				myCarousel.startAutoplay();
+			}
+		});
+	});
+
+	/*function bannerClicks(id_banner,id_slider){
+		var click_url = '<?php echo $click_url;?>';
+		banner_id = id_banner;
+		new Ajax.Request(click_url,{
+			method: 'post',
+			parameters:{id_banner: banner_id, slider_id:id_slider},
+			onFailure: '',
+			onSuccess: ''
+
+		});
+
+	}*/
+</script>

@@ -1,0 +1,102 @@
+<div class="header-container">
+	<?php if ($this->customerCoupon()) : ?>
+		<div class="customer-coupon">
+			<?php echo $this->__('Você tem direito a "%s"', $this->customerCoupon()->getName()); ?>
+		</div>
+	<?php endif; ?>
+	<?php /* Reutilizando os bloco. Para utilizar o mesmo layout e apresentar a mensagem */ ?>
+	<?php if ($this->getTopHeaderMessage()) : ?>
+		<div class="customer-coupon">
+			<?php echo $this->getTopHeaderMessage(); ?>
+		</div>
+	<?php endif; ?>
+	<div class="header container default-page-width">
+		<?php if ($this->getUseBrandLogo()): ?>
+			<div class="brand-logo">
+				<a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $this->getBrandLogo(true); ?>" alt="<?php echo $this->getBrandLogoAlt() ?>" /></a>
+				<div class="clear"></div>
+			</div>
+		<?php endif; ?>
+		<div class="inner">
+			<?php echo $this->getChildHtml('sales_rep'); ?>
+		</div>
+		<div class="vendor-logo">
+			<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+			<div class="clear"></div>
+		</div>
+		<?php echo $this->getAdditionalHtml() ?>
+		<div class="welcome-msg">
+			<?php echo $this->getWelcome() ?>
+		</div>
+		<?php echo $this->getChildHtml('topLinks') ?>
+	</div>
+	<?php if (Mage::getSingleton('customer/session')->getCustomer()->getTipopessoa() != 'RC') : ?>
+		<div class="sub-header">
+			<div class="top-container container default-page-width">
+
+				<?php echo $this->getChildHtml('topMenu') ?>
+
+				<div class="top-search">
+					<?php echo $this->getChildHtml('topSearch') ?>
+				</div>
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_callout')->toHtml() ?>
+				<div class="headerCartTop">
+					<?php echo $this->getChildHtml('headerCart') ?>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<?php echo $this->getChildHtml('topContainer'); ?>
+	<?php else : ?>
+		<style>
+			.header-container
+			{
+				min-height: auto;
+			}
+		</style>
+	<?php endif; ?>
+
+</div>
+
+<?php echo $this->getChildHtml('header_mobile') ?>
+
+<?php echo $this->getChildHtml('institutionals_menu'); ?>
+
+<script type="text/javascript">
+
+	document.observe('dom:loaded', function() {
+		new MobileNavigation();
+
+		var searchToggle = $('mobile-search-toggle'),
+			searchForm = $('search_mini_form');
+		if (searchToggle && searchForm) {
+			searchToggle.observe('click', function() {
+				searchForm.toggleClassName('shown');
+			});
+		}
+
+		jQuery('.header-mobile .custommenu-mobile').html(jQuery('#custommenu-mobile').outerHTML());
+		jQuery('#custommenu-mobile').remove();
+
+
+		jQuery('#show-mobile-menu').bind('click', function() {
+			jQuery('.custommenu-mobile').css({display:'block'});
+			jQuery('.custommenu-mobile').animate({
+				left:0
+			}, 'fast', 'linear');
+		});
+
+		jQuery('#menu-hidden').bind('click', function() {
+			jQuery('.custommenu-mobile').animate({
+				left:-jQuery('.custommenu-mobile').width()
+			}, {
+				complete: function() {
+					//#biscoito. Nao esta funcionando. Sempre chama antes de terminar
+					//jQuery('.custommenu-mobile').css({display:'none'});
+				}
+			});
+		});
+	});
+
+
+</script>

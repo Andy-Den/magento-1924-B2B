@@ -1,0 +1,54 @@
+<?php $_function = $this->getMethodData(); ?>
+<?php $_data = $this->$_function(); ?>
+
+<?php
+if (!$_data || count($_data) === 0) {
+	echo '<div class="no-data"><h3>' . Mage::helper('fvets_customdash')->__('No Data') . '</h3></div>';
+	return;
+}
+?>
+
+<?php $_columns = $this->getColumns(); ?>
+<?php $_options = $this->getOptions(); ?>
+<?php $_noDataLabel = $this->getNoDataLabel(); ?>
+<?php $_tipoData = $this->getTipoData(); ?>
+
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+<script type="text/javascript">
+	//google.load("visualization", "1", {packages: ["corechart"]});
+	//google.setOnLoadCallback(drawChart);
+	function drawChart<?php echo $this->getId(); ?>() {
+		var data = google.visualization.arrayToDataTable([
+			['Label', 'Value'],
+			<?php foreach ($_data as $_item) { ?>
+			<?php echo '[\'' . ($_item->getLabel() == '' ? $_noDataLabel : $_item->getLabel()) . '\'' ?>, <?php echo $_item->getValue() . '],' ?>
+			<?php } ?>
+		]);
+
+		var options = {
+			<?php if (isset($_options)) { foreach ($_options as $_option) { ?>
+			<?php echo $_option[0] . ':' . '\'' . $_option[1] . '\'' . ',' ?>
+			<?php }} ?>
+<!--			title: --><?php //echo '\'' . $this->__($this->getName()) . '\''; ?><!--,-->
+			pieHole: 0.4
+		};
+
+		<?php if ($_tipoData && $_tipoData == 'decimal') { ?>
+			var formatter = new google.visualization.NumberFormat({decimalSymbol: ',', groupingSymbol: '.', negativeColor: 'red', negativeParens: true, prefix: 'R$ '});
+			formatter.format(data, 1);
+		<?php } ?>
+
+		var chart = new google.visualization.PieChart(document.getElementById('<?php echo $this->getId() ?>'));
+		chart.draw(data, options);
+	}
+</script>
+
+<div class="container">
+    <div class="dash-header"><h1><?php echo $this->__($this->getName()); ?></h1></div>
+	<div id="<?php echo $this->getId() ?>" class="chart"></div>
+</div>
+
+<script type="text/javascript">
+    //executa a função que desenha o Chart;
+    drawChart<?php echo $this->getId(); ?>();
+</script>

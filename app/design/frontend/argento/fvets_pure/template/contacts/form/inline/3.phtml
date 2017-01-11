@@ -1,0 +1,61 @@
+<div class="contacts-form-inline-3">
+	<form action="<?php echo Mage::getUrl('contacts/index/post'); ?>" id="contactForm" method="post">
+		<input id="redirecturl" name="redirecturl" type="hidden" value="cms/index/index/anchor/contactForm" />
+
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<div class="clear"></div>
+		<div class="fieldset">
+			<h3 class="legend">A nossa equipe está disposta a te ajudar!</h3>
+			<ul class="form-list">
+				<li class="fields">
+					<div class="field">
+<!--						<label for="email" class="required"><em>*</em>--><?php //echo Mage::helper('contacts')->__('Email') ?><!--</label>-->
+
+						<div class="input-box">
+							<input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>"
+										 value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>"
+										 class="input-text required-entry validate-email" type="email" placeholder="seu e-mail" />
+						</div>
+					</div>
+				</li>
+				<li class="wide">
+<!--					<label for="message" class="required"><em>*</em>--><?php //echo Mage::helper('contacts')->__('Message') ?><!--</label>-->
+
+					<div class="input-box">
+						<textarea name="message" id="message" title="<?php echo Mage::helper('contacts')->__('Message') ?>"
+											class="required-entry input-text" cols="5" rows="3" placeholder="digite a sua mensagem"></textarea>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="buttons-set">
+			<input type="text" name="hideit" id="hideit" value="" style="display:none !important;"/>
+			<button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="link-enviar">
+				<span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+		</div>
+		<div class="contacts">
+			<div class="phone">
+				<i class="fa fa-phone-square fa-2x"></i>
+				<span><?php echo Mage::getStoreConfig('general/store_information/phone'); ?></span>
+			</div>
+			<div class="mail">
+				<i class="fa fa-envelope fa-2x"></i>
+				<span><?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?></span>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	//<![CDATA[
+	var contactForm = new VarienForm('contactForm', false);
+	//]]>
+
+	<?php
+	$anchor = Mage::app()->getRequest()->getParam('anchor');
+	if ($anchor) { ?>
+	jQuery(document).ready(function () {
+		jQuery('html,body').animate({scrollTop: jQuery(<?php echo ("'#" . $anchor . "'") ?>).offset().top}, 'slow');
+	});
+	<?php } ?>
+
+</script>

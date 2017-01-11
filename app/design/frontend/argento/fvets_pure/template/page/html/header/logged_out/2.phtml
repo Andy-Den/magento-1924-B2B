@@ -1,0 +1,149 @@
+<div class="header-container">
+	<div class="header container default-page-width">
+		<div class="vendor-logo">
+			<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
+				 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img
+					src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>"/></a>
+		</div>
+		<div class="menu">
+
+			<?php
+
+			$category = Mage::registry('current_category');
+
+			if ($category)
+			{
+				$catLevel = Mage::registry('current_category')->getLevel();
+			}
+
+			?>
+
+			<!--			se não há categoria, então a página é a HOME, uma institucional ou de produto-->
+			<?php if (!$category)
+			{
+				?>
+
+				<nav id="primary_nav_wrap">
+					<ul>
+						<li class="current-menu-item"><a href="<?php echo '#'; //echo Mage::helper('categoryattribute')->getCategoryByUrlKey('idexx', 'pequenos-animais')->getUrl(); ?>">Pequenos Animais
+								<i class="fa fa-sort-desc"></i></a>
+							<ul>
+								<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'snaps')->getUrl(); ?>">Snaps</a></li>
+								<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'equipamentos')->getUrl(); ?>">Equipamentos</a></li>
+							</ul>
+						</li>
+												<li><a href="#">Gado e aves <i class="fa fa-sort-desc"></i></a>
+<!--													<ul>-->
+<!--														<li><a href="#">Sub Menu 1</a></li>-->
+<!--														<li><a href="#">Sub Menu 2</a>-->
+<!--															<ul>-->
+<!--																<li><a href="#">Deep Menu 1</a>-->
+<!--																	<ul>-->
+<!--																		<li><a href="#">Sub Deep 1</a></li>-->
+<!--																		<li><a href="#">Sub Deep 2</a></li>-->
+<!--																		<li><a href="#">Sub Deep 3</a></li>-->
+<!--																		<li><a href="#">Sub Deep 4</a></li>-->
+<!--																	</ul>-->
+<!--																</li>-->
+<!--																<li><a href="#">Deep Menu 2</a></li>-->
+<!--															</ul>-->
+<!--														</li>-->
+<!--														<li><a href="#">Sub Menu 5</a></li>-->
+<!--													</ul>-->
+												</li>
+												<li><a href="#">Equinos <i class="fa fa-sort-desc"></i></a>
+<!--													<ul>-->
+<!--														<li><a href="#">Sub Menu 1</a></li>-->
+<!--														<li><a href="#">Sub Menu 2</a></li>-->
+<!--														<li><a href="#">Sub Menu 3</a></li>-->
+<!--													</ul>-->
+												</li>
+												<li><a href="#">Testes em leite <i class="fa fa-sort-desc"></i></a>
+<!--													<ul>-->
+<!--														<li class="dir"><a href="#">Sub Menu 1</a></li>-->
+<!--														<li class="dir"><a href="#">Sub Menu 2</a>-->
+<!--															<ul>-->
+<!--																<li><a href="#">Category 1</a></li>-->
+<!--																<li><a href="#">Category 2</a></li>-->
+<!--																<li><a href="#">Category 3</a></li>-->
+<!--																<li><a href="#">Category 4</a></li>-->
+<!--																<li><a href="#">Category 5</a></li>-->
+<!--															</ul>-->
+<!--														</li>-->
+<!--														<li><a href="#">Sub Menu 3</a></li>-->
+<!--														<li><a href="#">Sub Menu 4</a></li>-->
+<!--														<li><a href="#">Sub Menu 5</a></li>-->
+<!--													</ul>-->
+												</li>
+					</ul>
+				</nav>
+
+				<!--				menu de categoria nível 2-->
+			<?php } elseif ($catLevel && $catLevel == 2)
+			{ ?>
+
+				<nav id="primary_nav_wrap">
+					<ul>
+						<li class="current-menu-item"><a href="<?php echo Mage::getBaseUrl() ?>">A IDEXX <i
+									class="fa fa-sort-desc"></i></a>
+
+							<ul>
+								<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('idexx', 'pequenos-animais')->getUrl(); ?>">Pequenos Animais</a>
+								<ul>
+									<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'snaps')->getUrl(); ?>">Snaps</a></li>
+									<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'equipamentos')->getUrl(); ?>">Equipamentos</a></li>
+								</ul>
+								</li>
+
+								<li><a href="#">Gado e aves</a></li>
+								<li><a href="#">Equinos</a></li>
+								<li><a href="#">Testes em leite</a></li>
+							</ul>
+
+						</li>
+
+
+						<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'snaps')->getUrl(); ?>">Snaps <i class="fa fa-sort-desc"></i></a></li>
+						<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'equipamentos')->getUrl(); ?>">Equipamentos <i class="fa fa-sort-desc"></i></a></li>
+						</li>
+					</ul>
+				</nav>
+
+			<?php } else
+			{ ?>
+
+				<nav id="primary_nav_wrap">
+					<ul>
+						<li class="current-menu-item"><a href="<?php echo Mage::getBaseUrl() ?>">A IDEXX <i
+									class="fa fa-sort-desc"></i></a>
+
+							<ul>
+								<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('idexx', 'pequenos-animais')->getUrl(); ?>">Pequenos Animais</a>
+									<ul>
+										<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'snaps')->getUrl(); ?>">Snaps</a></li>
+										<li><a href="<?php echo Mage::helper('categoryattribute')->getCategoryByUrlKey('pequenos-animais', 'equipamentos')->getUrl(); ?>">Equipamentos</a></li>
+									</ul>
+								</li>
+							</ul>
+
+						</li>
+						</li>
+					</ul>
+				</nav>
+
+			<?php } ?>
+
+		</div>
+		<div class="search">
+			<a href="#">
+				<i class="fa fa-search fa-3x"></i>
+				<i class="fa fa-times fa-3x"></i>
+			</a>
+		</div>
+		<div class="top-search">
+			<?php echo $this->getChildHtml('topSearch') ?>
+		</div>
+	</div>
+</div>
+
+<?php echo $this->getChildHtml('loginBox'); ?>

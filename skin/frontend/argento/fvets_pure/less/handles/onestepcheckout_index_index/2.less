@@ -1,0 +1,497 @@
+@import "../../mixins";
+
+.onestepcheckout-index-index
+{
+  .main
+  {
+    padding: 0;
+
+    .logo
+    {
+      margin: 13px 0 13px 20px;
+    }
+
+    .onestepcheckout-description
+    {
+      font-size:14px;
+      font-weight: normal;
+    }
+
+    .onestepcheckout-threecolumns,
+    .checkoutcontainer
+    {
+
+      border-top:@defaultBorder;
+
+      .onestepcheckout-column-left,
+      .onestepcheckout-column-middle,
+      .onestepcheckout-column-right
+      {
+        width: 32%;
+        margin: 2% 0;
+        padding:0;
+        background: none;
+        box-sizing: border-box;
+      }
+
+      .onestepcheckout-column-left
+      {
+        padding-right: 2%;
+      }
+
+
+      .onestepcheckout-column-middle
+      {
+        width: 36%;
+        padding:0 2%;
+        border:@defaultBorder;
+        border-top: none;
+        border-bottom: none;
+      }
+
+      .onestepcheckout-column-right
+      {
+        padding-left: 2%;
+      }
+
+      .onestepcheckout-numbers
+      {
+        background: none;
+        padding: 0;
+        text-transform:uppercase;
+
+        &:before
+        {
+          background: @defaultColor7;
+          color: #ffffff;
+          content: "0";
+          display: inline-block;
+          height: 15px;
+          padding: 3px 3px 9px 9px;
+          width: 15px;
+          .rounded();
+          margin-right: 12px;
+        }
+
+        &.onestepcheckout-numbers-1
+        {
+          &:before
+          {
+            content: "1";
+          }
+        }
+
+        &.onestepcheckout-numbers-2
+        {
+          &:before
+          {
+            content: "2";
+          }
+        }
+
+        &.onestepcheckout-numbers-3
+        {
+          &:before
+          {
+            content: "3";
+          }
+        }
+
+        &.onestepcheckout-numbers-4
+        {
+          &:before
+          {
+            content: "4";
+          }
+        }
+
+        &.onestepcheckout-numbers-5
+        {
+          &:before
+          {
+            content: "5";
+          }
+        }
+      }
+
+      .onestepcheckout-box-ok
+      {
+        background: @defaultBackgroundColor2;
+        box-sizing: border-box;
+        padding: 6% 7%;
+        position: relative;
+
+        li
+        {
+          padding:4px 0;
+
+          &.inner-box-ok
+          {
+            position: absolute;
+            top:0;
+            right:0;
+            width: 0;
+            height: 0;
+            margin:0;
+
+            .triangle
+            {
+              border-style: solid;
+              border-width: 0 40px 40px 0;
+              border-color: transparent @defaultBackgroundColor4 transparent transparent;
+              position: absolute;
+              right: 0;
+              top: 0;
+            }
+
+            .fa-check
+            {
+              font-size: 17px;
+              color:white;
+              position: absolute;
+              top:3px;
+              right: 3px;
+            }
+          }
+
+          h4
+          {
+            text-transform: none;
+          }
+        }
+      }
+
+      .payment-methods
+      {
+        margin-bottom:15px;
+
+        #checkout-payment-method-load
+        {
+
+          dt
+          {
+            display: inline-block;
+            max-width: 32.5%;
+            text-align: center;
+
+            .no-display
+            {
+              visibility: hidden;
+            }
+
+            .fa
+            {
+              border: @defaultBorder;
+              padding: 8px 11px 3px;
+
+              &.fa-gwap_boleto::before
+              {
+                content:"";
+              }
+
+              &.fa-gwap_cc::before
+              {
+                content:"";
+              }
+
+              &.fa-cashondelivery::before
+              {
+                content:"";
+              }
+            }
+
+            label
+            {
+              font-size: 12px;
+              display: block;
+              height: 35px;
+              margin: 0;
+            }
+          }
+          .no-display
+          {
+            display: inline-block;
+          }
+
+          .error-msg,
+          .success-msg,
+          .note-msg,
+          .notice-msg
+          {
+            padding-left:32px;
+          }
+
+          label
+          {
+            font-size: 14px;
+            margin-left: 5px;
+            width: 100%;
+          }
+
+          dd
+          {
+            padding: 0;
+
+            dt
+            {
+              margin-bottom: 10px;
+            }
+
+            &.payment-method
+            {
+              li
+              {
+                margin:0;
+
+                &.allpago-boleto
+                {
+                  img
+                  {
+                    width: auto;
+                  }
+                  .info-boleto
+                  {
+                    li
+                    {
+                      list-style: inside none square;
+
+                      &.separator
+                      {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+
+                .payment-option-gwap_boleto
+                {
+                  border:1px solid @defaultBackgroundColor2;
+                  position: relative;
+
+                  .payment-option-name-label
+                  {
+                    width: 100%;
+                    .verticalAlign(absolute);
+                    margin-left: 10px;
+                    font-size: 12px;
+                    font-weight: bold;
+
+                    input
+                    {
+                      left:auto;
+                      position: initial;
+                    }
+                  }
+
+                  &.selected
+                  {
+                    //border:1px solid @defaultBackgroundColor3;
+                  }
+
+                  img
+                  {
+                    width: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .onestepcheckout_sales_rep
+      {
+        position: relative;
+        margin-bottom: 10px;
+
+        .image
+        {
+          float: left;
+
+          img
+          {
+            width: 67px;
+            height: 67px;
+            .rounded(50%);
+            @defaultBorder;
+          }
+        }
+
+        .info
+        {
+          float: left;
+          margin-left: 10px;
+          max-width: 195px;
+
+          .name
+          {
+            font-weight: bold;
+          }
+        }
+
+        .popup
+        {
+          display: none;
+          position: absolute;
+          width: 90%;
+          padding: 5%;
+          padding-top: 0;
+          top:67px;
+          .boxShadow();
+          background: white;
+          z-index:999;
+        }
+
+        &:hover
+        {
+          .popup
+          {
+            display: block;
+          }
+        }
+      }
+
+      .onestepcheckout-comments
+      {
+
+        margin-top: 20px;
+
+        textarea
+        {
+          @defaultBorder;
+          font-size: 12px;
+        }
+      }
+
+      .onestepcheckout-summary
+      {
+        .onestepcheckout-summary-scroll
+        {
+          max-height:400px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          border-bottom: @defaultBorder;
+          /*padding-right: 20px;*/
+          width: 100%;
+        }
+
+        th,
+        td
+        {
+          border-color: @defaultBorderBoxColor;
+          padding: 10px 3px;
+        }
+
+        &.onestepcheckout-summary
+        {
+          tr
+          {
+            &:nth-of-type(2n)
+            {
+              background:@defaultBackgroundColor2;
+            }
+          }
+        }
+      }
+
+      .onestepcheckout-totals
+      {
+        tr
+        {
+          td
+          {
+            border-color: @defaultBorderBoxColor;
+            padding: 10px 3px;
+          }
+
+        }
+      }
+    }
+  }
+
+  .onestepcheckout-coupons
+  {
+    .coupon-code:before
+    {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+      width: 0;
+      height: 0;
+
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid black;
+    }
+  }
+
+  .ckeckout-loading-block {
+    color: @defaultColor1;
+    background-color: #d3d3d3;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .ckeckout-loading-data {
+    font-size: 14px;
+    width: 350px;
+    text-align: center;
+    height: 117px;
+    border: 2px solid @defaultColor4;
+    border-radius: 7px;
+    background-color: @defaultColor3;
+    padding-top: 39px;
+    opacity: 1;
+    top: 36%;
+    position: fixed;
+    left: 40%;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 768px) {
+  .onestepcheckout-index-index {
+    min-width: 768px;
+  }
+  .onestepcheckout-index-index {
+    .onestepcheckout-column-left {
+      width: 30% !important;
+    }
+    .onestepcheckout-column-middle {
+      width: 28% !important;
+    }
+
+    .onestepcheckout-column-right {
+      width: 32% !important;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .onestepcheckout-index-index {
+    min-width: 0;
+    .onestepcheckout-column-left {
+      width: 100% !important;
+    }
+    .onestepcheckout-column-middle {
+      width: 100% !important;
+    }
+    .onestepcheckout-column-right {
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .onestepcheckout-index-index {
+    min-width: 320px;
+  }
+  .onestepcheckout-column-left, .onestepcheckout-column-middle, .onestepcheckout-column-right {
+    width: 100% !important;
+  }
+}

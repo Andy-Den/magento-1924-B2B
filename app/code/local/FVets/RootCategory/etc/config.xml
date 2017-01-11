@@ -1,0 +1,19 @@
+<config>
+    <modules>
+        <FVets_RootCategory>
+            <version>0.0.1</version>
+        </FVets_RootCategory>
+    </modules>
+    <global>
+        <models>
+            <rootcategory>
+                <class>FVets_RootCategory_Model</class>
+            </rootcategory>
+            <core>
+                <rewrite>
+                    <store_group>FVets_RootCategory_Model_Store_Group</store_group>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>

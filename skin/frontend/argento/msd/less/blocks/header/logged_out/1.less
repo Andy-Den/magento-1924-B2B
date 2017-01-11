@@ -1,0 +1,296 @@
+@import "../../../mixins";
+
+.top-toolbar-container
+{
+  background: none repeat scroll 0 0 @defaultBackgroundColor1;
+}
+
+.header-container
+{
+  background: white;
+  min-height:113px;
+  border-color: @defaultBorderBoxColor;
+
+  .customer-coupon
+  {
+    padding-bottom: 5px;
+    text-align: center;
+    background: @defaultBackgroundColor1;
+    color:white;
+    font-size: 14px;
+  }
+
+  .header
+  {
+    margin-top: 7px;
+    padding: 5px 0;
+
+    .brand-logo,
+    .vendor-logo
+    {
+      display: inline-block;
+      border-right: @defaultBorder;
+      padding-right: 20px;
+      margin-top: 0px;
+
+      .logo
+      {
+        float: none;
+        margin-left: 0px;
+
+        img
+        {
+          width: auto;
+          max-height: 50px;
+        }
+      }
+    }
+
+    .vendor-logo
+    {
+      border: none;
+      padding-right: 0px;
+    }
+
+    .welcome-msg
+    {
+      display: inline-block;
+      text-align: left;
+      font-weight: normal;
+      margin-left: 3%;
+      margin-right: 10px;
+      margin-top: 18px;
+      min-height: 27px;
+    }
+
+    .brand-logo, .vendor-logo, .welcome-msg
+    {
+      float: left;
+      max-width:35%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .inner
+    {
+      float: right;
+
+      &.logged-out
+      {
+        width: 68%;
+
+        .links {
+          width: 22%;
+
+          &:before
+          {
+            margin-top:6px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+
+    .links
+    {
+      width: 18%;
+      a
+      {
+        padding: 0 2%;
+      }
+    }
+
+
+
+    .header-login
+    {
+      min-width: 640px;
+      float: right;
+      text-align: right;
+
+      .forgot-password
+      {
+        line-height: 2;
+        margin-right: 22px;
+      }
+
+      .blocks
+      {
+        > li
+        {
+          display: inline-block;
+          float:left;
+          line-height:2.5;
+          width: 100%;
+
+          .login-form
+          {
+            width: 100%;
+
+            .form-list {
+              input {
+                &.input-text {
+                  width: 149px;
+                  line-height: 1.3;
+                }
+              }
+
+              li {
+                width: auto;
+                display: inline-block;
+                float: none;
+
+                &.login-span {
+                  line-height: 2.5;
+                  margin-right: 10px;
+                }
+
+                &.or {
+                  padding: 0 2%;
+                  text-align: center;
+                }
+
+                button.btn-doToAction {
+                  padding: 2px 0 2px 0;
+                }
+              }
+            }
+          }
+        }
+      }
+      .panel-forgot-password
+      {
+        width: 389px;
+      }
+      .messages
+      {
+        max-width: 600px;
+        position: absolute;
+        text-align: left;
+        top: 100px;
+        z-index: 999;
+        box-sizing: border-box;
+        margin-left: 28px !important;
+      }
+    }
+  }
+
+  .sub-header
+  {
+    background: @defaultBackgroundColor2;
+    padding: 0;
+
+    .nav-container
+    {
+      width: 16%;
+      margin-top:8px;
+    }
+
+    .top-search
+    {
+      width: 50%;
+      margin-top: 8px;
+
+      input
+      {
+        width: 90%;
+        border: @defaultBorder;
+        border-right:0;
+      }
+
+      button
+      {
+        background: white;
+        height: 40px;
+        width: 41px;
+        border: @defaultBorder;
+        border-left:0;
+
+        > span
+        {
+          > span
+          {
+            color: @defaultColor4;
+          }
+        }
+      }
+    }
+
+    .headerCartTop
+    {
+      width: 30%;
+    }
+  }
+}
+
+.header-mobile
+{
+  display: none;
+}
+
+@media (max-width: 900px)
+{
+  .header-container {
+    display: none;
+  }
+
+  .header-mobile {
+    display: block;
+    padding:16px 2%;
+
+    .logos {
+      float:left;
+      padding: 4px 0;
+
+      .brand-logo, .vendor-logo {
+        display: inline-block;
+      }
+    }
+
+    .header-login {
+      float: right;
+
+      .form-list {
+        li {
+          display: inline-block;
+          margin: 0;
+
+          button {
+            &.button {
+              > span {
+                padding: 15px 12px;
+                > span {
+                  font-size: 14px;
+                }
+              }
+
+              &.btn-lessAction {
+                > span {
+                  background: #6a6a6a;
+                }
+
+                &:hover {
+                  >span {
+                    background: darken(#6a6a6a, 10%);;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .header-mobile .logos {
+    max-width: 100px;
+    padding: 0;
+    .brand-logo, .vendor-logo {
+      float: none;
+      max-width: 100px;
+      height: auto;
+    }
+  }
+}

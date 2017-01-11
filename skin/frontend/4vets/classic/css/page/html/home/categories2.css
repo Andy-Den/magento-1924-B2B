@@ -1,0 +1,184 @@
+.home_categories .inner-block {
+    border-radius: 0;
+    margin-top: 50px;
+}
+
+.home_categories .header-categories{
+    margin-bottom: 3%;
+}
+
+.home_categories .row-fluid .row-fluid.inner-block {
+    margin-bottom: 4%;
+}
+
+.home_categories .header-categories hr {
+    border: 1.2px solid #f1f1f1;
+}
+
+.home_categories .header-categories .title {
+    margin-top: -33px;
+    text-align: center;
+}
+
+.home_categories .header-categories .title span {
+    background-color: #FFFFFF;
+    z-index: 10000;
+    padding: 0 29px;
+    z-index: 10000;
+    font-weight: bold;
+    font-size: 33px;
+    text-transform: uppercase;
+}
+
+.home_categories .inner-block .title {
+    color:#262626;
+    font-size: 27px;
+    font-weight: lighter;
+}
+
+.home_categories .inner-block .description {
+    font-size: 14px;
+    font-weight: lighter;
+    color: #262626;
+    overflow: hidden;
+    height: 40px;
+    margin: 0 15px 15px 15px;
+}
+
+.home_categories .inner-block .image {
+    text-align: center;
+    background: #ffffff; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #f3f2f2 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#f3f2f2)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%,#f3f2f2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #ffffff 0%,#f3f2f2 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%,#f3f2f2 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #ffffff 0%,#f3f2f2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    border-bottom: 1px solid #d6d6d6;
+    padding:0px;
+}
+
+.home_categories .inner-block .text {
+    text-align: center;
+    line-height: 1;
+    font-size: 14px;
+}
+
+.home_categories .inner-block .links {
+    line-height: 5;
+}
+
+.home_categories .inner-block .links .background {
+    background: #f1f1f1;
+    -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.home_categories .inner-block .links a{
+    font-size: 20px;
+    font-weight: bold;
+    color:#262626;
+    text-transform: uppercase;
+    -webkit-transition: color 0.3s, -webkit-transform 0.3s;
+    transition: color 0.3s, transform 0.3s;
+    white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+    .home_categories .inner-block .links a{
+        font-size:15px;
+        line-height: 6.5;
+    }
+}
+
+@media (max-width: 767px) {
+    .home_categories .inner-block .links a{
+        font-size:12px;
+        line-height: 8.5;
+    }
+}
+
+.home_categories .inner-block .links,
+.home_categories .inner-block .links div
+{
+    height: 100px;
+}
+
+.home_categories .inner-block .links {
+    margin-top: 20px;
+}
+
+.home_categories .inner-block .links:hover a
+{
+    color:white;
+    text-decoration: none;
+}
+
+.home_categories .inner-block .links .col3 {
+    background: none repeat scroll 0 0 #f1f1f1;
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 2.9;
+    text-align: center;
+    color: #f1f1f1;
+    -webkit-transition: color 0.3s, -webkit-transform 0.3s;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.home_categories .inner-block .links:hover .col3 {
+    color: #262626;
+}
+
+.home_categories .inner-block .links.defaultcat .col1,
+.home_categories .inner-block .links.defaultcat .background:hover
+{
+    background: #ff6c65;
+}
+
+.home_categories .inner-block .links.nutric-o .col1,
+.home_categories .inner-block .links.nutric-o .background:hover
+{
+    background: #33aa7f;
+}
+
+.home_categories .inner-block .links.diagnostico .col1,
+.home_categories .inner-block .links.diagnostico .background:hover
+{
+    background: #cc3e6f;
+}
+
+.home_categories .inner-block .links.acessorios-banho-e-tosa .col1,
+.home_categories .inner-block .links.acessorios-banho-e-tosa .background:hover
+{
+    background: #289ab8;
+}
+
+.home_categories .inner-block .text p a{
+    color:#262626;
+}
+
+.home_categories .inner-block .see-all strong{
+    color: #7ea0a6;
+}
+
+.home_categories .inner-block .see-all .fa {
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+    background: #00afe3;
+    padding:1px 7px 3px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.image a img[class="lazy"] {
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .home_categories {
+        overflow: hidden;
+    }
+}

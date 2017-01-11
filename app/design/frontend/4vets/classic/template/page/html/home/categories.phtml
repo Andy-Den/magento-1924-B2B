@@ -1,0 +1,69 @@
+<div class="container">
+
+	<div class="row">
+		<?php
+		$blockClassName = Mage::getConfig()->getBlockClassName('catalog/navigation');
+		$block = new $blockClassName();
+
+		$categories = $block->getStoreCategories();
+
+		if (is_object($categories)) $categories = $block->getStoreCategories()->getNodes();
+		$count = 1;
+		foreach($categories as $category) :
+		if (in_array($category->getUrl_key(), array('info4vets', 'info4vet'))) { continue; } ?>
+		<?php $_category = Mage::getModel('catalog/category')->load($category->getId()); ?>
+
+		<div class="col-md-4 inner-block">
+				<div class="image">
+					<a href="<?php echo $block->getCategoryUrl($category); ?>">
+							<?php list($width, $height, $type, $attr) = getimagesize(Mage::getBaseUrl('media').'catalog/category/'.$_category->getHomepage_image()); ?>
+							<img class="lazy" data-original="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_category->getHomepage_image(); ?>" alt="<?php echo  $category->getName(); ?>" <?php echo $attr; ?> />
+						<br />
+						<br />
+						<div class="title"><?php echo $category->getName(); ?></div>
+						<br />
+						<div class="description"><?php echo $_category->getDescription(); ?></div>
+					</a>
+				</div>
+			<br />
+			<div class="text">
+				<div class="links">
+					<?php
+					if ($_category->getUrlKey() != 'distribuidor') :
+						$children = $category->getChildren();
+						$count2 = 0;
+						foreach ($children as $child)
+						{
+							if ($count2 >= 6) {continue;}
+							$count2++;
+							if ($child->getIsActive())
+							{
+								?> <p><a href="<?php echo $block->getCategoryUrl($child); ?>"><?php echo $child->getName(); ?></a></p> <?php
+							}
+						}
+					else :
+						$vendors = Mage::helper('vendor')->getVendorsUnique();
+						$count2 = 0;
+						foreach ($vendors as $vendor)
+						{
+							if ($count2 >= 6) {continue;}
+							$count2++;
+								?> <p><a href="/<?php echo $vendor->getUrlKey(); ?>"><?php echo $vendor->getVendorSharedName(); ?></a></p> <?php
+						}
+					endif;
+					?>
+				</div>
+				<p><a href="<?php echo $block->getCategoryUrl($category); ?>" class="see-all"><strong>Veja Todos <i class="fa  fa-angle-right"></i></strong></a></p>
+			</div>
+
+		</div>
+
+		<?php if ($count%3 == 0) : ?>
+	</div>
+	<br />
+	<div class="row">
+		<?php endif; ?>
+		<?php $count++; ?>
+		<?php endforeach;	?>
+	</div>
+</div>

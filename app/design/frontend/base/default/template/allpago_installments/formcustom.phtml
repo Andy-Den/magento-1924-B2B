@@ -1,0 +1,47 @@
+<?php if ($this->isActive()): ?>
+    <?php $_sortNumber = $this->getSortNumber(); ?>
+    <?php if ($this->getFormType()): ?>
+        <?php $_installmentCode = $this->getPaymentInstallmentCode(); ?>
+        <?php $_code = $this->getPaymentCode(); ?>
+
+        <div class="advancedinstallments">
+            <?php ?>
+            <label class="required"><em>*</em><?php echo $this->__('Número de parcelas') ?></label>
+            <div style="clear:both"></div>
+            <div class="advancedinstallments-parcelas-<?php echo $this->getPaymentCode(); ?>">
+                <?php foreach ($this->getInstallments(true) as $installment): ?>
+                    <input
+                        type="radio"
+                        id="<?php echo $this->getPaymentCode(); ?>_<?php echo $this->getPaymentInstallmentCode().$_sortNumber; ?>"
+                        name="payment[<?php echo $this->getPaymentCode(); ?>_<?php echo $this->getPaymentInstallmentCode().$_sortNumber; ?>]"
+                        value="<?php echo $installment->getValue(); ?>"
+                        <?php echo $installment->getExtraParams(); ?>
+                        />
+                        <?php echo $installment->getValue() . ' x ' . $installment->getInstallment() . ' ' . $installment->getMessage(); ?>
+                    <br />
+                <?php endforeach; ?>
+            </div>
+            <?php ?>
+        </div>
+
+    <?php else: ?>
+        <?php $_installmentCode = $this->getPaymentInstallmentCode(); ?>
+        <?php $_code = $this->getPaymentCode(); ?>
+
+        <div class="advancedinstallments">
+            <?php ?>
+            <label class="required"><em>*</em><?php echo $this->__('Número de parcelas:*') ?></label>
+            <div style="clear:both"></div>
+            <div class="advancedinstallments-parcelas-<?php echo $this->getPaymentCode(); ?>">
+                <select id="select-parcelamento-<?php echo $this->getPaymentCode().$_sortNumber; ?>" name="payment[<?php echo $this->getPaymentCode(); ?>_<?php echo $this->getPaymentInstallmentCode().$_sortNumber; ?>]">
+                    <?php foreach ($this->getInstallments(true) as $installment): ?>
+                        <option value="<?php echo $installment->getValue(); ?>" <?php echo $installment->getExtraParams(); ?>><?php echo $installment->getValue() . ' x ' . $installment->getInstallment() . ' ' . $installment->getMessage(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <?php ?>
+        </div>
+
+    <?php endif; ?>
+
+<?php endif; ?>

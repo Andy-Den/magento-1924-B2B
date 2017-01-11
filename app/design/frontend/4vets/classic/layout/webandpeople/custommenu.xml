@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/webandpeople/custommenu/custommenu.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/webandpeople/custommenu/custommenu.js</name>
+            </action>
+        </reference>
+        <reference name="header">
+            <block type="custommenu/toggle"></block>
+        </reference>
+    </default>
+</layout>

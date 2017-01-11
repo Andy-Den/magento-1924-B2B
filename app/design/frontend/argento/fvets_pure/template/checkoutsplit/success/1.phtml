@@ -1,0 +1,26 @@
+<div class="inner">
+
+	<div class="first-row">
+
+		<h1><?php echo $this->__('Your order has been received.') ?></h1>
+		<br />
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<br />
+
+		<?php echo Mage::getModel('core/variable')->setStoreId(Mage::app()->getStore()->getId())->loadByCode('checkout_success_message')->getValue('html'); ?>
+
+		<?php echo Mage::getStoreConfig('trans_email/ident_custom1/email'); ?>
+		<br />
+		<?php echo Mage::getStoreConfig('general/store_information/phone'); ?>
+
+	</div>
+
+	<div class="summary">
+
+		<?php echo $this->getChildHtml('checkout_split_success_order'); ?>
+
+	</div>
+
+	<button type="button" class="button btn-action" title="<?php echo $this->__('Back to homepage') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Back to homepage') ?></span></span></button>
+
+</div>

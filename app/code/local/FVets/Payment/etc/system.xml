@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_Payment extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_Payment
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <cashondelivery>
+                    <fields>
+                        <payment_conditions translate="label">
+                            <label>Add the payment conditions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_conditions>
+                    </fields>
+                </cashondelivery>
+            </groups>
+        </payment>
+        <allpago translate="label" module="fvets_payment">
+            <groups>
+                <gwap_boleto translate="label">
+                    <fields>
+                        <generate_boleto translate="label">
+                            <label>Gerar boleto</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <comment>
+                                <![CDATA[
+                                    (Sim) => Gera o boleto bancário para que o cliente possa imprimí-los na finalização do pedido.
+                                    <br />
+                                    (Não) => Mostra somente o informativo do boleto bancário para o cliente
+                                ]]>
+                            </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </generate_boleto>
+                        <id_erp translate="label">
+                            <label>ID ERP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </id_erp>
+                    </fields>
+                </gwap_boleto>
+                <gwap_cc translate="label">
+                    <fields>
+                        <id_erp translate="label">
+                            <label>ID ERP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </id_erp>
+                    </fields>
+                </gwap_cc>
+                <gwap_deposito translate="label">
+                    <fields>
+                        <id_erp translate="label">
+                            <label>ID ERP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </id_erp>
+                    </fields>
+                </gwap_deposito>
+            </groups>
+        </allpago>
+        <payment_condition translate="label" module="fvets_payment">
+            <class>separator-top</class>
+            <label>Payment Condition</label>
+            <tab>fvets</tab>
+            <sort_order>620</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_payment">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <increase_text translate="label">
+                            <label>Descrição de acréscimo no resumo do pedido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Frase para ser exibida no sumário do checkout quando há condições que acrescentam valor ao pedido</comment>
+                        </increase_text>
+                        <condition_increase_text translate="label">
+                            <label>Descrição de ACRÉSCIMO na condição</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Descrição para ser exibida ao lado das condições que acrescentam no valor total do pedido</comment>
+                        </condition_increase_text>
+                        <condition_discount_text translate="label">
+                            <label>Descrição de DESCONTO na condição</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Descrição para ser exibida ao lado das condições que dão desconto no valor total do pedido</comment>
+                        </condition_discount_text>
+                        <condition_discount_after_subtotal_calculed_items translate="label">
+                            <label>Habilitar desconto de condições de pagamento sobre o total de itens com desconto</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Habilitando essa configuração, os pedidos com desconto por item passam a ser considerados para desconto da condição de pagamento em cima desse subtotal calculado</comment>
+                        </condition_discount_after_subtotal_calculed_items>
+                        <condition_increase_after_subtotal_calculated_items translate="label">
+                            <label>Habilitar acréscimo de condições de pagamento sobre o total de itens com desconto</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Habilitando essa configuração, os pedidos com desconto por item passam a ser considerados para acréscimo da condição de pagamento em cima desse subtotal calculado</comment>
+                        </condition_increase_after_subtotal_calculated_items>
+                        <calculate_items_on_condition_payment_increase_calculated translate="label">
+                            <label>Habilitar calculo das campanhas em cima do acréscimo da condição de pagamento</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Habilitando essa configuração, os itens dos pedidos que tiver desconto por campanha, deverão ser calculados em cima do acréscimo da condição de pagamento</comment>
+                        </calculate_items_on_condition_payment_increase_calculated>
+                    </fields>
+                </general>
+            </groups>
+        </payment_condition>
+    </sections>
+</config>

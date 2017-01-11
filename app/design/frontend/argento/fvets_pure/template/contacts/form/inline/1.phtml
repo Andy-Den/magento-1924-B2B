@@ -1,0 +1,126 @@
+<!--removendo a div que exibe mensagens de erro/sucesso - desnecessário já que existem outros componentes para exibição dessas msgs na pág.-->
+<!--<div id="messages_product_view">--><?php //echo $this->getMessagesBlock()->getGroupedHtml() ?><!--</div>-->
+<form action="<?php echo Mage::getUrl('contacts/index/post'); ?>" id="contactForm" method="post">
+    <div class="fieldset">
+        <h3 class="legend">FORMULÁRIO DE E-MAIL</h3>
+		<span>
+			Caso deseje mais informações, por favor preencha o formulário abaixo. (Campos assinalados com * são de preenchimento obrigatório)
+		</span>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <div class="input-box">
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <div class="input-box">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="email" />
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+				<div class="field">
+					<label for="telephone" class="required"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+					<div class="input-box">
+						<input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text" type="tel" />
+					</div>
+				</div>
+				<div class="field">
+					<label for="occupation"><?php echo Mage::helper('contacts')->__('Occupation') ?></label>
+					<div class="input-box">
+						<select id="occupation" name="occupation" class="input-text">
+							<option value="">Selecione</option>
+							<option value="dono">Dono</option>
+							<option value="comprador">Comprador</option>
+							<option value="gerente">Gerente</option>
+							<option value="veterinario">Veterinário</option>
+							<?php echo Mage::getModel('core/variable')->setStoreId(Mage::app()->getStore()->getId())->loadByCode('contact_occupation_options')->getValue('html'); ?>
+						</select>
+					</div>
+				</div>
+            </li>
+			<li class="fields">
+				<div class="field">
+					<label for="cep" class="required"><?php echo Mage::helper('contacts')->__('Postcode') ?></label>
+					<div class="input-box">
+						<input name="postcode" id="postcode" title="<?php echo Mage::helper('contacts')->__('Postcode') ?>" value="" class="input-text mask-zip" type="text" />
+					</div>
+				</div>
+				<div class="field">
+					<label for="city" class="required"><?php echo Mage::helper('contacts')->__('City') ?></label>
+					<div class="input-box">
+						<input name="city" id="city" title="<?php echo Mage::helper('contacts')->__('City') ?>" value="" class="input-text" type="text" />
+					</div>
+				</div>
+			</li>
+			<li>
+				<label for="address"><?php echo Mage::helper('contacts')->__('Address') ?></label>
+				<div class="input-box">
+					<input name="address" id="address" title="<?php echo Mage::helper('contacts')->__('Address') ?>" value="" class="input-text" type="text" />
+				</div>
+			</li>
+			<li>
+				<label for="subject" class="required"><?php echo Mage::helper('contacts')->__('Subject') ?></label>
+				<div class="input-box">
+					<input name="subject" id="subject" title="<?php echo Mage::helper('contacts')->__('Subject') ?>" value="" class="input-text" type="text" />
+				</div>
+			</li>
+            <li class="wide">
+                <label for="message" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Message') ?></label>
+                <div class="input-box">
+                    <textarea name="message" id="message" title="<?php echo Mage::helper('contacts')->__('Message') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button btn-action"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+		var cepUrl = '<?php echo Mage::getUrl('magefm_customer/cep/buscar', array('_secure' => false)); ?>';
+
+jQuery(document).ready(function () {
+
+	//var cepUrl inside .phtml
+	jQuery('#postcode').on('blur', function (e) {
+		//jQuery('#cep-please-wait').show();
+		jQuery.ajax({
+			url: cepUrl,
+			data: { cep: jQuery('#postcode').val() },
+			dataType: 'json',
+			success: function (data) {
+				//jQuery('#cep-please-wait').hide();
+
+				if (data.resultado == '0') {
+					alert(data.message);
+					jQuery('#address').val('');
+					jQuery('#city').val('');
+				} else {
+					jQuery('#address').val(data.tipo_logradouro + ' ' + data.logradouro);
+					jQuery('#city').val(data.cidade);
+				}
+
+				jQuery('li.hidden-no-cep').show();
+			}
+		});
+	});
+
+	//remover espaços em branco do inicio e fim dos campos
+	var fields = jQuery('.input-text');
+	jQuery.each(fields, function (index, value) {
+		jQuery(value).blur(function () {
+			jQuery(value).val(jQuery(value).val().trim());
+		});
+	});
+	//fim
+});
+
+//]]>
+</script>

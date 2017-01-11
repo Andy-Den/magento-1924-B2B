@@ -1,0 +1,86 @@
+<?php $uId = 'id' . rand(0, time()); ?>
+
+<?php $_qty_blocks = 4; ?>
+
+<div class="blocklinks-grid block-highlight <?php echo $uId; ?>">
+	<div class="block-content">
+		<ul class="grid cols-<?php echo $this->getBlockCols(); ?>">
+			<?php for ($_i = 1; $_i <= $_qty_blocks; $_i++) : ?>
+				<li class="item">
+					<div class="prolabel-wrapper">
+						<a class="category-image" title="<?php echo $this->{"getBlock".$_i."Title"}(); ?>" href="<?php echo $this->{"getBlock".$_i."Link"}(); ?>#">
+								<?php if(file_exists($_SERVER['DOCUMENT_ROOT'] . $this->{"getBlock".$_i."Image"}())) : ?>
+									<?php list($width, $height) = getimagesize($_SERVER['DOCUMENT_ROOT'] . $this->{"getBlock".$_i."Image"}()); ?>
+									<img width="<?php echo $width; ?>" height="<?php echo $height; ?>" alt="<?php echo $this->{"getBlock".$_i."Title"}(); ?>" class="lazy" data-original="<?php echo $this->{"getBlock".$_i."Image"}(); ?>">
+								<?php endif; ?>
+						</a>
+					</div>
+					<h4 class="block-title">
+						<a title="<?php echo $this->{"getBlock".$_i."Title"}(); ?>" href="<?php echo $this->{"getBlock".$_i."Link"}(); ?>">
+							<?php echo $this->{"getBlock".$_i."Title"}(); ?>
+						</a>
+					</h4>
+
+					<div>
+						<?php echo $this->{"getBlock".$_i."Text"}(); ?>
+					</div>
+				</li>
+			<?php endfor; ?>
+		</ul>
+		<script type="text/javascript">decorateGeneric($$('ul.categories-grid'), ['odd','even','first','last'])</script>
+	</div>
+</div>
+<script type="text/javascript">
+
+	jQuery(document).ready(function() {
+		jQuery(document).bind('resizeBoxes', function(){
+			var firstElement = jQuery('.<?php echo $uId; ?> .grid .item').first();
+			var lenght = 0;
+
+			jQuery('.<?php echo $uId; ?> .grid .item').each(function() {
+				if (jQuery(this).position().top == jQuery(firstElement).position().top)
+				{
+					lenght++;
+				}
+			});
+
+			var index = 0;
+			var minHeight = 0;
+			var line = 1;
+
+			jQuery('.<?php echo $uId; ?> .grid .item').css({'min-height' : '0'});
+
+			jQuery('.<?php echo $uId; ?> .grid .item').each(function()
+			{
+
+				if (index == 0)
+				{
+					jQuery(this).addClass('first');
+				}
+				else
+				{
+					jQuery(this).addClass('middle');
+				}
+
+				index++;
+
+				jQuery(this).addClass('line'+line);
+
+				if (jQuery(this).outerHeight() > minHeight)
+					minHeight = jQuery(this).outerHeight();
+
+				//console.log(minHeight);
+				//console.log(line);
+
+				if (index == lenght)
+				{
+					jQuery('.<?php echo $uId; ?> .item.line'+line).css({'min-height':minHeight+'px'});
+					index = 0;
+					minHeight = 0;
+					line++;
+					jQuery(this).addClass('last').removeClass('middle');
+				}
+			});
+		})
+	});
+</script>

@@ -1,0 +1,55 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   FVets
+ * @package    FVets_CustomGrid
+ * @copyright  Copyright (c) 2014 Benoît Leulliette <carlos.farah@gmail.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php if ($this->getIsAjaxMode()): ?>
+<?php $_wrapperId = $this->helper('core')->uniqHash('fvetscg-ajax-messages-wrapper-') ?>
+<div id="<?php echo $_wrapperId ?>">
+<?php foreach ($this->getMessagesTypes() as $_type => $_label): ?>
+    <?php if ($this->hasMessages($_type)): ?>
+        <li class="no-display fvetscg-messages-list-wrapper fvetscg-messages-list-wrapper-<?php echo $_type ?>">
+            <div class="fvetscg-messages-list"><?php echo $this->getMessagesHtml($_type) ?></div>
+        </li>
+    <?php endif ?>
+<?php endforeach ?>
+</div>
+<?php else: ?>
+<div id="fvetscg-messages-wrapper" class="fvetscg-messages-wrapper">
+    <ul class="fvetscg-messages-tabs">
+    <?php $_counts = array(); ?>
+    <?php foreach ($this->getMessagesTypes() as $_type => $_label): ?>
+        <li id="fvetscg-messages-tab-<?php echo $_type ?>" class="fvetscg-messages-tab fvetscg-messages-tab-<?php echo $_type ?><?php if (!$_count = $this->getMessagesCount($_type)): ?> no-display<?php endif ?>"><?php echo $this->htmlEscape($_label) ?> (<span id="fvetscg-messages-tab-count-<?php echo $_type ?>"><?php echo $_count ?></span>)</li>
+    <?php endforeach ?>
+    </ul>
+    <ul class="fvetscg-messages-lists">
+    <?php foreach ($this->getMessagesTypes() as $_type => $_label): ?>
+        <li id="fvetscg-messages-list-wrapper-<?php echo $_type ?>" class="no-display fvetscg-messages-list-wrapper fvetscg-messages-list-wrapper-<?php echo $_type ?>">
+            <div class="fvetscg-messages-list"><?php echo $this->getMessagesHtml($_type) ?></div>
+        </li>
+    <?php endforeach ?>
+    </ul>
+</div>
+<?php endif ?>
+<script type="text/javascript">
+//<![CDATA[
+<?php if ($this->getIsAjaxMode()): ?>
+if (typeof(fvetscgMessagesTabs) != 'undefined') {
+    fvetscgMessagesTabs.addMessages('<?php echo $_wrapperId ?>')
+    $('<?php echo $_wrapperId ?>').remove();
+}
+<?php else: ?>
+var fvetscgMessagesTabs = new fvetscg.MessagesTabs('fvetscg-messages-wrapper', <?php echo $this->helper('core')->jsonEncode(array_keys($this->getMessagesTypes())) ?>);
+<?php endif ?>
+//]]>
+</script>

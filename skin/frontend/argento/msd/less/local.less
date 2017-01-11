@@ -1,0 +1,77 @@
+.cms-page-view
+{
+  .main-account-approval
+  {
+    .hundred
+    {
+      .layout
+      {
+        height: auto;
+        padding-top: 2%;
+        &.lane-impar
+        {
+          background-color: #dbe2fc;
+        }
+
+        &.lane-par
+        {
+          background-color: none;
+        }
+      }
+      .container
+      {
+        .layout
+        {
+          max-width: 950px;
+          margin-left: 14%;
+        }
+
+        .left
+        {
+          float: left;
+          text-align: center;
+          width: 22%;
+          em
+          {
+            font-style: normal;
+            font-size: 13em;
+          }
+        }
+        .right
+        {
+          float: left;
+          width: 75%;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  &.cms-account-awaiting-approval
+  {
+    .footer-cms-container
+    {
+      height: 160px;
+      margin-top: 190px;
+    }
+  }
+}
+
+.container-valores
+{
+  img
+  {
+    margin-top: 40px;
+  }
+}
+
+.carousel-products
+{
+  margin-top: 0px !important;
+}
+
+.footer-cms-container
+{
+  color: @defaultTextColor;
+  border-top: @defaultBorder;
+  background: url("@{skinUrl}images/img-footer.png") no-repeat @defaultBackgroundColor2;
+}

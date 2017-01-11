@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Coupon>
+            <active>false</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Checkout />
+                <FVets_Page />
+            </depends>
+        </FVets_Coupon>
+    </modules>
+</config>

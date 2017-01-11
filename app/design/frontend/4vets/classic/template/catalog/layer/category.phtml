@@ -1,0 +1,9 @@
+<?php
+$_category  = $this->getCurrentCategory();
+?>
+
+<?php if ($_category->getUrlKey() == 'busque-por-marca') :?>
+	<?php echo $this->getChildHtml('categories.leftnav'); ?>
+<?php else : ?>
+	<?php echo $this->getChildHtml('catalog.leftnav'); ?>
+<?php endif; ?>

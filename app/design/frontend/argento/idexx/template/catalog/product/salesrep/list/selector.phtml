@@ -1,0 +1,49 @@
+<?php
+	$regionCollection = $this->getRegionCollection();
+?>
+
+<select name='customer[region]' id='customer-region' class="customer-region validate-select" >
+	<option value=""><?php echo $this->__('Please select the region'); ?></option>
+	<?php foreach($regionCollection as $region) : ?>
+		<option id="option-<?php echo $region->getCode(); ?>" value="<?php echo $region->getCode() ?>" <?php if ($region->getCode() == Mage::getModel('core/cookie')->get('customer-region')) : ?>selected="selected"<?php endif; ?> ><?php echo $region->getDefaultName() ?></option>
+	<?php endforeach ?>
+</select>
+
+<script>
+	jQuery(document).ready(function() {
+		customerRegionBind();
+	})
+	function customerRegionBind() {
+		jQuery('.customer-region').unbind( "change" );
+		jQuery('.customer-region').change(function()
+		{
+			jQuery.cookie('customer-region', jQuery(this).val(), { expires: 365, path: '/'});
+
+			jQuery('#product-vendors-table thead tr').show();
+			jQuery('#product-vendors-table tr.no-salesrep-available').hide();
+
+			if (jQuery(this).val() != '')
+			{
+				jQuery('#product-vendors-table tr.vendor').hide();
+				jQuery('#product-vendors-table .'+jQuery(this).val()).show()
+
+				if (jQuery('#product-vendors-table .'+jQuery(this).val()).size() <= 0)
+				{
+					jQuery('#product-vendors-table tr').hide();
+					jQuery('#product-vendors-table tr.no-salesrep-available').show();
+				}
+
+			} else {
+				jQuery('#product-vendors-table .vendor').hide();
+			}
+
+			jQuery('.customer-region').val(jQuery(this).val());
+
+		});
+
+		if (jQuery('.customer-region').val() == '')
+		{
+			jQuery('#product-vendors-table .vendor').hide();
+		}
+	}
+</script>

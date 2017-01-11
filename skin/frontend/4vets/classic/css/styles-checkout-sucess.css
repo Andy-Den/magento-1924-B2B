@@ -1,0 +1,29 @@
+/* checkout sucess */
+
+.checkout-onepage-success .fieldset {
+    border:1px solid #f5f5f5;
+    border-top: 2px solid #00afe3;
+    padding-top:30px;
+}
+
+.checkout-onepage-success .fieldset .inner {
+    background: #f9f9f9;
+    border:1px solid #e7e7e7;
+    margin:0 auto;
+    float: none;
+    border-radius: 5px;
+}
+
+.checkout-onepage-success .big{
+    font-size:1.286em;
+}
+
+.checkout-onepage-success .fieldset .inner .boleto {
+    display:inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background: #00afe3;
+    padding:10px 35px;
+    border-radius: 3px;
+}

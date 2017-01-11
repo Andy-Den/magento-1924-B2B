@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Rolepermissions
+ */
+-->
+
+<config>
+    <translate>
+        <modules>
+            <Amasty_Rolepermissions>
+                <files>
+                    <default>Amasty_Rolepermissions.csv</default>
+                </files>
+            </Amasty_Rolepermissions>
+        </modules>
+    </translate>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <amrolepermissions translate="title">
+                                <title>Role Permissions</title>
+                                <children>
+                                    <product_owner translate="title">
+                                        <title>Allow to View/Edit Product Owner</title>
+                                    </product_owner>
+                                    <delete_products translate="title">
+                                        <title>Allow to Delete Products</title>
+                                    </delete_products>
+                                    <delete_customers translate="title">
+                                        <title>Allow to Delete Customers</title>
+                                    </delete_customers>
+                                    <save_products translate="title">
+                                        <title>Allow to Create And Edit Products</title>
+                                    </save_products>
+                                    <save_customers translate="title">
+                                        <title>Allow to Save Customers</title>
+                                    </save_customers>
+                                    <create_categories translate="title">
+                                        <title>Allow to Create Categories</title>
+                                    </create_categories>
+                                    <delete_categories translate="title">
+                                        <title>Allow to Delete Categories</title>
+                                    </delete_categories>
+                                    <categories translate="title">
+                                        <title>Allow Advanced: Categories</title>
+                                    </categories>
+                                    <products translate="title">
+                                        <title>Allow Advanced: Products</title>
+                                    </products>
+                                </children>
+                            </amrolepermissions>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

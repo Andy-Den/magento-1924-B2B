@@ -1,0 +1,89 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">
+
+  <product_index_vendor>
+      <reference name="root">
+          <action method="setTemplate"><template>page/modal.phtml</template></action>
+      </reference>
+      <reference name="content">
+          <block type="catalog/product_view" name="product.info" template="catalog/product/list/vendor_list.phtml">
+              <block type="udmultiprice/productVendors" name="product.info.table.simple" as="product_type_table_data" template="udmultiprice/product/vendors_2.phtml">
+                  <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml"/>
+                  <block type="regionselector/selector" name="regionselector" as="regionselector" template="regionselector/selector.phtml"/>
+              </block>
+          </block>
+      </reference>
+  </product_index_vendor>
+
+
+  <product_index_index>
+    <reference name="root">   
+      <action method="setTemplate"><template>page/modal.phtml</template></action>
+    </reference>
+      <reference name="head">
+          <action method="addJs"><script>varien/product.js</script></action>
+          <action method="addJs"><script>varien/configurable.js</script></action>
+
+          <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+          <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+          <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+      </reference>
+      <reference name="content">
+          <block type="catalog/product_view" name="product.info" template="catalog/product/view_catalog.phtml">
+
+
+              <!--block type="udmultiprice/productVendors" name="product.vendors" as="product.vendors" template="udmultiprice/product/vendors.phtml">
+                  <action method="addToParentGroup"><group>detailed_info</group></action>
+              </block-->
+
+              <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media_catalog.phtml"/>
+              <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+                  <label>Alert Urls</label>
+              </block>
+
+              <block type="udmultiprice/productVendors" name="product.info.table.simple" as="product_type_table_data" template="udmultiprice/product/vendors_2.phtml">
+                  <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml"/>
+                  <block type="regionselector/selector" name="regionselector" as="regionselector" template="regionselector/selector.phtml"/>
+              </block>
+
+              <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
+
+              <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml">
+                  <action method="setColumnCount"><columns>4</columns></action>
+                  <action method="setItemLimit"><type>upsell</type><limit>4</limit></action>
+              </block>
+
+              <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+
+              <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
+                  <action method="addToParentGroup"><group>detailed_info</group></action>
+              </block>
+              <block type="catalog/product_view" name="product.info.addto" as="addto" template="catalog/product/view/addto.phtml"/>
+              <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart_catalog.phtml"/>
+
+              <remove name="product.info.upsell"></remove>
+              <remove name="catalog.topnav"></remove>
+              <remove name="product.attributes"></remove>
+
+          </block>
+      </reference>
+
+  </product_index_index>
+    <PRODUCT_TYPE_simple translate="label" module="catalog">
+        <label>Catalog Product View (Simple)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product_info_table_simple_catalog" as="product_type_table_data_catalog" template="catalog/product/view/type/table/default_catalog.phtml">
+                <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_grouped translate="label" module="catalog">
+        <label>Catalog Product View (Grouped)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_grouped" name="product_info_table_grouped_catalog" as="product_type_table_data_catalog" template="catalog/product/view/type/table/grouped_catalog.phtml">
+                <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_grouped>
+</layout>   
+	

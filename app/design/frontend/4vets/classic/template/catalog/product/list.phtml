@@ -1,0 +1,246 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+
+<?php
+	$_productCollection = $this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<a href="javascript:history.go(-1)" class="go-back breadcrumb"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<?php echo $this->__('Voltar'); ?></a>
+
+<div class="clear"></div>
+
+<br />
+
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="category-products">
+	<?php if($this->getData('name') != 'home.catalog.product.list'): ?>
+    	<?php echo $this->getToolbarHtml() ?>
+	<?php endif; ?>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <div class="products-list" id="products-list">
+    <?php foreach ($_productCollection as $_product): ?>
+
+		<?php
+		$_reviewsCollection = Mage::getModel('review/review')->getCollection()
+			->addStoreFilter(Mage::app()->getStore()->getId())
+			->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+			->addEntityFilter('product', $_product->getId())
+			->setDateOrder()
+			->setPageSize(1);
+		?>
+
+        <div class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?> col-md-12">
+			<div class="row">
+				<?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+				<h2 class="product-name text-left text-center-xs text-center-sm"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+				<?php echo $this->getReviewsSummaryHtml($_product, "short", true) ?>
+			</div>
+			<br />
+			<br />
+        	<div class="row">
+						<div class="col-md-3 text-center-xs text-center-sm">
+							<a href="<?php echo $_product->getProductUrl() ?>"
+								 title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
+								 class="product-image"><img
+									src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>"
+									width="200" height="200"
+									alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/></a>
+
+							<div class="clear"></div>
+
+							<?php $shortDescription = $_product->getShortDescription();
+								if (strlen($shortDescription) > 100) {
+									$shortDescription = substr($shortDescription, 0, 100) . "...";
+								}
+
+							?>
+
+							<span><?php echo $shortDescription; ?></span>
+							<br/><br/>
+							<a class="read-more" href="<?php echo $_product->getProductUrl() ?>">leia mais...</a>&nbsp;
+							<i class="fa fa-chevron-down"></i>
+						</div>
+
+						<?php $this->getChild('latestreview')->setProduct($_product); ?>
+						<?php echo $this->getChildHtml('latestreview', false); ?>
+
+<!--	        	<div class="col-md-9">-->
+<!--		            <div class="product-shop">-->
+<!---->
+<!--						<div class="row">-->
+<!--							<h4>Quem distribui este produto?</h4>-->
+<!--							<div class="show-vendor-list---><?php //echo $_product->getId(); ?><!--">-->
+<!--								<a href="javascript://" title="Veja quem distribui este produto" class="product-vendor-list-link" data-id="--><?php //echo $_product->getId(); ?><!--">Clique aqui para ver a lista</a>-->
+<!--							</div>-->
+<!--						</div>-->
+<!---->
+<!--						<br />-->
+<!---->
+<!--		                <div class="f-fix">-->
+<!---->
+<!--							--><?php //if($_reviewsCollection->count()) : ?>
+<!---->
+<!--								--><?php //foreach($_reviewsCollection as $_review) : ?>
+<!---->
+<!--									<div class="review std">-->
+<!---->
+<!--										--><?php //echo $this->getReviewsSummaryHtml($_product, "value", true) ?>
+<!---->
+<!--										<div class="title">-->
+<!--											--><?php //echo $_review->getTitle(); ?>
+<!--										</div>-->
+<!---->
+<!--										<div class="clear"></div>-->
+<!---->
+<!--										<div class="text">-->
+<!--											--><?php //echo  nl2br($this->htmlEscape($_review->getDetail())); ?>
+<!--										</div>-->
+<!---->
+<!--									</div>-->
+<!---->
+<!--								--><?php //endforeach; ?>
+<!---->
+<!--							--><?php //else : ?>
+<!---->
+<!--								<div class="desc std">-->
+<!--									--><?php //echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+<!--								</div>-->
+<!---->
+<!--							--><?php //endif; ?>
+<!---->
+<!--							<br />-->
+<!---->
+<!--		                </div>-->
+<!--		            </div>-->
+<!--					<a class="see-more-link" href="--><?php //echo $_product->getProductUrl() ?><!--" title="--><?php //echo $_productNameStripped; ?><!--">--><?php //echo $this->__('Veja mais sobre este produto >'); ?><!--</a>-->
+<!--	        	</div>-->
+
+        	</div>
+            <?php // Product Image ?>
+            <?php // Product description ?>
+        </div>
+    <?php endforeach; ?>
+    </div>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+    <?php else: ?>
+
+			<?php // Grid Mode ?>
+
+			<?php echo $this->getChildHtml('product_grid_block'); ?>
+
+		<?php endif; ?>
+
+	<?php if($this->getData('name') != 'home.catalog.product.list'): ?>
+		<?php echo $this->getToolbarHtml() ?>
+	<?php endif; ?>
+
+</div>
+<?php endif; ?>
+
+<script>
+	jQuery('.product-vendor-list-link').bind('click', function() {
+
+		var id = jQuery(this).data('id');
+
+		jQuery( '.show-vendor-list-'+id ).html( '<div style="text-align: center"> <i class="fa fa-spinner fa-spin fa-2x"></i></div>' );
+
+		jQuery.ajax({
+			url: "/product/index/vendor/id/"+id
+		}).done(function( html ) {
+			jQuery( '.show-vendor-list-'+id ).html( html );
+		});
+	})
+</script>
+
+
+
+
+<script>
+	jQuery(document).ready(function(){
+
+	});
+
+	function customerRegionBind() {
+
+		jQuery('.customer-region').unbind( "change" );
+
+		jQuery('.customer-region').change(function(){
+			jQuery.cookie('customer-region', jQuery(this).val(), { expires: 365, path: '/'});
+
+			if (jQuery(this).val() != '')
+			{
+				jQuery('.product-vendors-table tr.rows').hide();
+				jQuery('.product-vendors-table .'+jQuery(this).val()).show();
+			} else {
+				jQuery('.product-vendors-table .vendor').show();
+			}
+
+			jQuery('.customer-region').val(jQuery(this).val());
+
+		})
+
+		if (jQuery('.customer-region').val() == '') {
+			if (screen.width <= 480) {
+				jQuery('#product-vendors-table .vendor').hide();
+			}
+			else {
+				jQuery('#product-vendors-table .vendor').show();
+			}
+		}
+	}
+</script>
+
+<style>
+	.product-vendors-table tr.rows {
+		display:none;
+	}
+	<?php if (Mage::getModel('core/cookie')->get('customer-region')) : ?>
+	.product-vendors-table .<?php echo Mage::getModel('core/cookie')->get('customer-region'); ?>.rows {
+		display: table-row;
+	}
+	<?php endif; ?>
+</style>
+
+<a href="javascript:history.go(-1)" class="go-back"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<?php echo $this->__('Voltar'); ?></a>
+
+<div class="clear"></div>
+
+<br />
+<br />

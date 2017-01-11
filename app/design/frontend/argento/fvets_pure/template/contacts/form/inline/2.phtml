@@ -1,0 +1,100 @@
+<form action="<?php echo Mage::getUrl('contacts/index/post'); ?>" id="contactForm" method="post">
+	<div class="fieldset">
+		<ul class="form-list">
+			<li class="fields">
+				<div class="field">
+
+					<div class="input-box">
+						<input placeholder="<?php echo Mage::helper('contacts')->__('Seu Nome') ?>" name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Seu Nome') ?>"
+									 value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>"
+									 class="input-text required-entry" type="text"/>
+					</div>
+				</div>
+				<div class="field">
+
+					<div class="input-box">
+						<input placeholder="<?php echo Mage::helper('contacts')->__('Seu Email') ?>" name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Seu Email') ?>"
+									 value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>"
+									 class="input-text required-entry validate-email" type="email"/>
+					</div>
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+
+					<div class="input-box">
+						<input placeholder="<?php echo Mage::helper('contacts')->__('Seu Telefone') ?>" name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Seu Telefone') ?>"
+									 value="" class="input-text" type="tel"/>
+					</div>
+				</div>
+				<div class="field">
+					<select style="" class="input-text" title="Estado" name="region_id" id="region_id" defaultvalue="">
+						<option value="">Sua Região</option>
+						<option value="485" title="Acre">Acre</option>
+						<option value="486" title="Alagoas">Alagoas</option>
+						<option value="487" title="Amapá">Amapá</option>
+						<option value="488" title="Amazonas">Amazonas</option>
+						<option value="489" title="Bahia">Bahia</option>
+						<option value="490" title="Ceará">Ceará</option>
+						<option value="491" title="Distrito Federal">Distrito Federal</option>
+						<option value="492" title="Espírito Santo">Espírito Santo</option>
+						<option value="493" title="Goiás">Goiás</option>
+						<option value="494" title="Maranhão">Maranhão</option>
+						<option value="495" title="Mato Grosso">Mato Grosso</option>
+						<option value="496" title="Mato Grosso do Sul">Mato Grosso do Sul</option>
+						<option value="497" title="Minas Gerais">Minas Gerais</option>
+						<option value="498" title="Pará">Pará</option>
+						<option value="499" title="Paraíba">Paraíba</option>
+						<option value="500" title="Paraná">Paraná</option>
+						<option value="501" title="Pernambuco">Pernambuco</option>
+						<option value="502" title="Piauí">Piauí</option>
+						<option value="503" title="Rio de Janeiro">Rio de Janeiro</option>
+						<option value="504" title="Rio Grande do Norte">Rio Grande do Norte</option>
+						<option value="505" title="Rio Grande do Sul">Rio Grande do Sul</option>
+						<option value="506" title="Rondônia">Rondônia</option>
+						<option value="507" title="Roraima">Roraima</option>
+						<option value="508" title="Santa Catarina">Santa Catarina</option>
+						<option value="509" title="São Paulo">São Paulo</option>
+						<option value="510" title="Sergipe">Sergipe</option>
+						<option value="511" title="Tocantins">Tocantins</option>
+					</select>
+				</div>
+			</li>
+			<li class="fields">
+				<div class="field">
+
+					<div class="input-box">
+						<input placeholder="<?php echo Mage::helper('contacts')->__('Sua Clínica') ?>" name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Sua Clínica') ?>"
+									 value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>"
+									 class="input-text required-entry" type="text"/>
+					</div>
+				</div>
+			</li>
+			<li class="wide">
+				<div class="input-box">
+					<textarea placeholder="<?php echo Mage::helper('contacts')->__('Sua Mensagem') ?>" name="message" id="message" title="<?php echo Mage::helper('contacts')->__('Sua Mensagem') ?>"
+										class="required-entry input-text" cols="5" rows="3"></textarea>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="buttons-set">
+		<input type="text" name="hideit" id="hideit" value="" style="display:none !important;"/>
+		<button type="submit" title="<?php echo Mage::helper('contacts')->__('Enviar!') ?>" class="button btn-action">
+			<span><span><?php echo Mage::helper('contacts')->__('Enviar!') ?></span></span></button>
+	</div>
+</form>
+<script type="text/javascript">
+	//<![CDATA[
+	var contactForm = new VarienForm('contactForm', false);
+	//]]>
+</script>
+
+<script type="text/javascript">
+	//<![CDATA[
+
+	var regionJson = <?php echo $this->helper('directory')->getRegionJson() ?>;
+	var cepUrl = '<?php echo Mage::getUrl('magefm_customer/cep/buscar', array('_secure' => true)); ?>';
+
+	//]]>
+</script>

@@ -1,0 +1,190 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * One page checkout payment methods
+ *
+ * @see Mage_Checkout_Block_Onepage_Payment_Methods
+ */
+?>
+
+<?php
+
+$salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep();
+if (!$salesrep) {
+	$salesrepId = $this->getRequest()->get('salesrep', false);
+	if($salesrepId) {
+		$salesrep = Mage::getModel('fvets_salesrep/salesrep')->load($salesrepId);
+	}
+}
+
+?>
+
+<?php
+
+$helper = Mage::helper('onestepcheckout/checkout');
+$hide_nonfree_methods = false;
+if($helper->settings['hide_nonfree_payment_methods'])   {
+	foreach($this->getMethods() as $_method)    {
+		if($_method->getCode() == 'free')   {
+			$hide_nonfree_methods = true;
+		}
+	}
+}
+
+
+?>
+
+<div class="payment-methods-<?php echo $salesrep ? $salesrep->getId() : ''?>">
+
+	<script type="text/javascript">
+		//<![CDATA[
+		<?php echo $this->getChildHtml('reward.scripts'); ?>
+		<?php echo $this->getChildHtml('customerbalance_scripts'); ?>
+		var payment<?php echo $salesrep->getId(); ?> = new Payment('checkout-payment-method-load-<?php echo $salesrep ? $salesrep->getId() : ''; ?>', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
+		payment<?php echo $salesrep->getId(); ?>.currentMethod = "<?php echo $this->getQuote()->getPayment()->getMethod() ?>";
+		//]]>
+	</script>
+	<?php if (count($this->getMethods())=='1' && Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
+		<dl id="checkout-payment-method-load-<?php echo $salesrep->getId(); ?>" >
+			<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+
+				<dt>
+					<input id="p_method_<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>" value="<?php echo $_code ?>" type="hidden" name="payment[<?php echo $salesrep->getId(); ?>][method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" class="radio" checked="checked" />
+					<label for="p_method_<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>"><?php echo $_method->getTitle() ?></label>
+				</dt>
+			<?php endforeach; ?>
+		</dl>
+	<?php else:?>
+
+		<dl id="checkout-payment-method-load-<?php echo $salesrep->getId(); ?>">
+			<div class="step step-payment-method">
+				<?php if (count($this->getMethods())>='1' || !Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
+					<div class="block-header">
+						<?php if (count($this->getMethods())=='1' && !Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
+							1 - <?php echo $this->__('Payment method'); ?>
+						<?php  else: ?>
+							1 - <?php echo $this->__('Select the payment method'); ?>
+						<?php endif; ?>
+					</div>
+					<br />
+				<?php endif; ?>
+				<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+					<?php if($hide_nonfree_methods && $_code != 'free') continue; ?>
+					<div class="select-payment-method">
+						<?php /*
+							<i class="fa fa-3x fa-<?php echo $_code ?>"></i>
+							<br />
+						*/ ?>
+						<?php /*if( sizeof($this->getMethods()) > 1 ):*/ ?>
+							<input id="p_method_<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>" value="<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>" type="radio" name="payment[<?php echo $salesrep->getId(); ?>][method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" class="radio validate-one-required-by-name payment-method-option" <?php if($this->getSelectedMethodCode()==$_code || ($hide_nonfree_methods && $_code == 'free') || count($this->getMethods())=='1'): ?> checked="checked"<?php endif; ?> />
+						<?php /*else: ?>
+							<span class="no-display"><input id="p_method_<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>" value="<?php echo $_code ?>" type="radio" name="payment[<?php echo $salesrep->getId(); ?>][method]" checked="checked" /></span>
+						<?php endif;*/ ?>
+						<label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?></label>
+					</div>
+				<?php endforeach; ?>
+				<br />
+			</div>
+
+			</dd>
+			<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+				<?php if($hide_nonfree_methods && $_code != 'free') continue; ?>
+				<?php if($html = $this->getChildHtml('payment.method.'.$_code, false)): ?>
+					<div id="container_payment_method_<?php echo $_code; ?>-<?php echo $salesrep->getId(); ?>" class="payment-method-<?php echo $salesrep->getId(); ?> container_payment_method">
+						<?php echo $html; ?>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			<?php if($this->getErrorMethods()): ?>
+				<ul class="messages">
+					<li class="notice-msg">
+						<ul>
+							<?php foreach($this->getErrorMethods() as $error): ?>
+								<li><span><?php echo $error; ?></span></li>
+							<?php endforeach; ?>
+						</ul>
+					</li>
+				</ul>
+
+			<?php endif; ?>
+			<script>
+				update_payments = true;
+			</script>
+		</dl>
+	<?php endif;?>
+</div>
+<script type="text/javascript">
+	//<![CDATA[
+
+	$$('.cvv-what-is-this').each(function(element){
+		Event.observe(element, 'click', toggleToolTip);
+	});
+
+	function toggleToolTip(event){
+		if($('payment-tool-tip-<?php echo $salesrep->getId(); ?>')){
+			$('payment-tool-tip-<?php echo $salesrep->getId(); ?>').setStyle({
+				left: (Event.pointerX(event)-100)+'px',
+				top: (Event.pointerY(event)-300)+'px'
+			});
+			$('payment-tool-tip-<?php echo $salesrep->getId(); ?>').toggle();
+		}
+		Event.stop(event);
+	}
+
+	var checkout = new Checkout();
+	$$('#checkout-payment-method-load-<?php echo $salesrep->getId(); ?> dt input').invoke('observe', 'click', function(e) {
+
+		var element = e.element();
+		var name = 'payment_form_' + element.getValue();
+		payment<?php echo $salesrep->getId(); ?>.currentMethod = element.getValue();
+		/* Hide all other forms */
+		$$('dd.payment-method-<?php echo $salesrep->getId(); ?>').invoke('hide');
+
+		if(element.checked) {
+			payment<?php echo $salesrep->getId(); ?>.switchMethod(payment<?php echo $salesrep->getId(); ?>.currentMethod);
+			var form = $(name);
+			var container = $('container_payment_method_' + element.getValue());
+
+			if(element !== null && container !== null)    {
+				container.show();
+				if ($(name) !== null)
+					$(name).show();
+			}
+		}
+	});
+
+	payment<?php echo $salesrep->getId(); ?>.switchMethod(payment<?php echo $salesrep->getId(); ?>.currentMethod);
+	<?php echo $this->getChildHtml('giftcardaccount_scripts');?>
+	//]]>
+
+	jQuery(document).ready(function() {
+		jQuery('input.payment-method-option').click(function() {
+			//alert(jQuery(this).val());
+		});
+	});
+</script>

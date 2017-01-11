@@ -1,0 +1,10 @@
+<div class="mini-success">
+	<i class="fa fa-check fa-2x"></i>
+	<div class="inner">
+		<strong><?php echo $this->__('Pedido #%s realizado com sucesso!', $this->getOrderId()); ?></strong>
+		<br />
+		<?php echo $this->__('O boleto será enviado junto aos produtos, você receberá um resumo do seu pedido
+		<br />
+		através do email cadastrado (%s)', $this->getCustomer()->getEmail()); ?>
+	</div>
+</div>

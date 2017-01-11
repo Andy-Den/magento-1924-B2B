@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_SalesRule extension
+ * 
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+--> 
+<layout>
+    <!--adminhtml_salesrule_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>promo/fvets_salesrule/salesrule</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_salesrule/adminhtml_salesrule" name="salesrule" />
+
+        </reference>
+    </adminhtml_salesrule_index-->
+    <!--adminhtml_salesrule_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrule/adminhtml_salesrule_grid" name="salesrule_grid"/>
+        </block>
+    </adminhtml_salesrule_grid-->
+    <!-- Salesrule add/edit action -->
+    <!--adminhtml_salesrule_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>promo/fvets_salesrule/salesrule</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_salesrule/adminhtml_salesrule_edit" name="salesrule_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_salesrule/adminhtml_salesrule_edit_tabs" name="salesrule_tabs"></block>
+        </reference>
+    </adminhtml_salesrule_edit-->
+
+    <adminhtml_salesrule_customer_salesrules>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrule/adminhtml_customer_edit_tab_salesrule_form" name="customer.edit.tab.salesrule.form"/>
+            <block type="fvets_salesrule/adminhtml_customer_edit_tab_salesrule_premier" name="customer.edit.tab.salesrule.premier"/>
+            <block type="fvets_salesrule/adminhtml_customer_edit_tab_salesrule_promo" name="customer.edit.tab.salesrule.promo"/>
+            <block type="adminhtml/widget_grid_serializer" name="salesrule_grid_serializer">
+                <reference name="salesrule_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>customer.edit.tab.salesrule.promo</grid_block_name>
+                        <data_callback>getSelectedSalesrules</data_callback>
+                        <hidden_input_name>salesrules</hidden_input_name>
+                        <reload_param_name>customer_salesrules</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_salesrule_customer_salesrules>
+    <adminhtml_salesrule_customer_salesrulesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrule/adminhtml_customer_edit_tab_salesrule_promo" name="customer.edit.tab.salesrule.promo"/>
+        </block>
+    </adminhtml_salesrule_customer_salesrulesgrid>
+    <adminhtml_salesrule_customers>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrule/adminhtml_promo_quote_edit_tab_customer" name="salesrule.edit.tab.customer"/>
+            <block type="adminhtml/widget_grid_serializer" name="customer_grid_serializer">
+                <reference name="customer_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>salesrule.edit.tab.customer</grid_block_name>
+                            <data_callback>getSelectedCustomers</data_callback>
+                            <hidden_input_name>customers</hidden_input_name>
+                            <reload_param_name>salesrule_customers</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_salesrule_customers>
+    <adminhtml_salesrule_customersgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrule/adminhtml_promo_quote_edit_tab_customer" name="salesrule.edit.tab.customer"/>
+        </block>
+    </adminhtml_salesrule_customersgrid>
+</layout>

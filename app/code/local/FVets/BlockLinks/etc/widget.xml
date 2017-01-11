@@ -1,0 +1,616 @@
+<?xml version="1.0"?>
+<widgets>
+    <blocklinks_institutionals1 type="blocklinks/widget_institutionals" translate="name" module="blocklinks">
+        <name>FVets Widget Instutional</name>
+        <description>Add a block with categories and some links in homepage</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <label>Template</label>
+                <type>text</type>
+                <value>blocklinks/home/full.phtml</value>
+            </template>
+            <category_id translate="label" module="catalog">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Root Category (Brands)</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_category_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </category_id>
+            <link_brands>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Brands)</label>
+                <type>text</type>
+                <value></value>
+            </link_brands>
+            <text_offers>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Text (Offers)</label>
+                <type>textarea</type>
+                <value></value>
+            </text_offers>
+            <link_offers>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Offers)</label>
+                <type>text</type>
+                <value></value>
+            </link_offers>
+            <text_company1>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Text (Company 1)</label>
+                <type>text</type>
+                <value></value>
+            </text_company1>
+            <link_company1>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Company 1)</label>
+                <type>text</type>
+                <value></value>
+            </link_company1>
+            <text_company2>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Text (Company 2)</label>
+                <type>text</type>
+                <value></value>
+            </text_company2>
+            <link_company2>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Company 2)</label>
+                <type>text</type>
+                <value></value>
+            </link_company2>
+            <text_company3>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Text (Company 3)</label>
+                <type>text</type>
+                <value></value>
+            </text_company3>
+            <link_company3>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Company 3)</label>
+                <type>text</type>
+                <value></value>
+            </link_company3>
+            <text_company4>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Text (Company 4)</label>
+                <type>text</type>
+                <value></value>
+            </text_company4>
+            <link_company4>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Company 4)</label>
+                <type>text</type>
+                <value></value>
+            </link_company4>
+            <text_company5>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Text (Company 5)</label>
+                <type>text</type>
+                <value></value>
+            </text_company5>
+            <link_company5>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Company 5)</label>
+                <type>text</type>
+                <value></value>
+            </link_company5>
+            <text_care>
+                <required>1</required>
+                <visible>1</visible>
+                <label>Text (Care)</label>
+                <type>textarea</type>
+                <value></value>
+            </text_care>
+            <link_care>
+                <required>0</required>
+                <visible>1</visible>
+                <label>Link (Care)</label>
+                <type>text</type>
+                <value></value>
+            </link_care>
+        </parameters>
+    </blocklinks_institutionals1>
+
+
+
+    <blocklinks_blocks1 type="blocklinks/widget_blocks" translate="name" module="blocklinks">
+        <name>FVets Widget Blocks</name>
+        <description>Add a grid block with default text and image</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <label>Template</label>
+                <type>text</type>
+                <value>blocklinks/widget/blocks/1.phtml</value>
+            </template>
+            <my_template>
+                <required>1</required>
+                <visible>1</visible>
+                <type>select</type>
+                <label>Template</label>
+                <values>
+                    <one translate="label">
+                        <label>V1</label>
+                        <value>blocklinks/widget/blocks/1.phtml</value>
+                    </one>
+                </values>
+            </my_template>
+            <block_cols>
+                <label>Columns</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>text</type>
+                <value>2</value>
+            </block_cols>
+            <block_title>
+                <label>Title</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_title>
+            <block_class>
+                <label>Add Class</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_class>
+            <block_subtitle>
+                <label>Sub-Title</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_subtitle>
+            <block1_image>
+                <label>Block 1 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block1_image>
+            <block1_fontawesome>
+                <visible>1</visible>
+                <label>Block 1 Font Awesome TAG</label>
+                <type>text</type>
+            </block1_fontawesome>
+            <block1_link>
+                <visible>1</visible>
+                <label>Block 1 Link</label>
+                <type>text</type>
+            </block1_link>
+            <block1_title>
+                <visible>1</visible>
+                <label>Block 1 Title</label>
+                <type>text</type>
+            </block1_title>
+            <block1_text>
+                <visible>1</visible>
+                <label>Block 1 Textarea</label>
+                <type>textarea</type>
+            </block1_text>
+
+            <block2_image>
+                <label>Block 2 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block2_image>
+            <block2_fontawesome>
+                <visible>1</visible>
+                <label>Block 2 Font Awesome TAG</label>
+                <type>text</type>
+            </block2_fontawesome>
+            <block2_link>
+                <visible>1</visible>
+                <label>Block 2 Link</label>
+                <type>text</type>
+            </block2_link>
+            <block2_title>
+                <visible>1</visible>
+                <label>Block 2 Title</label>
+                <type>text</type>
+            </block2_title>
+            <block2_text>
+                <visible>1</visible>
+                <label>Block 2 Textarea</label>
+                <type>textarea</type>
+            </block2_text>
+
+            <block3_image>
+                <label>Block 3 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block3_image>
+            <block3_fontawesome>
+                <visible>1</visible>
+                <label>Block 3 Font Awesome TAG</label>
+                <type>text</type>
+            </block3_fontawesome>
+            <block3_link>
+                <visible>1</visible>
+                <label>Block 3 Link</label>
+                <type>text</type>
+            </block3_link>
+            <block3_title>
+                <visible>1</visible>
+                <label>Block 3 Title</label>
+                <type>text</type>
+            </block3_title>
+            <block3_text>
+                <visible>1</visible>
+                <label>Block 3 Textarea</label>
+                <type>textarea</type>
+            </block3_text>
+
+            <block4_image>
+                <label>Block 4 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block4_image>
+            <block4_fontawesome>
+                <visible>1</visible>
+                <label>Block 4 Font Awesome TAG</label>
+                <type>text</type>
+            </block4_fontawesome>
+            <block4_link>
+                <visible>1</visible>
+                <label>Block 4 Link</label>
+                <type>text</type>
+            </block4_link>
+            <block4_title>
+                <visible>1</visible>
+                <label>Block 4 Title</label>
+                <type>text</type>
+            </block4_title>
+            <block4_text>
+                <visible>1</visible>
+                <label>Block 4 Textarea</label>
+                <type>textarea</type>
+            </block4_text>
+
+            <block5_image>
+                <label>Block 5 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block5_image>
+            <block5_fontawesome>
+                <visible>1</visible>
+                <label>Block 5 Font Awesome TAG</label>
+                <type>text</type>
+            </block5_fontawesome>
+            <block5_link>
+                <visible>1</visible>
+                <label>Block 5 Link</label>
+                <type>text</type>
+            </block5_link>
+            <block5_title>
+                <visible>1</visible>
+                <label>Block 5 Title</label>
+                <type>text</type>
+            </block5_title>
+            <block5_text>
+                <visible>1</visible>
+                <label>Block 5 Textarea</label>
+                <type>textarea</type>
+            </block5_text>
+
+            <block6_image>
+                <label>Block 6 Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </block6_image>
+            <block6_fontawesome>
+                <visible>1</visible>
+                <label>Block 6 Font Awesome TAG</label>
+                <type>text</type>
+            </block6_fontawesome>
+            <block6_link>
+                <visible>1</visible>
+                <label>Block 6 Link</label>
+                <type>text</type>
+            </block6_link>
+            <block6_title>
+                <visible>1</visible>
+                <label>Block 6 Title</label>
+                <type>text</type>
+            </block6_title>
+            <block6_text>
+                <visible>1</visible>
+                <label>Block 6 Textarea</label>
+                <type>textarea</type>
+            </block6_text>
+        </parameters>
+    </blocklinks_blocks1>
+
+    <blocklinks_categories1 type="blocklinks/widget_categories" translate="name" module="blocklinks">
+        <name>FVets Widget Categories</name>
+        <description>Add a block with categories in homepage</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <type>text</type>
+                <value>blocklinks/widget/categories/1.phtml</value>
+            </template>
+            <my_template>
+                <required>1</required>
+                <visible>1</visible>
+                <type>select</type>
+                <label>Template</label>
+                <values>
+                    <one translate="label">
+                        <label>V1</label>
+                        <value>blocklinks/widget/categories/1.phtml</value>
+                    </one>
+                    <two translate="label">
+                        <label>V2</label>
+                        <value>blocklinks/widget/categories/2.phtml</value>
+                    </two>
+                </values>
+            </my_template>
+            <category_id translate="label" module="catalog">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Root Category</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_category_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </category_id>
+            <block_cols>
+                <label>Columns</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>text</type>
+                <value>2</value>
+            </block_cols>
+            <block_title>
+                <label>Title</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_title>
+            <see_all_image>
+                <label>See all image</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </see_all_image>
+        </parameters>
+    </blocklinks_categories1>
+
+    <blocklinks_onepagecatalog type="blocklinks/widget_onepagecatalog" translate="name" module="blocklinks">
+        <name>FVets Widget One Page Catalog</name>
+        <description>Add a catalog from selected category</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <type>text</type>
+                <value>blocklinks/widget/onepagecatalog/1.phtml</value>
+            </template>
+            <my_template>
+                <required>1</required>
+                <visible>1</visible>
+                <type>select</type>
+                <label>Template</label>
+                <values>
+                    <one translate="label">
+                        <label>V1</label>
+                        <value>blocklinks/widget/onepagecatalog/1.phtml</value>
+                    </one>
+                </values>
+            </my_template>
+            <category_id translate="label" module="catalog">
+                <required>1</required>
+                <visible>1</visible>
+                <label>Root Category</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_category_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Category...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </category_id>
+        </parameters>
+    </blocklinks_onepagecatalog>
+
+    <blocklinks_vetcenter type="blocklinks/widget_vetcenter" translate="name" module="blocklinks">
+        <name>FVets Widget Designed for Vet Center</name>
+        <description></description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <label>Template</label>
+                <type>text</type>
+                <value>blocklinks/widget/vetcenter/1.phtml</value>
+            </template>
+            <my_template>
+                <required>1</required>
+                <visible>1</visible>
+                <type>select</type>
+                <label>Template</label>
+                <values>
+                    <one translate="label">
+                        <label>V1</label>
+                        <value>blocklinks/widget/vetcenter/1.phtml</value>
+                    </one>
+                </values>
+            </my_template>
+            <block_title>
+                <label>Title</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_title>
+            <block_subtitle>
+                <label>Sub-Title</label>
+                <visible>1</visible>
+                <required>0</required>
+                <type>text</type>
+                <value></value>
+            </block_subtitle>
+            <background_image>
+                <label>Background Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </background_image>
+            <center_image>
+                <label>Center Image</label>
+                <visible>1</visible>
+                <type>label</type>
+                <helper_block>
+                    <type>widgets/cms_wysiwyg_images_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Insert Image...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </center_image>
+            <left_line1_fontawesome>
+                <visible>1</visible>
+                <label>Left Col, Line 1, Font Awesome TAG</label>
+                <type>text</type>
+            </left_line1_fontawesome>
+            <left_line1_text>
+                <visible>1</visible>
+                <label>Left Col, Line 1, Text</label>
+                <type>text</type>
+            </left_line1_text>
+            <right_line1_fontawesome>
+                <visible>1</visible>
+                <label>Right Col, Line 1, Font Awesome TAG</label>
+                <type>text</type>
+            </right_line1_fontawesome>
+            <right_line1_text>
+                <visible>1</visible>
+                <label>Right Col, Line 1, Text</label>
+                <type>text</type>
+            </right_line1_text>
+            <left_line2_fontawesome>
+                <visible>1</visible>
+                <label>Left Col, Line 2, Font Awesome TAG</label>
+                <type>text</type>
+            </left_line2_fontawesome>
+            <left_line2_text>
+                <visible>1</visible>
+                <label>Left Col, Line 2, Text</label>
+                <type>text</type>
+            </left_line2_text>
+            <right_line2_fontawesome>
+                <visible>1</visible>
+                <label>Right Col, Line 2, Font Awesome TAG</label>
+                <type>text</type>
+            </right_line2_fontawesome>
+            <right_line2_text>
+                <visible>1</visible>
+                <label>Right Col, Line 2, Text</label>
+                <type>text</type>
+            </right_line2_text>
+        </parameters>
+    </blocklinks_vetcenter>
+
+</widgets>

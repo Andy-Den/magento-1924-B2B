@@ -1,0 +1,163 @@
+<config>
+    <tabs>
+        <fvets translate="label" module="core">
+            <label>4Vets</label>
+            <sort_order>9999999</sort_order>
+        </fvets>
+    </tabs>
+    <sections>
+        <allin translate="label" module="fvets_allin">
+            <class>separator-top</class>
+            <label>Email Marketing</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_allin">
+                    <label>AllIn Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <integration_log_enabled translate="label" module="fvets_allin">
+                            <label>Log de Integração Habilitado?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </integration_log_enabled>
+                        <data_log_enabled translate="label" module="fvets_allin">
+                            <label>Log de Dados exportados Habilitado?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </data_log_enabled>
+                        <source_site_enabled translate="label" module="fvets_allin">
+                            <label>Valor padrão da origem Site</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fvets_allin_status/source_status</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Valor padrão quando a origem do cliente for SITE</comment>
+                        </source_site_enabled>
+                        <source_erp_enabled translate="label" module="fvets_allin">
+                            <label>Valor padrão da origem ERP</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fvets_allin_status/source_status</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Valor padrão quando a origem do cliente for ERP</comment>
+                        </source_erp_enabled>
+                    </fields>
+                </general>
+                <mailchimp translate="label" module="fvets_allin">
+                    <label>MailChimp Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <mailchimp_hash_id translate="label" module="fvets_allin">
+                            <label>Hash ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Valor do Hash retornado pela API 3.0 quando uma lista é criada. (Docs: http://developer.mailchimp.com/documentation/mailchimp/reference/lists/#create-post_lists)</comment>
+                        </mailchimp_hash_id>
+                        <mailchimp_from_email_list translate="label" module="fvets_allin">
+                            <label>Email From</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>60</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Email da Lista no MailChimp</comment>
+                        </mailchimp_from_email_list>
+                        <mailchimp_address translate="label" module="fvets_allin">
+                            <label>Address 1</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>70</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_address>
+                        <mailchimp_city translate="label" module="fvets_allin">
+                            <label>City</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>71</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_city>
+                        <mailchimp_state translate="label" module="fvets_allin">
+                            <label>State</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>72</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_state>
+                        <mailchimp_country translate="label" module="fvets_allin">
+                            <label>Country</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>73</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_country>
+                        <mailchimp_zip translate="label" module="fvets_allin">
+                            <label>Zip Code</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>74</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_zip>
+                        <mailchimp_company_name translate="label" module="fvets_allin">
+                            <label>Company Name</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>74</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Endereço Físico que irá para MailChimp</comment>
+                        </mailchimp_company_name>
+                        <mailchimp_permission_reminder translate="label" module="fvets_allin">
+                            <label>Remind people how they signed up to your list</label>
+                            <frontend_type>text</frontend_type>
+                            <required>1</required>
+                            <sort_order>74</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Example: “You are receiving this email because you opted in at our website … ” or “We send special offers to customers who opted in at … ”</comment>
+                        </mailchimp_permission_reminder>
+                        <mailchimp_enabled translate="label" module="fvets_allin">
+                            <label>Create List MailChimp?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <comment>Habilitar Criação de Lista no MailChimp</comment>
+                        </mailchimp_enabled>
+                    </fields>
+                </mailchimp>
+            </groups>
+        </allin>
+
+    </sections>
+</config>

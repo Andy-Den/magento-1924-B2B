@@ -1,0 +1,36 @@
+<?php $salesrep = $this->getQuote()->getSalesrep(); ?>
+<?php $brands  = $salesrep->getSelectedCategories(); ?>
+
+<div class="order order-<?php echo $salesrep->getId(); ?>">
+
+	<div class="order-header two-columns">
+		<div class="column first salesrep">
+			<div class="salesrep-name"><?php echo $this->__('Pedido para representante:'); ?> <?php echo $salesrep->getName(); ?></div>
+			<div>
+				<?php $html = array(); ?>
+				<?php foreach($brands as $brand) : ?>
+					<?php if($brand->getIsActive()) : ?>
+						<?php $html[] = $brand->getName(); ?>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				<?php echo implode(', ',$html); ?>
+				-
+				<?php echo $this->helper('checkout')->formatPrice($this->getQuote()->getGrandTotal()); ?>
+			</div>
+		</div>
+		<div class="column last edit">
+
+		</div>
+	</div>
+
+	<div class="inner-minimun-value">
+		<strong>Este pedido <span class="red">não atingiu</span> o valor do pedido mínimo</strong>
+		<br />
+		Você pode finalizar os outros pedidos e todos os itens do pedido com <?php echo $salesrep->getName(); ?>
+		<br />
+		ficarão salvos no seu carrinho :)
+		<br />
+		ou então, <a href="/checkout/cart/#rep-<?php echo $salesrep->getId(); ?>"><?php echo $this->__('clique aqui para adicionar mais produtos para este pedido'); ?></a>
+	</div>
+
+</div>

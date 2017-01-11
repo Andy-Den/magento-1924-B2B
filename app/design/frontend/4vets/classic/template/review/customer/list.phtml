@@ -1,0 +1,52 @@
+<div class="row">
+	<?php if ($this->getCollection() && $this->count()): ?>
+		<?php echo $this->getToolbarHtml() ?>
+		<table id="my-reviews-table">
+			<tbody>
+			<tr>
+				<td class="td-title">
+					<div class="page-title">
+						<h3><?php echo $this->__('My Product Reviews') ?></h3>
+					</div>
+				</td>
+			</tr>
+
+			<?php foreach ($this->getCollection() as $_review): ?>
+				<tr>
+					<td class="review">
+						<div class="product-image">
+							<img src="<?php echo $_review->getImageUrl() ?>"/>
+						</div>
+						<div class="review-info">
+							<a href="<?php echo $_review->getProductUrl() ?>"><?php echo $this->htmlEscape($_review->getName()) ?></a>
+							<br><br>
+							<p><?php echo $this->helper('review')->getDetailHtml($_review->getDetail()) ?></p>
+						</div>
+					</td>
+					<td class="rating">
+						<?php if ($_review->getSum()): ?>
+
+							<?php $ratingValue = (($_review->getSum() / $_review->getCount()) / 20); ?>
+							<?php $ratingPercent = (((($_review->getSum() / $_review->getCount()) / 20) * 100) / 5); ?>
+							<div class="rating-big">
+								<div class="rating-value-container">
+									<span><?php echo number_format($ratingValue, 1); ?></span>
+								</div>
+
+								<div class="rating-box">
+									<div class="rating" style="width:<?php echo ceil($ratingPercent) ?>%;"></div>
+								</div>
+							</div>
+						<?php endif; ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<script type="text/javascript">decorateTable('my-reviews-table')</script>
+		<?php echo $this->getToolbarHtml() ?>
+	<?php else: ?>
+		<p><?php echo $this->__('You have submitted no reviews.') ?></p>
+	<?php endif; ?>
+
+</div>

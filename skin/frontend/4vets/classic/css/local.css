@@ -1,0 +1,866 @@
+/* Utils */
+@media (max-width: 767px) {
+    .dont-break-out {
+
+        /* These are technically the same, but use both */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breaks things wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
+
+        /* Adds a hyphen where the word breaks, if supported (No Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+
+    }
+}
+
+
+/*general*/
+.main-container {
+    z-index: 0!important;
+}
+
+.fa-check {
+    color: green;
+    font-size: 18px;
+}
+
+.input-text {
+    height: 40px!important;
+    color: #252525!important;
+}
+
+.form-list li .input-box {
+    margin: 10px 10px 10px 0;
+}
+
+/*facebook plugin*/
+
+.row-fluid .fb-container .fb-header {
+
+}
+
+/*review block*/
+
+div.status-container .status {
+    width: 12px;
+    height: 20px;
+    border-radius: 2px;
+    float: left;
+    display: none;
+
+    margin-right: 2px;
+}
+
+div.status-container .status.fit {
+    background-color: #5ca70f;
+    display: block;
+}
+
+div.status-container {
+    padding-top: 10px;
+}
+
+div.status-container .status-avaliador {
+    margin-left: 10px;
+}
+
+div.status-container .nivel-classificado-label {
+    margin-right: 10px;
+    float: left;
+}
+
+.rating-box {
+    height: 20px;
+    width: 100px;
+}
+
+.rating-box .rating {
+    height: 19px;
+}
+
+/*header*/
+#custommenu .menu:first-child {
+    background-color: #7ea0a6;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+#custommenu .fa {
+    background: white none repeat scroll 0 0;
+    border-radius: 50%;
+    color: #00afe3;
+    padding: 5px;
+    display: inline;
+    margin-right: 5px;
+}
+
+.login-box .buttons-set {
+    overflow: auto;
+}
+
+#search_mini_form {
+    margin-top:10px;
+}
+
+#search_mini_form legend {
+    display: none;
+}
+
+#search_mini_form label {
+    display: none;
+}
+
+#search_mini_form .button {
+    display: none;
+}
+
+#search_mini_form #search {
+    /*box-shadow: 0 0 2px;*/
+    height: 42px;
+    font-size: 12px;
+    font-weight: normal;
+    /*border-right: medium none;*/
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 2%;
+}
+
+#search_mini_form .searchfield {
+    width: auto;
+    position: relative;
+}
+
+.mini-search.form-search {
+    position: relative;
+}
+
+#search_mini_form .awesome-search {
+    position: absolute;
+    margin: 8px 11px 0 0;
+    right: 0;
+}
+
+#searchajaxico {
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    right: 35px!important;
+    left: auto!important;
+    z-index: 1000;
+}
+
+#header {
+    background-color: #f1f1f1;
+}
+
+#header p, #header a, #header span {
+    color: #000000;
+}
+
+@media (max-width: 767px) {
+    .header-institutional-links {
+        margin-top: 3%;
+    }
+}
+
+span.link-login-register a:nth-of-type(1) {
+    margin-right: 5%;
+}
+
+span.link-login-register a:nth-of-type(2) {
+    border: 1px solid #c3c3c3;
+    padding: 5px 20px;
+    margin-left: 5%;
+}
+
+#custommenu {
+    margin: 0px auto 0px;
+}
+
+
+/*footer*/
+
+.conheca-integravet {
+    background-color: #f1f1f1;
+    padding: 1% 0;
+}
+
+.conheca-integravet h4 {
+    margin: 0;
+    color:#262626;
+}
+
+.block-news .right .input-button {
+    border: none;
+    border-radius: 0;
+}
+
+.block-news .right .news_button {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.block-news .right .news_input {
+    color: #000000;
+    padding-left: 20px;
+    background: white;
+}
+
+div.pull-left {
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.block-news .right .news_button {
+    width: 150px;
+}
+
+
+/*home*/
+
+.home-big-banner
+{
+    background: #DBF0EE url("/skin/frontend/4vets/classic/images/home-recorte-gato.jpg") no-repeat left center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 10% 0;
+}
+
+@media (max-width: 992px)
+{
+    .home-big-banner
+    {
+        background-image: none;
+    }
+}
+
+/*.home-big-banner .container
+{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}*/
+
+.home-big-banner .container .span
+{
+    text-align: center;
+}
+
+.home-big-banner .container .span img
+{
+    max-width: 100%;
+}
+
+/*.cms-index-index .easyslideslider-id:before {*/
+    /*content: 'COMO FUNCIONA A 4VETS?';*/
+    /*font-weight: bold;*/
+    /*font-size: 22px;*/
+    /*margin-bottom: 1%;*/
+/*}*/
+
+.cms-index-index .easyslideslider-id {
+    width: auto!important;
+    height: auto!important;
+    z-index: 0;
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.cms-index-index .easyslideslider-id .easyslide-controls-wrapper {
+    display: none;
+}
+
+.cms-index-index .easyslideslider-id .scroller {
+    width: auto!important;
+}
+
+.cms-index-index .easyslideslider-id .scroller .section {
+    width: auto!important;
+}
+
+.cms-index-index .easyslideslider-id .scroller .easyslide-link img {
+    width: 100%!important;
+    height: auto;
+}
+
+.cms-index-index .main .std {
+    display: none;
+}
+
+.cms-index-index .main-container .main .callout-home-top {
+    margin-bottom: 0;
+}
+
+.brands-block h1 {
+    font-size: 33px!important;
+    font-weight: bold!important;
+    padding: 0 29px!important;
+    z-index: 10000;
+}
+
+.brands-block hr {
+    border: 1.2px solid #f1f1f1;
+}
+
+.brands-block .image {
+    margin-top: 20px;
+}
+
+.brands-block img
+{
+    max-width:100%;
+    height: auto;
+}
+
+.cms-index-index .main-container .callout-home-top:first-of-type {
+
+}
+
+.cms-index-index .main-container .callout-home-top:first-of-type .section {
+    overflow: auto;
+    height: auto;
+}
+
+.cms-index-index .main-container .callout-home-top:first-of-type .scroller {
+    overflow: auto;
+}
+
+.cms-index-index .main-container .callout-home-top:nth-of-type(2) {
+    /*margin-top: -68px;*/
+    margin-bottom: 5%;
+}
+
+#easyslideslider-11 {
+    width: 100%!important;
+}
+
+/*products page*/
+
+.catalog-product-view .span9 {
+    width: 58%;
+}
+
+.catalog-product-view .row-fluid .span5 {
+    width: 35%;
+}
+
+.catalog-product-view .product-image {
+    /*width: 75%;*/
+    max-width: 100%;
+    float: left;
+}
+
+.catalog-product-view .more-views {
+    /*width: 25%;*/
+    float: left;
+}
+
+.catalog-product-view .more-views .inline {
+    width: auto;
+}
+
+.catalog-product-view .product-img-box {
+    border-right: 2px solid #f1f1f1;
+    padding-right: 1%!important;
+}
+
+div#users-reviews img {
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+}
+
+/*bestreview block*/
+.bestreview .recommended-product {
+    margin: 0 0 0 1%;
+}
+
+.rating-big {
+    float: left;
+}
+
+.rating-big h2
+{
+    text-transform: uppercase;
+    color:#222222;
+    font-size:16px;
+}
+
+.rating-big .rating-value-container {
+    line-height: 76px;
+}
+
+.rating-big .rating-box {
+    margin: 0 auto;
+    display: block;
+}
+
+.rating-big span {
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.bestreview .nickname {
+    vertical-align: top;
+    font-weight: bold;
+    padding-left: 2%;
+}
+
+.bestreview .avatar {
+    width: 80px;
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+}
+
+.bestreview .review-title-top {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.bestreview .review-detail-top {
+    font-style: italic;
+}
+
+.bestreview {
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-left: 2%;
+}
+
+.bestreview .col1 {
+    width: 50%;
+    float: left;
+}
+
+.bestreview .col2 {
+    float: right;
+}
+
+.bestreview .rating-big .rating-box
+{
+    width: 60%;
+    background: #e9e9eb;
+}
+
+.bestreview .rating-big .rating-box .rating
+{
+    background: #5ba510;
+}
+
+.bestreview .rating-big .clear
+{
+    margin-bottom: 3%;
+}
+
+/*catalog page and catalogsearch page*/
+
+div.do-see-review {
+    /*width: auto;*/
+    /*margin: 3% 5% 0 0;*/
+    /*text-align: center;*/
+}
+
+div.do-see-review a{
+    width: 100%;
+}
+
+
+
+div.do-see-review i {
+    font-size: 10px;
+}
+
+div.do-see-review .lnk-outras-avaliacoes {
+    color: #000000;
+}
+
+a.go-back {
+    background: none;
+    color: #252525;
+    font-weight: normal;
+    top:-40px;
+    right: 0;
+    font-size:14px;
+}
+
+a.go-back:hover {
+    background: none;
+    color: #252525;
+    font-weight: normal;
+}
+
+.catalog-category-view h1 {
+    color: #262626;
+    position: relative;
+}
+
+.catalog-category-view .category-image {
+    float:left;
+}
+
+.catalog-category-view .products-count {
+    position: absolute;
+    top:50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 20px;
+    margin-left: 5%;
+}
+
+.read-more {
+    color: #262626;
+}
+
+div.breadcrumbs .inline li {
+    color: #262626;
+}
+
+/*catalog layered page*/
+
+.category-products .toolbar .sort-by {
+    width: auto;
+}
+
+/*customer_account*/
+
+.customer-account-create .btn-large span span {
+    padding: 0;
+}
+
+.customer-account-login .btn-large span span {
+    padding: 0;
+}
+
+body.customer-account-login #form-validate .form-list .control label, body.customer-account-create #form-validate .form-list .control label {
+    margin-top: 0;
+    margin-right: 4%;
+}
+
+div.input-box #email_address {
+    width: 99%!important;
+}
+
+.form-list .field:last-child {
+    width: 49%;
+}
+
+.sidebar .block-account .nav .active a {
+    border-left: none!important;
+}
+
+.account-create .col1 {
+    width: 12%;
+    float: left;
+}
+
+.account-create .col2 {
+    width: 85%;
+    float: left;
+    padding-left: 2%;
+}
+
+.customer-account-create div.inchoo-socialconnect-facebook {
+    float: left;
+}
+
+.customer-account-create div.fb-or {
+    display: none;
+}
+
+.main, .main-container {
+    margin-bottom: 2%!important;
+    /*overflow: auto!important;*/
+}
+
+/*login page*/
+
+.customer-account-login #login-form .buttons-set, .customer-account-create #login-form .buttons-set {
+    overflow: auto;
+}
+
+.inchoo-socialconnect-login-upper-facebook {
+    display: none;
+}
+
+div.registered-users {
+    margin: 0 auto 2% auto!important;
+    float: none!important;
+}
+
+.customer-account-login .btn-success {
+    float: right!important;
+}
+
+/*forgot password*/
+.customer-account-forgotpassword #form-validate .fieldset.well.span6 {
+    width: 100%;
+}
+
+.customer-account-forgotpassword #form-validate .fieldset.well.span6 {
+    width: 100%;
+}
+
+.customer-account-forgotpassword .button.btn.noborder {
+    padding: 6px 75px;
+}
+
+.customer-account-forgotpassword .input-append .add-on, .input-prepend .add-on {
+    height: 22px;
+}
+
+/*contacts page*/
+body.cms-contato #contactForm {
+    max-width: 500px;
+}
+
+body.cms-contato #contactForm .field {
+    width: 100%;
+}
+
+/*edit customer page*/
+.customer-account-edit #form-validate #change_password {
+    margin: -8px 0 0 10px;
+}
+
+.customer-account-edit #form-validate .buttons-set .btn-success {
+    margin: 0 0 2%;
+    padding: 10px 20px 20px 20px!important;
+}
+
+/*customer image upload*/
+div.img-container {
+    /*background-color: #f1f1f1;*/
+    text-align: center;
+    /*margin: 0px 10px 0 0;*/
+    position: relative;
+    border:1px solid;
+}
+
+div.img-container canvas {
+    max-width: 100%;
+    /*left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%)*/
+}
+
+div.img-container a {
+    display: inline-block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    width: 55px;
+}
+
+/*customer_account_index page*/
+.customer-account-index .col-left .nav-list {
+    padding-left: 0;
+}
+
+.customer-account-index .col-left .nav-list li {
+    border: 1px solid #f1f1f1;
+    margin-left: 10px;
+}
+
+.customer-account-index .col-left .nav-list li.active {
+    background-color: #f1f1f1;
+}
+
+.sidebar .block-account .nav .active a {
+    color: #252525!important;
+}
+
+.customer-account-index .col-left .nav-list li a {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.customer-account-index .field-label {
+    width: 25%;
+    float: left;
+}
+
+.customer-account-index .field-editable {
+    width: 75%;
+    float: left;
+}
+
+.customer-account-index .dashboard ul {
+    border-top: 1px solid #f1f1f1;
+    border-right: 1px solid #f1f1f1;
+    border-left: 1px solid #f1f1f1;
+}
+
+.customer-account-index .dashboard ul li {
+    min-height: 40px;
+    list-style: none;
+    overflow: auto;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px 0 0 10px;
+}
+
+.customer-account-index .status-container {
+    padding-top: 0;
+}
+
+#my-reviews-table {
+    width: 97%;
+    margin-left: 25px;
+}
+
+#my-reviews-table .review-info {
+    float: left;
+    margin-left: 5%;
+}
+
+#my-reviews-table .review-info a {
+    font-weight: bold;
+}
+
+#my-reviews-table tr {
+    border: 1px solid #f1f1f1;
+}
+
+#my-reviews-table td {
+    padding: 25px;
+}
+
+#my-reviews-table .rating.last .rating-big {
+    float: right;
+}
+
+#my-reviews-table .product-image {
+    width: 150px;
+    float: left;
+}
+
+#my-reviews-table .td-title {
+    padding: 20px 0 10px 10px;
+}
+
+
+.featherlight .featherlight-content {
+    min-width: auto;
+}
+
+@media (max-width: 640px) {
+    .zoomContainer
+    {
+        display:none;
+    }
+}
+
+/*account create page*/
+
+.account-create .img-container {
+    background-color: #f1f1f1;
+    border-color: #f0f0f0;
+    min-height: 180px;
+}
+
+.account-create .img-container a {
+    color: #000000;
+}
+
+.account-create .form-control {
+    height: 50px;
+}
+
+.account-create .buttons-set button {
+    float: left;
+    width: 150px;
+    width: 250px;
+}
+
+.account-create .buttons-set button span span {
+    font-weight: bold;
+}
+
+.account-create span {
+    font-size: 18px;
+}
+
+@media (max-width: 991px) {
+    .container {
+        width: 100%;
+        /*padding: 0 2%;*/
+    }
+}
+
+@media (max-width: 767px) {
+    div.img-container {
+        width: 150px;
+        margin-bottom: 2%;
+    }
+}
+
+@media (max-width: 480px) {
+    div.breadcrumbs li:last-of-type {
+        display: none;
+    }
+
+    div.category-products div.toolbar div.sorter {
+        display: none;
+    }
+
+    div.products-list div.text-center-xs span:first-of-type {
+        display: none;
+    }
+
+    .bestreview .rating-big .rating-box
+    {
+        width: 100%;
+        background: #e9e9eb;
+    }
+}
+
+@media (max-width: 400px) {
+    .form-list .field {
+        width: 100%;
+    }
+
+    .form-list .field:last-child {
+        width: 100%;
+    }
+
+    .container {
+        /*padding: 0 2% 2% 2%;*/
+    }
+
+    div.callout-home-top {
+        display: none;
+    }
+}
+
+
+/*.account-create .form-control::-webkit-input-placeholder {*/
+    /*color: #000000;*/
+/*}*/
+
+/*.account-create .form-control:-moz-placeholder { *//* Firefox 18- */
+    /*color: #000000;*/
+/*}*/
+
+/*.account-create .form-control::-moz-placeholder {  *//* Firefox 19+ */
+    /*color: #000000;*/
+/*}*/
+
+/*.account-create .form-control:-ms-input-placeholder {*/
+    /*color: #000000;*/
+/*}*/

@@ -1,0 +1,136 @@
+@import "../../../mixins";
+
+.loading-overlay
+{
+  display: none;
+  background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+
+  .fa
+  {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+  }
+}
+
+.featherlight {
+  .featherlight-close-icon {
+    font-weight: bold;
+    font-size: 17px;
+    background: none;
+  }
+  .featherlight-content {
+    top: -10%;
+    padding: 0;
+
+    background: #efefef none repeat scroll 0 0;
+    border-top: 8px solid @color2;
+    max-width: 100%;
+    min-width: 0;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 600px;
+    overflow: inherit;
+    top: -10%;
+
+    .featherlight-close-icon {
+      display: none;
+    }
+
+    #checkout-password-change {
+      .checkout-password-change-header {
+        padding: 3% 0 0 2%;
+      }
+      #form-validate {
+        .fieldset {
+          margin-top: 0!important;
+          margin-bottom: 0!important;
+          padding-top: 0;
+
+          .input-text {
+            width: 100%;
+            border: 1px solid #e6e6e7;
+            padding: 10px;
+            border-radius: 3px;
+            max-width: none;
+          }
+        }
+        .action-buttons {
+          button {
+            background-color: #275b8e;
+            border: 1px solid #275b8e;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px #224e7a;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1;
+            padding: 15px 5%;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            display: inline;
+            float: right;
+            margin-left: 3px;
+
+            margin-bottom: 20px;
+            width: 100%;
+          }
+        }
+      }
+
+      .messages {
+        overflow: hidden;
+        width: 100%;
+        list-style-type: none;
+        padding-left: 0;
+
+        .error-msg {
+          clear: both;
+          color: #ff0000;
+          background-color: #faebe7;
+          background-image: url("../images/i_msg-error.gif");
+          border-color: #f16048;
+          background-position: 10px 9px;
+          background-repeat: no-repeat;
+          border-style: solid;
+          border-width: 1px;
+          font-size: 11px;
+          font-weight: bold;
+          min-height: 24px;
+          padding: 8px 8px 8px 32px;
+          ul {
+            list-style-type: none;
+            padding-left: 0;
+          }
+        }
+      }
+      .errorMsgs {
+        color: red;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .info-message {
+        p {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .featherlight {
+    .featherlight-content {
+      min-width: 290px !important;
+    }
+  }
+}

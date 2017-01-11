@@ -1,0 +1,256 @@
+<div id="form-popup" class="row">
+    <div class="border-quick">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        <div class="row" id="login-box" style="display:none">
+            <div class="top-title">
+                <?php echo $this->__('Faça seu login'); ?>
+            </div>
+            <form action="/PrivateSales/account/ajaxLogin" method="post" id="login-form" class="frm-login ajax-form">
+                <div class="input-box" style="display: none;">
+                    <label class="input-box" for="rememberme"><input type="checkbox" style="margin-top: 2px" title="Remember me" id="rememberme" class="checkbox left" name="login[rememberme]" checked="checked">Manter-me conectado</label>
+                </div>
+                <div class="content">
+                    <ul class="form-list">
+												<li class="wide">
+													<div class="wide" style="text-align:right;padding-bottom:5px;" id="quicklogin-register-link">
+														<a href="javascript://" onclick="jQuery('#login-box').slideUp('fast');
+                                        jQuery('#fpass').slideUp('fast');
+                                        jQuery('#new-users').slideDown('fast', function() {
+                                            resizeOverlay();
+                                        });">Ainda não tenho cadastro</a>
+													</div>
+												</li>
+                        <li class="wide">
+                            <div class="input-box input-email"><input placeholder="e-mail" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" type="text" class="form-control required-entry wide" title="<?php echo $this->__('Email Address') ?>" /></div>
+                        </li>
+                        <li class="wide">
+                            <div class="input-box input-password"><input placeholder="senha" name="login[password]" type="password" class="form-control required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" /></div>
+                        </li>
+                        <li>
+                            <br />
+                        </li>
+                        <li class="wide">
+                            <button class="action-btn btn btn-success little" type="submit" name="send" id="send2"><?php echo $this->__('Entrar') ?></button>
+                        </li>
+                        <li class="wide">
+                            <div class="text-left col-md-6" style="padding-top:5px;">
+                                <a href="javascript:void(0)" onclick="jQuery('#fpass').slideToggle('fast', function() {
+                                            resizeOverlay();
+                                        });" class="forgot-password"><?php echo $this->__('Esqueceu sua senha?') ?></a>
+                            </div>
+
+                        </li>
+                        <li class="error-wrapp" style="display:none;">
+                            <div class="alert alert-danger"><span></span></div>
+                        </li>
+                    </ul>
+
+                </div>
+            </form>
+						<div class="clear"></div>
+					<br />
+        </div>
+        <div class="clear"></div>
+        <div id="fpass" style="display:none">
+            <div class="top-title" style="display:none">
+                <?php echo $this->__('Esqueci minha senha'); ?>
+            </div>
+            <form class="for-pass" id="forgot-form" method="post" action="<?php echo '/PrivateSales/account/ajaxForgotPassword/' ?>">
+                <p style="font-size: 14px; color: #333;"><?php echo $this->__('Digite seu e-mail abaixo e lhe enviaremos um link para voc&ecirc; cadastrar uma nova senha:') ?></p>
+                <ul class="form-list" >
+                    <li class="wide row input-append">
+                        <input type="text" title="Email Address" class="form-control required-entry validate-email remember-pass-input pull-left" id="forgot_email" value="" name="forgotemail" placeholder="Email de cadastro">
+                        <button type="submit" id="send3" name="send3" class="action-btn btn btn-info noborder remember-pass-button" onclick="">Enviar</button>
+                    </li>
+                    <li class="error-wrapp" style="display:none;">
+                        <div class="alert-ok"><span></span></div>
+                    </li>
+                </ul>
+                <p style="display:none;" id="loading"></p>
+            </form>
+            <br />
+        </div>
+        <div class="new-users form-shadow" id="new-users">
+            <div class="top-title">
+                <?php echo $this->__('<span class="big-word">Cadastre-se</span> agora gratuitamente'); ?>
+            </div>
+            <form action="/PrivateSales/account/ajaxCreate" method="post" id="regis-form" class="frm-regis ajax-form">
+                <input type="hidden" name="source" id="source" value="<?php echo Mage::getModel('core/cookie')->get('register_source'); ?>" title="source" class="form-control" />
+                <div class="content">
+                    <input type="checkbox" title="Remember Me" checked="checked" id="remember_mepo2ZHBIq7L" class="checkbox" name="persistent_remember_me" style="display: none;">
+                    <div class="content">
+                        <ul class="form-list row">
+                            <li class="wide text-left row" >
+                                <div class="col-md-12 ja-sou-cadastrado" style="text-align:right">
+                                    <a href="javascript://" onclick="jQuery('#login-box').slideDown('fast');
+                                            jQuery('#new-users').slideUp('fast', function() {
+                                                resizeOverlay();
+                                            });">Já é cadastrado? Clique aqui</a>
+                                </div>
+                            </li>
+                            <li class="wide">
+                                <?php /* <label for="" class="required">Email<em>*</em></label> */ ?>
+                                <div class="input-box input-email"><input placeholder="e-mail" id="email_address" class="form-control validate-email required-entry" type="text" title="Email Address" value="" name="email" /></div>
+                            </li>
+                            <li class="field">
+                                <?php /* <label for="" class="required">Senha<em>*</em></label> */ ?>
+                                <div class="input-box input-password"><input  placeholder="senha" id="password" class="form-control required-entry validate-password" type="password" title="Password" name="password"/></div>
+                            </li>
+                            <li class="field last">
+                                <?php /* <label for="" class="required">Confirmar Senha<em>*</em></label> */ ?>
+                                <div class="input-box"><input placeholder="Confirme a senha" id="confirmation" class="form-control required-entry validate-cpassword" type="password" title="Password" name="confirmation"/></div>
+                            </li>
+                            <li class="wide">
+                                <label for="" class="required eu-sou">Eu sou:<em>*</em></label>
+                                <div class="input-box row">
+                                    <select name="tipopessoa" id="tipo_cliente" onChange="showClientTypeFields();" class="wide required-entry" style="margin-bottom:10px">
+                                        <option value="">Selecione...</option>
+                                        <option value="pet">dono de pet shop</option>
+                                        <option value="vet">veterinário</option>
+                                        <option value="both">ambos</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="wide extra_fields input_only_vet">
+                                <div class="input-box"><input placeholder="<?php echo $this->__('Nome completo'); ?>" id="name" class="form-control required-entry" type="text" title="<?php echo $this->__('Nome completo'); ?>" value="" name="name" /></div>
+                            </li>
+                            <li class="wide extra_fields input_petshop">
+                                <div class="input-box"><input placeholder="<?php echo $this->__('Razão Social'); ?>" id="razao_social" class="form-control required-entry" type="text" title="<?php echo $this->__('Razão Social'); ?>" value="" name="razao_social" /></div>
+                            </li>
+                            <li class="field extra_fields input_veterinario">
+                                <div class="input-box"><input placeholder="CRMV" id="crmv" class="form-control validate-crmv" type="text" title="CRMV" value="" name="crmv"/></div>
+                            </li>
+													<li class="field extra_fields input_veterinario last">
+														<div class="input-box"><input placeholder="CPF" id="cpf" class="form-control validate-cpf" type="text" title="CPF" value="" name="cpf" maxlength="14" onkeypress="return txtBoxFormat(this, '000.000.000-00', event);" /></div>
+													</li>
+                            <li class="wide extra_fields input_petshop cnpj" >
+                                <div class="input-box"><input placeholder="CNPJ da sua loja" id="cnpj" class="form-control validar_cpf" type="text" title="CNPJ" value="" name="cnpj" onkeypress="return txtBoxFormat(this, '00.000.000/0000-00', event);" maxlength="18"/></div>
+                            </li>
+                            <li class="wide extra_fields input_petshop input_veterinario" >
+                                <div class="input-box"><input placeholder="Telefone" id="telephone" class="form-control validar_telephone" type="text" title="telefone" value="" name="telefone" onkeypress="return txtBoxFormat(this, '(99)99999-9999', event);" maxlength="14"/></div>
+                            </li>
+
+                            <li class="wide input_veterinario extra_fields input_petshop last" >
+                                <div class="input-box">
+                                    <input type="text" name="cep" placeholder="CEP" value="" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="form-control validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" onkeypress="return txtBoxFormat(this, '00000-000', event);" maxlength="9" />
+                                    <input type="hidden" name="create_custom_address" value="1" />
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        Validation.add('validate-zip-international', 'O CEP informado \xE9 invalido', function(v) {
+                                            return IsCEP(v);
+                                        });
+                                        //]]>
+                                    </script>
+                                    <small style="font-size:0.714em;line-height:1;color:#aeaeae">*Entraremos em contato para confirmar as informações acima</small>
+                            </li>
+
+                            <li class="wide input_veterinario extra_fields input_petshop">
+                                <label for="" class="required como-conheceu">Como conheceu a 4Vets:<em>*</em></label>
+                                <div class="input-box row">
+                                    <select id="como_conheceu" class="wide" style="margin-bottom: 10px">
+                                        <option value="">Selecione...</option>
+                                        <option>Redes Sociais</option>
+                                        <option>Publicidade</option>
+                                        <option>Newsletters</option>
+                                        <option>Feiras Nacionais</option>
+                                        <option>Conferências</option>
+                                        <option value="Motores de Busca">Motores de Busca (Google ou Yahoo)</option>
+                                        <option value="Outro">Outro (por favor especificar)</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="como_conheceu" id="como_conheceu_reply" value="" />
+                            </li>
+                            <li class="wide como_conheceu_reply_text" style="display:none">
+                                <input type="text" id="como_conheceu_reply_text" name="input" class="form-control input wide" />
+                            </li>
+
+                            <li class="wide text-left row" >
+                                <div class="col-md-12 termos-condicoes">
+                                    <input type="checkbox" name="IsSubscribed" value="1" checked="checked"/> Quero receber promoções e lançamentos
+                                </div>
+                            </li>
+
+
+                            <li class="wide text-left row" >
+                                <div class="col-md-12"><button type="submit" class="action-btn btn btn-success little"><span><?php echo $this->__('Cadastrar') ?></span></button></div>
+                            </li>
+
+                            <li class="error-wrapp" style="display:none;"><div class="alert alert-block alert-danger"><button type="button" class="close" onclick="jQuery('.error-wrapp').hide();">&times;</button><span></span></div></li>
+                        </ul>
+                    </div>
+                </div>
+							<div class="clear"></div>
+            </form>
+        </div>
+        <div class="new-vendor form-shadow" id="new-vendor" style="display:none">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('providerContact')->toHtml() ?>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+	jQuery(document).ready(function () {
+		documentBind();
+	});
+
+	jQuery(document).ready(function () {
+		/*<?php if (Mage::registry('form') == 'cadastro' || $this->getData('form') == 'cadastro'): ?>*/
+		jQuery('#login-box').hide();
+		jQuery('#new-users').show();
+		/*<?php elseif (Mage::registry('form') == 'senha' || $this->getData('form') == 'senha'): ?>*/
+		jQuery('#login-box').hide();
+		jQuery('#fpass').show();
+		jQuery('#fpass .top-title').show();
+		/*<?php else: ?>*/
+			jQuery('#login-box').hide();
+			jQuery('#new-users').show();
+		/*<?php endif; ?>*/
+	});
+
+</script>
+<?php if ($this->getData('showin') != 'inline') : ?>
+		</div>
+
+    <style>
+        #zenbox_tab, .zenbox_tab {
+            display:none !important;
+        }
+    </style>
+<?php endif; ?>
+
+
+<div class="clear"></div>
+
+</div>
+
+<div id="register-thanks">
+    <div class="inner">
+        <h1>Obrigado!</h1>
+        <div class="text">
+            <p>Obrigado por se cadastrar na 4vets</p>
+            <p>Agora você está pronto para utilizar nossa plataforma.</p>
+            <p class="button"><button class="action-btn btn btn-success little" type="button" onClick="document.location.reload();"><span>Começar agora</span></button></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#register-thanks').on('show', function() {
+            setTimeout(function() {
+                jQuery('#register-thanks .inner').css({'top': (jQuery(window).height() / 2) - (jQuery('#register-thanks .inner').height() / 2) + 'px'});
+                jQuery('#register-thanks .inner').css({'left': (jQuery(window).width() / 2) - (jQuery('#register-thanks .inner').width() / 2) + 'px'});
+            }, 1);
+        })
+    });
+    (function($) {
+        $.each(['show', 'hide'], function(i, ev) {
+            var el = $.fn[ev];
+            $.fn[ev] = function() {
+                this.trigger(ev);
+                el.apply(this, arguments);
+            };
+        });
+    })(jQuery);
+</script>

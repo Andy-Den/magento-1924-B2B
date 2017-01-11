@@ -1,0 +1,6 @@
+<?php
+$products = Mage::helper('ampromo')->getNewItems();
+?>
+<?php if (sizeof($products) > 0): ?>
+    <div id="ampromo-items-add"><?php echo Mage::getStoreConfig('ampromo/general/add_message')?></div>
+<?php endif ?>

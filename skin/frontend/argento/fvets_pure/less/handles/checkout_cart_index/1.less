@@ -1,0 +1,319 @@
+.checkout-cart-index
+{
+  h1
+  {
+    float: left;
+  }
+
+  .title-buttons
+  {
+    float: right;
+
+    .btn-continue
+    {
+      display: block;
+      float: left;
+      margin-right: 20px;
+      margin-top: 6px;
+    }
+  }
+
+  .shopping-cart-form
+  {
+    
+    margin-bottom: 30px;
+    display: block;
+
+    .products-list
+    {
+      .item
+      {
+        .cart-qty
+        {
+          text-align:center;
+        }
+
+        .btn-remove
+        {
+          float: right;
+          //background:url("@{iconsUrl}") no-repeat scroll -106px -21px rgba(0, 0, 0, 0);
+          background: none;
+          font-size: unset;
+          text-indent: 0;
+          width: auto;
+          height: auto;
+          margin-top: 30px;
+          margin-right: 30px;
+        }
+      }
+    }
+  }
+
+  .shipping-crosssell
+  {
+    width:70%;
+  }
+
+  .totals
+  {
+    width: 26%;
+    min-width: 247px;
+    table
+    {
+      th,
+      td
+      {
+        padding:10px 5px;
+      }
+    }
+
+    .checkout-types
+    {
+      margin:10px 0;
+    }
+  }
+
+  .main-container {
+    .cart {
+      .checkout-types {
+        .btn-action {
+          width: 159px;
+          height: 33px;
+          span {
+            width: 136px!important
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-cart-index {
+    .main-container {
+      .cart {
+        h1 {
+          margin-left: 2.5%;
+        }
+        .totals {
+          margin-right: 1%;
+        }
+        .shopping-cart-form {
+          .cart-headers {
+            .col-shop {
+              .col-total-price {
+                margin-left: 6%;
+              }
+            }
+          }
+          .products-list {
+            .product-shop {
+              .f-fix {
+                .cart-qty {
+                  width: 12.5%;
+                }
+                .cart-price-list {
+                  .cart-price {
+                    margin-left: 24%;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .title-buttons {
+          .checkout-types {
+            button {
+              margin-right: 14%;
+            }
+          }
+        }
+        .shipping-crosssell {
+          .col-1 {
+            margin-right: 2%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .cart {
+    margin: 2%;
+    .shopping-cart-form {
+      .cart-headers {
+        .col-shop {
+          margin-left: 2% !important;
+          .col-description {
+            width: 36% !important;
+          }
+          .col-unit-price {
+            width: 18% !important;
+          }
+          .cart-qty {
+            width: 20% !important;
+          }
+          .col-total-price {
+            margin-left: 4%;
+          }
+        }
+
+      }
+      .products-list {
+        .product-image {
+          display: none;
+        }
+        .product-shop {
+          margin-left: 2% !important;
+          .f-fix {
+            .col-description {
+              width: 36%;
+            }
+            .cart-qty {
+              margin-left: 6.5% !important;
+              width: 14.5% !important;
+
+              min-width: 81px;
+            }
+            .col-total-price {
+              margin-left: 11% !important;
+            }
+          }
+        }
+      }
+    }
+    .shipping-crosssell {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cart {
+    .shopping-cart-form {
+      .products-list {
+        .product-image {
+          display: block !important;
+          width: auto !important;
+          img {
+            width: auto !important;
+            max-width: 100% !important;
+          }
+        }
+        .product-shop {
+          .f-fix {
+            text-align: center;
+            width: 50%;
+            .col-description {
+              width: 100% !important;
+            }
+            .cart-qty {
+              min-width: 90px;
+              margin: 0 auto !important;
+            }
+            .col-total-price {
+              margin-left: 0px !important;
+              margin-top: 5%;
+            }
+            .btn-remove {
+              margin-right: -13px;
+              margin-top: -65px;
+            }
+          }
+        }
+      }
+    }
+    .shipping-crosssell {
+      width: 100%;
+      margin-top: 3%;
+      text-align: center;
+    }
+    .title-buttons {
+      width: 90%;
+      .btn-action {
+        span {
+          width: 100% !important;
+          span {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+  .totals {
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .checkout-cart-index {
+    min-width: 320px;
+    .main-container {
+      .cart {
+        .title-buttons {
+          float: none;
+          width: 100%!important;
+          .btn-continue {
+            display: none;
+          }
+          .checkout-types {
+            float: none;
+            li {
+              width: 100%;
+              .btn-action {
+                margin-right: 0px!important;
+              }
+            }
+          }
+        }
+        .messages {
+          margin: 0 2.5% !important;
+          width: 95%;
+        }
+        .totals {
+          width: 90%;
+          margin: 0 auto;
+        }
+        .col2-set {
+          &.shipping-crosssell {
+            .col-1 {
+              margin: 5px 6px 10px;
+            }
+          }
+        }
+      }
+      .shopping-cart-form {
+        .products-list {
+          .product-shop {
+            .f-fix {
+              width: 100%;
+              .cart-qty {
+                width: 80%;
+                .divQtd {
+                  margin-top: 7px;
+                }
+              }
+              .btn-remove {
+                margin-right: 22px;
+                margin-top: -45px;
+              }
+            }
+            .cart-price-list {
+              margin-top: 7px;
+            }
+          }
+          .product-image {
+            text-align: center;
+            width: 100% !important;
+            max-width: 100%;
+            img {
+              max-width: 100% !important;
+              width: 40% !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

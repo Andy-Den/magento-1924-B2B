@@ -1,0 +1,70 @@
+<?php
+$helper = Mage::helper('privatesales');
+$canShowRegPanel = $helper->canShowRegistrationLoginPanel();
+$customRegPanel = ($helper->getShowRegistrationLoginPanel()==2);
+$isForgotPasswordEnabled = $helper->canShowForgotPassword();
+?>
+<div class="header-login">
+	<ul class="blocks">
+		<li>
+			<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form" class="login-form">
+				<?php echo $this->getBlockHtml('formkey'); ?>
+				<div class="registered-users">
+					<div class="content">
+						<ul class="form-list">
+							<li class="login-span">
+								Faça seu login
+							</li>
+							<li>
+								<div class="input-box">
+									<input type="email" placeholder="e-mail" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo Mage::helper('customer')->__('Email Address') ?>" />
+								</div>
+							</li>
+							<li>
+								<div class="input-box">
+									<input type="password" placeholder="senha" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo Mage::helper('customer')->__('Password') ?>" />
+								</div>
+							</li>
+							<li>
+								<button type="submit" class="button btn-doToAction" title="<?php echo Mage::helper('customer')->__('Sign In') ?>" name="send" id="send2"><span><span><?php echo Mage::helper('customer')->__('Sign In') ?></span></span></button>
+							</li>
+							<li class="or">
+								<?php echo $this->__('or'); ?>
+							</li>
+							<li>
+								<a id="button-register" class="button btn-action" title="<?php echo $this->__('Register yourself'); ?>" onclick="window.location='<?php echo Mage::helper('customer')->getRegisterUrl(); ?>'"><span><span><?php echo $this->__('Register yourself'); ?></span></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</li>
+	</ul>
+
+	<div class="loading-container" style="display: none;">
+		<div class="screen-block"></div>
+		<div class="loading">
+			<h2>Carregando suas informações</h2>
+			<p>Por favor, aguarde só alguns segundos enquanto o portal carrega as configurações exclusivas para o seu
+				usuário.</p>
+			<i class="fa fa-spinner fa-spin fa-3x"></i>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		//<![CDATA[
+		var dataForm = new VarienForm('login-form', true);
+		dataForm.validator.options.onFormValidate = function(validationPassed, form) {
+			if(validationPassed){
+				jQuery('.loading-container').show();
+			}
+		}
+		//]]>
+	</script>
+	<?php if ($isForgotPasswordEnabled): ?>
+		<div class="panel-forgot-password">
+			<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="forgot-password"><?php echo Mage::helper('customer')->__('Forgot Your Password?') ?></a>
+		</div>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php endif; ?>
+</div>

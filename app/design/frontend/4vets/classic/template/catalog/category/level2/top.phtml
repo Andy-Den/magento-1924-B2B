@@ -1,0 +1,7 @@
+<?php $_productCollection=$this->getLoadedProductCollection(); ?>
+<?php if($_productCollection->count()) : ?>
+	<h3>MAIS VISTOS</h3>
+	<hr />
+	<?php echo $this->getChildHtml('product_grid_block'); ?>
+	<br />
+<?php endif; ?>

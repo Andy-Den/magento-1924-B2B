@@ -1,0 +1,212 @@
+<?php
+	$quote = Mage::getModel('checkout/cart')->getQuote();
+?>
+
+<div class="onestepcheckout-coupons">
+<div id="coupon-notice" style="display: none;"></div>
+<?php $_couponcode = $quote->getCouponCode(); ?>
+<label for="coupon_code"><strong><?php echo $this->__('Customer Discount:'); ?></strong></label><br>
+<label class="coupon-code"><a id="btn-show-coupon" href="#">Digite o número do seu cupom</a></label>
+<input class="input-text" style="display: none;" type="text" name="onestepcheckout-couponcode" id="coupon_code" value="<?php echo Mage::helper('core')->escapeHtml($_couponcode); ?>" />
+<br /><br />
+<button style="display: none;" id="onestepcheckout-coupon-add" class="form-button-alt button btn-doToAction disabled btn-applyCoupon" type="button"><span><span><?php echo $this->__('Apply Coupon'); ?></span></span></button>
+<button id="onestepcheckout-coupon-remove" class="form-button-alt button btn-doToAction disabled" type="button" style="<?php if($_couponcode == '') { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Cancel Coupon'); ?></span></span></button>
+<script>
+	Event.observe(window, 'load', function() {
+		$('onestepcheckout-coupon-add').observe('click', function(e)    {
+
+			var coupon = $('coupon_code').getValue();
+			var couponNotice = $('coupon-notice');
+
+			couponNotice.hide();
+
+			if(coupon == '')  {
+				alert('<?php echo $this->__('Please enter a valid coupon code.'); ?>');
+				return;
+			}
+
+			var url = '<?php echo $this->getUrl('onestepcheckout/ajax/add_coupon', array('_secure'=>true)); ?>';
+			var parameters = {code: coupon};
+			var shipping_methods = $$('dl.shipment-methods').first();
+			var payment_methods = $$('div.payment-methods').first();
+			var summary = $$('div.onestepcheckout-summary').first();
+
+			if(shipping_methods){
+				shipping_methods.update('<div class="loading-ajax">&nbsp;</div>');
+			}
+
+			if(payment_methods){
+				payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
+			}
+
+			summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+			new Ajax.Request(url, {
+				method: 'post',
+				parameters: parameters,
+				onSuccess: function(transport) {
+					if(transport.status == 200) {
+
+						var response = transport.responseText.evalJSON();
+
+						var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+						var update_payments = <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+
+						if(shipping_methods){
+							shipping_methods.hide();
+							shipping_methods.update(response.shipping_method);
+							shipping_methods.show();
+							$$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments));
+							$$('dl.shipment-methods input').invoke('observe', 'click', function() {
+								$$('div.onestepcheckout-shipment-method-error').each(function(item) {
+									new Effect.Fade(item);
+								});
+							});
+						}
+
+						if(payment_methods){
+							payment_methods.hide();
+							payment_methods.replace(response.payment_method);
+							payment_methods.show();
+
+							paymentContainer = $('container_payment_method_' + payment.currentMethod)
+							paymentForm = $('payment_form_' + payment.currentMethod)
+
+							if(paymentContainer != null){
+								paymentContainer.show();
+							}
+							if(paymentForm != null){
+								paymentForm.show();
+							}
+							$$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
+							$$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+								$$('div.onestepcheckout-payment-method-error').each(function(item) {
+									new Effect.Fade(item);
+								});
+							});
+						}
+
+						summary.hide();
+						summary.update(response.summary);
+						summary.show();
+
+						if(response.success) {
+
+							couponNotice.update(response.message);
+							couponNotice.removeClassName('error-msg');
+							couponNotice.addClassName('success-msg');
+							couponNotice.show();
+							/* Show remove button */
+							$('onestepcheckout-coupon-remove').show();
+						}
+						else    {
+
+							couponNotice.update(response.message);
+							couponNotice.removeClassName('success-msg');
+							couponNotice.addClassName('error-msg');
+							couponNotice.show();
+							/* Hide remove button */
+							$('onestepcheckout-coupon-remove').hide();
+						}
+					}
+				}
+			});
+		});
+
+		$('onestepcheckout-coupon-remove').observe('click', function(e) {
+
+			var coupon = $('coupon_code').getValue();
+			var couponNotice = $('coupon-notice');
+
+			couponNotice.hide();
+
+			var url = '<?php echo $this->getUrl('onestepcheckout/ajax/add_coupon', array('_secure'=>true)); ?>';
+			var parameters = {code: coupon, remove: '1'};
+			var shipping_methods = $$('dl.shipment-methods').first();
+			var payment_methods = $$('div.payment-methods').first();
+			var summary = $$('div.onestepcheckout-summary').first();
+
+			if(shipping_methods){
+				shipping_methods.update('<div class="loading-ajax">&nbsp;</div>');
+			}
+
+			if(payment_methods){
+				payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
+			}
+			summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+			new Ajax.Request(url, {
+				method: 'post',
+				parameters: parameters,
+				onSuccess: function(transport)  {
+					if(transport.status == 200) {
+						var response = transport.responseText.evalJSON();
+
+						if(response.success){
+							$('coupon_code').setValue('')
+							$('onestepcheckout-coupon-remove').hide();
+						}
+
+						var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+						var update_payments = <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+
+						if(shipping_methods){
+							shipping_methods.hide();
+							shipping_methods.update(response.shipping_method);
+							shipping_methods.show();
+							$$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments));
+							$$('dl.shipment-methods input').invoke('observe', 'click', function() {
+								$$('div.onestepcheckout-shipment-method-error').each(function(item) {
+									new Effect.Fade(item);
+								});
+							});
+						}
+
+						if(payment_methods){
+							payment_methods.hide();
+							payment_methods.replace(response.payment_method);
+							payment_methods.show();
+
+							paymentContainer = $('container_payment_method_' + payment.currentMethod)
+							paymentForm = $('payment_form_' + payment.currentMethod)
+
+							if(paymentContainer != null){
+								paymentContainer.show();
+							}
+
+							if(paymentForm != null){
+								paymentForm.show();
+							}
+							$$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
+							$$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+								$$('div.onestepcheckout-payment-method-error').each(function(item) {
+									new Effect.Fade(item);
+								});
+							});
+						}
+
+						summary.hide();
+						summary.update(response.summary);
+						summary.show();
+
+						couponNotice.hide();
+						couponNotice.update(response.message);
+						couponNotice.removeClassName('error-msg');
+						couponNotice.addClassName('success-msg');
+						couponNotice.show();
+					}
+				}
+			});
+		});
+
+		//show coupon input
+		$('btn-show-coupon').observe('click', function (event) {
+				event.preventDefault();
+				$('coupon_code').show();
+				$('onestepcheckout-coupon-add').show();
+				$('btn-show-coupon').hide();
+			}
+		);
+	});
+</script>
+</div>

@@ -1,0 +1,68 @@
+.frequent-questions {
+    margin-top:  50px;
+    margin-bottom: 50px;
+}
+
+.frequent-questions .block1 fieldset {
+    background: #f1f1f1;
+    border:1px solid #bdbdbd;
+    border-radius: 5px;
+    padding: 15px 0;
+}
+
+.frequent-questions .block1 fieldset .left {
+    border-right: 1px solid #bdbdbd;
+}
+
+.frequent-questions .block1 fieldset .right a{
+    color: #262626;
+}
+
+.frequent-questions .block1 fieldset ul {
+    margin: 0 15px;
+    list-style: none;
+}
+
+.frequent-questions .block1 fieldset ul li:before {
+    width: 8px;
+    height: 8px;
+    margin-top:7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background:#7ea0a6;
+    float: left;
+    content: "";
+}
+
+.frequent-questions .block1 fieldset ul li a{
+    font-size: 12px;
+    color:#262626;
+    text-decoration: none;
+}
+
+.frequent-questions .block2 {
+    padding: 0;
+}
+
+.frequent-questions .block2 ul{
+    list-style: none;
+    margin: 0;
+}
+
+.frequent-questions .block2 .question h4 {
+    text-transform: uppercase;
+}
+
+.frequent-questions .block2 .question, .frequent-questions .block2 .answer {
+    padding-left: 10px;
+}
+
+.frequent-questions .block2 .link a {
+    font-size: 14px;
+    font-weight: bold;
+    color: #7ea0a6;
+}
+
+.frequent-questions .block2 hr {
+    margin:0 0 15px;
+}

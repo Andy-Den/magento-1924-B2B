@@ -1,0 +1,97 @@
+<?php
+$regions = $this->getRegions();
+
+$renderCitySelectUrl = $this->getCitySelectUrl();
+$renderDistrictSelectUrl = $this->getDistrictSelectUrl();
+$findCustomersUrl = $this->findCustomersUrl();
+?>
+
+<div class="customer-finder">
+  <div class="container">
+    <form id="form-customer-finder">
+      <select class="select-region" id="select-region">
+        <option value="0">ESTADO</option>
+        <?php foreach ($regions as $region) { ?>
+          <option value="<?php echo $region['region'] ?>"><?php echo $region['region'] ?></option>
+        <?php } ?>
+      </select>
+      <select class="select-city" id="select-city">
+        <option value="0">CIDADE</option>
+      </select>
+      <select class="select-district" id="select-district">
+        <option value="0">BAIRRO</option>
+      </select>
+      <div class="actions">
+        <button id="btn-find" class="button" title="BUSCAR" type="submit"><span><span>BUSCAR</span></span></button>
+      </div>
+      <div class="content-data" id="content-data">
+      </div>
+    </form>
+  </div>
+
+  <div class="customer-finder-loading" style="display: none;">
+    <i class="fa fa-3x fa-spin fa-spinner" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script>
+  bindSelects();
+
+  function bindSelects() {
+
+    //bidando evento do select de estado
+    jQuery('#select-region').change(function () {
+      jQuery('.customer-finder-loading').show();
+      var selectedRegion = jQuery(this).val();
+
+      //limpando demais selects
+      jQuery('#select-city').html('<option value="0">CIDADE</option>');
+      jQuery('#select-district').html('<option value="0">BAIRRO</option>');
+
+      jQuery.ajax({
+        url: "<?php echo $renderCitySelectUrl ?>",
+        context: document.body,
+        data: {region: selectedRegion}
+      }).done(function (msg) {
+        jQuery('#select-city').html(msg);
+
+        jQuery('.customer-finder-loading').hide();
+      });
+    });
+
+    //bidando evento do select de cidade
+    jQuery('#select-city').change(function () {
+      jQuery('.customer-finder-loading').show();
+      var selectedCity = jQuery(this).val();
+
+      //limpando demais selects
+      jQuery('#select-district').html('<option value="0">BAIRRO</option>');
+
+      jQuery.ajax({
+        url: "<?php echo $renderDistrictSelectUrl ?>",
+        context: document.body,
+        data: {city: selectedCity}
+      }).done(function (msg) {
+        jQuery('#select-district').html(msg);
+
+        jQuery('.customer-finder-loading').hide();
+      });
+    });
+
+    //bidando o botão buscar
+    jQuery('#btn-find').click(function (event) {
+      jQuery('.customer-finder-loading').show();
+      event.preventDefault();
+
+      jQuery.ajax({
+        url: "<?php echo $findCustomersUrl ?>",
+        context: document.body,
+        data: {city: jQuery('#select-city').val(), district: jQuery('#select-district').val()}
+      }).done(function (msg) {
+        jQuery('#content-data').html(msg);
+
+        jQuery('.customer-finder-loading').hide();
+      });
+    });
+  }
+</script>

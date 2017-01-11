@@ -1,0 +1,7 @@
+<?php $_helper = Mage::helper('cms'); ?>
+<?php if($_heading = $this->getContentHeading()): ?>
+    <h1><?php echo $_helper->__($_heading); ?></h1>
+	<hr />
+	<br />
+	<br />
+<?php endif; ?>

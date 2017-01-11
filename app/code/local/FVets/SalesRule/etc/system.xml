@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_SalesRule extension
+ * 
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+--> 
+<config>
+    <tabs>
+        <fvets translate="label" module="fvets_salesrule">
+            <label>FVets</label>
+            <sort_order>2000</sort_order>
+        </fvets>
+    </tabs>
+    <sections>
+        <fvets_salesrule translate="label" module="fvets_salesrule">
+            <class>separator-top</class>
+            <label>Salesrule</label>
+            <tab>fvets</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>0</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <premier translate="label" module="fvets_salesrule">
+                    <label>Premier Commercial Policy</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <status translate="label" module="fvets_salesrule">
+                            <label>Habilitado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </status>
+                        <category translate="label" module="fvets_salesrule">
+                            <label>Qual a categoria da premier para essa loja?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>FVets_RootCategory_Model_System_Config_Source_Category_SubCategory</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </category>
+                        <report_email>
+                            <label>Emails que receberão os relatórios da loja.</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </report_email>
+                    </fields>
+                </premier>
+
+                <checkout translate="label" module="fvets_salesrule">
+                    <label>Checkout</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <concatenate_on_comments translate="label" module="fvets_salesrule">
+                            <label>Concatenar descrição de campanhas nos comentários do cliente?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </concatenate_on_comments>
+                    </fields>
+                </checkout>
+
+                <newsletter>
+                    <label>Newsletter</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <random_coupon_send_active translate="label" module="fvets_salesrule">
+                            <label>Enviar coupon randômico pro cliente (via e-mail)?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </random_coupon_send_active>
+                        <random_coupon_send_email_template>
+                            <label>Template do e-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </random_coupon_send_email_template>
+                        <random_coupon_send_repository>
+                            <label>Cópia do email para</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </random_coupon_send_repository>
+                    </fields>
+                </newsletter>
+            </groups>
+        </fvets_salesrule>
+    </sections>
+</config>

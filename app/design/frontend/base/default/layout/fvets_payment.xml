@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_Payment extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_Payment
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<layout>
+
+    <customer_view>
+        <reference name="customer.info">
+            <block type="fvets_payment/customer_list_condition" name="customer.info.conditions" as="customer_conditions" template="fvets_payment/customer/list/condition.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value" module="fvets_payment"><value>Conditions</value></action>
+            </block>
+        </reference>
+    </customer_view>
+
+    <onestepcheckout_index_index>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <onestepcheckout_ajax_set_methods_separate>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </onestepcheckout_ajax_set_methods_separate>
+
+    <onestepcheckout_ajax_save_billing>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </onestepcheckout_ajax_save_billing>
+</layout>

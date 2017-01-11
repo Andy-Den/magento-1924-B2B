@@ -1,0 +1,199 @@
+</div>
+</div>
+</div>
+
+
+<div class="block1">
+	<div class="bk-image">
+		<div class="bk-text">
+				<div class="bk-text-content">
+						<div class="fit">
+							<h1><strong>IDEXX</strong> Brasil</h1>
+							<h2>Test With Confidence™</h2>
+							<br>
+							<a href="#" id="lk-block1" class="link-saiba-mais">Saiba Mais
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block2" id="block2">
+	<h2>Soluções Inovadoras</h2>
+
+	<br /><br /><br /><br /><br />
+
+	<div class="bk2-container">
+
+		<?php
+
+		$rootId = Mage::app()->getStore()->getRootCategoryId();
+		$categories = Mage::getModel('catalog/category')
+			->getCollection()
+			->addFieldToFilter('path', array('like' => "1/$rootId/%"))
+			->addAttributeToFilter('level', array('eq' => 2))
+			->setOrder('position')
+		;
+
+		$count = 1;
+		foreach ($categories as $_category)
+		{
+			$_category = Mage::getModel('catalog/category')->load($_category->getId());
+
+			$catUrl = $_category->getUrl($_category);
+
+			$_target = ($_SERVER['HTTP_HOST'] != parse_url ( $catUrl, PHP_URL_HOST )) ? "_blank" : "_self";
+			
+			?>
+
+			<div class="cat-col">
+				<?php /*if ($count < 5) :*/ ?>
+					<a href="<?php echo $catUrl; ?>" target="<?php echo $_target; ?>" alt="<?php echo $_category->getName(); ?>">
+						<img class="count<?php echo $count; ?>"
+
+							 	src="<?php echo $_category->getBaseThumbnail(); ?>"
+								 data-original=""
+								 alt="<?php echo $_category->getName(); ?>"/><br>
+					</a>
+					<a href="<?php echo $catUrl; ?>" target="<?php echo $_target; ?>" alt="<?php echo $_category->getName(); ?>"><span
+							class="title"><?php echo $_category->getName(); ?></span></a>
+					<span class="description"><?php echo $_category->getDescription(); ?></span>
+					<a href="<?php echo $catUrl; ?>" target="<?php echo $_target; ?>" class="link-saiba-mais" >Saiba Mais <i
+							class="fa fa-angle-right"></i></a>
+			</div>
+
+		<?php $count++; } ?>
+	</div>
+</div>
+
+<div class="block2 testWater">
+	<h2>Água</h2>
+	<p>
+		<strong>
+			Testes para análise de água
+		</strong>
+	</p>
+		<img src="http://idexx.4vets.com.br/media/wysiwyg/idexx/agua.jpg" alt="">
+	<a href="https://www.idexx.com/br/water/water-testing-solutions-brasil.html" class="link-saiba-mais" alt="Saiba Mais" title="Saiba Mais">
+		Saiba Mais <i class="fa fa-angle-right"></i>
+	</a>
+</div>
+
+<div class="block3">
+	<a id="sobre-a-idexx"></a>
+	<div class="bk-image">
+		<div class="bk-text">
+			<div class="fit">
+				<h3>O maior laboratório do mundo</h3>
+				<br>
+
+				<p>A IDEXX é líder mundial em diagnóstico de pequenos animais, oferecendo aos veterinários de todo o mundo uma ampla gama de produtos e serviços baseados em tecnologia e informação. Os produtos da IDEXX proporcionam cuidados médicos avançados, melhoraram a produtividade e possibilitam práticas economicamente mais lucrativas. A IDEXX também é líder mundial no fornecimento de testes rápidos de diagnóstico para bovinos e aves além de testes para a qualidade e segurança da água e do leite. Com sede nos Estados Unidos, a IDEXX emprega mais de 6.000 pessoas e oferece produtos para seus clientes em mais de 175 países.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block3_5">
+	<div class="bk-image">
+		<div class="bk-text">
+			<div class="text">
+				<h2>O que fará um mundo melhor?</h2>
+				<h3>Veja o vídeo</h3>
+			</div>
+			<br /><br />
+			<div>
+				<video width="941" height="530" controls="true" poster="<?php echo $this->getSkinUrl('images/home/30.jpg') ?>">
+					<source src="/media/videos/idexx/a-idexx.mp4" >
+				</video>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block4">
+	<div class="bk-image">
+		<div class="bk-text">
+			<div class="text">
+				<h2>A mais avançada tecnologia dentro da sua clínica</h2>
+				<h4>Obtenha a mais avançada tecnologia ao seu dispor</h4>
+			</div>
+			<div class="items">
+				<div class="item-col">
+					<img src="<?php echo $this->getSkinUrl('images/home/07.png') ?>" />
+					<span>Hematologia & Química</span>
+				</div>
+				<div class="item-col">
+					<img src="<?php echo $this->getSkinUrl('images/home/08.png') ?>" />
+					<span>Doenças Infecciosas</span>
+				</div>
+				<div class="item-col">
+					<img src="<?php echo $this->getSkinUrl('images/home/09.png') ?>" />
+					<span>Medicina Interna</span>
+				</div>
+				<div class="item-col">
+					<img src="<?php echo $this->getSkinUrl('images/home/10.png') ?>" />
+					<span>Protocolos e Procedimentos</span>
+				</div>
+				<div class="item-col">
+					<img src="<?php echo $this->getSkinUrl('images/home/11.png') ?>" />
+					<span>Práticas de Gestão</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block5">
+	<div class="bk-image">
+		<div class="header">
+			<i class="fa fa-heart-o fa-2x"></i>
+
+			<h2>Garantia do bem estar animal</h2>
+			<h4>Invista no tratamento preventivo</h4>
+		</div>
+		<div class="bk-text">
+			<div class="fit">
+				<h3><strong>Qualidade e Precisão</strong></h3>
+
+
+				<p>Os analisadores e testes da IDEXX oferecem resultados rápidos e altamente confiáveis.</p>
+<br>
+				<h3><strong>Tratamento Correto</strong></h3>
+
+
+				<p>Dê ao seu paciente o tratamento correto de forma rápida e segura.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php echo $this->getChildHtml('contact'); ?>
+
+<script>
+	jQuery('#lk-block1').click(function(el) {
+		el.preventDefault();
+
+		jQuery('html,body').animate({scrollTop: jQuery("#block2").offset().top},'slow');
+
+		return false;
+	});
+
+
+	//Tamanho dos blocos
+	jQuery(document).ready(function() {
+		//jQuery('.block1 .bk-image').height(jQuery(window).height() - jQuery('.block1 .bk-image').offset().top);
+		//jQuery('.block2').height(jQuery(window).height());
+		//jQuery('.block3 .bk-image').height(jQuery(window).height());
+		//jQuery('.block3_5').height(jQuery(window).height());
+		//jQuery('.block4 .bk-image').height(jQuery(window).height());
+		//jQuery('.block5 .bk-image').height(jQuery(window).height());
+	})
+
+</script>
+
+
+<div class="main-container container col1-layout main-home">
+	<div class="main">
+		<div class="col-main">

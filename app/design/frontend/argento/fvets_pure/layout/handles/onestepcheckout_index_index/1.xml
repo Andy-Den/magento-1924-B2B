@@ -1,0 +1,80 @@
+<include_layout version="0.1.0">
+
+    <onestepcheckout_index_index>
+        <update handle="page_one_column" />
+        <update handle="choose_payment_method_gwap_boleto_1" />
+        <remove name="header"></remove>
+        <remove name="top_toolbar"></remove>
+
+        <reference name="head">
+            <!-- Fazer o theme.css aparecer após o onestepcheckout.css -->
+            <action method="addItem"><type>skin_css</type><name>css/jquery.quickselect.css</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.quicksilver.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/checkout.js</name></action>
+
+            <action method="addItem"><type>skin_css</type><name>less/handles/onestepcheckout_index_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/checkout/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/salesrep/1.less</name></action>
+
+            <action method="addItem"><type>skin_js</type><name>js/tm/prolabel/prolabel.js</name></action>
+        </reference>
+
+        <reference name="onestepcheckout.checkout">
+            <action method="setTemplate"><template>onestepcheckout/checkout/1.phtml</template></action>
+            <block type="fvets_salesrep/info" name="sales.rep" as="sales_rep" template="page/html/salesrep/1.phtml"/>
+            <block type="onestepcheckout/coupon_coupon" name="coupon" as="coupon" template="onestepcheckout/coupon/1.phtml"/>
+        </reference>
+        <reference name="onestepcheckout.billing.address">
+            <action method="setTemplate"><template>onestepcheckout/billing_fields/1.phtml</template></action>
+        </reference>
+        <reference name="onestepcheckout.summary">
+            <action method="setTemplate"><template>onestepcheckout/summary/1.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+
+    </onestepcheckout_index_index>
+
+    <onestepcheckout_ajax_save_billing>
+        <reference name="billing">
+            <action method="setTemplate"><template>onestepcheckout/billing/1.phtml</template></action>
+            <block type="onestepcheckout/fields" as="billing_address" name="onestepcheckout.billing.address" template="onestepcheckout/billing_fields/1.phtml" />
+        </reference>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>allpago_gwap/form/boleto/1.phtml</template></action>
+            <block type="fvets_payment/condition_allpago_boleto" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="payment/condition/allpago/boleto/1.phtml"/>
+        </reference>
+    </onestepcheckout_ajax_save_billing>
+
+    <onestepcheckout_ajax_set_methods_separate>
+        <reference name="onestepcheckout.summary">
+            <action method="setTemplate"><template>onestepcheckout/summary/1.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>allpago_gwap/form/boleto/1.phtml</template></action>
+            <block type="fvets_payment/condition_allpago_boleto" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="payment/condition/allpago/boleto/1.phtml"/>
+        </reference>
+    </onestepcheckout_ajax_set_methods_separate>
+
+    <onestepcheckout_ajax_paymentrefresh>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+    </onestepcheckout_ajax_paymentrefresh>
+
+    <onestepcheckout_ajax_add_coupon>
+        <reference name="onestepcheckout.summary">
+            <action method="setTemplate"><template>onestepcheckout/summary/1.phtml</template></action>
+        </reference>
+    </onestepcheckout_ajax_add_coupon>
+
+</include_layout>

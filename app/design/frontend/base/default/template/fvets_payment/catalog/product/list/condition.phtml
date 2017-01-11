@@ -1,0 +1,35 @@
+<?php
+/**
+ * FVets_Payment extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_Payment
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Condition list template on product page
+ *
+ * @category    FVets
+ * @package     FVets_Payment
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $conditions = $this->getConditionCollection();?>
+<?php if ($conditions && $conditions->count() > 0) :?>
+<div class="box-collateral box-conditions box-up-sell">
+    <?php foreach ($conditions as $_condition) : ?>
+        <div class="item">
+            <?php echo $_condition->getName();?>
+<br />
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

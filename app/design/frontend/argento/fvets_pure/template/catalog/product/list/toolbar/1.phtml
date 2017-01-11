@@ -1,0 +1,169 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+?>
+<?php if($this->getCollection()->getSize()): ?>
+<div class="toolbar">
+    <div class="pager">
+        <p class="amount">
+            <?php if($this->getLastPageNum()>1): ?>
+                <?php echo $this->__('Items %s to %s of %s total', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
+            <?php else: ?>
+                <span class="strong"><?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?></span>
+            <?php endif; ?>
+        </p>
+
+        <div class="limiter">
+            <label><?php echo $this->__('Show') ?></label>
+            <select onchange="setLocation(this.value)">
+            <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                    <?php echo $_limit ?>
+                </option>
+            <?php endforeach; ?>
+            </select> <?php echo $this->__('per page') ?>
+        </div>
+
+        <?php echo $this->getPagerHtml() ?>
+
+    </div>
+
+    <?php if( $this->isExpanded() ): ?>
+    <div class="sorter">
+        <?php if( $this->isEnabledViewSwitcher() ): ?>
+        <p class="view-mode">
+            <?php $_modes = $this->getModes(); ?>
+            <?php if($_modes && count($_modes)>1): ?>
+            <label><?php echo $this->__('View as') ?>:</label>
+            <?php foreach ($this->getModes() as $_code=>$_label): ?>
+                <?php if($this->isModeActive($_code)): ?>
+                    <span title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?> strong"><i class="fa fa-<?php echo strtolower($_code); ?>"></i> <span><?php echo $_label ?></span></span>&nbsp;
+                <?php else: ?>
+                    <a rel="nofollow" href="<?php echo $this->getModeUrl($_code) ?>" title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?>"><i class="fa fa-<?php echo strtolower($_code); ?>"></i> <span><?php echo $_label ?></span></a>&nbsp;
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </p>
+        <?php endif; ?>
+
+				<?php if ($this->isModeActive('list')) { ?>
+				<?php
+					$_cookieFlagImgs = Mage::helper("page")->showImgs();
+				?>
+
+				<div id="div-button-no-images" class="div-button-no-images" style="float: left;">
+					<a id="button-show-image" href="">
+						<i class="fa fa-camera fa-2x"></i>
+						<span id="tit-button-show-images" class="tit-button-show-images"><?php echo ($_cookieFlagImgs ?  $this->__('exibir imagens') : $this->__('não exibir imagens')); ?></span>
+					</a>
+				</div>
+				<?php } ?>
+
+		<?php
+
+
+		/*<div class="checkout">
+			<button type="button"
+					title="<?php echo $this->__('Checkout') ?>"
+					class="button btn-action"
+					onclick="setLocation('<?php echo Mage::helper('checkout/url')->getCheckoutUrl(); ?>')"
+				><span><span><?php echo $this->__('Checkout') ?> ></span></span></button>
+
+		</div>*/
+
+		?>
+
+        <div class="sort-by">
+            <label><?php echo $this->__('Sort By') ?></label>
+<!--            <select onchange="setLocation(this.value)">-->
+<!--            --><?php //foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+<!--                <option value="--><?php //echo $this->getOrderUrl($_key, 'asc') ?><!--"--><?php //if($this->isOrderCurrent($_key)): ?><!-- selected="selected"--><?php //endif; ?><!-->
+<!--                    --><?php //echo $this->__($_order) ?>
+<!--                </option>-->
+<!--            --><?php //endforeach; ?>
+<!--            </select>-->
+<!--            --><?php //if($this->getCurrentDirection() == 'desc'): ?>
+<!--                <a rel="nofollow" href="--><?php //echo $this->getOrderUrl(null, 'asc') ?><!--" title="--><?php //echo $this->__('Set Ascending Direction') ?><!--"><img src="--><?php //echo $this->getSkinUrl('images/i_desc_arrow.gif') ?><!--" alt="--><?php //echo $this->__('Set Ascending Direction') ?><!--" class="v-middle" /></a>-->
+<!--            --><?php //else: ?>
+<!--                <a rel="nofollow" href="--><?php //echo $this->getOrderUrl(null, 'desc') ?><!--" title="--><?php //echo $this->__('Set Descending Direction') ?><!--"><img src="--><?php //echo $this->getSkinUrl('images/i_asc_arrow.gif') ?><!--" alt="--><?php //echo $this->__('Set Descending Direction') ?><!--" class="v-middle" /></a>-->
+<!--            --><?php //endif; ?>
+					<select onchange="setLocation(this.value)">
+								<option <?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'asc'): ?>selected="selected"<?php endif; ?> value="<?php echo $this->getOrderUrl('name', 'asc'); ?>">Nome A-Z</option>
+								<option <?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'desc'): ?>selected="selected"<?php endif; ?> value="<?php echo $this->getOrderUrl('name', 'desc'); ?>">Nome Z-A</option>
+								<option <?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?>selected="selected"<?php endif; ?> value="<?php echo $this->getOrderUrl('price', 'asc'); ?>">Menor Preço</option>
+								<option <?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?>selected="selected"<?php endif; ?> value="<?php echo $this->getOrderUrl('price', 'desc'); ?>">Maior Preço</option>
+							</option>
+					</select>
+        </div>
+
+    </div>
+    <?php endif; ?>
+</div>
+<?php endif ?>
+
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+			var cookiesOptions = {path: '/', expiresAt: new Date( 2111, 1, 1 )};
+//		var cookie = jQuery.cookie('showImagesCatalog');
+//		if (cookie == null) {
+//			jQuery.cookie('showImagesCatalog', 0, cookiesOptions);
+//		}
+
+		jQuery('#button-show-image').bind("click", function (evt) {
+			evt.preventDefault();
+			var cookie = jQuery.cookie('showImagesCatalog');
+			if (cookie != null && cookie == 1) {
+				jQuery('.prolabel-wrapper').removeClass('no-image');
+				jQuery.cookie('showImagesCatalog', 0, cookiesOptions);
+				jQuery('#tit-button-show-images').html('não exibir imagens');
+				//Fix do not show images with lazy
+				jQuery(document).scrollTop(jQuery(document).scrollTop() + 1);
+			} else {
+				jQuery('.prolabel-wrapper').addClass('no-image');
+				jQuery.cookie('showImagesCatalog', 1, cookiesOptions);
+				jQuery('#tit-button-show-images').html('exibir imagens');
+			}
+			return false;
+		});
+	});
+
+	function verifyFlagImgs() {
+		var cookie = jQuery.cookie('showImagesCatalog');
+		if (cookie != null && cookie == 0) {
+			jQuery('.prolabel-wrapper').removeClass('no-image');
+			jQuery('#tit-button-show-images').html('não exibir imagens');
+		} else {
+			jQuery('.prolabel-wrapper').addClass('no-image');
+			jQuery('#tit-button-show-images').html('exibir imagens');
+		}
+	}
+</script>

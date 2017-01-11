@@ -1,0 +1,25 @@
+<?php
+	$_helper = $this->helper('catalog/output');
+	$_product = $this->getProduct();
+?>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="row">
+	<?php /* Column 1 */ ?>
+	<div class="col-md-4">
+		<div class="product-name row">
+			<h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+		</div>
+		<?php echo $this->getChildHtml('review.form'); ?>
+	</div>
+	<?php /* Column 2 */ ?>
+	<div class="col-md-8">
+		<?php echo $this->getChildHtml('media'); ?>
+	</div>
+</div>
+<div class="row">
+<div class="button-collateral" data-target="box-review">Avaliações <?php echo $this->getReviewsSummaryHtml($_product, 'short', false) ?></div>
+<hr />
+	<?php echo $this->getChildHtml('reviews') ?>
+
+</div>

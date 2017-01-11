@@ -1,0 +1,5 @@
+<div class="container">
+<?php if (Mage::helper('umicrosite')->getCurrentVendor()->getTopBanner() > 0) : ?>
+	<?php echo $this->getChild('top_banner')->setBannersliderId(Mage::helper('umicrosite')->getCurrentVendor()->getTopBanner())->toHtml(); ?>
+<?php endif; ?>
+</div>

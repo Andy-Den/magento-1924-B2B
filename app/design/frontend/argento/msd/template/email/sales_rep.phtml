@@ -1,0 +1,48 @@
+<?php
+
+$this->setCustomer($this->getData('customer_id'));
+
+$salesrep = $this->getSalesrep();
+
+if (empty($salesrep) || empty($salesrep->getId())) {
+	return;
+}
+?>
+<!--<table cellspacing="0" cellpadding="0" border="0" class="representante" width="650" style="border-top: solid 1px #424242;">-->
+<!--	<tr style="text-align: left;">-->
+<!--		<td class="col-lbl" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;width: 230px;text-align: center;padding: 10px;">-->
+<!--			<label>Seu Representante Comercial</label>-->
+<!--		</td>-->
+<!--	</tr>-->
+<!--	<tr style="text-align: left;">-->
+<!--		<td class="col-img" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;width: 230px;text-align: center;padding-bottom: 10px;">-->
+<!--			<img style="width: 180px;" src="{{skin url="images/email/faca-seu-login.png" _area='frontend'}}"/>-->
+<!--			<img src="--><?php //echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 180, 180); ?><!--" />-->
+<!--		</td>-->
+<!--		<td class="col-data" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;width: 350px;vertical-align: top;">-->
+<!--			<span>--><?php //echo $this->escapeHtml($salesrep->getName()); ?><!--</span><br>-->
+<!--			<span>--><?php //echo $this->escapeHtml($salesrep->getEmail()); ?><!--</span><br>-->
+<!--			<span>--><?php //echo $this->escapeHtml($salesrep->getTelephone()); ?><!--</span><br>-->
+<!--		</td>-->
+<!--	</tr>-->
+<!--</table>-->
+
+
+
+<table width="650" border="0" cellspacing="0" cellpadding="0" style="border-top:solid 1px #424242">
+	<tbody><tr style="text-align:left">
+		<td colspan="2" style="color:#2f2f2f;font:13px/1.35em 'Open Sans',Arial,Helvetica,sans-serif; width: 400px; text-align:left;padding:10px">
+			<h2>Seu Representante Comercial</h2>
+		</td>
+	</tr>
+	<tr style="text-align:left">
+		<td style="color:#2f2f2f;font:13px/1.35em 'Open Sans',Arial,Helvetica,sans-serif;width:180px; text-align:left;padding-bottom:10px">
+			<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 180, 180); ?>" />
+		</td>
+		<td style="color:#2f2f2f;font: 'Open Sans',Arial,Helvetica,sans-serif;width:350px;vertical-align:top">
+			<span style="font-size: 16px;color: #6c645c;"><?php echo $this->escapeHtml($salesrep->getName()); ?></span><br>
+			<span style="font-size: 16px;color: #6c645c;"><?php echo $this->escapeHtml($salesrep->getEmail()); ?></span><br>
+			<span style="font-size: 16px;color: #6c645c;"><?php echo $this->escapeHtml($salesrep->getTelephone()); ?></span><br>
+		</td>
+	</tr>
+	</tbody></table>

@@ -1,0 +1,50 @@
+<config>
+    <sections>
+        <comissions translate="label" module="fvets_allin">
+            <class>separator-top</class>
+            <label>Comissions</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_allin">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+                        <erp_comission_value translate="label">
+                            <label>Valor da comissão ERP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </erp_comission_value>
+                        <site_comission_value translate="label">
+                            <label>Valor da comissão SITE</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </site_comission_value>
+                        <last_buy_interval translate="label">
+                            <label>Intervalo da última compra</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Quantidade de dias que definirão qual valor de comissão ser</comment>
+                        </last_buy_interval>
+                    </fields>
+                </general>
+            </groups>
+        </comissions>
+    </sections>
+</config>

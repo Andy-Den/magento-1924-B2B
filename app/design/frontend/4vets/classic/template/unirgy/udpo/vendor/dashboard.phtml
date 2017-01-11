@@ -1,0 +1,172 @@
+<?php
+/**
+ * Unirgy LLC
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.unirgy.com/LICENSE-M1.txt
+ *
+ * @category   Unirgy
+ * @package    Unirgy_DropshipPo
+ * @copyright  Copyright (c) 2008-2009 Unirgy LLC (http://www.unirgy.com)
+ * @license    http:///www.unirgy.com/LICENSE-M1.txt
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php echo $this->getChildHtml('udpos') ?>
+<?php
+$_hlp = Mage::helper('udropship');
+$_v = Mage::getSingleton('udropship/session')->getVendor();
+
+switch ($_v['region_id']) {
+			case "1":
+				$estado = "AC";
+				break;
+			case "2":
+				$estado = "AL";
+				break;
+			case "3":
+				$estado = "AP";
+				break;
+			case "4":
+				$estado = "AM";
+				break;
+			case "5":
+				$estado = "BA";
+				break;
+			case "6":
+				$estado = "CE";
+				break;
+			case "7":
+				$estado = "DF";
+				break;
+			case "8":
+				$estado = "ES";
+				break;
+			case "9":
+				$estado = "GO";
+				break;
+			case "10":
+				$estado = "MA";
+				break;
+			case "11":
+				$estado = "MT";
+				break;
+			case "12":
+				$estado = "MS";
+				break;
+			case "13":
+				$estado = "MG";
+				break;
+			case "14":
+				$estado = "PA";
+				break;
+			case "15":
+				$estado = "PB";
+				break;
+			case "16":
+				$estado = "PR";
+				break;
+			case "17":
+				$estado = "PE";
+				break;
+			case "18":
+				$estado = "PI";
+				break;
+			case "19":
+				$estado = "RJ";
+				break;
+			case "20":
+				$estado = "RN";
+				break;
+			case "21":
+				$estado = "RS";
+				break;
+			case "22":
+				$estado = "RO";
+				break;
+			case "23":
+				$estado = "RR";
+				break;
+			case "24":
+				$estado = "SC";
+				break;
+			case "25":
+				$estado = "SP";
+				break;
+			case "26":
+				$estado = "SE";
+				break;
+			case "27":;
+				$estado = "TO";
+				break;
+			}
+$cep = substr(preg_replace("/[^0-9]/", "",$_v['zip']) . '00000000', 0, 8);
+$dataNascimento =  date("d/m/Y", mktime($_v['vendor_birthday']));
+$numero = preg_replace("/[^0-9]/", "",$_v['street']);
+$telefone = substr(preg_replace("/[^0-9]/", "",$_v['telephone']) . '0000000000', 0, 10);
+$xml = "<PreCadastramento>
+<prospect>
+<idProprio>{$_v['email']}</idProprio>
+<nome>{$_v['vendor_name']}</nome>
+<sobrenome>{$_v['vendor_contact_surname']}</sobrenome>
+<email>{$_v['email']}</email>
+<confirmaemail>{$_v['email']}</confirmaemail>
+<telefoneFixo>{$telefone}</telefoneFixo>
+<dataNascimento>{$dataNascimento}</dataNascimento>
+<rg>{$_v['vendor_rg']}</rg>
+<cpf>{$_v['vendor_cpf']}</cpf>
+<cep>{$_v['zip']}</cep>
+<rua>{$_v['street1']}</rua>
+<numero>{$numero}</numero>
+<complemento>{$_v['vendor_address_complemento']}</complemento>
+<bairro>{$_v['vendor_address_bairro']}</bairro>
+<cidade>{$_v['city']}</cidade>
+<estado>{$estado}</estado>
+<razaoSocial>{$_v['vendor_razao_social']}</razaoSocial>
+<nomeFantasia>{$_v['vendor_razao_social']}</nomeFantasia>
+<cnpj>{$_v['vendor_cnpj']}</cnpj>
+<cepEmpresa>{$cep}</cepEmpresa>
+<telefoneFixoEmpresa>{$telefone}</telefoneFixoEmpresa>
+<ruaEmpresa>{$_v['street']}</ruaEmpresa>
+<numeroEmpresa>{$_v['street']}</numeroEmpresa>
+<complementoEmpresa>{$_v['vendor_address_complemento']}</complementoEmpresa>
+<bairroEmpresa>{$_v['vendor_address_bairro']}</bairroEmpresa>
+<cidadeEmpresa>{$_v['city']}</cidadeEmpresa>
+<estadoEmpresa>{$estado}</estadoEmpresa>
+</prospect>
+</PreCadastramento>";
+$url = "https://www.moip.com.br/ws/alpha/PreCadastramento";
+$header = "Authorization: Basic " . base64_encode("FEE5P78NA6RZAHBNH3GLMWZFWRE7IU3D:Y8DIATTADUNVOSXKDN0JVDAQ1KU7UPJHEGPM7SBA");
+$httpClient = new Zend_Http_Client($url);
+        $httpClient->setHeaders($header);
+        $httpClient->setRawData($xml);
+        $responseMoIPConta = $httpClient->request('POST');
+        $res = simplexml_load_string($responseMoIPConta->getBody());
+ if ($res) {
+			if($res->respostaprecadastramento->status == "Falha")
+				$erro = $res->Resposta->Status;
+
+            foreach ($res->children() as $child) {
+                foreach ($child as $c) {
+                    if ($c->getName() == 'idRedirecionamento')
+                        $moipToken = $c;
+
+                }
+            }
+        }
+
+
+?>
+
+<?php 
+	if ($moipToken != ""): echo $xml;?>
+
+<script type="text/javascript">
+window.location = "https://www.moip.com.br/cadastro/mktplaceo2ti/<?php echo $moipToken; ?>"
+</script>
+<?php endif;  ?>

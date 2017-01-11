@@ -1,0 +1,69 @@
+<?php $_helper = Mage::helper('catalog/category') ?>
+<?php $_categories = $_helper->getStoreCategories() ?>
+<?php $currentCategory = Mage::registry('current_category') ?>
+<?php
+	$rootCategoryId = Mage::app()->getStore()->getRootCategoryId();
+	$rootCategory = Mage::getModel('catalog/category')->load($rootCategoryId);
+?>
+
+<?php if($rootCategory->getLevel() > 1) {
+	$_categories = array($rootCategory);
+ } ?>
+
+<div class="sidebar-categories">
+	<?php if (count($_categories) > 0): ?>
+		<ul class="container">
+			<?php foreach ($_categories as $_category): ?>
+				<li class="category">
+					<div class="main-link">
+						<a href="<?php echo $_helper->getCategoryUrl($_category) ?>">
+							<?php echo $_category->getName() ?>
+						</a>
+					</div>
+					<?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+					<?php $_subcategories = $_category->getChildrenCategories() ?>
+					<?php if (count($_subcategories) > 0): ?>
+						<ul class="child-container">
+							<?php foreach ($_subcategories as $_subcategory): ?>
+							<a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>">
+								<li class="child-category">
+									<div class="child-link">
+											<?php echo '<span class="child-label">' . $_subcategory->getName() . '</span>' ?>
+									</div>
+								</li>
+							</a>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
+</div>
+
+<script type="text/javascript">
+	//<![CDATA[
+	if (jQuery('body').hasClass('logged-out')) {
+
+		jQuery('.main-link a').bind('click', function(element) {
+			element.preventDefault();
+			jQuery.featherlight(jQuery('#newsletter-featherlight-login'));
+		});
+		jQuery('.child-container a').bind('click', function(element) {
+			element.preventDefault();
+			jQuery.featherlight(jQuery('#newsletter-featherlight-login'));
+		});
+
+		if (jQuery('.featherlight-login') != undefined)
+		{
+			jQuery('.featherlight-login').bind('click', function(element) {
+				element.preventDefault();
+				jQuery.featherlight(jQuery('#newsletter-featherlight-login'));
+			})
+		}
+
+	};
+
+
+	//]]>
+</script>

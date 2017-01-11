@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_CatalogRestrictionGroup extension
+ * 
+ * @category       FVets
+ * @package        FVets_CatalogRestrictionGroup
+ * @copyright      Copyright (c) 2016
+ */
+--> 
+<config>
+    <tabs>
+        <fvets translate="label" module="fvets_catalogrestrictiongroup">
+            <label>FVets</label>
+            <sort_order>2000</sort_order>
+        </fvets>
+    </tabs>
+    <sections>
+        <fvets_catalogrestrictiongroup translate="label" module="fvets_catalogrestrictiongroup">
+            <class>separator-top</class>
+            <label>Restriction Group</label>
+            <tab>fvets</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            </groups>
+        </fvets_catalogrestrictiongroup>
+    </sections>
+</config>

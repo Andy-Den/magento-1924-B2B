@@ -1,0 +1,65 @@
+.block-highlight
+{
+  .categories-grid
+  {
+    li.item
+    {
+      box-sizing: border-box;
+      clear: none;
+      float: left;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      padding: 7px 1%;
+      position: static;
+      margin-left: 1%;
+      margin-right: 1%;
+
+      border:1px solid #FFFFFF !important;
+
+      &:hover
+      {
+        border:@defaultBorder !important;
+      }
+
+      .prolabel-wrapper
+      {
+        margin-top: 10px;
+        position: relative;
+
+        .category-overlay
+        {
+          position:absolute;
+          height: 0px;
+          overflow: hidden;
+          background: @defaultBackgroundColor5;
+          bottom: 0;
+          width: 100%;
+
+          .category-name
+          {
+            padding:15px 10px;
+
+            a
+            {
+              color:white;
+            }
+          }
+
+          .category-description
+          {
+            color:white;
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .categories-grid.cols-3
+  {
+    li.item
+    {
+      width: 31.3%;
+    }
+  }
+}

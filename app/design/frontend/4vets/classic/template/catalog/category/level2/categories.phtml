@@ -1,0 +1,37 @@
+<?php
+	$blockClassName = Mage::getConfig()->getBlockClassName('catalog/navigation');
+	$block = new $blockClassName();
+	$_category  = $this->getCurrentCategory();
+?>
+
+<div class="categories row">
+	<?php $children_categories = $_category->getChildrenCategories(); ?>
+	<?php $i = 0; ?>
+	<?php foreach($children_categories as $children) : ?>
+		<?php $children = Mage::getModel('catalog/category')->load($children->getId()); ?>
+		<?php if($children->getIsFeatured()): ?>
+			<div class="col-md-6 inner-block">
+				<div class="row">
+					<div class="col-md-5 text-center">
+						<img class="lazy" data-original="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$children->getHomepage_image(); ?>" alt="<?php echo  $children->getName(); ?>" height="170"  />
+					</div>
+					<div class="col-md-7">
+						<div class="text">
+							<div class="title"><?php echo $children->getName(); ?></div>
+							<div class="description"><?php echo $children->getDescription(); ?></div>
+						</div>
+						<p><a href="<?php echo $block->getCategoryUrl($children); ?>" class="see-all"><i class="fa  fa-angle-right"></i>&nbsp;&nbsp;Confira todos os produtos</a></p>
+					</div>
+				</div>
+			</div>
+			<?php $i++ ; ?>
+			<?php if ($i%2 == 0) : ?>
+				</div>
+				<br />
+				<div class="categories row">
+			<?php endif; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</div>
+<div class="clear"></div>
+<br />

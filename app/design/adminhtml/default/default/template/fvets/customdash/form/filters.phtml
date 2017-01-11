@@ -1,0 +1,36 @@
+<div class="filterContainer">
+	<form id="dashboard-filter" action="" method="get">
+        <?php echo $this->getChildHtml('website-switcher') ?>
+		<label for="date_from">De:</label>
+		<input class="date" type="text" name="date_from" id="date_from" value="<?php echo $this->getRequest()->getParam('date_from') ?>"/><br/>
+		<label for="date_to">Até:</label>
+		<input class="date" type="text" name="date_to" id="date_to" value="<?php echo $this->getRequest()->getParam('date_to') ?>"/>
+		<button type="button" id="filterButton" onclick="requestChart();">Go</button>
+	</form>
+</div>
+
+<?php $_fromDate = $this->getFromDate(); ?>
+<?php $_toDate = $this->getToDate(); ?>
+<?php if (isset($_fromDate) && isset($_toDate)) { ?>
+<div style="text-align: center; width: 100%;">
+	<h3>Dados de <?php echo $_fromDate ?> a <?php echo $_toDate ?></h3>
+</div>
+<?php } ?>
+<div style="clear: both;"></div>
+<script type="text/javascript">// <![CDATA[
+	Calendar.setup({
+		inputField: 'date_from',
+		ifFormat: '%e/%m/%Y',
+		button: 'date_from_trig',
+		align: 'Bl',
+		singleClick: true
+	});
+
+	Calendar.setup({
+		inputField: 'date_to',
+		ifFormat: '%e/%m/%Y',
+		button: 'date_to_trig',
+		align: 'Bl',
+		singleClick: true
+	});
+	// ]]></script>

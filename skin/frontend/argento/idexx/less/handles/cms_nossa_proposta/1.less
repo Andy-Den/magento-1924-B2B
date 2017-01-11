@@ -1,0 +1,107 @@
+@import "../../../../fvets_pure/less/mixins";
+
+.main
+{
+  min-height:0;
+}
+
+.category-image
+{
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 0;
+  margin-top: -40px;
+
+  .category-title
+  {
+    background: fade(@defaultColor2, 78%);
+    width: 55%;
+    padding-right: 5%;
+    left: 0;
+    margin: 100px 0;
+    text-align: left;
+    .opacity(80%);
+    .boxSizing();
+
+    .inner
+    {
+      width: 100%;
+      max-width: 475px;
+      float: right;
+      padding: 60px 0;
+      .boxSizing();
+
+      h1
+      {
+        color:white;
+        .textShadow();
+        font-weight: lighter;
+        text-transform: uppercase;
+      }
+
+      .subtitle
+      {
+        color:white;
+        padding: 0;
+        font-size: 21px;
+      }
+    }
+  }
+}
+
+table.content
+{
+  h3
+  {
+    height:50px;
+  }
+}
+
+div.block-info {
+  width: 33.3%;
+  box-sizing: border-box;
+  float: left;
+  padding: 10px;
+}
+
+//responsive
+
+@media (max-width: 980px) {
+  .category-image {
+    background-position: right center;
+    .category-title {
+      .inner {
+        padding: 0 2%;
+      }
+    }
+  }
+}
+
+@media (max-width: 790px) {
+  div.block-info {
+    width: 50%;
+    min-height: 490px;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 670px) {
+  .category-image {
+    .category-title {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  div.block-info {
+    width: 100%;
+    min-height: auto;
+  }
+}

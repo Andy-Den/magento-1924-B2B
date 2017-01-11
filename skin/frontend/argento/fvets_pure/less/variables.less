@@ -1,0 +1,286 @@
+/**
+* Constants
+*/
+
+@skinUrl:"/skin/frontend/argento/fvet_pure/";
+@iconsUrl:"/skin/frontend/argento/fvets_pure/images/icons.png";
+
+@defaultPageWidth:950px;
+@fullPageWidth:100%;
+@contentPageWidth:@fullPageWidth;
+
+//colorss
+
+@color1: #d60210;
+@color2: #23528d;
+@color3: #e6e6e7;
+@color4: #ffffff;
+@color5: #262626;
+@color6: #f6ed88;
+@color7: #636363;
+@color8: #efefef;
+@color9: #d6f3c7;
+
+//backgrounds
+
+@backgroundColor1: @color1;
+@backgroundColor2: @color2;
+@backgroundColor3: @color7;
+@backgroundColor4: @color8;
+@backgroundColor5: @color9;
+@backgroundColor6: @color4;
+@backgroundColor7: @color6;
+
+//texts
+
+@defaultTextFontFamily:'Proxima Nova',Helvetica, Arial, sans-serif;
+@defaultTextFontSize:13px;
+@defaultTextColor:@color5;
+@defaultTextFontWeight:regular;
+@defaultTextTransform:unset;
+@defaultTextDecoration:unset;
+@defaultTextHoverDecoration:unset;
+
+@mobileDefaultTextFontSize:@defaultTextFontSize;
+
+@defaultHighlightTextSize:@defaultTextFontSize;
+@defaultHighlightTextColor:@defaultTextColor;
+@defaultHighlightTextFontWeight:@defaultTextFontWeight;
+@defaultHighlightTextTransform:uppercase;
+@defaultHighlightTextDecoration:@defaultTextDecoration;
+@defaultHighlightTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobileDefaultHighlightTextSize:@mobileDefaultTextFontSize;
+
+@defaultDisabledTextSize:@defaultTextFontSize;
+@defaultDisabledTextColor:@color7;
+@defaultDisabledTextFontWeight:@defaultTextFontWeight;
+@defaultDisabledTextTransform:@defaultTextTransform;
+@defaultDisabledTextDecoration:@defaultTextDecoration;
+@defaultDisabledTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobileDefaultDisabledTextSize:@mobileDefaultTextFontSize;
+
+@highlightTextSize:14px;
+@highlightTextColor:@defaultTextColor;
+@highlightTextFontWeight:bold;
+@highlightTextTransform:@defaultTextTransform;
+@highlightTextDecoration:@defaultTextDecoration;
+@highlightTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobileHighlightTextSize:@highlightTextSize;
+
+@highlightRegularTextSize:@highlightTextSize;
+@highlightRegularTextColor:@defaultTextColor;
+@highlightRegularTextFontWeight:@defaultTextFontWeight;
+@highlightRegularTextFontTransform:@defaultTextFontTransform;
+@highlightRegularTextDecoration:@defaultTextDecoration;
+@highlightRegularTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobileHighlightRegularTextSize:@highlightRegularTextSize;
+
+@alertTextSize:14px;
+@alertTextColor:@color1;
+@alertTextFontWeight:@defaultTextFontWeight;
+@alertTextTransform:@defaultTextTransform;
+@alertTextDecoration:@defaultTextDecoration;
+@alertTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobileAlertTextSize:@alertTextSize;
+
+@priceTextSize:16px;
+@priceTextColor:@defaultTextColor;
+@priceTextFontWeight:bold;
+@priceTextTransform:uppercase;
+@priceTextDecoration:@defaultTextDecoration;
+@priceTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobilePriceTextSize:@priceTextSize;
+
+@priceFromTextSize:@defaultTextFontSize;
+@priceFromTextColor:@defaultTextColor;
+@priceFromTextFontWeight:@defaultTextFontWeight;
+@priceFromTextTransform:@defaultTextTransform;
+@priceFromTextDecoration:overline;
+@priceFromTextHoverDecoration:@defaultTextHoverDecoration;
+
+@mobilepriceFromTextSize:@priceFromTextSize;
+
+@defaultLinkSize:14px;
+@defaultLinkColor:@defaultTextColor;
+@defaultLinkWeight:@defaultTextFontWeight;
+@defaultLinkTransform:@defaultTextTransform;
+@defaultLinkDecoration:@defaultTextDecoration;
+@defaultLinkHoverDecoration:underline;
+
+@mobileDefaultLinkSize:@defaultLinkSize;
+
+@highlightLinkSize:@defaultLinkSize;
+@highlightLinkColor:@defaultTextColor;
+@highlightLinkWeight:bold;
+@highlightLinkTransform:@defaultTextTransform;
+@highlightLinkDecoration:@defaultTextDecoration;
+@highlightLinkHoverDecoration:@defaultLinkHoverDecoration;
+
+@mobileHighlightLinkSize:@mobileDefaultLinkSize;
+
+@breadcrumbSize:@defaultTextFontSize;
+@breadcrumbColor:@defaultTextColor;
+@breadcrumbFontWeight:@defaultTextFontWeight;
+@breadcrumbTransform:@defaultTextTransform;
+@breadcrumbDecoration:@defaultTextDecoration;
+@breadcrumbHoverDecoration:@defaultTextDecoration;
+
+@mobileBreadcrumbSize:@breadcrumbSize;
+
+@breadcrumbActiveSize:@defaultTextFontSize;
+@breadcrumbActiveColor:@defaultTextColor;
+@breadcrumbActiveFontWeight:bold;
+@breadcrumbActiveTransform:@defaultTextTransform;
+@breadcrumbActiveDecoration:@defaultTextDecoration;
+@breadcrumbActiveHoverDecoration:@defaultTextDecoration;
+
+@mobileBreadcrumbActiveSize:@mobileBreadcrumbSize;
+
+@noticeTextSize:@defaultTextFontSize;
+@noticeTextColor:@defaultTextColor;
+@noticeTextWeight:bold;
+@noticeTextTransform:@defaultTextTransform;
+@noticeTextDecoration:@defaultTextDecoration;
+@noticeTextHoverDecoration:@defaultTextDecoration;
+
+@mobileNoticeTextSize:@mobileDefaultTextFontSize;
+
+//titles
+
+@titleH1Size:32px;
+@titleH1Color:@color2;
+@titleH1FontWeight:lighter;
+@titleH1TextTransform:unset;
+
+@mobileTitleH1Size:20px;
+
+@titleH2Size:20px;
+@titleH2Color:@color2;
+@titleH2FontWeight:normal;
+@titleH2TextTransform:unset;
+
+@mobileTitleH2Size:18px;
+
+@titleH3Size:16px;
+@titleH3Color:@color5;
+@titleH3FontWeight:normal;
+@titleH3TextTransform:unset;
+
+@mobileTitleH3Size:@titleH3Size;
+
+@titleH4Size:14px;
+@titleH4Color:@color5;
+@titleH4FontWeight:normal;
+@titleH4TextTransform:unset;
+
+@mobileTitleH4Size:@titleH4Size;
+
+@titleH5Size:14px;
+@titleH5Color:@color5;
+@titleH5FontWeight:bold;
+@titleH5TextTransform:unset;
+
+@mobileTitleH5Size:@titleH5Size;
+
+@titleH6Size:14px;
+@titleH6Color:@color5;
+@titleH6FontWeight:normal;
+@titleH6TextTransform:uppercase;
+
+@mobileTitleH6Size:@titleH6Size;
+
+//borders
+
+@border1: 1px solid @color3;
+@border2: 8px solid @color2;
+@borderAlert: 1px solid @color1;
+
+//boxes
+
+@box1Background: @backgroundColor4;
+@box1Border: @border1;
+
+@box2Background: @backgroundColor6;
+@box2Border: @border1;
+
+@box3Background: @backgroundColor3;
+@box3Border: unset;
+@box3Color:@color4;
+
+@importantMessageBackground:@backgroundColor7;
+
+//Buttons
+
+@btnMainActionBackground:@backgroundColor1;
+@btnMainActionHoverBackground:darken(@btnMainActionBackground, 20%);
+@btnMainActionColor:@color4;
+@btnMainActionBoxShadow:2px 2px 2px darken(@color1, 30%);
+@btnMainActionHoverBoxShadow:1px 1px 2px darken(@color1, 30%);
+@btnMainActionPadding:16px 50px;
+@btnMainActionBorderRadius: 2px;
+@btnMainActionBorder:1px solid darken(@btnMainActionBackground, 50%);
+@btnMainActionWidth:auto;
+@btnMainActionTextTransform:none;
+@btnMainActionFontSize:@defaultTextFontSize;
+@btnMainActionFontWeight:@defaultTextFontWeight;
+
+@btnMainActionSucessBackground:@btnMainActionBackground;
+@btnMainActionSucessHoverBackground:darken(@btnMainActionSucessBackground, 20%);
+@btnMainActionSucessColor:@btnMainActionColor;
+@btnMainActionSucessBoxShadow:none;
+@btnMainActionSucessHoverBoxShadow:none;
+@btnMainActionSucessPadding:10px 0;
+@btnMainActionSucessBorderRadius: @btnMainActionBorderRadius;
+@btnMainActionSucessBorder:@btnMainActionBorder;
+@btnMainActionSucessWidth:60%;
+@btnMainActionSucessTextTransform:uppercase;
+@btnMainActionSucessFontSize:@btnMainActionFontSize;
+@btnMainActionSucessFontWeight:bold;
+
+@mobileBtnMainActionSucessFontSize:@mobileDefaultTextFontSize;
+
+@btnSubActionBackground:@backgroundColor2;
+@btnSubActionHoverBackground:darken(@btnSubActionBackground, 20%);
+@btnSubActionColor:@color4;
+@btnSubActionBoxShadow:2px 2px 2px darken(@color2, 30%);
+@btnSubActionHoverBoxShadow:1px 1px 2px darken(@color2, 30%);
+@btnSubActionPadding:8px 17px;
+@btnSubActionBorderRadius: 2px;
+@btnSubActionBorder:1px solid darken(@btnSubActionBackground, 50%);
+@btnSubActionWidth:auto;
+@btnSubActionTextTransform:none;
+@btnSubActionFontSize:@defaultTextFontSize;
+@btnSubActionFontWeight:@defaultTextFontWeight;
+
+@btnSubActionSuccessBackground:@btnSubActionBackground;
+@btnSubActionSuccessHoverBackground:@btnSubActionHoverBackground;
+@btnSubActionSuccessColor:@btnSubActionColor;
+@btnSubActionSuccessBoxShadow:none;
+@btnSubActionSuccessHoverBoxShadow:none;
+@btnSubActionSuccessPadding:10px 0;
+@btnSubActionSuccessBorderRadius: @btnSubActionBorderRadius;
+@btnSubActionSuccessBorder:@btnSubActionBorder;
+@btnSubActionSuccessWidth:60%;
+@btnSubActionSuccessTextTransform:uppercase;
+@btnSubActionSuccessFontSize:@btnSubActionFontSize;
+@btnSubActionSuccessFontWeight:bold;
+
+@mobileBtnSubActionSuccessFontSize:@mobileDefaultTextFontSize;
+
+//Elements
+
+@elSelectBackground:@color4 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAHCAYAAAAMPr0FAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AQBDg0IJker8gAAAIBJREFUKM+tzzEOQVEQheHvelZAKyyCRViBBXilWJ/KBmjFAmgoRaJ9milucW8e4a8mc86cnEnKJIwwznYDdDF34bniVQoYVoIn2OnnjFVJaCoHz9AW0azEHRs8vgmGY+jzgnZDi0vtuOl59ZA1z5uuIzT5kS1O2GPqzywx+9T8Bq4TEl4zsQiNAAAAAElFTkSuQmCC') no-repeat right center !important;
+@elSelectFontSize:@defaultTextFontSize;
+@elSelectPadding:8px 22px 8px 8px;
+@elSelectBorder:1px solid @color3;
+
+//Especified
+@footerBackground:@backgroundColor4;
+@footerColor:@defaultTextColor;
+@footerBorder:@border2;

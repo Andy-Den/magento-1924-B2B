@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_CatalogRestrictionGroup extension
+ * 
+ * @category       FVets
+ * @package        FVets_CatalogRestrictionGroup
+ * @copyright      Copyright (c) 2016
+ */
+--> 
+<layout>
+    <adminhtml_catalogrestrictiongroup_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>catalog/fvets_catalogrestrictiongroup/catalogrestrictiongroup</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup" name="catalogrestrictiongroup" />
+
+        </reference>
+    </adminhtml_catalogrestrictiongroup_index>
+    <adminhtml_catalogrestrictiongroup_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_grid" name="catalogrestrictiongroup_grid"/>
+        </block>
+    </adminhtml_catalogrestrictiongroup_grid>
+    <!-- Catalogrestrictiongroup add/edit action -->
+    <adminhtml_catalogrestrictiongroup_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>catalog/fvets_catalogrestrictiongroup/catalogrestrictiongroup</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit" name="catalogrestrictiongroup_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit_tabs" name="catalogrestrictiongroup_tabs"></block>
+        </reference>
+    </adminhtml_catalogrestrictiongroup_edit>
+
+    <adminhtml_catalogrestrictiongroup_catalog_product_catalogrestrictiongroups>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalog_product_edit_tab_catalogrestrictiongroup" name="product.edit.tab.catalogrestrictiongroup"/>
+            <block type="adminhtml/widget_grid_serializer" name="catalogrestrictiongroup_grid_serializer">
+                <reference name="catalogrestrictiongroup_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>product.edit.tab.catalogrestrictiongroup</grid_block_name>
+                        <data_callback>getSelectedCatalogrestrictiongroups</data_callback>
+                        <hidden_input_name>catalogrestrictiongroups</hidden_input_name>
+                        <reload_param_name>product_catalogrestrictiongroups</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_catalogrestrictiongroup_catalog_product_catalogrestrictiongroups>
+    <adminhtml_catalogrestrictiongroup_catalog_product_catalogrestrictiongroupsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalog_product_edit_tab_catalogrestrictiongroup" name="product.edit.tab.catalogrestrictiongroup"/>
+        </block>
+    </adminhtml_catalogrestrictiongroup_catalog_product_catalogrestrictiongroupsgrid>
+    <adminhtml_catalogrestrictiongroup_products>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit_tab_product" name="catalogrestrictiongroup.edit.tab.product"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>catalogrestrictiongroup.edit.tab.product</grid_block_name>
+                            <data_callback>getSelectedProducts</data_callback>
+                            <hidden_input_name>products</hidden_input_name>
+                            <reload_param_name>catalogrestrictiongroup_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_catalogrestrictiongroup_products>
+    <adminhtml_catalogrestrictiongroup_productsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit_tab_product" name="catalogrestrictiongroup.edit.tab.product"/>
+        </block>
+    </adminhtml_catalogrestrictiongroup_productsgrid>
+    <adminhtml_catalogrestrictiongroup_customer_catalogrestrictiongroups>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_customer_edit_tab_catalogrestrictiongroup" name="customer.edit.tab.catalogrestrictiongroup"/>
+            <block type="adminhtml/widget_grid_serializer" name="catalogrestrictiongroup_grid_serializer">
+                <reference name="catalogrestrictiongroup_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>customer.edit.tab.catalogrestrictiongroup</grid_block_name>
+                        <data_callback>getSelectedCatalogrestrictiongroups</data_callback>
+                        <hidden_input_name>catalogrestrictiongroups</hidden_input_name>
+                        <reload_param_name>customer_catalogrestrictiongroups</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_catalogrestrictiongroup_customer_catalogrestrictiongroups>
+    <adminhtml_catalogrestrictiongroup_customer_catalogrestrictiongroupsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_customer_edit_tab_catalogrestrictiongroup" name="customer.edit.tab.catalogrestrictiongroup"/>
+        </block>
+    </adminhtml_catalogrestrictiongroup_customer_catalogrestrictiongroupsgrid>
+    <adminhtml_catalogrestrictiongroup_customers>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit_tab_customer" name="catalogrestrictiongroup.edit.tab.customer"/>
+            <block type="adminhtml/widget_grid_serializer" name="customer_grid_serializer">
+                <reference name="customer_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>catalogrestrictiongroup.edit.tab.customer</grid_block_name>
+                            <data_callback>getSelectedCustomers</data_callback>
+                            <hidden_input_name>customers</hidden_input_name>
+                            <reload_param_name>catalogrestrictiongroup_customers</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_catalogrestrictiongroup_customers>
+    <adminhtml_catalogrestrictiongroup_customersgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_catalogrestrictiongroup/adminhtml_catalogrestrictiongroup_edit_tab_customer" name="catalogrestrictiongroup.edit.tab.customer"/>
+        </block>
+    </adminhtml_catalogrestrictiongroup_customersgrid>
+</layout>

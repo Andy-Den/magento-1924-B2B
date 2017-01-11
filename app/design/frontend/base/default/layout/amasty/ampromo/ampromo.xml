@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <ampromo_items>
+        <reference name="head">
+            <action method="addCss"><name>css/amasty/ampromo/styles.css</name></action>
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
+            <action method="addJs"><script>calendar/calendar.js</script></action>
+            <action method="addJs"><script>amasty/ampromo/carousel-min.js</script></action>
+            <action method="addJs"><script>amasty/ampromo/items.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/bundle.js</name></action>
+            <block type="core/text" name="head.viewport">
+                <action method="setText"><text><![CDATA[<meta name="viewport" content="initial-scale=1.0, width=device-width" />]]>&#10;</text></action>
+            </block>
+        </reference>
+    </ampromo_items>
+
+    <checkout_cart_index>
+        <update handle="ampromo_items" />
+        <reference name="checkout.cart.form.before">
+            <block type="ampromo/add" name="ampromo.add" template="amasty/ampromo/add.phtml" />
+            <block type="ampromo/items" name="ampromo.items" template="amasty/ampromo/items.phtml" />
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <update handle="ampromo_items" />
+        <reference name="checkout.onepage">
+            <block type="page/html_wrapper" name="ampromo.onepage.review.before" as="review_before">
+                <block type="ampromo/add" name="ampromo.add" template="amasty/ampromo/add.phtml" />
+            </block>
+            <block type="page/html_wrapper" name="ampromo.onepage.order.before" as="order_before">
+                <block type="ampromo/items" name="ampromo.items" template="amasty/ampromo/items.phtml" />
+            </block>
+        </reference>
+    </checkout_onepage_index>
+</layout>

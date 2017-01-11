@@ -1,0 +1,34 @@
+@import '../../default';
+
+.header-container {
+  border-bottom:3px solid #c8214c;
+}
+
+.page {
+  background-image: url("@{skinUrl}images/atividades-socioambientais-background.jpg");
+
+  .content-heading {
+    background-image: url("@{skinUrl}images/atividades-socioambientais-heading.jpg");
+    h1 {
+      color: white;
+    }
+  }
+
+  .std {
+    max-height: 382px;
+    height: 382px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 680px) {
+  .page {
+    .content-heading {
+      background-image: url("@{skinUrl}images/atividades-socioambientais-heading-mobile.jpg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 100% 100%;
+      height: 177px;
+    }
+  }
+}

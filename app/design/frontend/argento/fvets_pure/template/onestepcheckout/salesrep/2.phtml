@@ -1,0 +1,41 @@
+<?php
+
+$collection  = $this->getCollection();
+
+if (count($collection) < 1)
+{
+	return;
+}
+
+?>
+
+<?php foreach($collection as $salesrep) : ?>
+
+<div class="onestepcheckout_sales_rep">
+	<div class="image">
+		<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 67, 67); ?>" height="67" width="67" />
+	</div>
+	<div class="info">
+		<div class="name"><?php echo $this->escapeHtml($salesrep->getName()); ?></div>
+		<div class="email"><?php echo $this->escapeHtml($salesrep->getEmail()); ?></div>
+		<div class="telephone"><?php echo $this->escapeHtml($salesrep->getTelephone()); ?></div>
+	</div>
+	<div class="popup">
+		<i class="fa fa-angle-up fa-stack-2x"></i>
+		<div class="clear"></div>
+		<br />
+		<div>
+			<strong>Marca(s):</strong>
+			<?php $_brands = $salesrep->getSelectedCategories(); ?>
+			<?php if (count($_brands) > 0) : ?>
+				<br />
+				<?php foreach($_brands as $_brand) : ?>
+					<?php echo $this->escapeHtml($_brand->getName()); ?><br />
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<?php endforeach; ?>

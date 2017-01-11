@@ -1,0 +1,105 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = Mage::helper('warehouse') ?>
+<!-- End Warehouse -->
+
+<h2><?php echo $helper->__('Quote') ?></h2>
+<div id="product-quote-container" class="std product-quote-container">
+<?php echo $this->getChildHtml('quote') ?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+var ProductQuoteClass = Class.create();
+ProductQuoteClass.prototype = {
+    
+    initialize : function(containerId, productFormId, refreshUrl)
+    {
+        this.container      = $(containerId);
+        this.productForm    = $(productFormId);
+        this.refreshUrl     = refreshUrl;
+        if (this.productForm) {
+            var self = this;
+            this.productForm.select('input', 'select', 'textarea', 'button').each(function (element) {
+                Event.observe($(element), 'change', self.refresh.bind(self));
+            });
+        }
+    }, 
+    
+    setLoading : function(flag)
+    {
+        if (flag) {
+            this.container.addClassName('disabled');
+            this.container.setStyle({opacity: 0.5});
+        } else {
+            this.container.removeClassName('disabled');
+            this.container.setStyle({opacity: 1});
+        }
+    }, 
+    
+    onRefreshFailure : function(transport)
+    {
+        
+    }, 
+    
+    onRefreshSuccess : function(transport)
+    {
+        if (transport && transport.responseText) {
+            try {
+                response = eval('(' + transport.responseText + ')');
+            } catch (e) {
+                response = {};
+            }
+            if (response.html) {
+                this.container.update(response.html);
+            }
+        }
+    }, 
+    
+    onRefreshComplete : function(transport)
+    {
+        this.setLoading(false);
+    }, 
+    
+    refresh : function()
+    {
+        this.setLoading(true);
+        new Ajax.Request(this.refreshUrl, {
+            method:         'post', 
+            onFailure:      this.onRefreshFailure.bind(this), 
+            onSuccess:      this.onRefreshSuccess.bind(this), 
+            onComplete:     this.onRefreshComplete.bind(this), 
+            parameters:     this.productForm.serialize(true)
+        });
+    }
+}
+
+productQuote = new ProductQuoteClass(
+    'product-quote-container', 
+    'product_addtocart_form', 
+    '<?php echo $this->getUrl('warehouse/warehouse/refreshProductQuote') ?>'
+);
+
+//]]>
+</script>

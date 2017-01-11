@@ -1,0 +1,50 @@
+/*#my-orders-table .inner-table:before {
+    background: url("../../images/icons.png") no-repeat scroll -92px -44px rgba(0, 0, 0, 0);
+    content: " ";
+    height: 19px;
+    left: 10px;
+    position: absolute;
+    top: -15px;
+    width: 21px;
+}*/
+
+#my-orders-table .view-order-link {
+    white-space:pre;
+}
+
+#my-orders-table .inner-table {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #969696;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    margin: 15px auto 0;
+    position: relative;
+}
+
+
+#my-orders-table .inner-table td, #my-orders-table .inner-table th {
+    background: none repeat scroll 0 0 white;
+    border: medium none white;
+    border-radius: 3px;
+}
+
+#my-orders-table .full-order-row {
+    display: none;
+}
+
+#my-orders-table .order-show {
+    display: block;
+    text-align: center;
+}
+
+#my-orders-table .order-show span{
+    width: 21px;
+    height: 18px;
+    display: inline-block;
+    background: url(../../images/icons.png) no-repeat -92px -62px;
+    font-size: 0;
+}
+
+#my-orders-table .order-show.opened span{
+    background: url(../../images/icons.png) no-repeat -92px -44px;
+}

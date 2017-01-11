@@ -1,0 +1,36 @@
+<div class="bkg-cover"
+     style="background-image: url(<?php echo $this->getSkinUrl('images/institutional/como_participar/hotsite_4_pg2_bkg.jpg') ?>)">
+
+  <div class="como-participar default-page-width">
+    <div class="menu">
+      <div class="logo">
+        <img src="<?php echo $this->getSkinUrl('images/institutional/como_participar/gatinho.png') ?>"/>
+      </div>
+      <div class="menu-content" style="display: none;">
+        <p>CAMPANHA</p>
+        <h1><strong>escute seu pet</strong></h1>
+        <p>faça exames preventivos</p>
+      </div>
+      <div class="menu-buttons">
+        <a href="/a-campanha">CAMPANHA</a>
+        <a class="active" href="/clinicas-participantes">CLÍNICAS PARTICIPANTES</a>
+      </div>
+    </div>
+    <div class="content">
+      <div class="img">
+        <img width="100%"
+             src="<?php echo $this->getSkinUrl('images/institutional/como_participar/hotsite_4_pg2.jpg') ?>">
+        </img>
+      </div>
+      <br>
+      <div class="header">
+        <h1>Encontre a clínica participante mais próxima de você</h1>
+      </div>
+      <div class="dynamic-blocks">
+        <?php echo $this->getLayout()->createBlock('fvets_customer/customerfinder_form')->setTemplate('customer/customerfinder/form.phtml')->tohtml(); ?>
+        <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+      </div>
+    </div>
+  </div>
+
+</div>

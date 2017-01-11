@@ -1,0 +1,1 @@
+<?php	$conditions = $this->getConditions();?><p>Condições de pagamento</p><ul>	<?php foreach ($conditions as $condition) : ?>	<li>		<input type="radio" name="fvets_quote_conditions" value="<?php echo $condition->getId(); ?>" /> <?php echo $condition->getName(); ?>	</li>	<?php endforeach; ?></ul>

@@ -1,0 +1,42 @@
+<?php if ($this->validateCustomerGroup())
+{
+	?>
+	<?php $product = Mage::registry('current_product'); ?>
+	<?php $labels = $this->getLabels($product, 'product'); ?>
+	<?php if (count($labels) > 0)
+{
+	$count = 1;
+
+	$router = Mage::app()->getFrontController()->getRequest()->getRouteName();
+
+	if ($router == 'checkoutsplit')
+	{
+		$router = 'onestepcheckout';
+	}
+
+	?>
+	<?php foreach ($labels as $rules)
+{
+	?>
+	<?php $shortDescription = $rules[key($rules)]['product_image_text']; ?>
+	<div class="campaign-label <?php echo('prolabel' . $count); ?> campaign-label-<?php echo $router; ?>">
+		<a href="#" onclick="return false;" class="tooltip">
+			<?php echo ($router && $router == 'onestepcheckout' ? $shortDescription[0] : $shortDescription) ?>
+			<span>
+        <strong><?php echo $shortDescription ?></strong><br />
+				<?php $description = ''; ?>
+				<?php foreach ($rules as $rule)
+				{
+					$description = $description . $rule['category_alt_text'] . '<br>';
+				}
+				echo $description;
+				?>
+    </span>
+		</a>
+	</div>
+	<?php
+	$count++;
+}
+}
+}?>
+

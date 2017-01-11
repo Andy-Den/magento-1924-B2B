@@ -1,0 +1,11 @@
+<jstranslator>
+    <validate-cpf translate="message" module="magefm_customer">
+        <message>Invalid CPF.</message>
+    </validate-cpf>
+    <validate-cnpj translate="message" module="magefm_customer">
+        <message>Invalid CNPJ.</message>
+    </validate-cnpj>
+    <validate-crmv translate="message" module="magefm_customer">
+        <message>Invalid CRMV.</message>
+    </validate-crmv>
+</jstranslator>

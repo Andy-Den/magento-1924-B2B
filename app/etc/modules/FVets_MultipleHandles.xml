@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<FVets_MultipleHandles>
+			<active>true</active>
+			<codePool>local</codePool>
+		</FVets_MultipleHandles>
+	</modules>
+</config>

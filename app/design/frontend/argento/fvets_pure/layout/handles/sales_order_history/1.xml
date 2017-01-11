@@ -1,0 +1,18 @@
+<include_layout version="0.1.0">
+    <sales_order_history>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/sales_order_history/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/dashboard/salesrep/form/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/jquery.quickselect.css</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.quicksilver.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="salesrep.form" template="customer/account/dashboard/salesrep/form/1.phtml" />
+        </reference>
+        <reference name="sales.order.history">
+            <action method="setTemplate"><template>sales/order/history/1.phtml</template></action>
+        </reference>
+    </sales_order_history>
+</include_layout>

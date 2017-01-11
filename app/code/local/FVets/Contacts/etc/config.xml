@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Contacts>
+            <version>1.0.0</version>
+        </FVets_Contacts>
+    </modules>
+    <frontend>
+        <routers>
+            <contacts>
+                <args>
+                    <modules>
+                        <fvets_contacts before="Mage_Contacts_IndexController">FVets_Contacts</fvets_contacts>
+                    </modules>
+                </args>
+            </contacts>
+        </routers>
+    </frontend>
+</config>

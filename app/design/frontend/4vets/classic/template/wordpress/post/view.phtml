@@ -1,0 +1,72 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+	<?php $helper = $this->helper('wordpress') ?>
+	<?php $author = $post->getAuthor() ?>
+	<?php $categories = $post->getParentCategories(); ?>
+	
+	
+	
+	
+	<div class="container blog-post">
+		<div class="page-title post-title">
+				<h1><?php echo $this->escapeHtml($post->getPostTitle()) ?></h1>
+		</div>
+		<div class="clear"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="post-header-categories">					
+					<?php foreach ($categories as $category) :?>
+						<span class="category-block">
+							<a href="<?php echo $category->getUrl(); ?>"><?php echo $category->getName(); ?></a>
+						</span>
+					<?php endforeach; ?>										
+				</div>
+				<div class="post-header-details">
+					<?php echo $post->getAuthor()->getFirstName();?>
+					<?php echo $post->getAuthor()->getLastName();?>
+					|
+					<?php echo $post->getPostDate('d/m/Y');?>
+					
+					<?php if (count($post->getComments()) > 1 ) : ?>
+						| <?php echo count($post->getComments()); ?> comentários
+					<?php elseif (count($post->getComments()) > 0 ) : ?>
+						| 1 comentário
+					<?php endif; ?>
+				</div>
+				
+				<div class="post-content">
+				
+					<?php if ($post->isViewableForVisitor()): ?>
+						<?php if ($featuredImage = $post->getFeaturedImage()): ?>
+							<div class="col-md-6" style="display:none"></div>
+							<div class="featured-image pull-right col-md-6"><img src="<?php echo $featuredImage->getMediumImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></div>
+						<?php endif; ?>
+						<div class="">						
+							<?php echo $this->getBeforePostContentHtml() ?>
+							<?php echo $post->getPostContent() ?>
+							<?php echo $this->getAfterPostContentHtml() ?>
+						</div>
+						<div class="row">
+							<?php echo $this->getCommentsHtml() ?>
+						</div>
+					<?php else: ?>
+						<?php echo $this->getPasswordProtectHtml() ?>
+					<?php endif; ?>
+				
+				</div>
+				
+			</div>
+			<div class="col-md-4 right-content">
+				<?php echo $this->getChildHtml('popular'); ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

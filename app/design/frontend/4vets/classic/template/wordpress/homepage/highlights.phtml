@@ -1,0 +1,49 @@
+<?php
+	$posts = $this->getHighlights();
+?>
+
+
+	<div class="container blog-home-highlights">
+		<div class="row">
+			<?php foreach ($posts as $post) : ?>
+				<div class="col-md-4 highlight-column">
+						<?php if ($post->getFeaturedImage()): ?>
+						<a href="<?php echo $post->getUrl(); ?>">
+						<div class="image image<?php echo $post->getId(); ?>">
+							<style>
+								.image<?php echo $post->getId(); ?> {
+								  background: url(<?php echo $post->getFeaturedImage()->getMediumImage(); ?>) no-repeat center center;
+								  -webkit-background-size: cover;
+								  -moz-background-size: cover;
+								  -o-background-size: cover;
+								  background-size: cover;
+								}
+								filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $post->getFeaturedImage()->getMediumImage(); ?>', sizingMethod='scale');
+								-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $post->getFeaturedImage()->getMediumImage(); ?>', sizingMethod='scale')";
+							</style>
+						</div>
+						</a>
+						<?php endif; ?>
+						<?php if (!Mage::registry('wordpress_category')) : ?>
+							<div class="category">
+								<?php
+									$category = $post->getParentCategories()->getFirstItem();
+									if ($category->getSlug() != 'sem-categoria' && $category->getSlug() != 'destaques'){
+										echo $category->getName();
+									}
+								?>
+							</div>
+						<?php endif; ?>
+						<h1 class="title">
+							<a href="<?php echo $post->getUrl(); ?>"><?php echo $post->getPostTitle(); ?></a>
+						</h1>
+						<div class="shortText">
+							<a href="<?php echo $post->getUrl(); ?>"><?php echo $this->getPostExcerpt($post); ?></a>
+						</div>
+						<div class="details"><?php echo $this->getPostDetails($post); ?></div>
+					</a>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="clear"></div>
+	</div>

@@ -1,0 +1,60 @@
+<?php
+
+	$_product = $this->getParentBlock()->getProduct();
+	$_product = !$_product ? Mage::registry('current_product') : $_product;
+	$_product = !$_product ? Mage::registry('product') : $_product;
+
+	$_hlp = Mage::helper('udmultiprice');
+	$data = json_decode($_hlp->getMultiPriceDataJson($this->getParentBlock()));
+	$data = $data->{$_product->getId()}->mvData;
+
+?>
+
+<?php echo $this->getChildHtml('regionselector'); ?>
+
+<table id="product-vendors-table-<?php echo $_product->getId(); ?>" class=" product-vendors-table data-table" width="100%">
+	<thead>
+	<tr>
+		<th class="first"><?php echo $this->__('Seller') ?></th>
+		<th><?php echo $this->__('Informations') ?></th>
+		<th class="last"><?php echo $this->__('Site') ?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php foreach($data as $id => $vendor) : ?>
+		<tr class=" rows <?php echo $vendor->config->regions; ?>">
+			<td>
+				<div class="seller-info">
+					<?php echo $vendor->vendor_name; ?>
+				</div>
+			</td>
+			<td>
+				<div id="product_vendors_<?php echo $id; ?>_vendor_information">
+					<?php
+						if (isset($vendor->config->information) && $vendor->config->information != '') :
+							echo $vendor->config->information;
+						else :
+							echo $vendor->config->street . ' - ' . $vendor->config->city . ' - ' . $vendor->config->region_code;
+							if (isset($vendor->config->telephone) && $vendor->config->telephone != '') :
+								echo '<br />' . $this->__('Telephone') . ': ' . $vendor->config->telephone;
+							endif;
+						endif;
+					?>
+				</div>
+			</td>
+			<td class="last">
+				<div id="product_vendors_<?php echo $id; ?>_vendor_site">
+					<?php
+						if (isset($vendor->config->site) && $vendor->config->site != '') :
+							echo '<a href="'.$vendor->config->site.'" target="_blank"	>'.$vendor->config->site.'</a>';
+						else :
+							echo $this->__('No information available');
+						endif;
+					?>
+				</div>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<script type="text/javascript">decorateTable('product-vendors-table-<?php echo $_product->getId(); ?>')</script>

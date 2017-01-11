@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <FVets_CustomReports>
+            <version>0.1.0</version>
+        </FVets_CustomReports>
+    </modules>
+    <global>
+        <blocks>
+            <fvets_customreports>
+                <class>FVets_CustomReports_Block</class>
+            </fvets_customreports>
+        </blocks>
+        <helpers>
+            <fvets_customreports>
+                <class>FVets_CustomReports_Helper</class>
+            </fvets_customreports>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <fvets_customreports>
+                <use>admin</use>
+                <args>
+                    <module>FVets_CustomReports</module>
+                    <frontName>customreports</frontName>
+                </args>
+            </fvets_customreports>
+        </routers>
+    </admin>
+</config>

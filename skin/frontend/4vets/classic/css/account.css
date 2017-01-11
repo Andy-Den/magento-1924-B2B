@@ -1,0 +1,228 @@
+.sidebar .block-account .block-title{
+    display:none !important;
+}
+
+.sidebar .block-account .nav a {
+    padding:10px 15px;
+}
+
+.sidebar .block-account .nav .active a {
+    background: none;
+    color: #7ea0a6;
+    border-left: 2px solid #7ea0a6;
+
+}
+
+.customer-account-index .well {
+    background: white;
+    border: 1px solid #9e9e9e;
+}
+
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #262626;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #262626;
+}
+
+#my-orders-table a, .customer-account-index .box-account a {
+    font-weight: bold;
+    color:#262626;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: underline;
+}
+#my-orders-table .information
+{
+    background: white;
+    display: none;
+}
+
+#my-orders-table .inner-table:before {
+    background: url("../images/icons.png") no-repeat scroll -76px -165px rgba(0, 0, 0, 0);
+    content: " ";
+    height: 19px;
+    left: 10px;
+    position: absolute;
+    top: -15px;
+    width: 21px;
+}
+#my-orders-table .inner-table {
+    margin:0 auto;
+    background: white;
+    border:1px solid #969696;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    margin-top: 15px;
+}
+
+#my-orders-table .inner-table td, #my-orders-table .inner-table th {
+    border:white;
+    border-radius: 3px;
+    background: white;
+}
+
+#order-information .table-caption {
+    font-weight: bold;
+    color: #262626;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#order-information h2.table-caption {
+    font-size: 14px;
+}
+
+#order-information {
+    background: #f0f0f0;
+}
+
+#order-information .order-info-box {
+    background: white;
+    padding: 10px 5px;
+}
+
+#order-information .order-info-box address{
+    margin:0;
+}
+
+#order-information .data-table th{
+    background: #8f8f8f;
+    color: white;
+}
+
+#order-information .data-table dl{
+    margin:0;
+}
+
+#order-information .data-table dt, dd{
+    line-height: 1.5;
+}
+
+#order-information .data-table tfoot{
+    background: #8f8f8f;
+}
+
+#order-information .data-table tfoot td {
+    padding:2px 10px;
+}
+
+#order-information .data-table tfoot tr.first td {
+    padding-top:5px;
+}
+
+#order-information .data-table tfoot tr.last td {
+    padding-bottom: 5px;
+}
+
+#order-information .data-table tfoot td, #order-information .data-table tfoot td span{
+    border:none;
+    color: white;
+    font-weight: bold;
+}
+
+#sales-order-view a {
+    display: inline-block;
+    color: #262626;
+    font-weight: bold;
+}
+
+#order-paper-table td
+{
+    padding: 0;
+}
+#order-paper-table .top-left{
+    width:  62px; /*or 70%, or what you want*/
+    height: 39px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/top-left.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#order-paper-table .top-center{
+    height: 39px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/top-center.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#order-paper-table .top-right{
+    width:  64px; /*or 70%, or what you want*/
+    height: 39px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/top-right.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#order-paper-table .middle-left{
+    width:  62px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/middle-left.jpg?1);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#order-paper-table .middle-right{
+    width:  64px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/middle-right.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#order-paper-table .bottom-left{
+    width:  62px; /*or 70%, or what you want*/
+    height: 57px;
+    background-image: url(../images/order_table/bottom-left.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#order-paper-table .bottom-center{
+    height:  57px; /*or 70%, or what you want*/
+    background-image: url(../images/order_table/bottom-center.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#order-paper-table .bottom-right{
+    width:  64px; /*or 70%, or what you want*/
+    height: 57px;
+    background-image: url(../images/order_table/bottom-right.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.box-account .well {
+    overflow: auto;
+}
+
+.box-account .well .customer-img {
+    float: left;
+    width: 30%;
+}
+
+.box-account .well .customer-img img {
+    border-radius: 50%;
+}
+
+.box-account .well .customer-img .input-text {
+    margin-top: 15px;
+}
+
+.box-account .well .box {
+    float: left;
+    width: 70%;
+}

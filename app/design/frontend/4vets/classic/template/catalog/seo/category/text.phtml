@@ -1,0 +1,22 @@
+<?php
+/**
+ * User: ianitsky
+ * Date: 5/20/14
+ * Time: 1:05 PM
+ */
+
+
+$_category  = $this->getCurrentCategory();
+
+$text = trim($_category->getFrontendSeoDescription());
+
+$text = explode("\n", $text);
+
+echo array_shift($text);
+?>
+<?php if (count($text) > 0) : ?>
+<div class="category_seo_hidden">
+	<?php echo implode("\n", $text); ?>
+</div>
+<a href="javascript:void(0)" class="category_seo_readmore">Leia mais</a>
+<?php endif; ?>

@@ -1,0 +1,40 @@
+#div404 {
+    color:#7ea0a6;
+}
+
+#div404 .first {
+    font-size:40px;
+    font-weight:900;
+    line-height:1;
+
+}
+
+#div404 .first small {
+    font-size: 16px;
+    color:#262626;
+    font-weight: normal;
+}
+
+#div404 .last {
+    font-size:2.857em;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+#div404 .btn {
+    background: #8f8f8f;
+    border:0;
+    padding-top: 15px;
+    padding: 15px;
+    float: right;
+}
+
+#div404 .btn span {
+    font-weight:bold;
+}
+
+#div404 .bottom-text  {
+    font-size: 28px;
+    color:#7ea0a6;
+    font-weight: bold;
+}

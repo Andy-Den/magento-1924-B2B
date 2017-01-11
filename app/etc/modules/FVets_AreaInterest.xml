@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <FVets_AreaInterest>
+            <active>true</active>
+            <codePool>local</codePool>
+        </FVets_AreaInterest>
+    </modules>
+</config>

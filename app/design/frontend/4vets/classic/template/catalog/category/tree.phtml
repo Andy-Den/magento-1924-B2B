@@ -1,0 +1,52 @@
+<?php
+$categories = Mage::getModel('catalog/category')->load($this->getCategoryId())->getChildrenCategories();
+
+$excludedChildCategories = $this->getExcludeChildCategories();
+
+?>
+
+<div class="category-tree">
+	<ul class="level1">
+		<?php
+		foreach ($categories as $category)
+		{
+			if (!is_array($excludedChildCategories))
+			{
+				if ($category->getId() == $excludedChildCategories)
+				{
+					continue;
+				}
+			} else
+			{
+				if (in_array($category->getId(), $excludedChildCategories))
+				{
+					continue;
+				}
+			}
+			?>
+			<li class="level1">
+				<ul class="level2">
+					<li class="level2 header">
+						<?php
+						echo '<a title="' . $category->getName() . '" href="' . $category->getUrl() . '">' . $category->getName() . '</a>';
+						?>
+					</li>
+					<?php
+					foreach ($category->getChildrenCategories() as $childCategory)
+					{
+						?>
+						<li class="level2">
+							<?php
+							echo '<a title="' . $childCategory->getName() . '" href="' . $childCategory->getUrl() . '">' . $childCategory->getName() . '</a>';
+							?>
+						</li>
+					<?php
+					}
+					?>
+				</ul>
+			</li>
+		<?php
+		}
+		?>
+	</ul>
+</div>

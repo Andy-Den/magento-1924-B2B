@@ -1,0 +1,145 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<!--dá o load na visualização do chart (apenas uma vez é necessário - não precisa chamar a função para cada requisição ajax)-->
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart", "table"]});
+</script>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="head-dashboard"><?php echo $this->__('Personal Dashboard') ?></h3></td>
+        </tr>
+    </table>
+</div>
+<div class="dashboard">
+    <?php echo $this->getChildHtml('filters') ?>
+
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+
+        $j(function () {
+            $j("#tabs").tabs(
+                {
+                    activate: function (event, ui) {
+                        requestChart();
+                    }
+                }
+            );
+        });
+    </script>
+
+    <div id="tabs">
+        <ul>
+            <?php
+            foreach ($this->activeCharts as $_key => $_chartParams) {
+                echo "<li". ($this->isGroupDelimiter($_chartParams) ? ' style="clear:both;"' : '') . "><a href=\"#tabs-" . ($_key + 1) . "\">" . $_chartParams . "</a></li>";
+            }
+            ?>
+        </ul>
+        <?php
+        foreach ($this->activeCharts as $_key => $_chartParams) {
+            //if ($_key == 0 || $this->activeCharts[$_key]['params']['name'][1] != $this->activeCharts[$_key - 1]['params']['name'][1]) {
+                echo "<div id=\"tabs-" . ($_key + 1) . "\">";
+            //}
+
+            if ($_key == 0) {
+                //echo $this->getChildHtml($this->activeCharts[$_key]['params']['id'][1]);
+            }
+
+            //if ((($_key + 1) == count($this->activeCharts)) || $this->activeCharts[$_key]['params']['name'][1] != $this->activeCharts[$_key + 1]['params']['name'][1]) {
+                echo "</div>";
+            //}
+        }
+        ?>
+        <div style="clear: both;"> </div>
+    </div>
+
+</div>
+
+<div style="clear: both;"></div>
+
+
+<script type="text/javascript">
+
+    function requestChart() {
+        var nomeChart = $j('.ui-tabs-active a').text();
+        var tab = $j('.ui-tabs-active a').attr('href');
+        var formFiltersDash = $j('#dashboard-filter');
+        var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl('adminhtml/fvets_customdash/chart'); ?>';
+        //alert($j(tab).html());
+        //if ($j(tab).html() == '') {
+        setLoadingWindow(tab);
+        $j.ajax({
+            url: url,
+            data: {
+                name: nomeChart,
+                website_switcher: formFiltersDash.find('#website_switcher').val(),
+								storeview_switcher: formFiltersDash.find('#storeview_switcher').val(),
+                date_from: formFiltersDash.find('#date_from').val(),
+                date_to: formFiltersDash.find('#date_to').val()
+            }
+        }).done(function (html) {
+            $j(tab).html(html);
+        });
+        //}
+    }
+
+    function setLoadingWindow(tab) {
+        $j(tab).html('carregando...');
+    }
+
+		function getStores(websiteCode) {
+			var storeSwitcherPlace = $j('#store-switcher');
+			var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl('adminhtml/fvets_customdash/getstores'); ?>';
+			$j.ajax({
+				url: url,
+				data: {
+					code: websiteCode
+				}
+			}).done(function (html) {
+				$j(storeSwitcherPlace).html(html);
+			});
+		}
+
+    //requisita o chart default assim que a página é carregada
+    $j( document ).ready(function() {
+				$j('#website_switcher').change(function() {
+					var storeSwitcher = getStores($j(this).val());
+					if (storeSwitcher) {
+						$j('#store-switcher').html(storeSwitcher);
+					}
+				});
+
+        //seleciona o gráfico default pelo nome
+        $j('.ui-tabs-anchor').each(function() {
+            //alert($j(this).text());
+            if ($j(this).text() == '<?php echo $this->defaultDash ?>') {
+                $j(this).click();
+            }
+        });
+        requestChart();
+    });
+
+</script>
+
+
+<!--### Script para carregar bibliotecas externas para o analytics ### -->
+<script>
+  (function (w, d, s, g, js, fjs) {
+	g = w.gapi || (w.gapi = {});
+	g.analytics = {q: [], ready: function (cb) {
+	  this.q.push(cb)
+	}};
+	js = d.createElement(s);
+	fjs = d.getElementsByTagName(s)[0];
+	js.src = 'https://apis.google.com/js/platform.js';
+	fjs.parentNode.insertBefore(js, fjs);
+	js.onload = function () {
+	  g.load('analytics')
+	};
+  }(window, document, 'script'));
+</script>

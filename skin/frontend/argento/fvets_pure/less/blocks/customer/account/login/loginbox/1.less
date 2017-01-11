@@ -1,0 +1,54 @@
+.featherlight-content {
+  margin-top: 5%;
+}
+
+.account-login {
+  &.login-box {
+    padding: 30px;
+
+    .login-box-container {
+      .content {
+        padding: 0!important;
+
+        .form-list {
+          margin: 0;
+          padding: 0;
+
+          li {
+            label {
+              font-weight: bold;
+            }
+
+            .input-box {
+              input {
+                border-radius: 3px;
+                background: none;
+                border: @defaultBorder;
+                width: 100%;
+                max-width: none;
+                padding: 6px 4px;
+              }
+            }
+          }
+        }
+      }
+
+      .buttons-set {
+        padding: 0;
+        margin: 20px 0 0 0;
+
+        .button {
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .featherlight {
+    .featherlight-content {
+      min-width: 290px !important;
+    }
+  }
+}

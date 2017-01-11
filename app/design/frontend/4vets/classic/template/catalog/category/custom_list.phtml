@@ -1,0 +1,44 @@
+<?php
+//@Todo fazer a escolha das categorias pelo admin
+?>
+<div class="custom_category_list">
+	<?php $categories = array(6,3,4,5); ?>
+	<?php foreach($categories as $category): ?>
+		<?php
+		$category_data = Mage::getModel('catalog/category')->load($category);
+		$children = explode(',', $category_data->getChildren());
+		?>
+		<?php if((bool)$category_data->getIsActive()): ?>
+			<h3><a href="<?php echo $category_data->getUrl() ?>"><?php echo $category_data->getName() ?></a></h3>
+			<?php if(count($children) > 0): ?>
+				<ul>
+					<?php $count = 0; ?>
+					<?php foreach($children as $child): ?>
+						<?php if ($count++ >=5) : ?>
+							<li><a href="<?php echo $category_data->getUrl() ?>"><strong>Ver todas</strong></a></li>
+							<?php break; ?>
+						<?php endif; ?>
+						<?php
+						$child_data = Mage::getModel('catalog/category')->load($child);
+						$sub_children = explode(',', $child_data->getChildren());
+						?>
+						<?php if((bool)$child_data->getIsActive()): ?>
+						<li><a href="<?php echo $child_data->getUrl() ?>"><?php echo $child_data->getName() ?></a>
+							<?php /*if(count($sub_children) > 0): ?>
+								<ul>
+									<?php foreach($sub_children as $sub_children_child): ?>
+										<?php $subchild_data = Mage::getModel('catalog/category')->load($sub_children_child); ?>
+										<?php if((bool)$subchild_data->getIsActive()): ?>
+										<li><a href="<?php echo $subchild_data->getUrl() ?>">- <?php echo $subchild_data->getName() ?></a>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif;*/ ?>
+						</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</div>

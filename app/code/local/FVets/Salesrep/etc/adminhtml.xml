@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+        <customer>
+            <children>
+                <fvets_salesrep translate="title" module="fvets_salesrep">
+                    <title>Sales Representative</title>
+                    <sort_order>200</sort_order>
+                    <action>adminhtml/fvets_salesrep/index</action>
+                </fvets_salesrep>
+            </children>
+        </customer>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fvets_salesrep translate="title" module="fvets_salesrep">
+                                        <title>Salesrep</title>
+                                    </fvets_salesrep>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <customer>
+                        <children>
+                            <fvets_salesrep translate="title" module="fvets_salesrep">
+                                <title>Sales Representative</title>
+                                <sort_order>200</sort_order>
+                            </fvets_salesrep>
+                        </children>
+                    </customer>
+                    <salesrep translate="title" module="fvets_salesrep">
+                        <title>Salesrep</title>
+                        <children>
+                            <create translate="title"><title>Create</title></create>
+                            <edit translate="title"><title>Edit</title></edit>
+                        </children>
+                    </salesrep>
+                </children>
+            </admin>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fvets_salesrep>
+                                        <title>FVets - SalesRep Configuration</title>
+                                        <sort_order>900</sort_order>
+                                    </fvets_salesrep>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>    
+</config>

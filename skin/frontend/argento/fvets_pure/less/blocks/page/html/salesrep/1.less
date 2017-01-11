@@ -1,0 +1,108 @@
+@import "../../../../mixins";
+
+.sales_rep
+{
+  width: auto;
+  height: 50px;
+
+  img
+  {
+    .rounded(50%);
+  }
+
+  li
+  {
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0 !important;
+
+    .info
+    {
+      .lineheight1
+      {
+        line-height: 4;
+      }
+      .lineheight2
+      {
+        line-height: 2.1;
+      }
+
+      .lineheight3
+      {
+        line-height: 1.4;
+      }
+
+      .lineheight4
+      {
+        line-height: 1;
+      }
+    }
+
+    &:not(:first-of-type)
+    {
+      .info
+      {
+        margin-left: 10px;
+      }
+    }
+
+    .popup
+    {
+      position: absolute;
+      z-index: 1100;
+      top: 50px;
+      right: 0;
+      display: none;
+      .rounded();
+
+      .fa
+      {
+        color:@defaultBorderBoxColor;
+        background: none repeat scroll 0 0 white;
+        left: auto;
+        line-height: 0.4;
+        position: absolute;
+        right: 19px;
+        width: 10px;
+        font-size:15px;
+      }
+
+      .inner
+      {
+        background: white;
+        border:@defaultBorder;
+        padding: 12px;
+        margin-top: 5px;
+        box-shadow: @defaultBoxShadow;
+      }
+    }
+
+    &:hover
+    {
+      .info
+      {
+        text-decoration: underline;
+      }
+      .popup
+      {
+        display: block;
+      }
+    }
+  }
+}
+
+.checkoutcontainer {
+  .sales_rep {
+    li {
+      .info {
+        .lineheight1 {
+          line-height: 4;
+          max-width: 65px;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

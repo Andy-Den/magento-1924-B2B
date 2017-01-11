@@ -1,0 +1,12 @@
+<?php if ($this->getCollection() && $this->getCollection()->getSize()): ?>
+    <div class="block block-category-topproductviewed">
+        <div class="block-title">
+            <strong><?php echo $this->__('Produtos mais vistos'); ?></strong>
+        </div>
+        <ul>
+            <?php foreach ($this->getCollection() as $product): ?>
+                <li><a href="<?php echo $product->getProductUrl(); ?>"><?php echo $product->getName(); ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

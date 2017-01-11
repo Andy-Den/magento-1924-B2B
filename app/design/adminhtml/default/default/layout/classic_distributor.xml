@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Classic_Distributor extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Classic
+ * @package        Classic_Distributor
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_distributor_distributor_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>classic_distributor/distributor</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="classic_distributor/adminhtml_distributor" name="distributor" />
+
+        </reference>
+    </adminhtml_distributor_distributor_index>
+    <adminhtml_distributor_distributor_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="classic_distributor/adminhtml_distributor_grid" name="distributor_grid"/>
+        </block>
+    </adminhtml_distributor_distributor_grid>
+    <!-- Distributor add/edit action -->
+    <adminhtml_distributor_distributor_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>classic_distributor/distributor</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="classic_distributor/adminhtml_distributor_edit" name="distributor_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="classic_distributor/adminhtml_distributor_edit_tabs" name="distributor_tabs"></block>
+        </reference>
+    </adminhtml_distributor_distributor_edit>
+
+    <adminhtml_distributor_distributor_region_distributors>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="classic_distributor/adminhtml_region_edit_tab_distributor" name="region.edit.tab.distributor"/>
+            <block type="adminhtml/widget_grid_serializer" name="distributor_grid_serializer">
+                <reference name="distributor_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>region.edit.tab.distributor</grid_block_name>
+                        <data_callback>getSelectedDistributors</data_callback>
+                        <hidden_input_name>distributors</hidden_input_name>
+                        <reload_param_name>region_distributors</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_distributor_distributor_region_distributors>
+    <adminhtml_distributor_distributor_region_distributorsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="classic_distributor/adminhtml_region_edit_tab_distributor" name="region.edit.tab.distributor"/>
+        </block>
+    </adminhtml_distributor_distributor_region_distributorsgrid>
+    <adminhtml_distributor_distributor_regions>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="classic_distributor/adminhtml_distributor_edit_tab_region" name="distributor.edit.tab.region"/>
+            <block type="adminhtml/widget_grid_serializer" name="region_grid_serializer">
+                <reference name="region_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>distributor.edit.tab.region</grid_block_name>
+                            <data_callback>getSelectedRegions</data_callback>
+                            <hidden_input_name>regions</hidden_input_name>
+                            <reload_param_name>distributor_regions</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_distributor_distributor_regions>
+    <adminhtml_distributor_distributor_regionsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="classic_distributor/adminhtml_distributor_edit_tab_region" name="distributor.edit.tab.region"/>
+        </block>
+    </adminhtml_distributor_distributor_regionsgrid>
+</layout>

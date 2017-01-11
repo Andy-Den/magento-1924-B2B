@@ -1,0 +1,100 @@
+<?php $uId = 'id' . rand(0, time()); ?>
+
+<?php $_categories = $this->getCategories(); ?>
+
+<div class="blocklinks-categories block-highlight <?php echo $uId; ?>">
+	<h1 class="block-title"><span>
+			<?php
+				if (trim($this->getBlockTitle() != ''))
+					echo $this->__($this->getBlockTitle());
+				else
+					echo $this->__('Shop by Category');
+
+			?>
+	</span></h1>
+	<div class="block-content">
+		<ul class="categories-grid cols-<?php echo $this->getBlockCols(); ?>">
+			<?php foreach ($_categories as $_category) : ?>
+				<?php $_category = Mage::getModel('catalog/category')->load($_category->getId()); ?>
+				<li class="item">
+					<div class="prolabel-wrapper">
+						<a class="category-image" title="<?php echo $_category->getName(); ?>" href="<?php echo $_category->getUrl($_category); ?>">
+							<img width="200" height="200" alt="<?php echo $_category->getName(); ?>" class="lazy" data-original="<?php echo $_category->getResizedThumbnail('200'); ?>">
+						</a>
+						<div class="category-overlay">
+							<h4 class="category-name">
+								<a title="<?php echo $_category->getName(); ?>" href="<?php echo $_category->getUrl($_category); ?>">
+									<?php echo $_category->getName(); ?>
+								</a>
+							</h4>
+							<div class="category-description">
+								<?php echo $_category->getDescription(); ?>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<script type="text/javascript">decorateGeneric($$('ul.categories-grid'), ['odd','even','first','last'])</script>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+		jQuery('.<?php echo $uId; ?> .categories-grid .category-overlay').each(function() {
+
+			var overlay = this;
+
+			jQuery(overlay).height(jQuery(overlay).find('.category-name').outerHeight(true));
+
+			jQuery(overlay)
+				.mouseenter(function(){
+					jQuery(overlay).animate({
+						"height": jQuery(overlay).find('.category-name').outerHeight(true) + jQuery(overlay).find('.category-description').outerHeight(true) + 'px'
+					}, "fast");
+				})
+				.mouseleave(function(){
+					jQuery(overlay).animate({
+						"height": jQuery(overlay).find('.category-name').outerHeight(true) + 'px'
+					}, "fast");
+				});
+		});
+
+		jQuery(document).bind('resizeBoxes', function(){
+
+			var firstElement = jQuery('.<?php echo $uId; ?> .categories-grid .item').first();
+			var lenght = 0;
+
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').each(function() {
+				if (jQuery(this).position().top == jQuery(firstElement).position().top)
+				{
+					lenght++;
+				}
+			});
+
+			var index = 0;
+			var maxHeight = 0;
+			var line = 1;
+
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').css({'min-height' : 'auto'});
+
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').each(function()
+			{
+				index++;
+
+				jQuery(this).addClass('line'+line);
+
+				if (jQuery(this).outerHeight() > maxHeight)
+					maxHeight = jQuery(this).outerHeight();
+
+				if (index == lenght)
+				{
+					jQuery('.<?php echo $uId; ?> .item.line'+line).css({'min-height' : maxHeight + 'px'});
+					index = 0;
+					maxHeight = 0;
+					line++;
+				}
+			});
+		});
+	})
+</script>

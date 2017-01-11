@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_Payment extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_Payment
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_payment_condition_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>sales/fvets_payment/condition</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_payment/adminhtml_condition" name="condition" />
+        </reference>
+    </adminhtml_payment_condition_index>
+    <adminhtml_payment_condition_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_condition_grid" name="condition_grid"/>
+        </block>
+    </adminhtml_payment_condition_grid>
+    <!-- Condition add/edit action -->
+    <adminhtml_payment_condition_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>sales/fvets_payment/condition</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_payment/adminhtml_condition_edit" name="condition_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_payment/adminhtml_condition_edit_tabs" name="condition_tabs"></block>
+        </reference>
+    </adminhtml_payment_condition_edit>
+
+    <adminhtml_payment_condition_customer_conditions>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_customer_edit_tab_condition" name="customer.edit.tab.condition"/>
+            <block type="adminhtml/widget_grid_serializer" name="condition_grid_serializer">
+                <reference name="condition_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>customer.edit.tab.condition</grid_block_name>
+                        <data_callback>getSelectedConditions</data_callback>
+                        <hidden_input_name>conditions</hidden_input_name>
+                        <reload_param_name>customer_conditions</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_payment_condition_customer_conditions>
+    <adminhtml_payment_condition_customer_conditionsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_customer_edit_tab_condition" name="customer.edit.tab.condition"/>
+        </block>
+    </adminhtml_payment_condition_customer_conditionsgrid>
+    <adminhtml_payment_condition_customers>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_condition_edit_tab_customer" name="condition.edit.tab.customer"/>
+            <block type="adminhtml/widget_grid_serializer" name="customer_grid_serializer">
+                <reference name="customer_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>condition.edit.tab.customer</grid_block_name>
+                            <data_callback>getSelectedCustomers</data_callback>
+                            <hidden_input_name>customers</hidden_input_name>
+                            <reload_param_name>condition_customers</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_payment_condition_customers>
+    <adminhtml_payment_condition_customersgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_condition_edit_tab_customer" name="condition.edit.tab.customer"/>
+        </block>
+    </adminhtml_payment_condition_customersgrid>
+
+    <adminhtml_payment_condition_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_condition_edit_tab_categories" name="condition.edit.tab.categories"/>
+        </block>
+    </adminhtml_payment_condition_categories>
+    <adminhtml_payment_condition_catalog_category_conditionsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_catalog_category_tab_condition" name="category.edit.tab.condition"/>
+        </block>
+    </adminhtml_payment_condition_catalog_category_conditionsgrid>
+
+    <adminhtml_payment_condition_excluded>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_payment/adminhtml_condition_edit_tab_excluded" name="condition.edit.tab.excluded"/>
+        </block>
+    </adminhtml_payment_condition_excluded>
+
+</layout>

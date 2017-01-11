@@ -1,0 +1,57 @@
+<?php
+/**
+ * FVets_SalesRule extension
+ *
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+/**
+ * SalesRule list template on customer page
+ *
+ * @category    FVets
+ * @package     FVets_SalesRule
+ * @author      Douglas Borella Ianitsky
+ */
+?>
+<!-- Page Title -->
+<div class="page-title">
+	<h1>Política Comercial Premier</h1>
+</div>
+<?php $customers = ($this->getSalesrepCustomers()) ?  $this->getSalesrepCustomers() : array();?>
+<select name="premier_customer" id="premier_customer">
+	<?php foreach ($customers as $_customer) : ?>
+		<option value="<?php echo $_customer->getId(); ?>"><?php echo $_customer->getIdErp() . ' - ' . $_customer->getFirstname() . ' ' . $_customer->getLastname(); ?></option>
+	<?php endforeach; ?>
+</select>
+
+<button class="button  btn-action" onclick="getCustomerForm()"><span><span>Carregar</span></span></button>
+
+<br /><br /><br />
+
+<div id="premier_customer_data"></div>
+
+<script>
+	function getCustomerForm()
+	{
+		jQuery.ajax({
+			url: "<?php echo $this->getUrl('salesrule/salesrep/premierCustomer'); ?>",
+			data: 'customer_id=' + jQuery('#premier_customer').val(),
+			beforeSend: function() {
+				jQuery('.loading-overlay').show();
+			},
+			success: function(data) {
+				jQuery('#premier_customer_data').html(data);
+				jQuery('.loading-overlay').hide();
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert('Desculpe, houve um erro!');
+				jQuery('.loading-overlay').hide();
+			}
+		});
+		return false;
+	}
+	getCustomerForm();
+</script>
+<div class="loading-overlay">
+	<i class="fa fa-spinner fa-spin fa-5x"></i>
+</div>

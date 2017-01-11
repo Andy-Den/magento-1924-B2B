@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_CatalogSearch>
+            <version>1.0.0</version>
+        </FVets_CatalogSearch>
+    </modules>
+    <frontend>
+        <routers>
+            <catalogsearch>
+                <args>
+                    <modules>
+                        <FVets_CatalogSearch before="Mage_CatalogSearch">FVets_CatalogSearch</FVets_CatalogSearch>
+                    </modules>
+                </args>
+            </catalogsearch>
+        </routers>
+    </frontend>
+</config>

@@ -1,0 +1,20 @@
+<?php
+
+$salesrep = $this->getSalesrep();
+
+if (empty($salesrep) || empty($salesrep->getId())) {
+	return;
+}
+?>
+
+<div class="sales_rep">
+	<div class="info">
+		<div class="name"><?php echo $this->__('Seu(a) representante comercial') ?></div>
+		<?php echo $this->escapeHtml($salesrep->getName()); ?> <br />
+		<?php echo $this->escapeHtml($salesrep->getEmail()); ?><br />
+		<?php echo $this->escapeHtml($salesrep->getTelephone()); ?> <br />
+	</div>
+	<div class="image">
+		<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 50, 50); ?>" width="50" height="50" />
+	</div>
+</div>

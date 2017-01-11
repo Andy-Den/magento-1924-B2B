@@ -1,0 +1,56 @@
+<!--@subject Confirmação para gerar nova senha {{var customer.name}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/resetpassword/\" _query_id=$customer.id _query_token=$customer.rp_token":"Reset Password URL"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top" class="logo" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left; background-color: #f1f1f1;padding-bottom: 10px; padding-left: 30px;">
+                            <br>
+                            <a href="{{store url=""}}" target="_blank"><img style="width: 200px;" src="{{skin url="images/email/logo_email.png" _area='frontend'}}"/></a>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" class="welcome" width="650" style="margin-top: 0px;text-align: left;padding: 10px 0px 10px 10px; border-top: 2px solid #5d5d5d;">
+                    <tr>
+                        <td valign="top" style="color: #2f2f2f;font: 15px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;">
+                            <h3>Olá {{var customer.nome}}!</h3>
+                            <p>Nosso sistema identificou que você já é um cliente Pec-Lam e gostaríamos que confirmasse a sua conta clicando no link abaixo para alterar a sua senha:</p>
+                            <a style="color: #000000!important;" href="{{store url="customer/account/resetpassword/" _query_id=$customer.id _query_token=$customer.rp_token}}">{{store url="customer/account/resetpassword/" _query_id=$customer.id _query_token=$customer.rp_token}}</a>
+                        </td>
+                    </tr>
+                </table>
+                {{block type='fvets_salesrep/email' area='frontend' template='email/sales_rep.phtml' customer_id=$customer.id}}
+                <table cellspacing="0" cellpadding="0" border="0" class="passos" width="650" style="border-top: solid 1px #424242;margin-top: 10px;text-align: center;padding: 10px 0 10px 0;">
+                    <tr>
+                        <td valign="top" class="left" style="text-align: center;width: 300px;color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;padding: 10px;">
+                            <label style="font-size: 16px;font-weight: bold;">Dúvidas?</label><br><br>
+                            <span style="font-size: 14px;color: #6c645c;">Você pode entrar em contato através do nosso e-mail ou telefone.</span>
+                            <br>
+                        </td>
+                        <td valign="top" class="right" style="color: #2f2f2f;font: 13px/1.35em 'Open Sans', Arial, Helvetica, sans-serif;text-align: left;padding: 10px;width: 300px;">
+                            <br>
+                            <label style="font-size: 16px;font-weight: bold;"><a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a></label><br>
+                            <label style="font-size: 16px;font-weight: bold;">{{config path='general/store_information/phone'}}</label><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

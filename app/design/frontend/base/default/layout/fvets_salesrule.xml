@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <customer_account ifhandle="customer_tipopessoa_RC">
+        <reference name="customer_account_navigation">
+            <action method="addLink" ifconfig="fvets_salesrule/premier/status" translate="label" module="fvets_salesrule">
+                <name>premier_commercial_policy</name>
+                <path>salesrule/salesrep/premier</path>
+                <label>Premier Commercial Policy</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <salesrule_salesrep_premier>
+        <label>Customer My Account (All Pages)</label>
+        <update handle="customer_account"/>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Edit Premier Commercial Policy</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="fvets_salesrule/salesrep_premier" name="salesrule.salesrep.premier" as="salesrule_salesrep_premier" template="fvets_salesrule/salesrep/premier.phtml"/>
+        </reference>
+
+        <reference name="left">
+            <action method="unsetChild"><name>left.permanent.callout</name></action>
+        </reference>
+
+        <reference name="content">
+            <remove name="custommenu.toggle" />
+        </reference>
+    </salesrule_salesrep_premier>
+    <salesrule_salesrep_premiercustomer>
+        <block type="fvets_salesrule/salesrep_premier_customer" name="root" output="toHtml" template="fvets_salesrule/salesrep/premier/customer.phtml"/>
+    </salesrule_salesrep_premiercustomer>
+</layout>

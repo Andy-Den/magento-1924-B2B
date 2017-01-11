@@ -1,0 +1,237 @@
+@import "../../../../fvets_pure/less/mixins";
+
+.catalog-category-view
+{
+
+  h1
+  {
+    font-size: 34px;
+    color:@color1;
+  }
+
+  h2
+  {
+    font-size: 24px;
+    color: @defaultColor7 !important;
+  }
+
+  h3
+  {
+    font-size: 24px;
+    font-weight: 600;
+    color: @defaultColor7;
+  }
+
+  h4
+  {
+    font-size: 24px;
+    font-weight: 600;
+    color: @defaultColor2 !important;
+  }
+
+  p
+  {
+    font-size: 18px;
+    color: @defaultColor7;
+    line-height: 1.6;
+  }
+
+  .col-main
+  {
+    margin: 0;
+  }
+  .category-image
+  {
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+
+    .category-title
+    {
+      background: fade(@defaultColor2, 78%);
+      width: 50%;
+      padding-right: 5%;
+      left: 0;
+      float:left;
+      margin: 100px 0;
+      text-align: left;
+      .opacity(80%);
+      .boxSizing();
+
+      .inner
+      {
+        width: 100%;
+        max-width: 475px;
+        float: right;
+        padding: 60px 0;
+        .boxSizing();
+
+        h1
+        {
+          color:white;
+          .textShadow();
+          font-weight: lighter;
+          text-transform: uppercase;
+        }
+
+        .subtitle
+        {
+          color:white;
+          padding: 0;
+          font-size: 21px;
+        }
+      }
+    }
+
+    .category-title-image
+    {
+      float:right;
+      width: 50%;
+      text-align: left;
+      .boxSizing();
+      margin-top: 4%;
+
+      img
+      {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .category-description
+  {
+    width: 100%;
+    padding-bottom: 70px;
+  }
+
+  .block1
+  {
+    margin:120px 0;
+
+    .right
+    {
+      margin-top: 15%;
+    }
+  }
+
+  .block2
+  {
+    text-align: center;
+    margin-bottom: 120px;
+  }
+
+  .block3
+  {
+    text-align: center;
+    margin-bottom: 120px;
+
+    h2
+    {
+      line-height: 1.8;
+    }
+  }
+
+  .block4
+  {
+    margin-bottom: 75px;
+
+    .left
+    {
+      text-align: center;
+      width: 32%;
+      padding: 0;
+      padding-top: 45px;
+    }
+
+    .right
+    {
+      width: 68%;
+    }
+  }
+
+  .block4-divisor
+  {
+    text-align: center;
+    margin-bottom: 75px;
+
+    hr
+    {
+      width: 20%;
+      margin: 0 auto;
+    }
+
+  }
+
+
+}
+
+.catalog-category-view
+{
+  .idexx-breadcrumb
+  {
+    .inner
+    {
+      .overlay
+      {
+        left:67.5%;
+      }
+    }
+  }
+}
+
+.page .pre-footer-cms-container
+{
+  background-image:url("@{skinUrl}images/footer/cat2.png");
+}
+
+//responsive
+
+@media (max-width: 980px) {
+  div.category-image {
+    .category-title {
+      width: 100%!important;
+      .inner {
+        padding-left: 2%!important;
+      }
+    }
+
+    .category-title-image {
+      display: none;
+    }
+  }
+
+  .idexx-breadcrumb {
+    .inner {
+      .overlay {
+        width: 29.9%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .block1 {
+    &.two-columns {
+      .column {
+        &.left {
+          width: 100%;
+          padding-right: 0;
+        }
+
+        &.right {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .block2 {
+      h1 {
+        font-size: 15px;
+      }
+  }
+}

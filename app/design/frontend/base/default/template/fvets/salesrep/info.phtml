@@ -1,0 +1,14 @@
+<?php
+
+$salesrep = $this->getSalesrep();
+
+if (empty($salesrep) || empty($salesrep->getId())) {
+    return;
+}
+?>
+<div class="salesrep">
+    <img src="<?php echo $this->getImageUrl($salesrep); ?>" width="50" height="50" />
+    <span class="name"><?php echo $this->escapeHtml($salesrep->getName()); ?></span>
+    <span class="email"><?php echo $this->escapeHtml($salesrep->getEmail()); ?></span>
+    <span class="telephone"><?php echo $this->escapeHtml($salesrep->getTelephone()); ?></span>
+</div>

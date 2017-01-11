@@ -1,0 +1,63 @@
+<?php if(!$this->helper('customer')->isLoggedIn()): ?>
+	<div class="block-news">
+		<div class="inner-block container">
+
+			<div class="right col-md-6">
+				<div class="title">
+					MANTENHA-SE INFORMADO
+				</div>
+				<h4>Fique por dentro de todas as novidades que acontecem aqui no portal!</h4>
+			</div>
+
+			<div class="right col-md-6">
+				<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+					<div class="inner">
+						<?php echo $this->getChildHtml('global_messages'); ?>
+							<div class="input-button">
+								<div class="col-xs-9">
+									<input type="text" name="email" id="newsletter" class="news_input" placeholder="Seu e-mail" />
+								</div>
+								<div class="col-xs-3 text-right">
+									<button class="news_button text-left">
+										<div class="pull-left">Quero ficar<br/>por dentro!</div>
+<!--										<div class="letter-icon pull-right"></div>-->
+										<i class="fa fa-envelope"></i>
+									</button>
+								</div>
+								<div class="clear"></div>
+							</div>
+						<p class="label-news">Enviaremos um resumo mensal das melhores avaliações de produtos, além de novidades do ramo pet&nbsp&nbsp<i class="fa fa-heart"></i></p>
+						</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		//<![CDATA[
+		var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+		//]]>
+	</script>
+<?php endif; ?>
+
+<?php /*
+<div class="block block-subscribe">
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+        <div class="block-content row">
+            <div class="form-subscribe-header col-md-3">
+                <label for="newsletter"><i class="fa fa-envelope"></i>&nbsp;&nbsp;<?php echo $this->__('Receba nossas novidades') ?></label>
+            </div>
+            <div class="input-box input-append col-md-9">
+               <input type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="form-control required-entry validate-email col-md-10" />
+               <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="btn noborder"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+    </script>
+</div>
+*/ ?>

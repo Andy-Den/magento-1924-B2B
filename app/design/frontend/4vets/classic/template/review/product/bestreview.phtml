@@ -1,0 +1,58 @@
+<?php
+$_product = $this->getProduct();
+
+$bestReview = Mage::helper('review')->getBestReview($_product);
+if ($bestReview)
+{
+	?>
+
+	<div class="bestreview">
+
+		<div class="col1">
+			<?php
+
+			$ratings = $bestReview->getRatingVotes()->getItems();
+			$rating = $ratings[key($ratings)];
+			$ratingValue = $rating->getValue();
+
+			echo "<span class='review-title-top'>" . $bestReview->getTitle() . "</span>";
+
+			if ($bestReview->getIsRecommended())
+			{
+				echo '&nbsp<i class="fa fa-check"></i><span class="recommended-product">recomendado</span>';
+			}
+
+			echo "<br/><span class='review-detail-top'>" . "\"" . $bestReview->getDetail() . "\"" . "</span><br/><br/>";
+
+			$_picture = Mage::helper('fvets_customer')->getCustomerImageUrl($bestReview->getCustomerId());
+			?>
+
+			<div class="rater">
+				<?php
+				echo "<img class='avatar' src=" . $_picture . " />";
+				echo "<span class='nickname'>" . $bestReview->getNickname() . "</span>";
+				?>
+				<br>
+				<?php echo Mage::helper('review')->getCustomerLevel($bestReview->getCustomerId()); ?>
+			</div>
+
+			<?php
+			$summaryEvaluation = Mage::helper('review')->getProductSummaryEvaluation($_product);
+			?>
+		</div>
+
+		<div class="col2">
+			<div class="rating-big">
+				<div class="rating-value-container">
+					<span><?php echo number_format($summaryEvaluation['percent'] / 10, 1); ?></span>
+				</div>
+
+				<div class="rating-box">
+					<div class="rating" style="width:<?php echo ceil($summaryEvaluation['percent']) ?>%;"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<?php } ?>

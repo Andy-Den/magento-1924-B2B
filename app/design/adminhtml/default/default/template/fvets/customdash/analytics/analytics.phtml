@@ -1,0 +1,65 @@
+<?php
+
+$singleton = Mage::getSingleton('fvets_customdash/analytics');
+
+$client = $singleton->getClient();
+$params = $singleton->getParams();
+
+if (!$params) {
+  die('<div class="no-data"><h3>Selecione um website</h3></div>');
+}
+
+?>
+
+<section id="auth-button"></section>
+<section id="view-selector"></section>
+<section id="timeline"></section>
+
+<script>
+  function drawAnalytics() {
+	gapi.analytics.auth.authorize({
+	  serverAuth: {
+		access_token: '<?php echo json_decode($client->getAccessToken())->access_token; ?>'
+	  }
+	});
+
+	timeline = new gapi.analytics.googleCharts.DataChart({
+	  reportType: 'ga',
+	  query: {
+		'ids': 'ga:<?php echo $params['view_id'] ?>',
+		'dimensions': 'ga:date',
+		'metrics': 'ga:<?php echo $params['metrics'] ?>',
+		'start-date': '30daysAgo',
+		'end-date': 'yesterday'
+	  },
+	  chart: {
+		type: 'LINE',
+		container: 'timeline',
+		options: {
+		  width: '100%'
+		}
+	  }
+	});
+
+	// ### se tem mais de uma storeview ###
+	var viewSelector = new gapi.analytics.ViewSelector({
+	  container: 'view-selector'
+	});
+
+	viewSelector.on('change', function (ids) {
+	  console.log(ids);
+	  var newIds = {
+		query: {
+		  ids: ids
+		}
+	  }
+	  timeline.set(newIds).execute();
+	});
+
+	//viewSelector.execute();
+
+	// ### apenas uma storeview ###
+	timeline.execute();
+  }
+  drawAnalytics();
+</script>

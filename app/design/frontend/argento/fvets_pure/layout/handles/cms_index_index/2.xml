@@ -1,0 +1,79 @@
+<include_layout version="0.1.0">
+
+    <cms_index_index ifhandle="customer_logged_in">
+        <update handle="page_two_columns_left"/>
+        <update handle="page_homepage_sidebar_categories_1" />
+        <update handle="product_grid_featured_carousel_1" />
+        <update handle="product_grid_bestseller_carousel_1" />
+        <reference name="head">
+            <action method="setTitle"><title>Distribuidor Online</title></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/easyslide/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/blocklinks/widget/categories/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/blocklinks/widget/categories/2.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/tabBuilder.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/slider.js</name></action>
+        </reference>
+        <reference name="top_content">
+            <block type="page/html" name="loggedin.homepage.widtget.banners" as="homepage_widget_banenrs" template="page/homepage/banners/1.phtml" before="-">
+                <action method="setSliderName"><slider_name></slider_name></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <remove name="cms_page" />
+        </reference>
+        <reference name="sub_content">
+            <block type="page/html" name="loggedin.homepahe.widget.brand1" as="homepahe_widget_brand1" template="blocklinks/widget.phtml" after="-"/>
+            <block type="page/html" name="loggedin.homepahe.widget.brand2" as="homepahe_widget_brand2" template="blocklinks/widget.phtml" after="-"/>
+        </reference>
+        <reference name="left">
+            <remove name="left.reports.product.viewed" />
+            <remove name="left.search" />
+        </reference>
+    </cms_index_index>
+
+    <cms_index_index ifhandle="customer_logged_out">
+        <update handle="page_two_columns_left"/>
+        <update handle="page_homepage_sidebar_categories_1"/>
+        <reference name="head">
+            <action method="setTitle"><title>Distribuidor Online</title></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/easyslide/1.less</name></action>
+
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customer_locator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/ajaxsearch.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabel.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabels-tooltip.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/styles-ee.css</name></action>
+        </reference>
+        <reference name="top_content">
+            <block type="page/html" name="loggedout.homepage.widtget.banners" as="homepage_widget_banenrs" template="page/homepage/banners/1.phtml" before="-">
+                <action method="setSliderName"><slider_name></slider_name></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <remove name="cms_page" />
+            <block type="cms/block" name="institutionals.center">
+                <action method="setBlockId"><block_id></block_id></action>
+            </block>
+        </reference>
+    </cms_index_index>
+
+</include_layout>

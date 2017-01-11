@@ -1,0 +1,22 @@
+<?php
+
+$this->startSetup();
+
+$entityTypeId = $this->getEntityTypeId('customer');
+
+$this->addAttribute($entityTypeId, 'overdue', array(
+	'input' => 'select',
+	'type' => 'int',
+	'label' => 'Inadimplente?',
+	'source' => 'eav/entity_attribute_source_boolean',
+	'required' => false,
+	'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_WEBSITE,
+	'visible' => true,
+	'default' => 0
+));
+
+$attribute = Mage::getSingleton('eav/config')->getAttribute('customer', 'overdue');
+$attribute->setData('used_in_forms', array('adminhtml_customer'));
+$attribute->save();
+
+$this->endSetup();

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Classic_Distributor extension
+ * 
+ * NOTICE OF LICENSE
+ *
+ * @category       Classic
+ * @package        Classic_Distributor
+ * @copyright      Copyright (c) 2015
+ */
+-->
+<config>
+    <modules>
+        <Classic_Distributor>
+            <version>1.0.1</version>
+        </Classic_Distributor>
+    </modules>
+    <global>
+        <resources>
+            <classic_distributor_setup>
+                <setup>
+                    <module>Classic_Distributor</module>
+                    <class>Classic_Distributor_Model_Resource_Setup</class>
+                </setup>
+            </classic_distributor_setup>
+        </resources>
+        <blocks>
+            <classic_distributor>
+                <class>Classic_Distributor_Block</class>
+            </classic_distributor>
+        </blocks>
+        <helpers>
+            <classic_distributor>
+                <class>Classic_Distributor_Helper</class>
+            </classic_distributor>
+        </helpers>
+        <models>
+            <classic_distributor>
+                <class>Classic_Distributor_Model</class>
+                <resourceModel>classic_distributor_resource</resourceModel>
+            </classic_distributor>
+            <classic_distributor_resource>
+                <class>Classic_Distributor_Model_Resource</class>
+                <entities>
+                    <distributor>
+                        <table>classic_distributor</table>
+                    </distributor>
+                    <region>
+                        <table>classic_distributor_region</table>
+                    </region>
+                </entities>
+            </classic_distributor_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <classic_distributor>
+                    <file>classic_distributor.xml</file>
+                </classic_distributor>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Classic_Distributor>
+                    <files>
+                        <default>Classic_Distributor.csv</default>
+                    </files>
+                </Classic_Distributor>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Classic_Distributor before="Mage_Adminhtml">Classic_Distributor_Adminhtml</Classic_Distributor>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

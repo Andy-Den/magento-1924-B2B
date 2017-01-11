@@ -1,0 +1,26 @@
+<config>
+    <sections>
+        <general module="core">
+            <groups>
+                <categories translate="label">
+                    <label>Categories</label>
+                    <sort_order>520</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <menu_root_category translate="label">
+                            <label>Menu Root Category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>FVets_RootCategory_Model_System_Config_Source_Category_SubCategory</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </menu_root_category>
+                    </fields>
+                </categories>
+            </groups>
+        </general>
+    </sections>
+</config>

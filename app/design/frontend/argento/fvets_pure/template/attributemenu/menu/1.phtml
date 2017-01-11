@@ -1,0 +1,17 @@
+<?php $attribute = Mage::helper('fvets_attributemenu')->getAttribute(); ?>
+<?php $attributeCodeParam = Mage::app()->getRequest()->getParam($attribute->getAttributeCode()); ?>
+<?php $attributeValues = $this->returnAttributeValues(); ?>
+<?php $totalValues = count($attributeValues);
+$count = 1;
+?>
+<div class="institutionals-menu-line full-page-width up"></div>
+<div class="institutionals-menu">
+	<ul>
+		<?php foreach ($attributeValues as $value => $label)
+		{ ?>
+				<li class="<?php echo ($attributeCodeParam == $value ? 'selected' : ''); echo ($count == $totalValues ? ' last' : ''); ?>"><a title="<?php echo $label ?>" href="<?php echo Mage::getBaseUrl() ?><?php echo ($value ? (Mage::helper('fvets_attributemenu')->formatKey($label) . "?" . $attribute->getAttributeCode() . "=" . $value) : $value) ?>"><?php echo $label ?></a></li>
+		<?php $count++;
+		} ?>
+	</ul>
+</div>
+<div class="institutionals-menu-line full-page-width down"></div>

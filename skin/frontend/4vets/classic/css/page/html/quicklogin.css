@@ -1,0 +1,64 @@
+#quicklogin div.border-quick:nth-of-type(1) {  width:95%;}
+#quicklogin .forgot-password {  font-size:10pt;}
+
+#form-popup{
+    background:#f1f1f1;
+    border-radius:3px;
+    /*padding-bottom:5%;*/
+}
+
+#form-popup a{
+    color:#7b7b7b;
+}
+
+#form-popup form {
+    padding:0 7% 5%;
+}
+
+#form-popup .container-fluid {
+    padding:0;
+}
+
+#form-popup .new-users, #form-popup .registered-users {
+    padding:0;
+}
+
+#form-popup .top-title {
+    font-family:'Open Sans';
+    font-weight:400;
+    font-size:2em;
+    color:white;
+    padding:1.5% 0;
+    background:#16aedc;
+    text-align:center;
+    border-radius:7px 0 0;
+    margin-bottom: 10px;
+}
+
+#form-popup #fpass .alert-ok{
+    font-size:1em;
+    color:#4d950c;
+    padding:5% 0;
+}
+
+#form-popup #fpass .remember-pass-input {
+    width:80%;
+    border-radius: 5px 0 0 5px;
+}
+
+#form-popup #fpass .remember-pass-button {
+    width:20%;
+    padding:5px;
+}
+
+#form-popup .extra_fields {
+    display:none;
+}
+
+#form-popup .ja-sou-cadastrado {
+    padding-right:1px;
+}
+
+#form-popup .input-append {
+    font-size:0.929em;
+}

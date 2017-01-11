@@ -1,0 +1,19 @@
+<config>
+    <modules>
+        <FVets_Eav>
+            <version>0.0.1</version>
+        </FVets_Eav>
+    </modules>
+    <global>
+        <models>
+            <fvets_eav>
+                <class>FVets_Eav_Model</class>
+            </fvets_eav>
+            <eav>
+                <rewrite>
+                    <entity_attribute_backend_time_created>FVets_Eav_Model_Entity_Attribute_Backend_Time_Created</entity_attribute_backend_time_created>
+                </rewrite>
+            </eav>
+        </models>
+    </global>
+</config>

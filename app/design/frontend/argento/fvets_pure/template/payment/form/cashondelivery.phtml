@@ -1,0 +1,23 @@
+<?php if ($this->getPaymentConditions()) : ?>
+<ul class="form-list checkout-payment-conditions">
+	<li>
+		<label><?php echo $this->__('Select the payment conditions'); ?></label>
+		<br />
+		<select name="payment_conditions" class="payment-conditions">
+			<?php foreach($this->getPaymentConditions() as $_condition) : ?>
+				<option <?php if ($_condition['id']) : ?> value="<?php echo $_condition['id']; ?>" <?php endif; ?>><?php echo $_condition['value']; ?></option>
+			<?php endforeach; ?>
+		</select>
+	</li>
+</ul>
+<?php endif; ?>
+
+<?php if ($this->getInstructions()): ?>
+    <ul class="form-list checkout-agreements" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <li>
+            <div class="<?php echo $this->getMethodCode() ?>-instructions-content agreement-content">
+                <?php echo nl2br($this->getInstructions()) ?>
+            </div>
+        </li>
+    </ul>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<?php
+    $_associated = $this->getAssociatedProducts();
+?>
+
+<div class="associated-products-list">
+    Apresentações do produto:
+    <br />
+    <?php foreach ($_associated as $_product) : ?>
+        <?php echo $_product->getName(); ?><br />
+    <?php endforeach; ?>
+</div>
+

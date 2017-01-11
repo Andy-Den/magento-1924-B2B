@@ -1,0 +1,54 @@
+.main-container {
+    width: 960px!important;
+    margin: 0 auto;
+}
+
+/*header*/
+.header-login .blocks .or {
+    clear: both;
+}
+
+.header-container .headerCartTop #cartButton .fa-shopping-cart {
+    display: none;
+}
+
+.header-container .vendor-logo {
+    width: auto;
+    float: left;
+}
+
+.header-container .welcome-msd {
+    display: none;
+}
+
+.header-mobile {
+    display: none;
+}
+
+/*home não logado*/
+.cms-index-index .brandContainer .brands-list li {
+    width: 19%;
+}
+.cms-index-index .bloco-institucionais .institucional .img a img {
+    width: auto;
+}
+
+/*checkout*/
+.onestepcheckout-column-left {
+    width: 31%;
+    margin-right: 1%;
+    float: left;
+}
+.onestepcheckout-column-middle {
+    width: 31%;
+    margin-right: 1%;
+    float: left;
+}
+.onestepcheckout-column-right {
+    width: 31%;
+    float: left;
+}
+
+.allpago-boleto img {
+    width: auto;
+}

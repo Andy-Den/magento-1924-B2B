@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<FVets_DataImport>
+			<active>true</active>
+			<codePool>local</codePool>
+		</FVets_DataImport>
+	</modules>
+</config>

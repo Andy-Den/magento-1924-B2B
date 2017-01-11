@@ -1,0 +1,51 @@
+<div class="header-mobile">
+<div class="links">
+	<a title="Sair" href="<?php echo Mage::helper('customer')->getLogoutUrl() ?>">Sair</a>
+</div>
+	<ul>
+		<li>
+			<a href="javascript://" id="show-mobile-menu"><i class="fa fa-bars fa-2x"></i></a>
+		</li>
+		<li>
+			<div class="<?php if ($this->getUseBrandLogo()): ?>logos<?php else: ?>logo<?php endif; ?>">
+				<?php if ($this->getUseBrandLogo()): ?>
+					<div class="brand-logo">
+						<a href="<?php echo $this->getUrl('') ?>"><img src="<?php echo $this->getBrandLogo(true); ?>"
+																													 alt="<?php echo $this->getBrandLogoAlt() ?>"/></a>
+
+						<div class="clear"></div>
+					</div>
+				<?php endif; ?>
+				<div class="vendor-logo">
+					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img
+							src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>"/></a>
+
+					<div class="clear"></div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>"
+				 alt="Meu Carrinho"><?php echo $this->getChildHtml('mobileCart'); ?></a>
+		</li>
+	</ul>
+	<div class="clear"></div>
+	<div class="custommenu-mobile"></div>
+	<div class="clear"></div>
+	<div class="top-search">
+		<?php echo $this->getChildHtml('topSearchMobile') ?>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+
+	<?php
+	$checkoutUrl = $this->getUrl('onestepcheckout', array('_secure' => true));
+	?>
+
+	<div class="mobile-checkout-button">
+		<?php $baseUrl = Mage::getBaseUrl(); ?>
+		<button onclick="setLocation('<?php echo $checkoutUrl; ?>')" class="button  btn-action"
+						title="Finalizar pedido" type="button"><span><span>Finalizar pedido</span></span></button>
+	</div>
+
+</div>

@@ -1,0 +1,14 @@
+<?php
+$regionCollection = $this->getRegionCollection();
+?>
+
+Selecione a sua região: &nbsp;
+
+<select name='customer[region]' id='customer-region' class="customer-region validate-select" >
+	<option value="">Please select state</option>
+	<?php foreach($regionCollection as $region) : ?>
+		<option value="<?php echo $region['code'] ?>" <?php if ($region['code'] == Mage::getModel('core/cookie')->get('customer-region')) : ?>selected="selected"<?php endif; ?> ><?php echo $region['name'] ?></option>
+	<?php endforeach ?>
+</select>
+
+<script>customerRegionBind();</script>

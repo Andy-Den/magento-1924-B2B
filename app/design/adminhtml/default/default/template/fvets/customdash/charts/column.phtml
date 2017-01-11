@@ -1,0 +1,113 @@
+<?php $_function = $this->getMethodData(); ?>
+<?php $_data = $this->$_function(); ?>
+
+<?php
+if (!$_data || count($_data) === 0) {
+	echo '<div class="no-data"><h3>' . Mage::helper('fvets_customdash')->__('No Data') . '</h3></div>';
+	return;
+}
+?>
+
+<?php $_columns = $this->getColumns(); ?>
+<?php $_options = $this->getOptions(); ?>
+<?php $_noDataLabel = $this->getNoDataLabel(); ?>
+<?php $_tipoData = $this->getTipoData(); ?>
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+<script type="text/javascript">
+	//google.load("visualization", "1", {packages:["corechart"]});
+	//google.setOnLoadCallback(drawChart<?php echo $this->getId(); ?>);
+	function drawChart<?php echo $this->getId(); ?>() {
+
+		var data = google.visualization.arrayToDataTable([
+//			colunas do chart
+			<?php echo '[' ?>
+			<?php foreach ($_columns as $_column) { ?>
+			<?php echo '\'' . ($_column[1]) . '\',' ?>
+			<?php } ?>
+			<?php echo '],' ?>
+//			fim
+//			valores do chart
+			<?php
+			$menorValor = 1000000;
+			$maiorValor = 0;
+			$ticks = true;
+			?>
+			<?php if (count($_columns) <= 2) { ?>
+			<?php foreach ($_data as $_item) { ?>
+
+            <?php
+                if (is_object($_item)) {
+                    $_label = $_item->getLabel();
+                    $_value = $_item->getValue();
+
+										if ($_item->getValue() < $menorValor) {
+											$menorValor = $_item->getValue();
+										}
+
+										if ($_item->getValue() > $maiorValor) {
+											$maiorValor = $_item->getValue();
+										}
+                } else {
+                    $_label = $_item['label'];
+                    $_value = ($_item['value'] == '' ? 0 : $_item['value']);
+
+                    if ($_value < $menorValor) {
+											$menorValor = $_value;
+										}
+
+										if ($_value > $maiorValor) {
+											$maiorValor = $_value;
+										}
+                }
+            ?>
+
+			<?php echo '[\'' . ($_label == '' ? $_noDataLabel : $_label) . '\'' ?>, <?php echo $_value . '],' ?>
+			<?php } ?>
+			<?php } else {
+				$ticks = false;
+			?>
+				<?php foreach ($_data as $_item) { ?>
+					<?php echo '[' ?>
+					<?php for ($i = 0; $i < count($_columns); $i++) { ?>
+						<?php $_value = $_item['col'.($i+1)]; ?>
+						<?php echo ($_columns[$i][0] == 'number' ? ($_item['col'.($i+1)] ? $_item['col'.($i+1)] : 0) : '\'' . $_item['col'.($i+1)] . '\'') . ',' ?>
+					<?php } ?>
+					<?php echo '],' ?>
+				<?php } ?>
+			<?php } ?>
+//			fim
+		]);
+
+		var options = {
+			<?php if (isset($_options)) { foreach ($_options as $_option) { ?>
+			<?php echo $_option[0] . ':' . $_option[1] . ',' ?>
+			<?php }} ?>
+			<?php if ($ticks) { ?>
+			vAxis: {
+				minValue: 0,
+				ticks: [<?php echo $menorValor ?>, <?php echo ($menorValor + $maiorValor)/2 ?>, <?php echo $maiorValor ?>]
+			}
+			<?php } ?>
+		};
+
+		<?php if ($_tipoData && $_tipoData == 'decimal') { ?>
+			var formatter = new google.visualization.NumberFormat({decimalSymbol: ',', groupingSymbol: '.', negativeColor: 'red', negativeParens: true, prefix: 'R$ '});
+			formatter.format(data, 1);
+		<?php } ?>
+
+		var chart = new google.visualization.ColumnChart(document.getElementById('<?php echo $this->getId() ?>'));
+
+		chart.draw(data, options);
+	}
+
+
+</script>
+<div class="container">
+    <div class="dash-header"><h1><?php echo $this->__($this->getName()); ?></h1></div>
+	<div id="<?php echo $this->getId() ?>" class="chart"></div>
+</div>
+
+<script type="text/javascript">
+    //executa a função que desenha o Chart;
+    drawChart<?php echo $this->getId(); ?>();
+</script>

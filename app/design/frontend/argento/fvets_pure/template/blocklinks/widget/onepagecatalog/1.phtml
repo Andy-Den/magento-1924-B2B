@@ -1,0 +1,79 @@
+<?php $_categories = $this->getCategories($this->getNameInLayout()); ?>
+<style>
+@media (max-device-width: 480px) {
+
+	#products-list li { padding-bottom: 9px; }
+    .blocklinks-onepage-catalog .category-item .inner {height:125px;padding-bottom: 9px;}
+}
+</style>
+
+<div class="blocklinks-onepage-catalog default-page-width">
+	<?php foreach ($_categories as $_category) : ?>
+		<?php $_category = Mage::getModel('catalog/category')->load($_category->getId()); ?>
+		<?php
+			$collection = Mage::getModel('catalog/product')->getCollection();
+			Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
+			Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($collection);
+			if (!$collection->addCategoryFilter($_category)->getSize())
+			{
+				continue;
+			}
+		?>
+		<?php $id = rand(0, time()); ?>
+		<div class="category-item category-item<?php echo $id; ?>">
+			<div class="category-header">
+				<a href="<?php echo $_category->getUrl($_category) ?>">
+				<div class="category-thumbnail">
+					<?php if ($_category->getThumbnail()) : ?>
+						<img width="40" height="40" style="width: auto;" alt="<?php echo $_category->getName(); ?>" class="lazy" data-original="<?php echo $_category->getBaseThumbnail(); ?>">
+					<?php else : ?>
+						<?php echo $_category->getName(); ?>
+					<?php endif; ?>
+				</div>
+				</a>
+			</div>
+			<hr />
+			<div class="inner <?php echo 'inner'.$id; ?>">
+				<?php echo $this->getChildHtml($_category->getName() . '_' . $_category->getId()); ?>
+			</div>
+			<?php if ($collection->getSize() > 1) : ?>
+				<a href="javascript://" class="see-all-button" data-id="<?php echo $id; ?>" data-textshow="ver todos de <?php echo $_category->getName(); ?> <i class='fa fa-angle-down'></i>" data-texthide="esconder todos <i class='fa fa-angle-up'></i>">ver todos de <?php echo $_category->getName(); ?> <i class="fa fa-angle-down"></i></a>
+			<?php /*else : ?>
+				<div class="see-all-div" >&nbsp;</div> */?>
+			<?php endif; ?>
+		</div>
+	<?php endforeach; ?>
+</div>
+
+<script>
+	jQuery(document).ready(function()
+	{			
+		jQuery('.see-all-button').click(function()
+		{
+			var clicked = this;
+			var inner = 'inner'+jQuery(this).data('id');
+			var categoryitem = 'category-item'+jQuery(this).data('id');
+			var myInnerWidth = jQuery(window).innerWidth();
+			if(jQuery('.'+inner).hasClass("toggled"))
+			{
+				if(myInnerWidth <=480) {
+					jQuery('.'+inner).animate( { height:'125px' }).removeClass("toggled");	
+				} else {
+					jQuery('.'+inner).animate( { height:'82px' }).removeClass("toggled");
+				}
+				
+				jQuery(clicked).html(jQuery(clicked).data('textshow'))
+			}
+			else
+			{
+				var curHeight = jQuery('.'+inner).height();
+				jQuery('.'+inner).css('height', 'auto');
+				var autoHeight = jQuery('.'+inner).height();
+				jQuery('.'+inner).height(curHeight)
+				jQuery('.'+inner).animate( { height:autoHeight }).addClass("toggled");
+				jQuery(clicked).html(jQuery(clicked).data('texthide'))
+			}
+			jQuery("html, body").animate({scrollTop : jQuery('.'+categoryitem).offset().top - 70})
+		})
+	});
+</script>

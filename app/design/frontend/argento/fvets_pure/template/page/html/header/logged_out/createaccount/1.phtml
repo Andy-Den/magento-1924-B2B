@@ -1,0 +1,183 @@
+<?php
+$isValidationActive = Mage::getStoreConfig('validate_customer/general/enabled');
+$storeName = Mage::getStoreConfig('general/store_information/name');
+$isBrandPage = Mage::getStoreConfig('general/store_information/is_brand');
+
+if ($isValidationActive) {
+
+	if (!$isBrandPage) {
+		?>
+
+		<div class="hidden">
+			<div id="modal-customer-validate" class="modal-customer-validate">
+				<div class="modal-customer-validate-header">
+					<h1><?php echo $this->__('Você já é cliente da %s?', $this->escapeHtml($storeName)) ?></h1>
+				</div>
+
+				<div class="hundred">
+					<hr/>
+				</div>
+				<br/>
+
+				<div class="info-message">
+					<p><?php echo $this->__('Clientes da distribuidora %s já estão cadastrados, clique em "já sou cliente" caso você já tenha relações comerciais com
+					a distribuidora.', $this->escapeHtml($storeName)) ?></p>
+					<br/>
+				</div>
+
+				<form
+					action="#"
+					method="get" id="form-createaccount-validate">
+					<div class="action-buttons">
+						<button type="button" title="<?php echo($this->__('SIM! JÁ SOU CLIENTE') . ' ' . $storeName); ?>"
+										onclick="window.location='<?php echo(Mage::getUrl('customer/account/create', array('_secure' => true)) . '?cliente=1') ?>'"
+										class="button btn-action">
+							<span><span><?php echo($this->__('SIM! JÁ SOU CLIENTE') . ' ' . $storeName); ?></span></span></button>
+						<br>
+						<button type="button" title="<?php echo $this->__('AINDA NÃO SOU CLIENTE'); ?>"
+										onclick="window.location='<?php echo(Mage::getUrl('customer/account/create', array('_secure' => true))) ?>'"
+										class="button btn-doToAction">
+							<span><span><?php echo $this->__('AINDA NÃO SOU CLIENTE'); ?></span></span></button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+
+			//<![CDATA[
+			jQuery(document).ready(function() {
+				if (jQuery('.modal-customer-validate') != undefined) {
+					jQuery('#button-register').attr('onclick', '').unbind('click');
+					jQuery('#button-register').click(function (event) {
+						event.preventDefault();
+						jQuery.featherlight(jQuery('#modal-customer-validate'));
+						return false;
+					});
+				}
+			})
+			//]]>
+
+		</script>
+
+	<?php } else { ?>
+		<?php
+		$storeCode = Mage::app()->getStore()->getCode();
+		$stores = Mage::helper('fvets_customer')->getWebsitesByBrand($storeCode);
+		?>
+
+		<div class="hidden">
+			<div id="modal-customer-validate" class="modal-customer-validate">
+				<div class="modal-customer-validate-header">
+					<h1><?php echo $this->__('Você já é cliente da %s?', $this->escapeHtml($storeName)) ?></h1>
+				</div>
+
+				<div class="hundred">
+					<hr/>
+				</div>
+				<br/>
+
+				<div class="info-message">
+					<p><?php echo $this->__('Clientes da distribuidora %s já estão cadastrados, clique em "já sou cliente" caso você já tenha relações comerciais com
+					a distribuidora.', $this->escapeHtml($storeName)) ?></p>
+					<br/>
+				</div>
+
+				<form
+					action="#"
+					method="get" id="form-createaccount-validate">
+					<div class="action-buttons">
+						<button type="button" title="<?php echo($this->__('SIM! JÁ SOU CLIENTE') . ' ' . $storeName); ?>"
+										onclick="redirectToCorrectPage(1);"
+										class="button btn-action">
+							<span><span><?php echo($this->__('SIM! JÁ SOU CLIENTE') . ' ' . $storeName); ?></span></span></button>
+						<br>
+<!--						<button type="button" title="--><?php //echo $this->__('AINDA NÃO SOU CLIENTE'); ?><!--"-->
+<!--										onclick="redirectToCorrectPage(0);"-->
+<!--										class="button btn-doToAction">-->
+<!--							<span><span>--><?php //echo $this->__('AINDA NÃO SOU CLIENTE'); ?><!--</span></span></button>-->
+
+						<button type="button" title="<?php echo $this->__('AINDA NÃO SOU CLIENTE'); ?>"
+										onclick="window.location='<?php echo(Mage::getUrl('customer/account/create', array('_secure' => true))) ?>'"
+										class="button btn-doToAction">
+							<span><span><?php echo $this->__('AINDA NÃO SOU CLIENTE'); ?></span></span></button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="hidden">
+			<div id="modal-warehouse-select" class="modal-warehouse-select">
+				<div class="modal-warehouse-select-header">
+					<h1><?php echo $this->__('Selecione a distribuidora da sua região:') ?></h1>
+				</div>
+				<br/>
+
+				<form
+					action="#"
+					method="get" id="form-select-warehouse">
+					<div class="warehouse-select">
+						<select name="warehouse-switcher" id="warehouse-switcher">
+							<?php foreach ($stores as $key => $store) { ?>
+								<option value="<?php echo($key) ?>"><?php echo $store ?></option>
+							<?php } ?>
+						</select>
+						<button type="button" title="<?php echo($this->__('OK')); ?>"
+										onclick="redirectToCorrectPage(2);"
+										class="button btn-action">
+							<span><span><?php echo($this->__('OK')); ?></span></span></button>
+					</div>
+					<input id="finalUrl" type="hidden" value=""/>
+				</form>
+			</div>
+		</div>
+
+		<input type="hidden" id="eventSelected"/>
+		<input type="hidden" id="isClient"/>
+
+		<script type="text/javascript">
+			//método para redirecionar o usuário para a página de "cadastro" ou de "esqueci minha senha" correta;
+			function redirectToCorrectPage(brand) {
+				if (brand == 1) {
+					jQuery.featherlight(jQuery('#modal-warehouse-select'));
+					jQuery('#isClient').val('true');
+					return false;
+				}
+
+				var url = jQuery("#finalUrl").val();
+				if (jQuery('#eventSelected').val() == 'createaccount') {
+					if (jQuery('#isClient').val() == 'true' && brand == 2) {
+						url = url + 'customer/account/create?cliente=1';
+					} else {
+						url = url + 'customer/account/create';
+					}
+				} else {
+					url = url + 'customer/account/forgotpassword';
+				}
+				jQuery(location).attr("href", url);
+			}
+
+			//customizando o botão de "cadastro" e "esqueci minha senha" para abrirem o modal;
+			jQuery(document).ready(function () {
+				jQuery('.header-login').find('.btn-action').attr('onclick', '').unbind('click');
+				jQuery('.header-login').find('.btn-action').click(function (event) {
+					event.preventDefault();
+					jQuery('#eventSelected').val('createaccount');
+					jQuery.featherlight(jQuery('#modal-customer-validate'));
+					return false;
+				});
+
+				jQuery('.panel-forgot-password .forgot-password').bind('click', function (event) {
+					event.preventDefault();
+					jQuery('#eventSelected').val('forgotpassword');
+					jQuery.featherlight(jQuery('#modal-warehouse-select'));
+				});
+
+				jQuery('#warehouse-switcher').change(function(element) {
+					jQuery("#finalUrl").val(this.value);
+				});
+			});
+		</script>
+
+	<?php } ?>
+<?php } ?>

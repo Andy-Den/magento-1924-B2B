@@ -1,0 +1,29 @@
+<include_layout version="0.1.0">
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.cookie.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_category_view/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/grid/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/list/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/list/toolbar/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_category_view/2.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/categoriesbanners/1.less</name></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>catalog/category/view/1.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <action method="setTemplate"><template>catalog/product/list/1.phtml</template></action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate"><template>catalog/product/list/toolbar/1.phtml</template></action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate"><template>page/html/pager/1.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="subcategories.banners" template="catalog/product/list/categoriesbanners/1.phtml" after="-"></block>
+        </reference>
+    </catalog_category_layered>
+</include_layout>

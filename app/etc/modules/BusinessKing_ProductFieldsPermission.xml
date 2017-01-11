@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<config>
+    <modules>
+        <BusinessKing_ProductFieldsPermission>
+            <active>false</active>
+            <codePool>local</codePool>			
+        </BusinessKing_ProductFieldsPermission>
+    </modules>
+</config> 

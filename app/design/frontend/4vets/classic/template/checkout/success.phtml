@@ -1,0 +1,192 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+
+$order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+
+$order->getPayment()->setMethod() == 'magefm_moip_boleto';
+?>
+<div class="page-title">
+	<h1><?php echo $this->__('Thank you for your purchase!') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<div class="fieldset row">
+
+	<div class="row">
+
+		<div class="inner col-md-11">
+
+			<div class="col-md-3 text-right">
+				<img src="<?php echo $this->getSkinUrl('images/checkout/OK.png'); ?>" alt="" style="margin:30px 0" />
+			</div>
+
+			<div class="col-md-9">
+
+				<br />
+
+				<h2 class="sub-title"><?php echo $this->__('Your order has been received.') ?></h2>
+
+				<?php if ($this->getOrderId()):?>
+				<?php if ($this->getCanViewOrder()) :?>
+					<p><span clas="big"><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s"><strong>%s</strong></a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></span></p>
+				<?php  else :?>
+					<p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+				<?php endif;?>
+				<p>Uma confirmação do seu pedido foi enviada para: <strong><?php echo $order->getShippingAddress()->getEmail(); ?></strong></p>
+				<p>Forma de pagamento escolhida: <strong>
+						<?php
+						if ($order->getPayment()->getMethod() == 'magefm_moip_boleto') :
+							echo 'Boleto Bancário';
+						elseif ($order->getPayment()->getMethod() == 'magefm_moip_creditcard') :
+							echo 'Cartão de Crédito';
+						else :
+							echo $order->getPayment()->getMethod();
+						endif;
+						?>
+					</strong>
+				</p>
+				<p>Entrega: <strong><?php echo $order->getShippingAddress()->getStreetFull(); ?> - <?php echo $order->getShippingAddress()->getCity(); ?> - <?php echo $order->getShippingAddress()->getRegion(); ?> - <?php echo $order->getShippingAddress()->getPostcode(); ?></strong></p>
+
+			</div>
+			<div class="clear"></div>
+
+
+			<?php endif;?>
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+
+	<div class="row">
+		<div class="inner col-md-11">
+			<div class="col-md-12" style="padding: 0 5%">
+				<br />
+				<?php if ($order->getPayment()->getMethod() == 'magefm_moip_boleto'):	?>
+					<p>Imprima o boleto e efetue o pagamento em qualquer agência bancária, ou então anote o número do código de barras e pague pelo internet baking do seu banco.</p>
+					<a target="_blank" href="<?php echo Mage::helper('magefm_moip')->getBoletoUrl($order); ?>" class="boleto"><?php echo $this->__('Imprimir boleto'); ?></a>
+					<br /><br />
+				<?php endif; ?>
+
+				<?php if ($order->getPayment()->getMethod() == 'magefm_moip_creditcard'): ?>
+					<?php $result = json_decode($order->getPayment()->getData('magefm_moip_result')); ?>
+				<?php endif;?>
+
+				<p><strong>Seu pedido será enviado pelas formas de envio disponíveis:</strong></p>
+
+				<?php $udropship_shipping_details = json_decode($order->getData('udropship_shipping_details')); ?>
+
+				<?php $sum = 0; ?>
+				<?php foreach($udropship_shipping_details->methods as $methods) : ?>
+					<?php $sum += $methods->price; ?>
+					<p><?php echo $methods->carrier_title; ?> - <?php echo $methods->method_title; ?> - <?php echo Mage::helper('core')->currency($methods->price); ?></p>
+				<?php endforeach; ?>
+
+				<br />
+
+				<p><strong>Total de taxa de envio: <?php echo Mage::helper('core')->currency($sum); ?></strong></p>
+
+
+				<hr />
+
+				<h3>Resumo da sua compra</h3>
+				<table width="100%" class="table">
+					<thead>
+					<tr>
+						<th class="first">
+							Produto
+						</th>
+						<th>
+							Qtde
+						</th>
+						<th>
+							Valor Un.
+						</th>
+						<th class="last">
+							Total
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?php $items = $order->getItemsCollection(); ?>
+
+					<?php $count = 0; foreach($items as $_item) : $data = $_item->getData(); $count++; ?>
+						<tr>
+							<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+								<?php echo $data['name']; ?>
+							</td>
+							<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+								<?php echo (int) $data['qty_ordered']; ?>
+							</td>
+							<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+								<?php echo Mage::helper('core')->currency($data['price']); ?>
+							</td>
+							<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?>">
+								<?php echo Mage::helper('core')->currency($data['row_total']); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+				<br />
+
+				<div class="text-right">
+					<strong>TOTAL R$ <?php echo $order->getTotalDue(); ?><?php //print_r(get_class_methods($order)); ?></strong>
+				</div>
+
+				<br />
+
+			</div>
+
+
+
+
+
+			<div class="clear"></div>
+		</div>
+	</div>
+
+
+</div>
+
+<br />

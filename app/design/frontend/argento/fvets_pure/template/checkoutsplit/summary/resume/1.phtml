@@ -1,0 +1,163 @@
+<?php
+$_coreHelper = $this->helper('core');
+$checkoutHelper = Mage::helper('onestepcheckout/checkout');
+$salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep();
+?>
+<div class="clear"></div>
+
+<div class="arrow">
+	<div class="text hide"><?php echo $this->__('econder resumo do pedido'); ?></div>
+	<div class="text show"><?php echo $this->__('ver resumo do pedido'); ?></div>
+	<i class="fa fa-chevron-right fa-2x"></i>
+</div>
+
+<div class="onestepcheckout-summary-scroll onestepcheckout-summary-scroll-<?php echo $salesrep->getId(); ?>">
+	<table class="onestepcheckout-summary" width="100%">
+		<thead>
+			<tr>
+				<th class="name"><?php echo $this->__('Product'); ?></th>
+				<th class="total"><?php echo $this->__(''); ?></th>
+				<th class="qty"><?php echo $this->__('Qty'); ?></th>
+				<th class="total"><?php echo $this->__('Subtotal'); ?></th>
+				<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+					<th class="total"><?php echo $this->__('Total'); ?></th>
+				<?php endif; ?>
+			</tr>
+		</thead>
+		<?php foreach($this->getItems() as $item): ?>
+		<tr>
+			<td class="name">
+				<span>
+				<?php echo $item->getName(); ?>
+				<?php if($checkoutHelper->settings['show_custom_options']): ?>
+					<?php $options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct()); ?>
+					<?php if(isset($options['options']) && count($options['options']) > 0): ?>
+					<ul class="onestepcheckout-custom-options">
+					<?php foreach($options['options'] as $option): ?>
+						<li><b><?php echo $option['label'] . ':</b> ' . $option['value']; ?></li>
+					<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+
+					<?php if($item->getProduct()->isConfigurable()): ?>
+
+					<?php
+					$configurable_options = $item->getProduct()->getTypeInstance(true)->getSelectedAttributesInfo($item->getProduct());
+					?>
+
+					<?php if(is_array($configurable_options) && count($configurable_options) > 0): ?>
+					<ul class="onestepcheckout-custom-options">
+					<?php foreach($configurable_options as $option): ?>
+						<li><b><?php echo $option['label']; ?>:</b> <?php echo $option['value']; ?></li>
+					<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+
+					<?php endif; ?>
+
+				<?php endif; ?>
+				</span>
+			</td>
+
+			<td>
+				<span>
+				<?php $_product = Mage::getModel('catalog/product')->load($item->getData('product_id'));
+				//$_urlImage = Mage::helper('prolabels')->getLabelImgUrl($_product, 'product');
+				//$productAltText = Mage::helper('prolabels')->getAltText($_product, 'product');
+				$label = Mage::helper('prolabels')->getlabel($_product, 'product');
+				if(!empty($label)) { ?>
+					<?php echo $label; ?>
+				<?php } ?>
+				</span>
+			</td>
+
+			<td class="qty">
+				<span>
+					<?php echo $item->getQty(); ?>
+				</span>
+			</td>
+			<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+				<td class="total">
+					<span>
+					<?php if ($item->getOriginalPrice() * $item->getQty() > $this->helper('checkout')->getSubtotalInclTax($item)) : ?>
+						<?php echo str_replace('R$', '', $this->helper('checkout')->formatPrice($item->getOriginalPrice() * $item->getQty(), true)); ?>
+					<?php else : ?>
+						<?php echo str_replace('R$', '', $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item), true)); ?>
+					<?php endif; ?>
+					</span>
+				</td>
+			<?php endif; ?>
+			<td class="total">
+				<?php if($checkoutHelper->settings['display_tax_included']): ?>
+					<?php $_price = $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item)); ?>
+				<?php else: ?>
+					<?php $_price = $this->helper('checkout')->formatPrice($item->getRowTotal()); ?>
+				<?php endif; ?>
+				<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+					<?php echo str_replace('R$', '', $_price); ?>
+				<?php else: ?>
+					<?php echo $_price; ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+</div>
+
+
+
+
+
+<script>
+	//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery('.onestepcheckout-summary-scroll-<?php echo $salesrep->getId(); ?>').height(jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').height() /*- jQuery('.order-<?php echo $salesrep->getId(); ?> .subtotals').height()*/);
+		jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow').click(function() {
+			showHideSummary<?php echo $salesrep->getId(); ?>();
+		})
+		showHideSummary<?php echo $salesrep->getId(); ?>();
+	});
+
+	/*jQuery(window).load(function() {
+		showHideSummary();
+	});*/
+
+	function showHideSummary<?php echo $salesrep->getId(); ?>()
+	{
+		if (jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').hasClass('openned'))
+		{
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').css({'right':'-'+(jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').outerWidth() - jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow').outerWidth())+'px'});
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').removeClass('openned');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').addClass('closed');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .fa').addClass('fa-flip-horizontal');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .hide').hide();
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .show').show();
+		}
+		else
+		{
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').css({'right':'0'});
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').removeClass('closed');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?>').addClass('openned');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .fa').removeClass('fa-flip-horizontal');
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .hide').show();
+			jQuery('.onestepcheckout-summary-<?php echo $salesrep->getId(); ?> .arrow .show').hide();
+		}
+	}
+
+	function organizeProlabel()
+	{
+		jQuery(".onestepcheckout-summary .fvets-prolabel a.tooltip").trigger("hover");
+		jQuery(".onestepcheckout-summary .fvets-prolabel a.tooltip span").each(function(index, element)
+		{
+			jQuery(this).css({'left': (jQuery(this).parent().offset().left - jQuery(this).width()) + 1 + 'px'});
+			jQuery(this).css({'top': (jQuery(this).parent().offset().top - jQuery(window).scrollTop() + 21) + 'px'});
+		});
+	}
+
+	jQuery(document).ready(function() {
+		jQuery(".onestepcheckout-summary .fvets-prolabel a.tooltip").hover(function() {
+			organizeProlabel();
+		})
+	})
+	//]]>
+</script>

@@ -1,0 +1,65 @@
+<?php
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+?>
+
+<?php
+	$blockClassName = Mage::getConfig()->getBlockClassName('catalog/navigation');
+	$block = new $blockClassName();
+	$_helper    = $this->helper('catalog/output');
+	$_category  = $this->getCurrentCategory();
+
+	$childrens = Mage::getModel('catalog/category')->load($_category->getId())->getChildrenCategories();
+
+
+
+	foreach ($childrens as $child) :
+		$child=Mage::getModel('catalog/category')->load($child->getId());
+
+
+
+	?>
+
+			<div class="block">
+				<div class="block-title">
+					<a href="<?php echo $block->getCategoryUrl($child); ?>" alt="<?php echo $child->getName(); ?>"><strong><?php echo $child->getName(); ?></strong></a>
+				</div>
+				<div class="block-content">
+						<dl id="narrow-by-list">
+							<?php $_childrens = Mage::getModel('catalog/category')->load($child->getId())->getChildrenCategories(); ?>
+							<?php $i = 0; ?>
+							<?php foreach ($_childrens as $_child) : ?>
+								<?php if (++$i == 6) : ?>
+									<a href="javascript://" data-category="<?php echo $child->getId(); ?>" class="trigger-see-all">Veja mais</a>
+									<div class="see-all category<?php echo $child->getId(); ?>">
+								<?php endif; ?>
+									<dt><a href="<?php echo $block->getCategoryUrl($_child); ?>" alt="<?php echo $_child->getName() ?>"><?php echo $_child->getName() ?></a></dt>
+
+							<?php endforeach; ?>
+								<?php if ($i >= 6) : ?>
+									</div>
+								<?php endif; ?>
+						</dl>
+						<script type="text/javascript">decorateDataList('narrow-by-list')</script>
+				</div>
+			</div>
+
+	<?php endforeach; ?>
+<script>
+	jQuery(document).ready(function() {
+		jQuery('.trigger-see-all').bind({
+			click: function() {
+				jQuery('.see-all.category'+jQuery(this).data('category')).show();
+				jQuery(this).hide();
+			}
+		})
+	})
+</script>
+<style>
+	.sidebar .block-content .see-all {
+		display: none;
+	}
+</style>

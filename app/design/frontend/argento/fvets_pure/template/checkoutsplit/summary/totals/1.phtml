@@ -1,0 +1,89 @@
+<?php
+$_coreHelper = $this->helper('core');
+$checkoutHelper = Mage::helper('onestepcheckout/checkout');
+$totalDiscount = 0.00;
+?>
+
+<table class="onestepcheckout-totals" width="100%">
+	<?php foreach($this->getTotals() as $total): ?>
+		<?php if(!$total->getTitle()){continue;}?>
+		<?php
+		$fullInfo = $total->getFullInfo();
+
+		if(!empty($fullInfo) && $checkoutHelper->settings['display_full_tax']):
+			foreach ($fullInfo as $info):
+				$rates = current($info['rates']);
+				$amount = $info['amount'];
+				?>
+				<tr>
+					<td class="title"><?php echo $rates['title'] ?> (<?php echo $rates['percent'] ?>%)</td><td class="value"><?php echo $this->helper('checkout')->formatPrice($amount); ?></td>
+				</tr>
+			<?php endforeach;
+		endif;?>
+		<tr class="<?php if($total->getCode() == 'grand_total'): ?>grand-total<?php endif; ?> <?php if(strpos($total->getCode(), 'discount') !== false || $total->getCode() == 'payment_condition'): ?>discount<?php endif; ?>">
+			<td class="title">
+				<?php
+
+				$code = $total->getCode();
+				$value = $total->getValue();
+
+
+				if($code == 'subtotal')    {
+					$total_name = $this->__('Subtotal');
+				}
+				elseif($code == 'shipping')    {
+					$total_name = $this->__('Shipping');
+					if($checkoutHelper->settings['display_tax_included'])   {
+						$value += $this->getQuote()->getShippingAddress()->getShippingTaxAmount();
+					}
+				}
+				elseif($code == 'grand_total')    {
+					$checkoutTotalObs = Mage::getStoreConfig('checkout_split/general/checkout_total_obs');
+					$total_name = ($this->__('Grand total') . ($checkoutTotalObs ? ' *' : ''));
+				}
+				elseif($code == 'discount')
+				{
+					$total_name = '<strong>'.$this->__('Discounts total').'</strong>';
+				}
+				else    {
+					$total_name = $total->getTitle();
+				}
+
+				if(strpos($total->getCode(), 'discount') !== false || $total->getCode() == 'payment_condition'):
+					echo '<a class="tooltip">' . $this->__($total_name);
+					if ($rules = $total->getRules()) :
+						echo '<span>
+        					<strong>Desconto</strong><br>';
+						foreach ($rules as $rule) :
+							if ($description = $rule->getDescription()) :
+								echo $description . '<br />';
+							else :
+								echo $rule->getName() . '<br />';
+							endif;
+						endforeach;
+						echo '</span>';
+					endif;
+					echo '</a>';
+				else :
+					echo $total_name;
+				endif;
+
+				?>
+			</td>
+			<td class="value">
+				<div class="last-child">
+					<?php if ($total->getCode() == 'discount') : ?><strong><?php 
+						$value = $totalDiscount;
+					endif; ?>
+					<?php if(strpos($total->getCode(), 'discount') !== false || $total->getCode() == 'payment_condition'): ?><?php $totalDiscount += round($value,2); endif; ?><?php echo $this->helper('checkout')->formatPrice($value); ?>
+					<?php if ($total->getCode() == 'discount') : ?></strong><?php endif; ?>
+				</div>
+			</td>
+		</tr>
+		<div class="total_rule_pupup">
+			<?php
+
+			?>
+		</div>
+	<?php endforeach; ?>
+</table>

@@ -1,0 +1,80 @@
+<div class="home_categories row">
+	<div class="container">
+
+		<div>
+			<?php
+			$blockClassName = Mage::getConfig()->getBlockClassName('catalog/navigation');
+			$block = new $blockClassName();
+
+			$categories = $block->getStoreCategories();
+
+			if (is_object($categories)) $categories = $block->getStoreCategories()->getNodes();
+			$count = 1;
+			foreach($categories as $category) :
+			if (in_array($category->getUrl_key(), array('info4vets', 'info4vet', 'busque-por-marca'))) { continue; } ?>
+			<?php $_category = Mage::getModel('catalog/category')->load($category->getId()); ?>
+
+			<div class="inner-block">
+<!--					<div class="image">-->
+<!--						<a href="--><?php //echo $block->getCategoryUrl($category); ?><!--">-->
+<!--								--><?php
+//								if ($_category->getHomepage_image()) {
+//									list($width, $height, $type, $attr) = getimagesize(Mage::getBaseUrl('media').'catalog/category/'.$_category->getHomepage_image());
+//								} else {
+//									$width = 0;
+//									$height = 0;
+//									$type = 0;
+//									$attr = 0;
+//								}
+//								?>
+<!--								<img width="1170" height="218" style="width: 1170px; height: 218px" class="lazy" data-original="--><?php //echo Mage::getBaseUrl('media').'catalog/category/'.$_category->getHomepage_image(); ?><!--" alt="--><?php //echo  $category->getName(); ?><!--" --><?php //echo $attr; ?><!-- />-->
+<!--						</a>-->
+<!--					</div>-->
+				<div class="header-categories">
+					<hr/>
+					<div class="title">
+						<span><?php echo $category->getName(); ?></span>
+					</div>
+				</div>
+				<br />
+				<div>
+					<?php
+						$children = $category->getChildren();
+						$count2 = 0;
+						foreach ($children as $child) :
+
+							if ($child->getIsActive()) :
+							?>
+								<div class="col-sm-6 links <?php echo $_category->getUrlKey(); ?> defaultcat row">
+									<div class="background">
+										<div class="col-xs-1 col1"></div>
+										<a class="col-xs-10 col-sm-9 col2" href="<?php echo $block->getCategoryUrl($child); ?>"><?php echo $child->getName(); ?></a>
+										<div class="col-xs-2 col3 hidden-xs">+</div>
+									</div>
+								</div>
+							<?php
+								$count2++;
+								if($count2 % 2 == 0) :
+								?>
+									</div>
+									<div class="clear"></div>
+									<div>
+								<?php
+								endif;
+							endif;
+
+
+						endforeach;
+					?>
+				</div>
+				<div class="clear"></div>
+				<?php if($count2 % 2 != 0) : ?>
+				<br />
+				<?php endif; ?>
+
+			</div>
+			<?php $count++; ?>
+			<?php endforeach;	?>
+		</div>
+	</div>
+</div>

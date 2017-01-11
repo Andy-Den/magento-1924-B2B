@@ -1,0 +1,64 @@
+<a href="#" class="btn-review btn">DÊ SUA AVALIAÇÃO</a>
+
+<script type="text/javascript">
+
+	<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()) { ?>
+	jQuery(document).ready(function () {
+
+		jQuery('.btn-review').bind('click', function (element) {
+			element.preventDefault();
+			window.location.href = window.location.href + '?review=true'
+		});
+
+		if (getURLParameter('review') != undefined) {
+			jQuery.featherlight(jQuery('#account-login-box'));
+		}
+
+	});
+	<?php } else { ?>
+
+	jQuery(document).ready(function () {
+		jQuery('.btn-review').click(function () {
+			goToReviewAnchor('#review-form', 50, true);
+			return false;
+		});
+
+		if (window.location.href.indexOf('#review-form') > -1) {
+			goToReviewAnchor('#review-form', 50, true);
+			return false;
+		}
+		if (window.location.href.indexOf('#users-reviews') > -1) {
+			goToReviewAnchor('#users-reviews', 100, false);
+			return false;
+		}
+		//se usuário está logado e se "review" estiver setado como parâmetro, significa que é para mostrar o form de review
+		if (getURLParameter('review') != undefined) {
+			goToReviewAnchor('#review-form', 50, true);
+		}
+
+	});
+
+	function goToReviewAnchor(anchorName, positionBack, showReviewForm) {
+		if (showReviewForm) {
+			jQuery('.form-add').show();
+		}
+
+		var catTopPosition = jQuery(anchorName).offset().top - positionBack;
+		jQuery('html, body').animate({scrollTop: catTopPosition}, 'slow');
+	}
+
+	<?php } ?>
+
+	function getURLParameter(sParam) {
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+		for (var i = 0; i < sURLVariables.length; i++)
+		{
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam)
+			{
+				return sParameterName[1];
+			}
+		}
+	}
+</script>

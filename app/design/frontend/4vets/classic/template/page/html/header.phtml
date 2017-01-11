@@ -1,0 +1,92 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.3&appId=129533510590383";
+		js.async = true;
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="header">
+	<div class="container">
+		<header role="banner">
+			<div>
+				<div class="col-md-2 text-center col-sm-4">
+					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+				</div>
+				<div class="col-md-10 col-sm-8">
+					<div class="quick-access">
+						<div class="top-links">
+							<div class="col-md-8 text-left col-sm-7">
+								<div class="row">
+									<div class="col-md-5 col-sm-5 welcome-msg-container hidden-sm hidden-xs">
+										<span class="welcome-msg">
+											<?php echo $this->getWelcome() ?>
+										</span>
+									</div>
+									<div class="col-md-7 inherit-link-login-register  text-left-xs col-sm-12">
+										<?php if($this->helper('customer')->isLoggedIn()): ?>
+											<a href="<?php echo $this->getUrl('customer/account/logout'); ?>">(sair)</a>
+										<?php else: ?>
+											<?php echo $this->getAdditionalHtml() ?><span class="link-login-register"><a href="<?php echo Mage::getUrl('customer/account/login'); ?>">Faça seu Login</a> <span class="ou">ou</span> <a href="<?php echo Mage::getUrl('customer/account/create'); ?>">Cadastre-se</a></span>
+										<?php endif; ?>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 text-right col-sm-5 header-institutional-links hidden-xs">
+								<?php /*<div class="clearfix">
+									<?php if($this->helper('customer')->isLoggedIn()): ?>
+										<?php echo $this->getChildHtml('topLinks') ?>
+									<?php else: ?>
+										<a href="javascript:void(0)" class="customer modal-login button-register-popup" id="customer-modal-login-register" data-modal-target="forgot">Faça seu cadastro <span class="red">gratuito</span> aqui</a>
+										|
+										<a href="javascript:void(0)" class="customer modal-login button-login-popup" id="customer-modal-login-login" data-modal-target="forgot">Faça seu LOGIN</a>
+									<?php endif; ?>
+								</div> */ ?>
+
+								<?php if($this->helper('customer')->isLoggedIn()): ?>
+								<a href="<?php echo $this->getUrl('customer/account'); ?>">Minha Conta</a>
+								|
+								<?php endif; ?>
+								<a href="<?php echo $this->getUrl('sobre-nos'); ?>">Sobre nós</a>
+								|
+								<a href="<?php echo $this->getUrl('como-funciona'); ?>">Ajuda</a>
+								|
+								<a href="<?php echo $this->getUrl('contato'); ?>">Contato</a>
+<!--								|-->
+<!--								--><?php //echo Mage::getModel('core/variable')->loadByCode('full_phone')->getValue('plain'); ?>
+							</div>
+						</div>
+						<?php echo $this->getChildHtml('topSearch') ?>
+					</div>
+				</div>
+			</div>
+		</header>
+	</div>
+	<?php echo $this->getChildHtml('topMenu') ?>
+</div>
+
+<div id="fixed-menu">
+	<div class="container">
+		<header role="banner">
+			<div>
+				<div class="col-sm-3 col-md-2 hidden-xs">
+					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" height="45" style="max-height: 45px" /></a>
+				</div>
+				<div class="col-sm-3 col-md-2 hidden-xs">
+					<div class="menu-see-all-site">
+						<a href="/busque-por-marca" class="level-top"><i class="fa fa-chevron-down"></i> &nbsp; <span>busque por marca</span></a>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-8">
+					<?php echo $this->getChildHtml('topSearch') ?>
+				</div>
+			</div>
+		</header>
+	</div>
+</div>
+
+<?php echo $this->getChildHtml('loginbox'); ?>
+
+<?php echo $this->getChildHtml('header_banners'); ?>

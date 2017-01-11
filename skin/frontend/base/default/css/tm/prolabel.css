@@ -1,0 +1,161 @@
+.prolabel-wrapper { position: relative; }
+.prolabels-content-wrapper { display: table; }
+.prolabels-content-wrapper ul.tt-wrapper { display: table; }
+.prolabels-content-wrapper ul.tt-wrapper li { display: table-cell; vertical-align: middle; }
+.prolabels-content-wrapper ul.tt-wrapper,
+.prolabels-content-wrapper ul.tt-wrapper li { margin: 0; padding: 0; list-style: none; }
+.prolabels-mobile-content {  }
+.prolabels-mobile-wrapper { float: left; }
+.prolabel-mobile { display: table-cell; vertical-align: middle; }
+.prolabels-image-mobile { display: table; }
+.prolabel-wrapper .prolabels-image { display: table; }
+
+.productlabeltext {
+    line-height: 11px;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: block;
+    letter-spacing:0.01px;
+    text-decoration: none;
+    color: #fff;
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+.prolabel-wrapper a {
+    text-decoration: none;
+    position: relative;
+}
+.products-list .prolabel-wrapper {
+    float:left;
+}
+.prolabel {
+    position: absolute;
+    z-index: 10;
+}
+.prolabel td {
+    vertical-align: middle;
+    text-align: center;
+}
+.top-center {
+    top: 0;
+    left: 50%;
+}
+.middle-left {
+    left: 0;
+    top: 50%;
+}
+.middle-right {
+    right: 0;
+    top: 50%;
+}
+.bottom-center {
+    bottom: 0;
+    right: 50%;
+}
+.middle-center {
+    top: 50%;
+    right: 50%;
+}
+.top-left {
+    top: 0;
+    left: 0;
+}
+.top-right {
+    top: 0;
+    right: 0;
+}
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+/*IE6 fix*/
+* html .prolabel-wrapper { float: left; }
+* html .prolabel-wrapper a { position: relative; }
+
+
+/*fvets label/tooltips*/
+
+/*default positions*/
+.fvets-prolabel {
+    color: #ffffff;
+}
+
+.fvets-prolabel a.tooltip {
+    display: block;
+    min-height: 22px;
+    padding: 3px 5px 0 12px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.fvets-prolabel a.tooltip span:before {
+    content: "";
+    display: block;
+    border-left: 6px solid #00923f;
+    border-top: 6px solid transparent;
+    position: absolute;
+    top: -6px;
+    left: 0px;
+}
+
+.fvets-prolabel a.tooltip span {
+    display: none;
+}
+
+.fvets-prolabel a.tooltip:hover span {
+    position: absolute;
+    z-index: 999;
+    white-space: nowrap;
+    left: 50%;
+    background: #00923f;
+    padding: 0px 7px;
+    line-height: 24px;
+    transition: opacity 0.4s ease-out;
+    border-radius: 0 5px 5px 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font: bold 13px/1.35 Arial,Helvetica,sans-serif;
+    color: #ffffff;
+    background-color: #00923f;
+    opacity: 1;
+    top: 30px;
+    display: block;
+}
+
+/*product view*/
+.product-view .product-img-box .prolabel-wrapper .fvets-prolabel {
+    left: 305px;
+    position: absolute;
+    top: 7px;
+    z-index: 900;
+}
+
+/*catalog*/
+.products-list .product-shop .fvets-prolabel {
+    position: relative;
+    float: left;
+    margin-left: 8px;
+    margin-top: 0px;
+}
+
+.products-grid .prolabel-wrapper .fvets-prolabel {
+    position: relative;
+    float: right;
+    margin-left: 8px;
+    margin-top: 0px;
+}
+
+.products-grid .prolabel-wrapper .fvets-prolabel a {
+    z-index: 995;
+    position: absolute;
+    right: 8px;
+    top: 7px;
+}
+
+.products-grid.cols-3 li.item div.prolabel-wrapper div.fvets-prolabel a.tooltip {
+    right: 9px;
+}

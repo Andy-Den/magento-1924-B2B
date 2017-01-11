@@ -1,0 +1,61 @@
+@import '../../default';
+
+.header-container {
+  border-bottom:3px solid #017874;
+}
+
+.page {
+  background-image: url("@{skinUrl}images/nossos-valores-background.jpg");
+
+  .main {
+    background: none;
+
+    .content-heading {
+      background-image: url("@{skinUrl}images/nossos-valores-heading.jpg");
+      h1 {
+        color: white;
+      }
+    }
+
+    .std {
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      .desktop {
+        display: block;
+      }
+      .mobile {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .page {
+    background: none;
+    .main-container {
+      .main {
+        .content-heading {
+          background-image: url("@{skinUrl}images/nossos-valores-heading-mobile.jpg");
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 100% 100%;
+          height: 177px;
+        }
+
+        .std {
+          .desktop {
+            display: none;
+          }
+          .mobile {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

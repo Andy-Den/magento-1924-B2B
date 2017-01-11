@@ -1,0 +1,272 @@
+@import "../../../../fvets_pure/less/mixins";
+
+.catalog-category-view
+{
+
+  h1
+  {
+    font-size: 34px;
+    color:@color1;
+  }
+
+  h3
+  {
+    font-size: 24px;
+    font-weight: 600;
+    color: @defaultColor7;
+  }
+
+  p
+  {
+    font-size: 16px;
+  }
+
+  .col-main
+  {
+    margin: 0;
+  }
+  .category-image
+  {
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+
+    .category-title
+    {
+      background: fade(@defaultColor2, 78%);
+      width: 55%;
+      padding-right: 5%;
+      left: 0;
+      margin: 100px 0;
+      text-align: left;
+      .opacity(80%);
+      .boxSizing();
+
+      .inner
+      {
+        width: 100%;
+        max-width: 475px;
+        float: right;
+        padding: 60px 0;
+        .boxSizing();
+
+        h1
+        {
+          color:white;
+          .textShadow();
+          font-weight: lighter;
+          text-transform: uppercase;
+        }
+
+        .subtitle
+        {
+          color:white;
+          padding: 0;
+          font-size: 21px;
+        }
+      }
+    }
+  }
+
+  .category-description
+  {
+    width: 100%;
+    padding-bottom: 70px;
+  }
+
+  .block1
+  {
+    margin: 120px 0;
+
+    h3
+    {
+      white-space: nowrap;
+    }
+
+    ul
+    {
+      &.level1
+      {
+        li, li a
+        {
+
+          font-size: 24px;
+          line-height: 1.5;
+
+          &:hover
+          {
+//            text-decoration: underline;
+          }
+        }
+      }
+
+      &.level2
+      {
+        padding-left: 15px;
+
+        li
+        {
+          font-size: 18px;
+        }
+      }
+    }
+    .column
+    {
+      &.right
+      {
+        .image
+        {
+          text-align: right;
+        }
+      }
+
+      &.fat
+      {
+        border-right: @defaultBorder;
+        width: 52%;
+      }
+
+      &.thin
+      {
+        width: 48%;
+      }
+    }
+  }
+
+  .block2, .block3
+  {
+    margin-bottom: 120px;
+
+    .image
+    {
+      img
+      {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.catalog-category-view
+{
+  .idexx-breadcrumb
+  {
+    .inner
+    {
+      .overlay
+      {
+        left:42.6%;
+      }
+    }
+  }
+}
+
+.page .pre-footer-cms-container
+{
+  background-image:url("@{skinUrl}images/footer/dog.png");
+}
+
+@media (max-width: 980px) {
+//  div.main-container {
+//    display: none;
+//  }
+
+  .catalog-category-view {
+    .idexx-breadcrumb {
+      .inner {
+        .overlay {
+          width: 29%;
+        }
+      }
+    }
+  }
+
+  div.category-image {
+    padding: 0 2%;
+    box-sizing: border-box;
+  }
+
+  div.main-container {
+    padding: 0 2%!important;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 950px) {
+  .block1 {
+    div {
+      &.column {
+        &.fat {
+          width: 100% !important;
+          border-right: none!important;
+        }
+
+        &.right {
+          &.thin {
+            width: 100%;
+            .image {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-category-view {
+    .page {
+      .main-container {
+        .col-main {
+          width: 100%!important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .catalog-category-view {
+    .category-image {
+      .category-title {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .catalog-category-view {
+    .category-image {
+      .category-title {
+        .inner {
+          padding-right: 2%;
+          padding-left: 2%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .block1 {
+    div {
+      &.column {
+        &.fat {
+          .two-columns {
+            .column {
+              width: 100%;
+              margin: 0 2%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

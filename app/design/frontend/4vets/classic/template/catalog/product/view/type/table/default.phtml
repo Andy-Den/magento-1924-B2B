@@ -1,0 +1,47 @@
+<?php $_product = $this->getProduct() ?>
+
+<tr data-post='<?php echo json_encode(array('product'=>$_product->getId(), 'qty' => 0)); ?>'  data-tier='<?php echo json_encode($_product->getTierPrice()) ?>'>
+  <td width="200">
+    <span class="product-name"><?php echo $_product->getName() ?></span>
+  </td>
+  <td class="a-left text-left" width="20">
+    <?php if ($_product->isAvailable()): ?>
+      <span class="in-stock"><i class="fa fa-check-circle-o"></i>&nbsp;<?php //echo $this->__('In stock') ?></span>
+    <?php else: ?>
+      <span class="out-of-stock"><i class="fa fa-ban"></i>&nbsp;<?php //echo $this->__('Out of stock') ?></span>
+    <?php endif; ?>
+  </td>
+	<td>
+		<span class="product-price"><?php echo $this->getChildHtml('product_type_data') ?></span>
+	</td>
+  <td width="104" class="rowBoxQty">
+    <?php if ($_product->isAvailable()): ?>
+      <?php if((int)$_product->getBoxQty() > 1): ?>
+        <script>showRowBoxQty = true;</script>
+        <div class="buy-box">
+          <label for=""><input type="checkbox" class="use-box" onclick="changeItensToPruchase(<?php echo $_product->getId(); ?>)" data-value="<?php echo $_product->getBoxQty();?>"/> <?php echo $_product->getBoxQty();?></label>
+        </div>
+      <?php endif; ?>
+    <?php endif; ?>
+  </td>
+
+  <td width="100">
+    <?php if ($_product->isAvailable()): ?>
+			<div class="quantity-all-box item-box-<?php echo $_product->getId(); ?>">
+				<div class="quantity-box">
+					<input type="text" class="quantity qty" name="qty" value="1">
+				</div>
+				<div class="controls-box">
+					<ul>
+						<li data-id="<?php echo $_product->getId(); ?>" class="sum qty-action increase">
+
+						</li>
+						<li data-id="<?php echo $_product->getId(); ?>" class="subtraction qty-action decrease">
+
+						</li>
+					</ul>
+				</div>
+			</div>
+    <?php endif; ?>
+  </td>
+</tr>

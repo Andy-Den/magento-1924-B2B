@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_AttributeMenu extension
+ * 
+ * @category       FVets
+ * @package        FVets_AttributeMenu
+ * @copyright      Copyright (c) 2015
+ */
+-->
+<config>
+    <modules>
+        <FVets_AttributeMenu>
+            <version>1.0.0</version>
+        </FVets_AttributeMenu>
+    </modules>
+    <global>
+        <resources>
+            <fvets_attributemenu_setup>
+                <setup>
+                    <module>FVets_AttributeMenu</module>
+                    <class>FVets_AttributeMenu_Model_Resource_Setup</class>
+                </setup>
+            </fvets_attributemenu_setup>
+        </resources>
+        <blocks>
+            <fvets_attributemenu>
+                <class>FVets_AttributeMenu_Block</class>
+            </fvets_attributemenu>
+        </blocks>
+        <helpers>
+            <fvets_attributemenu>
+                <class>FVets_AttributeMenu_Helper</class>
+            </fvets_attributemenu>
+        </helpers>
+        <models>
+            <fvets_attributemenu>
+                <class>FVets_AttributeMenu_Model</class>
+                <resourceModel>fvets_attributemenu_resource</resourceModel>
+            </fvets_attributemenu>
+            <fvets_attributemenu_resource>
+                <class>FVets_AttributeMenu_Model_Resource</class>
+                <entities>
+                    <entity>
+                        <table>fvets_attributemenu_entity</table>
+                    </entity>
+                    <entity_store>
+                        <table>fvets_attributemenu_entity_store</table>
+                    </entity_store>
+                </entities>
+            </fvets_attributemenu_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <fvets_attributemenu>
+                    <file>fvets_attributemenu.xml</file>
+                </fvets_attributemenu>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <FVets_AttributeMenu>
+                    <files>
+                        <default>FVets_AttributeMenu.csv</default>
+                    </files>
+                </FVets_AttributeMenu>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <FVets_AttributeMenu before="Mage_Adminhtml">FVets_AttributeMenu_Adminhtml</FVets_AttributeMenu>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <attributemenu>
+                <use>standard</use>
+                <args>
+                    <module>FVets_AttributeMenu</module>
+                    <frontName>attributemenu</frontName>
+                </args>
+            </attributemenu>
+        </routers>
+    </frontend>
+</config>

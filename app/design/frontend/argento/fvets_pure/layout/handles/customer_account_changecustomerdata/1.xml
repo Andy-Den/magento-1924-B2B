@@ -1,0 +1,18 @@
+<include_layout version="0.1.0">
+    <customer_account_changecustomerdata>
+        <update handle="customer_account"/>
+        <update handle="page_one_column"/>
+        <update handle="customer_account_navigation_1" />
+        <remove name="left"></remove>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_changecustomerdata/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/jquery.quickselect.css</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.quicksilver.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.js</name></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/form_register" name="customer_account_changecustomerdata" template="customer/account/changecustomerdata/1.phtml" />
+        </reference>
+    </customer_account_changecustomerdata>
+</include_layout>

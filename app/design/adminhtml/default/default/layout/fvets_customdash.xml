@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_fvets_index_index>
+        <reference name="content">
+            <block type="fvets_customdash/adminhtml_dashboard" name="fvets_customdash_dashboard"/>
+        </reference>
+    </adminhtml_fvets_index_index>
+
+    <adminhtml_dashboard_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <script>fvets/customdash/css/dashboard.css</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_customdash/adminhtml_dashboard" name="fvets_customdash_dashboard" before="dashboard">
+                <block type="fvets_customdash/adminhtml_filters" name="filters" as="filters" template="fvets/customdash/form/filters.phtml">
+                    <block type="adminhtml/store_switcher" name="websites.switcher" as="website-switcher" template="fvets/customreports/switcher/websiteswitcher.phtml" before="-"/>
+                </block>
+            </block>
+            <remove name="dashboard"/>
+        </reference>
+    </adminhtml_dashboard_index>
+</layout>

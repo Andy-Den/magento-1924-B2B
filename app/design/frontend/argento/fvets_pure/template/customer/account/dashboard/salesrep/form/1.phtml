@@ -1,0 +1,44 @@
+<?php if ($salesrep = Mage::getSingleton('fvets_salesrep/session')->getCustomer()->getId()) : ?>
+	<div class="salesrepFormContainer">
+		<form action="<?php echo Mage::getModel('core/url')->getUrl('salesreplogin'); ?>" method="post" name="salesrepForm">
+			<h3 for="customer-select_quickselect">Selecione o cliente com qual deseja comprar</h3>
+			<br />
+			<?php $customers =  $this->helper('fvets_salesrep')->getSalesRepCustomers(Mage::getSingleton('customer/session')->getCustomer()->getFvetsSalesrep()); ?>
+			<select id="customer-select" name="id" class="input-text required-entry">
+				<?php foreach($customers as $customer) : ?>
+					<option></option>
+					<option value="<?php echo $customer->getId(); ?>"><?php echo $customer->getIdErp() . ' - ' . $customer->getFirstname() . ' ' . $customer->getLastname() . ' (' . (trim($customer->getCpf()) != '' ? $customer->getCpf() : $customer->getCnpj()) . ')'; ?></option>
+				<?php endforeach; ?>
+			</select>
+			<button type="submit" title="<?php echo $this->__('Login as customer') ?>" class="button btn-loginascustomer btn-doToAction disabled"><span><span><?php echo $this->__('Login as customer') ?></span></span></button>
+		</form>
+		<?php if (Mage::getSingleton('fvets_salesrep/session')->getCustomer()->getId() != Mage::getSingleton('customer/session')->getCustomer()->getId()) :?>
+			<div class="link-session-back">
+				<a href="<?php echo Mage::getModel('core/url')->getUrl('salesreplogin', array('id' => Mage::getSingleton('fvets_salesrep/session')->getCustomer()->getId())); ?>">Voltar à sessão de Representante Comercial</a>
+			</div>
+		<?php endif; ?>
+	</div>
+
+	<script>
+
+		//<![CDATA[
+		var contactForm = new VarienForm('salesrepForm', true);
+		//]]>
+
+		if (jQuery('#customer-select') != undefined)
+		{
+			jQuery(document).ready(function() {
+				jQuery('#customer-select').quickselect({
+					autoSelectFirst : false,
+					selectSingleMatch: false,
+					inputClass: 'input-text required-entry',
+					onItemSelect: function (li)
+					{
+						jQuery('.btn-loginascustomer').removeClass('disabled');
+					}
+				});
+			})
+		}
+	</script>
+	<br /><br />
+<?php endif; ?>

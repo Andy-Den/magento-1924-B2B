@@ -1,0 +1,5 @@
+<?php $_filters = $this->getFilters() ?>
+<?php foreach ($_filters as $_filter): ?>
+		<dt><?php echo $this->__($_filter->getName()) ?></dt>
+		<dd><?php echo $_filter->getHtml() ?></dd>
+<?php endforeach; ?>

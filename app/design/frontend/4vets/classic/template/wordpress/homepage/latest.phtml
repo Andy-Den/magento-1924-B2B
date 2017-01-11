@@ -1,0 +1,58 @@
+<?php
+
+	$posts = $this->getLatestPosts();
+
+	$time = rand(0, time());
+
+ ?>
+
+<?php if ($this->getPage() == 1) : ?>
+<div class="row blog-post_list">
+
+	<h1 class="block-title">Posts mais recentes</h1>
+	<div id="ajax<?php echo $time; ?>">
+<?php endif; ?>
+
+<?php foreach($posts as $post): ?>
+	<div class="item<?php if ($post->isSticky()): ?> featured<?php endif; ?> <?php if(($counter+1) % 4 == 0 || $countposts == $counter):?> last<?php endif;?>">
+		<?php echo $this->getPostRenderer($post)->toHtml() ?>
+	</div>
+	<br />
+	<hr />
+	<br /><br />
+<?php endforeach; ?>
+
+<?php if ($this->getPage() == 1) : ?>
+	</div>
+	<div id="loading<?php echo $time; ?>" style="display:none">
+		<center><img src="<?php echo $this->getSkinUrl('images/loading.gif'); ?>" alt="Carregando" /></center>
+	</div>
+	<span id="button-load"><a href="javascript://" onClick="getMore();" class="blog-button">Carregar mais</a></span>
+	<br /><br /><br /><br />
+</div>
+<script>
+	var page = <?php echo $this->getPage(); ?>;
+	function getMore()
+	{
+		page++;
+		jQuery('#loading-mask').show();
+		jQuery.ajax({
+		    url: "/blog/latest",
+		    type: "POST",
+		    data: "page="+page<?php if (Mage::registry('category_id')) { echo '+"&category='.Mage::registry('category_id').'"'; }?><?php if (Mage::registry('exclude_posts')) { echo '+"&exclude='.implode(',', Mage::registry('exclude_posts')).'"'; }?>,
+		    success: function(data) {
+			    if (data.trim() != '')
+			    {
+			    	jQuery('#ajax<?php echo $time; ?>').append(data);
+			    } else {
+				    jQuery('#button-load').html('Todos os itens foram carregados');
+			    }
+			    jQuery('#loading-mask').hide();
+		    },
+		    error: function() {
+		    	jQuery('#loading-mask').hide();
+		    }
+		});
+	}
+</script>
+<?php endif; ?>

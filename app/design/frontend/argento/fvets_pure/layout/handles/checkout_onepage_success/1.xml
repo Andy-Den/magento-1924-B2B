@@ -1,0 +1,18 @@
+<include_layout version="0.1.0">
+    <checkout_onepage_success>
+        <update handle="page_one_column" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/checkout_onepage_success/1.less</name></action>
+
+            <!-- Alteração de senha no checkout -->
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/checkout/password-change/1.less</name></action>
+            <!--Fim-->
+        </reference>
+        <reference name="checkout.success">
+            <action method="setTemplate"><template>checkout/success/1.phtml</template></action>
+            <block type="page/html" name="checkout-password-change" as="checkout-password-change" template="onestepcheckout/password_change/1.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+</include_layout>

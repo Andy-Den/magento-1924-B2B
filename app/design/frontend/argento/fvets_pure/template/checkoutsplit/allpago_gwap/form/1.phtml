@@ -1,0 +1,31 @@
+<?php
+$session = Mage::getSingleton('checkout/session');
+$quote_id = $session->getQuoteId();
+
+if ($quote_id) {
+    $quote = Mage::getModel('sales/quote')->load($quote_id);
+    if($quote->getPayment() && !$quote->getPayment()->getMethod()) {
+        return;
+    }
+    $quotePaymentCode = $quote->getPayment()->getMethodInstance()->getCode();
+} else {
+    return;
+}
+
+$_code = $this->getMethodCode();
+if ($quotePaymentCode != $_code) {
+    return;
+}
+?>
+
+<?php $salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep(); ?>
+<div class="form-list" id="payment_form_<?php echo $_code ?>-<?php echo $salesrep ? $salesrep->getId() : ''; ?>">
+    <div class="step step-bank-slip">
+
+    </div>
+    <br/>
+    <div class="step step-payment-conditions">
+        <?php echo $this->getChildHtml($_code . '_condition', false); ?>
+        <br/>
+    </div>
+</div>

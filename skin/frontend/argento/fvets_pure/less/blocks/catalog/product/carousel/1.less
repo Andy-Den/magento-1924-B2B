@@ -1,0 +1,195 @@
+@import "../../../../mixins";
+
+.carousel-products
+{
+  margin-top: 60px;
+  position: relative;
+
+  .block-content
+  {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 46px;
+    /*
+    This is the visible area of you carousel.
+    Set a width here to define how much items are visible.
+    The width can be either fixed in px or flexible in %.
+    Position must be relative!
+    */
+    .jcarousel
+    {
+      overflow: hidden;
+      width: 100%;
+
+      .bottom-links {
+        font-weight: bold;
+        margin: 1.5%;
+      }
+
+      .products-grid
+      {
+        border: none;
+        width: 20000em;
+        position: relative;
+
+        /* Optional, required in this case since it's a <ul> element */
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li.item
+        {
+          border:1px solid #FFFFFF !important;
+          margin-bottom: 0;
+          width: 214px;
+          margin-left: 0px;
+          margin-right: 0px;
+          padding-left: 8px;
+          padding-right: 8px;
+          float: left;
+          box-sizing: border-box;
+
+          &:hover
+          {
+            border:@defaultBorder !important;
+          }
+
+          .product-name {
+            height: 32px;
+            text-align: left;
+          }
+
+          .prolabel-wrapper
+          {
+            margin-top: 10px;
+          }
+
+          .price-box
+          {
+            height: 41px;
+
+            .regular-price
+            {
+              display: block;
+            }
+
+            .regular-price,
+            .special-price
+            {
+              .price
+              {
+                font-size: 14px;
+                color:@defaultTextColor;
+                font-weight: bold;
+              }
+            }
+
+            .special-price,
+            .old-price
+            {
+              .price-label
+              {
+                display: inline-block;
+              }
+            }
+
+            .old-price
+            {
+              .price-label,
+              .price
+              {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .actions
+          {
+            float: none;
+            position: inherit;
+            background: @defaultBackgroundColor2;
+            padding: 10px 12%;
+            box-sizing: border-box;
+            height: 96px;
+            text-align: center;
+
+            .divQtd
+            {
+              width: 100%;
+            }
+            .increment-message {
+              padding-bottom: 10px;
+            }
+          }
+
+          .product-details-container {
+            min-height: 32px;
+          }
+        }
+      }
+
+    }
+
+    .jcarousel-control-prev
+    {
+      width: 46px;
+      text-align: left;
+      height: 59px;
+      //background: url("@{skinUrl}images/icons.png") -92px -85px no-repeat;
+      display: block;
+      position: absolute;
+      top: 217px;
+      left: 0;
+      //font-size:0;
+      color:@defaultColor4;
+
+      &.inactive
+      {
+        .opacity('0.1');
+      }
+    }
+
+    .jcarousel-control-next
+    {
+      width: 46px;
+      text-align: right;
+      height: 59px;
+      //background: url("@{skinUrl}images/icons.png") -92px -85px no-repeat;
+      display: block;
+      position: absolute;
+      top: 217px;
+      right: 0;
+      //font-size:0;
+      //.flipX();
+      color:@defaultColor4;
+
+      &.inactive
+      {
+        .opacity('0.1');
+      }
+    }
+  }
+}
+
+
+.col2-left-layout .carousel-products
+{
+  .block-title
+  {
+    padding-left: 54px;
+    box-sizing: border-box;
+  }
+  .block-content .jcarousel .products-grid li.item
+  {
+    width: 203px;
+  }
+}
+
+.catalog-product-view {
+  .carousel-products {
+    .block-content {
+      padding: 0 4.6%;
+    }
+  }
+}

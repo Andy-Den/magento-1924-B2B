@@ -1,0 +1,286 @@
+.brandContainer {
+  padding: 0px !important;
+  .brands-list {
+    padding: 0px !important;
+    li {
+      margin: 0 !important;
+    }
+  }
+}
+
+.block-highlight {
+  #highlight-bestsellers {
+    max-height: 572px;
+    li {
+      .product-name {
+        margin-bottom: 0.2em;
+      }
+    }
+  }
+}
+
+.product-details {
+  .price {
+    margin-top: 0px;
+  }
+}
+
+.main-container {
+  max-width: auto !important;
+  .main {
+    width: 960px;
+    padding: 0 5px;
+    padding-top: 20px !important;
+  }
+}
+
+//home não logado
+
+@media (max-width: 1035px) {
+  .cms-index-index {
+    &.logged-out {
+      .main-container {
+        .main {
+          width: 100%;
+          .col-main {
+            .col-1 {
+              width: 67.3%;
+              .easyslideslider-id {
+                .scroller {
+                }
+              }
+            }
+            .col4-set {
+              &.advantages {
+                .item {
+                  width: 23%;
+                  float: left;
+                  margin: 0 0.7%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 985px) {
+  .cms-index-index {
+    &.logged-out {
+      .main-container {
+        .main {
+          .col-main {
+            .col-1 {
+              width: 65.3%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 867px) {
+  .cms-index-index {
+    &.logged-out {
+      .main-container {
+        .main {
+          .col-main {
+            .col-1 {
+              width: 58.3%;
+            }
+            .account-login {
+              width: 37.7%;
+              float: right;
+              .registered-users {
+                width: 100%;
+                padding: 5px 5px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .cms-index-index {
+    &.logged-out {
+      .main-container {
+        .main {
+          .col-main {
+            .col-1 {
+              width: 100%;
+            }
+            .account-login {
+              width: 95%;
+              float: none;
+              margin: 0 auto;
+              .registered-users {
+                margin-top: 15%;
+              }
+            }
+            .col4-set {
+              &.advantages {
+                .item {
+                  width: 100%;
+                  margin: 1% 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 447px) {
+  .cms-index-index {
+    &.logged-out {
+      .main-container {
+        .main {
+          .col-main {
+            .col-1 {
+            }
+            .account-login {
+              .registered-users {
+                margin-top: 20%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//home logado
+
+@media (max-width: 1005px) {
+  .cms-index-index {
+    &.logged-in {
+      .main-container {
+        .main {
+          .col-main {
+            .callout-home-top {
+              .col-1 {
+                width: 65%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 979px) {
+  .cms-index-index {
+    &.logged-in {
+      .main-container {
+        .main {
+          width: 100%;
+          box-sizing: border-box;
+          .col-main {
+            .callout-home-top {
+              .col-2 {
+                display: block !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .cms-index-index {
+    &.logged-in {
+      .main-container {
+        .main {
+          .col-main {
+            .callout-home-top {
+              .col-1 {
+                width: 100%;
+              }
+              .col-2 {
+                width: 100%;
+                margin-top: 15%;
+              }
+            }
+            .promo-home-content {
+              .col-2 {
+                .category-products {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cms-index-index {
+    &.logged-in {
+      .main-container {
+        .main {
+          .col-main {
+            .promo-home-content {
+              .col-1 {
+                width: 100%;
+                .tabs-wrapper {
+                  display: none;
+                }
+                .content {
+                  box-sizing: border-box;
+                  padding: 0;
+                  .category-products {
+                    display: block;
+                    .products-grid {
+                      .item {
+                        height: 206px;
+                        margin: 2px !important;
+                        &.first {
+                        }
+                        &.last {
+                        }
+                      }
+                    }
+                    .bottom-links {
+                      border: none;
+                    }
+                  }
+                }
+              }
+              .col-2 {
+                box-sizing: border-box;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.logged-out {
+      .main-container {
+        .main {
+          padding:0;
+          .col4-set.advantages {
+            width: 95%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+}
+

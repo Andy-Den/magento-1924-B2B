@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Widget Slider
+ */
+/*$widget = Mage::getModel('widget/widget_instance')->load($this->getFirstBannerId());
+$widgetSlider = $this
+	->getLayout()
+	->createBlock($widget->getType(),
+		$widget->getTitle(),
+		$widget->getWidgetParameters());*/
+
+$componentSlider = $this
+	->getLayout()
+	->createBlock('easyslide/insert', 'slider', array('slider_id' => $this->getSliderName()));
+
+$componentMiniBanners = $this
+	->getLayout()
+	->createBlock('easybanner/widget_placeholder', 'banners', array('placeholder_name' => 'loggedout_homepage_minibanners'));
+?>
+<div class="callout-home-top  <?php echo $this->getClass(); ?>">
+	<?php if (is_object($componentSlider)): ?>
+		<div class="master-banner"><?php echo $componentSlider->toHtml(); ?></div>
+	<?php endif; ?>
+	<?php if (is_object($componentMiniBanners)): ?>
+		<div class="sub-banners"><?php echo $componentMiniBanners->toHtml(); ?></div>
+	<?php endif; ?>
+</div>

@@ -1,0 +1,86 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Orders') ?></h1>
+</div>
+<div class="recent-orders">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('info');?>
+    <?php echo $this->getPagerHtml(); ?>
+    <?php if($_orders->getSize()): ?>
+    <table class="data-table" id="my-orders-table">
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Order #') ?></th>
+                <th><?php echo $this->__('Date') ?></th>
+                <th><span class="nobr"><?php echo $this->__('Total') ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Status') ?></span></th>
+                
+                <!-- Warehouse -->
+                <?php if ($config->isInformationVisible()) : ?>
+                <th><?php echo $helper->__('Warehouse') ?></th>
+                <?php endif ?>
+                <!-- End Warehouse -->
+                
+            </tr>
+        </thead>
+        <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($_orders as $_order): ?>
+            <tr>
+                <td><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $_order->getRealOrderId() ?></a></td>
+                <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+                <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                <td><em><?php echo $_order->getStatusLabel() ?></em></td>
+                
+                <!-- Warehouse -->
+                <?php if ($config->isInformationVisible()) : ?>
+                <td>
+                    <?php if ($_order->isMultipleWarehouse()) : ?>
+                    <ul class="warehouse-list">
+                    <?php foreach ($_order->getWarehouses() as $warehouse) : ?>
+                    <li><?php echo $warehouse->getTitle() ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                    <?php elseif ($_order->getWarehouse()) : ?>
+                    <?php echo $_order->getWarehouse()->getTitle() ?>
+                    <?php else : ?>
+                    <?php echo $helper->__('No warehouse') ?>
+                    <?php endif ?>
+                </td>
+                <?php endif; ?>
+                <!-- End Warehouse -->
+                
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php else: ?>
+        <p><?php echo $this->__('You have placed no orders.'); ?></p>
+    <?php endif ?>
+</div>

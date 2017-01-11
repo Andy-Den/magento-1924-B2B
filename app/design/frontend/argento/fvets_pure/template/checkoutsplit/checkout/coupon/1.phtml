@@ -1,0 +1,100 @@
+<?php
+	$quote = Mage::getModel('checkout/cart')->getQuote();
+?>
+
+<div class="onestepcheckout-coupons">
+<div id="coupon-notice" style="display: none;"></div>
+<?php $_couponcode = $quote->getCouponCode(); ?>
+<label for="coupon_code"><strong><?php echo $this->__('Possui cupom de desconto?'); ?></strong></label><br>
+<input class="input-text" type="text" placeholder="Digite o código do seu cupom aqui" name="onestepcheckout-couponcode" id="coupon_code" value="<?php echo Mage::helper('core')->escapeHtml($_couponcode); ?>" />
+<button id="onestepcheckout-coupon-add" class="form-button-alt button btn-doToAction disabled btn-applyCoupon" type="button" style="<?php if($_couponcode != '') { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Apply Coupon'); ?></span></span></button>
+<button id="onestepcheckout-coupon-remove" class="form-button-alt button btn-doToAction disabled" type="button" style="<?php if($_couponcode == '') { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Cancel Coupon'); ?></span></span></button>
+<div class="coupon-msgs"></div>
+<script>
+	jQuery(document).ready(function() {
+
+
+		$('onestepcheckout-coupon-add').observe('click', function(e)    {
+
+			var coupon = $('coupon_code').getValue();
+			var couponNotice = $('coupon-notice');
+
+			couponNotice.hide();
+
+			if(coupon == '')  {
+				alert('<?php echo $this->__('Please enter a valid coupon code.'); ?>');
+				return;
+			}
+
+			var url = '<?php echo $this->getUrl('checkoutsplit/ajax/add_coupon', array('_secure'=>true)); ?>';
+			var parameters = {code: coupon, ignore_repost_order: true};
+
+			jQuery('.loading-overlay').show();
+
+			new Ajax.Request(url, {
+				method: 'post',
+				parameters: parameters,
+				onSuccess: function(transport) {
+					if(transport.status == 200) {
+						var response = transport.responseText.evalJSON();
+
+						if (response.success) {
+							jQuery('.checkoutsplit-coupon').html(response.coupon);
+							jQuery('.coupon-msgs').html("");
+						} else {
+							jQuery('.coupon-msgs').html("<span class='error'>" + response.message + "</span><br><br>");
+						}
+					}
+				},
+				onComplete: function()
+				{
+					jQuery.each(salesreps, function(index, value) {
+						checkoutShowNextFrame(value);
+					});
+				}
+			});
+		});
+
+		$('onestepcheckout-coupon-remove').observe('click', function(e) {
+
+			var coupon = $('coupon_code').getValue();
+			var couponNotice = $('coupon-notice');
+
+			couponNotice.hide();
+
+			var url = '<?php echo $this->getUrl('checkoutsplit/ajax/add_coupon', array('_secure'=>true)); ?>';
+			var parameters = {code: coupon, remove: '1'};
+
+			jQuery('.loading-overlay').show();
+
+			new Ajax.Request(url, {
+				method: 'post',
+				parameters: parameters,
+				onSuccess: function(transport)  {
+					if(transport.status == 200) {
+						var response = transport.responseText.evalJSON();
+
+						jQuery('.checkoutsplit-coupon').html(response.coupon);
+					}
+				},
+				onComplete: function()
+				{
+					jQuery.each(salesreps, function(index, value) {
+						checkoutShowNextFrame(value);
+					});
+				}
+			});
+		});
+
+		//show coupon input
+		/*$('btn-show-coupon').observe('click', function (event) {
+				event.preventDefault();
+				$('coupon_code').show();
+				$('onestepcheckout-coupon-add').show();
+				$('btn-show-coupon').hide();
+			}
+		);*/
+	});
+</script>
+</div>
+<br />

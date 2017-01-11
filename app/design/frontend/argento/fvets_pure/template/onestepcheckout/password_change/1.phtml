@@ -1,0 +1,132 @@
+<?php
+$defaultStorePassword = Mage::getStoreConfig('confirmcustomer/general/default_password');
+
+if ($defaultStorePassword) {
+	$customer = Mage::getSingleton('customer/session')->getCustomer();
+	$customerPasswordHash = $customer->getPasswordHash();
+
+	if (!$customer->validatePassword($defaultStorePassword)) {
+		return;
+	}
+	?>
+
+	<div class="hidden" style="display:none;">
+		<div id="checkout-password-change" class="checkout-password-change">
+			<div class="checkout-password-change-header">
+				<h1><?php echo $this->__('Reset a Password'); ?></h1>
+			</div>
+
+			<div class="hundred">
+				<hr/>
+			</div>
+			<br/>
+
+			<div class="info-message">
+				<p>Verificamos que você ainda não cadastrou uma senha, por favor cadastre-a agora</p>
+				<br/>
+			</div>
+
+			<div class="errorMsgs">
+				<?php $session = Mage::getSingleton('checkout/session');
+				$messages = $session->getMessages(true);
+				foreach ($messages->getItems() as $message) {
+					echo '<span>' . $message->getText() . '</span><br/>';
+				}
+				?>
+			</div>
+
+			<?php //echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+			<form
+				action="<?php echo $this->getUrl('onestepcheckout/index/resetpasswordoncheckoutpost', array('_query' => array('id' => $customer->getId()))); ?>"
+				method="post" id="form-validate">
+                <div class="fieldset" style="margin-top: 70px;">
+                    <div class="field">
+                        <label for="password" class="required"><em>*</em><?php echo $this->__('Nova senha *'); ?>
+                        </label>
+
+                        <div class="input-box">
+                            <input type="password" class="input-text required-entry validate-password" name="password"
+                                   id="password"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation"
+                               class="required"><em>*</em><?php echo $this->__('Confirme a nova senha *'); ?>
+                        </label>
+
+                        <div class="input-box">
+                            <input type="password" class="input-text required-entry validate-cpassword"
+                                   name="confirmation"
+                                   id="confirmation"/>
+                        </div>
+                    </div>
+                </div>
+                <br>
+				<div class="action-buttons">
+					<button type="submit" title="<?php echo $this->__('Cadastrar'); ?>" class="button btn-superAction"><?php echo $this->__('Cadastrar'); ?></button>
+				</div>
+			</form>
+			<script type="text/javascript">
+				/*<![CDATA[*/
+				var dataForm = new VarienForm('form-validate', true);
+				/*]]>*/
+			</script>
+		</div>
+	</div>
+
+	<div class="loading-overlay">
+		<i class="fa fa-spinner fa-spin fa-5x"></i>
+	</div>
+
+	<script type="text/javascript">
+
+		//<![CDATA[
+		if (jQuery('.checkout-password-change') != undefined) {
+			var configuration = ({
+				closeOnClick: true,
+				closeOnEsc: false
+			});
+
+			jQuery.featherlight(jQuery('#checkout-password-change'), configuration);
+		}
+
+		jQuery(document).ready(function () {
+
+			jQuery('.action-buttons .btn-superAction').click(function (evt) {
+				evt.preventDefault();
+
+				clearElements('.messages');
+
+				jQuery('.loading-overlay').show();
+
+				jQuery.post(
+					'<?php echo str_replace(array('https://', 'http://'), '//', $this->getUrl('onestepcheckout/index/resetpasswordoncheckoutpost')) ?>',
+					jQuery(".featherlight-content #form-validate").serialize(),
+					function (data) {
+						var result = eval("(" + data + ")");
+
+						if(result.error == undefined) {
+							jQuery('.loading-overlay').hide();
+							jQuery.featherlight.close();
+							return;
+						} else {
+							addError('.featherlight-content #form-validate', result.error);
+							jQuery('.loading-overlay').hide();
+						}
+					});
+			});
+		});
+
+		function addError(element, message) {
+			jQuery(element).append('<ul class="messages"><li class="error-msg"><ul><li><span>' + message + '</span></li></ul></li></ul>');
+			jQuery('#loading-overlay').hide();
+		}
+
+		function clearElements(classPattern) {
+			jQuery('.featherlight-content #form-validate .messages').remove();
+		}
+		//]]>
+
+	</script>
+
+<?php } ?>

@@ -1,0 +1,51 @@
+<include_layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <block type="page/html_header" name="top_toolbar" template="page/html/top_toolbar/1.phtml">
+                <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
+                <block type="page/html_welcome" name="welcome" as="welcome"/>
+            </block>
+            <block type="core/text_list" name="top_content" as="top_content" translate="label">
+                <label>Top Content</label>
+            </block>
+            <block type="core/text_list" name="sub_content" as="sub_content" translate="label">
+                <label>Sub Content</label>
+            </block>
+        </reference>
+        <reference name="head">
+            <!-- Font Proxima Nova -->
+            <action method="addItem"><type>skin_css</type><name>fonts/proxima-nova/css/proxima-nova.css</name></action>
+            <!-- Font Awesome -->
+            <action method="addItem"><type>skin_css</type><name>fonts/font-awesome/css/font-awesome.min.css</name></action>
+            <!-- Css padrão do tema do site -->
+            <action method="addItem"><type>skin_css</type><name>css/theme.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/ajaxpro/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/ie9-and-down.css</name><params/><if>lte IE 9</if></action>
+            <action method="addItem"><type>skin_css</type><name>less/custom.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/local.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/default.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.lazyload.min.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.outerhtml-2.1.0-min.js</name></action>
+            <block type="argento/html_head" name="argento.head" template="argento/html/head.phtml"/>
+            <action method="addItem"><type>skin_js</type><name>js/tm/prolabel/prolabel.js</name></action>
+        </reference>
+        <reference name="left">
+            <action method="insert"><name>catalog.compare.sidebar</name></action>
+            <block type="reports/product_viewed" after="catalog.leftnav" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+            <block type="fvets_salesrule/mix_sidebar_list" after="left.reports.product.viewed" name="salesrule.mix.sidebar.list" template="salesrule/mix/sidebar/list/1.phtml" />
+        </reference>
+        <reference name="right">
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="fvets_page/google_tagmanager" name="googletagmanager" template="page/google/tagmanager/1.phtml" before="-" />
+        </reference>
+        <remove name="left.newsletter"/>
+        <remove name="footer.newsletter"/>
+        <remove name="right.reports.product.viewed"/>
+        <remove name="cart_sidebar"/>
+        <remove name="catalog.compare.sidebar" />
+        <remove name="tags_tabbed" />
+    </default>
+
+</include_layout>

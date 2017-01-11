@@ -1,0 +1,98 @@
+<?php
+$order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$payment = $order->getPayment();
+$gwap = Mage::getModel('gwap/order')->load($payment->getOrder()->getId(), 'order_id');
+$data = new Varien_Object(unserialize(Mage::helper('core')->decrypt($gwap->getInfo())));
+$boletoLink = $data->getBoletoLink();
+$salesrep = Mage::getModel('fvets_salesrep/salesrep')->load($order->getSalesrepId());
+?>
+
+
+<div class="inner">
+
+	<h3>Pedido Nº <?php echo $this->escapeHtml($this->getOrderId()); ?></h3>
+
+
+	<div class="summary">
+
+		<h4><?php echo $salesrep->getName(); ?></h4>
+
+		<br />
+
+		<?php $count=0; ?>
+		<table width="100%" class="table">
+			<tr>
+				<th>
+					Tipo de pagamento:
+				</th>
+				<td  class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; $count++; ?>">
+					<?php echo $this->__($payment->getMethod()); ?>
+				</td>
+			</tr>
+			<?php if ($condition = $data->getConditionData()) : ?>
+				<tr>
+					<th>
+						Condição de pagamento:
+					</th>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; $count++; ?>">
+						<?php echo $condition['name']; ?>
+						<?php if($condition['discount']) : ?>
+							<br />
+							<small>(<?php echo $condition['discount']; ?>% de desconto)</small>
+						<?php endif; ?>
+					</td>
+				</tr>
+			<?php endif; ?>
+		</table>
+
+		<br />
+
+		<table width="100%" class="table">
+			<thead>
+			<tr>
+				<th class="first">
+					Produto
+				</th>
+				<th>
+					Qtde
+				</th>
+				<th>
+					Valor Un.
+				</th>
+				<th class="last">
+					Total
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php $items = $order->getItemsCollection(); ?>
+
+			<?php $count = 0; foreach($items as $_item) : $data = $_item->getData(); $count++; ?>
+				<tr>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-left">
+						<?php echo $data['name']; ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo (int) $data['qty_ordered']; ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo Mage::helper('core')->currency($data['price']); ?>
+					</td>
+					<td class="<?php if ($count%2==0) : echo 'odd'; else : echo 'even'; endif; ?> text-center">
+						<?php echo Mage::helper('core')->currency($data['row_total']); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<br />
+		<table class="table" style="float: right;">
+			<?php echo $this->getChildHtml('order_totals', false); ?>
+		</table>
+
+		<div class="clear"></div>
+
+	</div>
+
+</div>

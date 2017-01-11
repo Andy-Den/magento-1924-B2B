@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+-->
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <warehouses translate="title" module="warehouse">
+                    <title>Manage Warehouses</title>
+                    <action>adminhtml/warehouse/</action>
+                    <sort_order>17</sort_order>
+                </warehouses>
+            </children>
+        </catalog>
+        <sales>
+            <children>
+                <shipping>
+                    <children>
+                        <tablerates translate="title" module="warehouse">
+                            <title>Table Rates</title>
+                            <sort_order>0</sort_order>
+                            <children>
+                                <tablerates translate="title">
+                                    <title>Manage Table Rates</title>
+                                    <sort_order>0</sort_order>
+                                    <action>adminhtml/tablerate/</action>
+                                </tablerates>
+                                <methods translate="title">
+                                    <title>Manage Table Rate Methods</title>
+                                    <sort_order>10000</sort_order>
+                                    <action>adminhtml/tablerate_method/</action>
+                                </methods>
+                            </children>
+                        </tablerates>
+                    </children>
+                </shipping>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <warehouses translate="title" module="warehouse">
+                                <title>Manage Warehouses</title>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save Warehouse</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete Warehouse</title>
+                                        <sort_order>10</sort_order>
+                                    </delete>
+                                </children>
+                            </warehouses>
+                        </children>
+                    </catalog>
+                    <sales>
+                        <children>
+                            <shipping translate="title" module="warehouse">
+                                <title>Shipping</title>
+                                <sort_order>90</sort_order>
+                                <children>
+                                    <tablerates translate="title">
+                                        <title>Table Rates</title>
+                                        <sort_order>0</sort_order>
+                                        <children>
+                                            <tablerates translate="title">
+                                                <title>Manage Table Rates</title>
+                                                <sort_order>0</sort_order>
+                                            </tablerates>
+                                            <methods translate="title">
+                                                <title>Manage Table Rate Methods</title>
+                                                <sort_order>1000</sort_order>
+                                            </methods>
+                                        </children>
+                                    </tablerates>
+                                </children>
+                            </shipping>
+                            <sales_grid_warehouse>
+                                <title>View warehouse on grid</title>
+                            </sales_grid_warehouse>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <warehouse translate="title" module="warehouse">
+                                        <title>Warehouses Section</title>
+                                    </warehouse>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_ImportPromotions>
+            <version>1.0.0</version>
+        </FVets_ImportPromotions>
+    </modules>
+    <global>
+        <blocks>
+            <fvets_importpromotions>
+                <class>FVets_ImportPromotions_Block</class>
+            </fvets_importpromotions>
+            <adminhtml>
+                <rewrite>
+                    <system_convert_profile_edit_form>FVets_ImportPromotions_Block_Adminhtml_System_Convert_Profile_Edit_Form</system_convert_profile_edit_form>
+                    <system_convert_profile_edit_tabs>FVets_ImportPromotions_Block_Adminhtml_System_Convert_Profile_Edit_Tabs</system_convert_profile_edit_tabs>
+                    <system_convert_profile_edit>FVets_ImportPromotions_Block_Adminhtml_System_Convert_Profile_Edit</system_convert_profile_edit>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <fvets_importpromotions>
+                <class>FVets_ImportPromotions_Helper</class>
+            </fvets_importpromotions>
+        </helpers>
+        <models>
+            <fvets_importpromotions>
+                <class>FVets_ImportPromotions_Model</class>
+            </fvets_importpromotions>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <FVets_ImportPromotions before="Mage_Adminhtml">FVets_ImportPromotions_Adminhtml</FVets_ImportPromotions>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

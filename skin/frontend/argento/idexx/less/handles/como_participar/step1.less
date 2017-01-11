@@ -1,0 +1,246 @@
+p {
+  font-weight: bold;
+  line-height: 1.1em;
+}
+
+.main-container {
+  padding-bottom: 0;
+}
+
+h1 {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.idexx-breadcrumb, .idexx-breadcrumb-mobile {
+  display: none;
+}
+
+.bkg-cover {
+  background-size: auto;
+  overflow: auto;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.como-participar {
+  box-sizing: border-box;
+  padding: 0 10px;
+  h1 {
+    font-weight: bold;
+  }
+
+  .menu {
+    float: left;
+    max-width: 150px;
+    width: 20%;
+    .logo {
+      overflow: auto;
+      max-width: none;
+      width: 220px;
+
+      img {
+        float: right;
+        width: 100%;
+      }
+    }
+
+    .menu-content {
+      padding-right: 35px;
+      text-align: right;
+
+      h1, p {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    }
+
+    .menu-buttons {
+      padding-left: 18px;
+      a {
+        background-color: #8f9092;
+        display: block;
+        border-radius: 5px;
+        padding: 2px 7px 2px 0;
+        text-align: right;
+        width: 110px;
+        margin-top: 8px;
+        margin-right: 14px;
+        color: white;
+        float: right;
+        font-weight: bold;
+
+        &.active {
+          background-color: #bb2234;
+        }
+
+        &:first-of-type {
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+
+  .image {
+
+  }
+  .video {
+    float: left;
+    padding-top: 133px;
+    margin-left: 3%;
+    width: 80%;
+    box-sizing: border-box;
+  }
+
+  .content {
+    width: 82%;
+    float: right;
+    margin-top: 2%;
+
+    .data-header {
+      float: left;
+      width: 25%;
+    }
+
+    .data-content {
+      float: left;
+      width: 75%;
+      padding-left: 60px;
+      padding-bottom: 130px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@media (max-width: 980px) {
+
+  .como-participar {
+    .menu {
+      width: 255px;
+
+      .menu-buttons {
+        overflow: auto;
+        a {
+          float: left;
+
+          &:first-of-type {
+            margin-top: 25px;
+          }
+        }
+      }
+    }
+
+    .video {
+      margin-left: 0;
+      width: 80%;
+      padding-top: 2%;
+      padding-left: 45px;
+      padding-top: 133px;
+      box-sizing: border-box;
+    }
+
+    .content {
+      box-sizing: border-box;
+      padding-left: 30px;
+      padding-right: 35px;
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .como-participar {
+    .menu {
+      width: 20%;
+      max-width: inherit;
+    }
+  }
+}
+
+@media (max-width: 695px) {
+  .como-participar {
+    .menu {
+      width: 500px;
+      margin: 0 auto;
+      float: none;
+      .logo {
+        float: left;
+      }
+      .menu-buttons {
+        float: left;
+        margin-top: 200px;
+      }
+    }
+    .video {
+      width: 100%;
+      margin: 2% 0 0;
+      padding: 0;
+    }
+
+    .content {
+      width: 100%;
+      .data-header {
+        width: 35%;
+      }
+
+      .data-content {
+        width: 65%;
+      }
+    }
+  }
+}
+
+@media (max-width: 510px) {
+  .main {
+    padding: 0;
+  }
+
+  .como-participar {
+    .menu {
+      overflow: auto;
+      width: 100%;
+      .logo {
+        width: 40%;
+      }
+
+      .menu-buttons {
+        box-sizing: border-box;
+        margin-top: 179px;
+        width: 60%;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .como-participar {
+    .menu {
+      width: 310px;
+      .menu-buttons {
+        padding-left: 0;
+        margin-top: 118px;
+        a {
+          font-size: 10px;
+          width: 78px;
+          margin-right: 2px;
+        }
+      }
+    }
+
+    .content {
+      padding: 0;
+      float: none;
+      .data-header {
+        width: 100%;
+      }
+      .data-content {
+        width: 100%;
+        padding: 0;
+
+        p {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

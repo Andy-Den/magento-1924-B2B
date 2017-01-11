@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_SalesRule extension
+ * 
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+-->
+<config>
+    <modules>
+        <FVets_SalesRule>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Customer />
+                <Mage_Sales />
+                <Mage_SalesRule />
+             </depends>
+        </FVets_SalesRule>
+    </modules>
+</config>

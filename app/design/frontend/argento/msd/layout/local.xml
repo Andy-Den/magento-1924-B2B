@@ -1,0 +1,180 @@
+<layout version="0.1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="../../fvets_pure/layout/handles/default/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/cms_index_index/1.xml" />
+
+    <cms_index_index ifhandle="customer_logged_in">
+        <reference name="content">
+            <block type="page/html" name="loggedin.homepage.widtget.mobile.banners" as="homepage_widget_mobile_banenrs" template="page/homepage/banners/1.phtml" before="loggedout.homepage.widtget.banners">
+                <action method="setSliderName"><slider_name></slider_name></action>
+            </block>
+        </reference>
+    </cms_index_index>
+
+    <cms_index_index ifhandle="customer_logged_out">
+        <update handle="page_homepage_login_1"/>
+        <reference name="content">
+            <block type="page/html" name="loggedout.homepage.widtget.mobile.banners" as="homepage_widget_mobile_banenrs" template="page/homepage/banners/1.phtml" after="loggedout.homepage.widtget.banners">
+                <action method="setSliderName"><slider_name></slider_name></action>
+            </block>
+        </reference>
+    </cms_index_index>
+
+    <xi:include href="../../fvets_pure/layout/handles/cms_page/1.xml" />
+
+    <!--  Catalog -->
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_product_view/1.xml" />
+
+    <catalog_category_view>
+        <update handle="page_two_columns_left"/>
+    </catalog_category_view>
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_category_layered/3.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_result_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_result/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/salesrule_mix_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/suggestpage_view/1.xml" />
+
+    <!-- Cart -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_cart_index/2.xml" />
+
+    <!-- Checkout -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_onepage_success/2.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/onestepcheckout_index_index/3.xml" />
+
+    <contacts_index_index>
+        <update handle="page_one_column"/>
+    </contacts_index_index>
+
+    <!-- Customer -->
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_create/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_edit/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_login/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_changecustomerdata/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_activate/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_resetpassword/1.xml" />
+
+    <customer_account_logoutsuccess>
+        <update handle="page_one_column" />
+    </customer_account_logoutsuccess>
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_newsletter/1.xml" />
+    <customer_account_newsletter>
+        <reference name="loggedout.homepage.widtget.banners">
+            <action method="setSliderName"><slider_name>msd_slider</slider_name></action>
+        </reference>
+
+        <reference name="loggedout.home.grid">
+            <action method="setData"><key>widget_id</key><value>3</value></action>
+        </reference>
+    </customer_account_newsletter>
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_forgotpassword/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_address_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/newsletter_manage_index/1.xml" />
+
+    <!-- Contact -->
+
+    <xi:include href="../../fvets_pure/layout/handles/contacts_index_index/1.xml" />
+
+    <!-- Review -->
+
+    <review_product_list>
+        <update handle="page_one_column"/>
+    </review_product_list>
+
+    <review_product_view>
+        <update handle="page_one_column"/>
+    </review_product_view>
+
+    <tag_list_index>
+        <update handle="page_one_column"/>
+    </tag_list_index>
+
+    <!-- Sales -->
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_history/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_view/1.xml" />
+
+    <!--highlights-->
+
+    <xi:include href="../../fvets_pure/layout/handles/highlight_index_index/1.xml" />
+
+    <!-- modules -->
+    <askit_core>
+        <update handle="page_one_column"/>
+    </askit_core>
+
+    <cms_page_view>
+        <remove name="breadcrumbs" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view/1.less</name></action>
+        </reference>
+    </cms_page_view>
+
+    <cms_page_view ifhandle="page_one_column">
+        <update handle="cms_page_view_1column_1" />
+    </cms_page_view>
+
+    <cms_page_view ifhandle="page_two_columns_left">
+        <update handle="cms_page_view_2columns_1" />
+    </cms_page_view>
+
+    <cms_page_view_atividades_socioambientais>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view_atividades_socioambientais/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="cms.bottom" after="cms.wrapper" template="cms/content_footer/atividades_socioambientais.phtml" />
+        </reference>
+    </cms_page_view_atividades_socioambientais>
+
+    <cms_page_view_sobre_nos>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view_sobre_nos/1.less</name></action>
+        </reference>
+    </cms_page_view_sobre_nos>
+
+    <cms_page_view_contato>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view_contato/1.less</name></action>
+        </reference>
+    </cms_page_view_contato>
+
+    <cms_page_view_entre_em_contato>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view_contato/1.less</name></action>
+        </reference>
+    </cms_page_view_entre_em_contato>
+
+    <cms_page_view_nossos_valores>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/cms_page_view_nossos_valores/1.less</name></action>
+        </reference>
+    </cms_page_view_nossos_valores>
+
+</layout>

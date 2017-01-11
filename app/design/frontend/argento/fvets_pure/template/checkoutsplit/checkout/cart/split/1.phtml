@@ -1,0 +1,117 @@
+<?php
+$salesrep = $this->getQuote()->getSalesrep();
+$brands  = Mage::helper('fvets_salesrep/category')->getRepBrands($salesrep);
+?>
+<div class="clear"></div>
+<div id="rep-<?php echo $salesrep->getId(); ?>"
+<div class="clear"></div>
+<br />
+<div class="fieldset">
+	<div class="salesrep-block">
+		<div class="salesrep-image">
+			<img src="<?php echo Mage::helper('fvets_salesrep')->getImageUrl($salesrep); ?>" width="60" height="60" STYLE="width: 60px;height: 60px" />
+		</div>
+
+		<div class="order-title">
+			<?php echo $this->orderNumber; ?>º Pedido - <span class="brands">
+				<?php $html = array(); ?>
+				<?php foreach($brands as $brand) : ?>
+					<?php if($brand->getIsActive()) : ?>
+						<?php $html[] = '<a href="'.$brand->getUrl().'">'.$brand->getName().'</a>'; ?>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				Marca<?php if (count($html) > 1) : ?>s<?php endif; ?>:
+				<?php echo implode(', ',$html); ?>
+			</span>
+		</div>
+		<div class="salesrep-name">
+			<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/name')) { ?>
+				<?php echo $salesrep->getName(); ?>
+			<?php } ?>
+			<br />
+			<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/email')) { ?>
+				<?php echo $salesrep->getEmail(); ?>
+			<?php } ?>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	<?php
+		$amount = Mage::getStoreConfig('sales/minimum_order/amount', $storeId);
+		foreach($this->getItems() as $_item) : ?>
+		<?php if($_item['row_total'] < $amount) : ?>
+				<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php $this->getMessagesBlock()->getMessageCollection()->clear(); ?>
+	<?php if (!$this->getQuote()->validateMinimumAmount()) : ?>
+		<div class="divAllowCheckoutWithoutOrder">
+			<label><input type="checkbox" class="allowCheckoutWithoutOrder" data-salesrep="<?php echo $salesrep->getId(); ?>" <?php if ($this->getCheckout()->{"getSalesrep".$salesrep->getId().'AllowCheckout'}()) : ?>checked="checked"<?php endif; ?> /> Desejo continuar sem este pedido.</label>
+		</div>
+		<br />
+	<?php endif; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	<hr />
+	<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" id="shopping-cart-form-<?php echo $salesrep->getId(); ?>" class="shopping-cart-form">
+		<?php echo $this->getBlockHtml('formkey'); ?>
+		<fieldset id="shopping-cart-table" class="shopping-cart-table">
+			<div class="cart-headers">
+				<div class="col-shop">
+					<div class="col col-description"><span class="nobr"><?php echo $this->__('Products') ?></span></div>
+					<div class="col col-unit-price"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></div>
+					<div class="col cart-qty"><?php echo $this->__('Qty') ?></div>
+					<div class="col col-total-price"><?php echo $this->__('Subtotal') ?></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<ol id="products-cart-list-<?php echo $salesrep->getId(); ?>" class="products-list cart-list">
+				<?php foreach($this->getItems() as $_item): ?>
+					<?php echo $this->getItemHtml($_item) ?>
+				<?php endforeach ?>
+
+				<?php /*<li class="item">
+					<button type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update-qty btn-doToAction disabled"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+				</li>*/ ?>
+			</ol>
+
+			<?php if(false && $this->getContinueShoppingUrl()): ?>
+				<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+			<?php endif; ?>
+		</fieldset>
+
+		<?php echo $this->getChildHtml('checkout_cart_split_subtotals', false); ?>
+		<div class="clear"></div>
+
+	</form>
+</div>
+
+
+<div class="clear"></div>
+
+<?php if (!$this->getSalesrepAllowCheckout()) : ?>
+	<script>
+		jQuery(document).ready(function() {
+			desabilitarBotaoDeCheckout();
+		})
+		function desabilitarBotaoDeCheckout()
+		{
+			jQuery('.onepage-checkout-button').hide();
+			jQuery('.onepage-checkout-button-disabled').show();
+		}
+		desabilitarBotaoDeCheckout();
+	</script>
+<?php endif; ?>
+
+<script type="text/javascript">
+	decorateList('products-cart-list-<?php echo $salesrep->getId(); ?>', 'none-recursive');
+	<?php $wishlistHelper = $this->helper('wishlist');
+	if (!method_exists($wishlistHelper, 'getMoveFromCartUrl')) : ?>
+	$$('.link-wishlist').each(function(el) {
+		el.observe('click', function(e) {
+			e.stop();
+
+			el.previous().removeAttribute('disabled');
+			$('shopping-cart-form-<?php echo $salesrep->getId(); ?>').submit();
+		})
+	});
+	<?php endif; ?>
+</script>

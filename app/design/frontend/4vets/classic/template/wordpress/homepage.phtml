@@ -1,0 +1,23 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<div class="blog-home">
+
+	<?php echo $this->getChildHtml('highlights'); ?>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<?php echo $this->getChildHtml('latest'); ?>
+			</div>
+			<div class="col-md-4">
+				<?php echo $this->getChildHtml('popular'); ?>
+			</div>
+		</div>
+	</div>
+</div>

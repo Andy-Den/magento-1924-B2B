@@ -1,0 +1,83 @@
+.nav-container
+{
+  width:16%;
+
+  .headerMenu
+  {
+    background: none;
+
+    &:before
+    {
+      display: none;
+    }
+
+    .text1,
+    .text2
+    {
+      color:@defaultTextColor;
+    }
+
+    .text2
+    {
+      &:after
+      {
+        height: 6px;
+        background: none;
+      }
+      .fa-caret-down
+      {
+        display:inline-block;
+      }
+      .fa-caret-up
+      {
+        display: none;
+      }
+    }
+
+    &:hover
+    {
+      background: @defaultBackgroundColor1;
+      .inner
+      {
+        .text1,
+        .text2
+        {
+          color: white;
+        }
+
+        .text2
+        {
+          .fa-caret-down
+          {
+            display: none;
+          }
+          .fa-caret-up
+          {
+            display:inline-block;
+          }
+        }
+      }
+      #custommenu {
+        display:block !important;
+      }
+    }
+
+    .topMenu
+    {
+      .menu
+      {
+        &.active
+        {
+          background: @defaultBackgroundColor1;
+        }
+      }
+      a
+      {
+        &:hover
+        {
+          background: @defaultBackgroundColor1;
+        }
+      }
+    }
+  }
+}

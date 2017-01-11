@@ -1,0 +1,34 @@
+<include_layout version="0.1.0">
+    <customer_account>
+        <update handle="page_two_columns_left"/>
+        <update handle="customer_account_navigation_1" />
+
+        <reference name="head">
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/css/easyslide.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/highlight.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customerlocator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabel.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabels-tooltip.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+    </customer_account>
+</include_layout>

@@ -1,0 +1,83 @@
+<?php $uId = 'id' . rand(0, time()); ?>
+
+<?php $_categories = $this->getCategories(0); ?>
+
+<div class="blocklinks-categories2 block-highlight <?php echo $uId; ?>">
+	<h1 class="block-title"><span>
+			<?php
+			if (trim($this->getBlockTitle() != ''))
+				echo $this->__($this->getBlockTitle());
+			else
+				echo $this->__('Shop by Category');
+
+			?>
+	</span></h1>
+	<div class="block-content">
+		<ul class="categories-grid cols-<?php echo $this->getBlockCols(); ?>">
+			<?php foreach ($_categories as $_category) : ?>
+				<?php $_category = Mage::getModel('fvets_catalog/category')->load($_category->getId()); ?>
+				<li class="item">
+					<div class="prolabel-wrapper">
+						<a class="category-image" title="<?php echo $_category->getName(); ?>" href="<?php echo $_category->getUrl($_category); ?>">
+							<img width="200" height="200" alt="<?php echo $_category->getName(); ?>" class="lazy" data-original="<?php echo $_category->getResizedThumbnail('200'); ?>">
+						</a>
+					</div>
+				</li>
+			<?php endforeach; ?>
+			<?php if ($this->getSeeAllImage() != '') : ?>
+				<li class="item">
+					<div class="prolabel-wrapper">
+						<a class="category-image" title="<?php $this->__('See all'); ?>" href="<?php echo $this->getCurrentCategory()->getUrl($this->getCurrentCategory()); ?>">
+							<img width="200" height="200" alt="<?php $this->__('See all'); ?>" class="lazy" data-original="<?php echo $this->getSeeAllImage(); ?>">
+						</a>
+					</div>
+				</li>
+			<?php endif; ?>
+		</ul>
+		<script type="text/javascript">decorateGeneric($$('ul.categories-grid'), ['odd','even','first','last'])</script>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+		jQuery(document).bind('resizeBoxes', function(){
+
+			var firstElement = jQuery('.<?php echo $uId; ?> .categories-grid .item').first();
+			var lenght = <?php echo $this->getBlockCols(); ?>;
+
+			var index = 0;
+			var maxHeight = 0;
+			var line = 1;
+
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').css({'min-height' : 'auto'});
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').removeClass('fore');
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').removeClass('final');
+
+			jQuery('.<?php echo $uId; ?> .categories-grid .item').each(function()
+			{
+				index++;
+
+				jQuery(this).addClass('line'+line);
+
+				if (index==1)
+					jQuery(this).addClass('fore');
+
+				jQuery(this).find('.prolabel-wrapper').css({'position':'relative'});
+
+				if (jQuery(this).outerHeight() > maxHeight)
+					maxHeight = jQuery(this).outerHeight();
+
+				if (index == lenght)
+				{
+					jQuery('.<?php echo $uId; ?> .item.line'+line).css({'min-height' : maxHeight + 'px'});
+					index = 0;
+					maxHeight = 0;
+					line++;
+					jQuery(this).addClass('final');
+				}
+
+				jQuery(this).find('.prolabel-wrapper').css({'position':'absolute'});
+			});
+		});
+	})
+</script>

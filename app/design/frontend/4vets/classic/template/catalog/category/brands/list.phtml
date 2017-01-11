@@ -1,0 +1,31 @@
+<div>
+	<?php
+
+	if (!$category = $this->getCurrentCategory())
+	{
+		$category = Mage::getModel('catalog/category')->load($this->getCategoryId());
+	}
+
+	$childrens = $category->getChildrenCategories();
+
+	$x = 1;
+	foreach ($childrens as $child) {
+		$child=Mage::getModel('catalog/category')->load($child->getId());
+		?>
+
+		<div class="col-xs-6 col-sm-4 col-md-2 image">
+			<a href="<?php echo $child->getUrl(); ?>" title="<?php echo $child->getName(); ?>"><img class="lazy" data-original="<?php echo $child->getImageUrl(); ?>" style="border:2px solid #f2f2f2;border-radius: 3px" width="203" height="126" /></a>
+		</div>
+
+		<?php
+
+		/*if ($x++ == 6)
+		{
+			echo '</div><br /><div class="row">';
+			$x = 1;
+		}*/
+	}
+
+	?>
+
+</div>

@@ -1,0 +1,70 @@
+<div class="header-container">
+	<div class="header container default-page-width">
+		<div class="vendor-logo">
+			<a href="<?php echo $this->getUrl('', array('_secure'=>true)) ?>" title="<?php echo $this->getLogoAlt() ?>"
+			   class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img
+					src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>"/></a>
+		</div>
+		<div class="menu">
+
+			<?php
+
+			$category = Mage::registry('current_category');
+
+			?>
+
+			<nav id="primary_nav_wrap">
+				<ul>
+					<li class="first-level-menu" <?php if (isset($category) && $category->getUrlKey() == 'cag') : ?> class="current-menu-item" <?php endif; ?>><a href="#"><?php echo $this->__('IDEXX Business'); ?> <i class="fa fa-sort-desc"></i></a>
+						<div class="popup">
+							<div class="col1">
+								<ul>
+									<li><a href="<?php echo $this->getUrl('cat/cag', array('_secure'=>true)); ?>"><strong><?php echo $this->__('CAG - Saúde de Pequenos Animais'); ?></strong></a></li>
+									<li><a href="<?php echo $this->getUrl('cat/cag/snaps', array('_secure'=>true)); ?>"><?php echo $this->__('Linha SNAP<sup>&reg;</sup>'); ?></a></li>
+									<li><a href="<?php echo $this->getUrl('cat/cag/equipamentos', array('_secure'=>true)); ?>"><?php echo $this->__('Analisadores'); ?></a></li>
+								</ul>
+
+								<ul>
+									<li><a href="https://www.idexx.com/livestock-poultry/livestock-poultry.html" target="_blank"><strong><?php echo $this->__('LPD - Livestock and Poultry Diagnostics'); ?></strong></a></li>
+									<li><a href="https://www.idexx.com/livestock-poultry/poultry.html" target="_blank"><?php echo $this->__('Aves'); ?></a></li>
+									<li><a href="https://www.idexx.com/livestock-poultry/ruminant.html" target="_blank"><?php echo $this->__('Bovinos e Ruminantes'); ?></a></li>
+									<li><a href="https://www.idexx.com/livestock-poultry/swine.html" target="_blank"><?php echo $this->__('Suínos'); ?></a></li>
+									<li><a href="https://www.idexx.com/livestock-poultry/equine.html" target="_blank"><?php echo $this->__('Equinos'); ?></a></li>
+								</ul>
+							</div>
+							<div class="col2">
+								<ul>
+									<li><a href="https://www.idexx.com/dairy/dairy-testing.html" target="_blank"><strong><?php echo $this->__('DAIRY - Gerenciamento da Qualidade do Leite'); ?></strong></a></li>
+									<li><a href="https://www.idexx.com/dairy/about-dairy.html" target="_blank"><?php echo $this->__('SNAP<sup>&reg;</sup> ST - Detecção de Resíduos de Antibióticos'); ?></a></li>
+									<li><a href="https://www.idexx.com/dairy/tests/somaticell.html" target="_blank"><?php echo $this->__('SOMATICELL<sup>&reg;</sup> SCC - Contagem de Células somáticas'); ?></a></li>
+								</ul>
+								<ul>
+									<li>&nbsp;&nbsp;&nbsp;<strong><?php echo $this->__('WATER- Testes para análise de água'); ?></strong></li>
+									<li><a href="https://www.idexx.com/agua">Water</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="first-level-menu"><a href="<?php echo $this->getUrl('nossa-proposta', array('_secure'=>true)) ?>"><?php echo $this->__('A Nossa Proposta'); ?></a></li>
+					<li class="first-level-menu last"><a href="<?php echo $this->getUrl('contato', array('_secure'=>true)) ?>"><?php echo $this->__('Contato'); ?></a></li>
+				</ul>
+			</nav>
+
+			<!--                            menu de categoria nível 2-->
+
+		</div>
+		<div class="bandeira">
+			<img src="<?php echo $this->getSkinUrl('images/header/bandeira.png', array('_secure'=>true)); ?>"
+				 alt="brasil"/>
+		</div>
+		<div class="search">
+			<a href="#">
+				<i class="fa fa-search fa-2x"></i>
+				<i class="fa fa-times fa-2x"></i>
+			</a>
+		</div>
+		<div class="top-search">
+			<?php echo $this->getChildHtml('topSearch') ?>
+		</div>
+	</div>
+</div>

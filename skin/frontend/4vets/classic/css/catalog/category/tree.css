@@ -1,0 +1,51 @@
+.category-tree .level1 {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+}
+
+.category-tree ul.level1 {
+    width: 100%;
+}
+
+.category-tree li.level1 {
+    padding: 0 3%;
+}
+
+.category-tree li.level1:first-child {
+    padding-left: 0;
+}
+
+.category-tree .level1 .level2 {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.category-tree .level1 li.level2 {
+    padding: 1% 0;
+}
+
+.category-tree a {
+    color: #000000;
+}
+
+.category-tree .level2.header {
+    margin-bottom: 1%;
+}
+
+.category-tree .level2.header a {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+    .category-tree .level1 {
+        display: block;
+        float: left;
+    }
+
+    .category-tree li.level1 {
+        padding-left: 0;
+    }
+}

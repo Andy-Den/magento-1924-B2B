@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_TablePrice extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_TablePrice
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_tableprice_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>customer/group/fvets_tableprice/tableprice</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_tableprice/adminhtml_tableprice" name="tableprice" />
+
+        </reference>
+    </adminhtml_tableprice_index>
+    <adminhtml_tableprice_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_tableprice/adminhtml_tableprice_grid" name="tableprice_grid"/>
+        </block>
+    </adminhtml_tableprice_grid>
+    <!-- Tableprice add/edit action -->
+    <adminhtml_tableprice_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>customer/group/fvets_tableprice/tableprice</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_tableprice/adminhtml_tableprice_edit" name="tableprice_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_tableprice/adminhtml_tableprice_edit_tabs" name="tableprice_tabs"></block>
+        </reference>
+    </adminhtml_tableprice_edit>
+
+    <adminhtml_tableprice_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_tableprice/adminhtml_tableprice_edit_tab_categories" name="tableprice.edit.tab.categories"/>
+        </block>
+    </adminhtml_tableprice_categories>
+    <adminhtml_tableprice_catalog_category_tablespricesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_tableprice/adminhtml_catalog_category_tab_tableprice" name="category.edit.tab.tableprice"/>
+        </block>
+    </adminhtml_tableprice_catalog_category_tablespricesgrid>
+</layout>

@@ -1,0 +1,8 @@
+<?php if(Mage::helper('privatesales')->canShowPricesAndAddToCartButton()) { ?>
+<?php $_product = $this->getProduct(); ?>
+<div id="divQtd">
+	<input type='button' value='-' class='qtyminus' field='qty-<?php echo $_product->getId(); ?>' />
+	<input type='text' name='quantity' value='1' class='qty' id="qty-<?php echo $_product->getId(); ?>"/>
+	<input type='button' value='+' class='qtyplus' field='qty-<?php echo $_product->getId(); ?>' />
+</div>
+<?php } ?>

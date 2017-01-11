@@ -1,0 +1,947 @@
+"""%s"" Background Color","Cor de fundo ""%s"" "
+"""%s"" Text Color","Cor do texto ""%s"" "
+("%s"/"%s"),("%s"/"s%") 
+"%s" : "%s","%s":"%s" 
+"%s" ("%s"),"%s" ("%s") 
+"%s" (predefined),"%s" (pré-definido) 
+"%s" Permissions,"%s" Permissions 
+"%s" Role,"%s" Role 
+<em>Updated</em>,<em> Atualizado </ em> 
+-- Empty Value --,- Valor Vazio - 
+# Order,# Order 
+Actions,ações 
+Add Attribute Column,Adicionar Atributo de Coluna 
+Add Currency,Adicionar Moedas 
+Add Dimensions,Adicionar Dimensões 
+Add Exception,Adicionar Exceção 
+Add Group Name In Default Header,Adicionar nome do grupo no cabeçalho padrão 
+Add New Options Source,Adicionar opções Fonte Nova 
+Add Option,Adicionar Opção 
+Alignment,alinhamento 
+All ("%s"),Todos ("%s") 
+Allow,permitir 
+Allow Filtering On Time,Permitir filtragem On Time 
+Allow SQL Wildcards In Filter,Permitir SQL Wildcards filtro 
+An error occured while initializing order items,Ocorreu um erro durante a inicialização itens de ordem 
+An error occured while initializing items block,Ocorreu um erro ao inicializar itens bloquear 
+"An error occured while eval()ing the rewrite code : """%s"""","Ocorreu um erro ao eval () ing o código de reescrita: """%s""" "
+"An error occured while rewriting """%s""" : """%s""" (rewriter: """%s""")","Ocorreu um erro ao reescrever """%s""": """%s""" (banner: """%s""") "
+"Applies by default the use of an ""options"" renderer with customer group values (still overridable by rendering options)","Aplica-se, por padrão, o uso de um ""opções"" representante com os valores do grupo de clientes (ainda substituível por opções de renderização) "
+Apply,Aplique 
+Apply Configuration,aplicar configuração 
+Apply PHP function nl2br(),Aplicar a função PHP nl2br () 
+Apply Rates For Display,Aplicar taxas para exibição 
+Are you sure?,Você tem certeza? 
+As HTML,como HTML 
+As Text,como Texto 
+ascending,ascendente 
+Ascent Limit Level,Ascent Nível Limite 
+Attribute,atributo 
+Attribute Code,atributo Código 
+Attributes Values Rendering,Atributos Valores Rendering 
+Auto-generated,Auto-gerada 
+Auto-generated Class Files,Gerado pelo Auto Class Files 
+"Available variables : <strong>{is_eu_country}</strong>, <strong>{country_code}</strong>, <strong>{country_name}</strong><br />(variables will be replaced by the corresponding values).<br />If no value is set, ""{is_eu_country}"" will be used by default","Variáveis ​​disponíveis: <strong> {is_eu_country} </ strong>, <strong> {country_code} </ strong>, <strong> {country_name} </ strong> <br /> (variáveis ​​serão substituídos pelos valores correspondentes). <br /> Se nenhum valor for definido, ""{} is_eu_country"" será usado por padrão "
+Back,Voltar 
+Base Class,Base Class 
+Base Configuration,Configuração base 
+Base Configuration (Menu Link),Configuração base (Menu Link) 
+Base Display Format,Formato de exibição de base 
+Billing Address,Endereço de Cobrança 
+Block ID,Bloquear ID 
+Block Type,Tipo de Bloco 
+Browser Resize Only,Só Navegador Resize 
+Can't apply choice : JS object can't be found,Não é possível aplicar escolha: JS objeto não pode ser encontrado 
+Can't find any option to use for edited value,Não consigo encontrar qualquer opção para usar para o valor editado 
+Can't find editor JS object,Não consegue encontrar editor JS objeto 
+Can't retrieve request object,Não é possível recuperar pedido objeto 
+Can't save value : editor JS object can't be found,Não é possível salvar valor: editor JS objeto não pode ser encontrado 
+Carts Number,Número Carrinhos 
+Categories,Categorias 
+Categories Separator,Categorias Separator 
+Choose,Escolha 
+"Choose ""Yes"" if the field contains multiple values separated by a given string","Escolha ""Sim"" se o campo contém vários valores separados por uma determinada cadeia "
+"Choose ""Yes"" if the filter must match the entire value, and not just be contained within","Escolha ""Sim"" se o filtro deve corresponder ao valor inteiro, e não apenas ser contido "
+"Choose ""Yes"" if you do not want the field labels to be displayed in the header","Escolha ""Sim"" se você não quer que os rótulos de campo a ser exibido no cabeçalho "
+"Choose ""Yes"" to display IDs instead of names","Escolha ""Sim"" para exibir IDs em vez de nomes "
+"Choose ""Yes"" to filter values that either use config or not. Else, the filter type will depend on the type of the field","Escolha ""Sim"" para filtrar valores que quer usar configuração ou não. Logo, o tipo de filtro depende do tipo de campo "
+"Choose ""Yes"" to make the base pagination values be added to the custom ones","Escolha ""Sim"" para que os valores de paginação de base ser adicionada aos personalizados "
+"Choose ""Yes"" to use a custom source of EU countries.<br /><strong>For Magento versions < 1.7, you should always use this option as there is no base EU countries list by default</strong>","Escolha ""Sim"", para usar uma fonte personalizada dos países da UE. <br /> <Strong> Para versões do Magento <1.7, você deve sempre usar esta opção, pois não há base da UE lista de países por padrão </ strong> "
+Choose Categories To Filter,Escolha Categorias Para Filtro 
+Choose Editable Columns,Escolher colunas editáveis 
+Choose Default Profile,Escolha perfil padrão 
+Choose Profile,Escolha Perfil 
+City,cidade 
+CMS Blocks,CMS Blocks 
+CMS Pages,CMS Páginas 
+CMS Widgets,CMS Widgets 
+Collection,coleção 
+Column,coluna 
+"column """%s"""","coluna """%s""" "
+Column Attribute Code,Coluna Código Atributo 
+Column Field Name,Coluna Nome do campo 
+Column Header,Cabeçalho da coluna 
+Column ID,coluna ID 
+Column Position,coluna Posição 
+Column Type,Tipo de coluna 
+Column Types Descriptions,Tipos de coluna Descrições 
+Columns,colunas 
+Columns Editor,colunas do Editor 
+Columns Types Descriptions,Colunas Tipos Descrições 
+columns selected,Colunas selecionadas 
+Common,comum 
+Company,empresa 
+Complementary Exceptions,Exceções complementares 
+Complementary Exceptions Handling Mode,Exceções Complementares Modo de Manipulação 
+Config Values Prefix,Configuração valores de prefixo 
+Config Values Suffix,Configuração Valores Sufixo 
+Configuration,configuração 
+Continue,continuar 
+Controller Name,Nome do Controlador 
+Country,país 
+Create Profile,Criar perfil 
+Currencies Per Attribute,Moedas por atributo 
+Custom,Personalizado 
+Custom Columns,Colunas personalizadas 
+Custom Columns:,Colunas personalizados: 
+Custom Default Parameters Behaviour,Personalizada padrão Parâmetros de Comportamento 
+Custom Default Parameters Behaviour - Default Values,Personalizada padrão Parâmetros de Comportamento - Valores Padrão 
+Custom Filter - Number,Filtro personalizado - Número 
+Custom Filter - Operator,Custom Filter - Operador 
+Custom Grid,Personalizado Grade 
+Custom Grid: "%s",Personalizado Grade:"%s" 
+Custom Grids,Personalizado Grids 
+Custom Grids Configuration,Configuração Personalizada Grids 
+Custom List,Lista Personalizada 
+Custom Pagination Values,Valores Personalizado Paginação 
+Custom Source,Fonte personalizada 
+Customer,cliente 
+Customer Groups,Grupos de clientes 
+Customers,clientes 
+Customer Edit Tab,Cliente Editar Tab 
+Customizable,customizáveis 
+Customization : "%s",Personalização:"%s" 
+Customization Parameters,Parâmetros de personalização 
+Customization Parameters - Default Values,Parâmetros Personalização - Valores Padrão 
+Customize Columns,Personalize Colunas 
+Customize Grid Columns,Personalize Grid Columns 
+Date,Data 
+Date + Time,Data + Hora 
+Date/Date + Time,Data/Data + Hora 
+Default,padrão 
+Default (Last Set Value is Used),Padrão (Última valor definido é utilizado) 
+Default Options Source,Opções padrão de Fonte 
+Default Pagination Value,Valor Paginação Padrão 
+Default Values,Valores Padrão 
+Delete,excluir 
+Delete File Before Save,Excluir arquivo antes de salvar 
+Delete Profile,apagar Perfil 
+descending,decrescente 
+Description,Descrição 
+Disabled,pessoas com mobilidade condicionada 
+Disable,desativar 
+Discovery Mode,Modo de descoberta 
+"Display """%s"""","Display """%s""" "
+Display Complete Images URLs,Mostrar imagens completas URLs 
+Display Currency,Mostrar Moeda 
+Display Error Messages,Mensagens de erro de exibição 
+Display Error Messages If Rewrite Success,Mensagens Indicação de erro Se Rewrite Sucesso 
+Display Format,Formato de exibição 
+Display Full Path,Exibir caminho completo 
+Display Full Paths,Mostrar caminhos completos 
+Display IDs,IDs de exibição 
+Display Images,exibir imagens 
+Displays a country name from its code,Exibe um nome de país a partir do seu código 
+Displays a formatted date,Exibe uma data formatada 
+Displays a number,Exibe um número 
+Displays a price,Exibe um preço 
+Displays a store view from its ID,Exibe uma visualização da loja de seu ID 
+Displays a text,Exibe um texto 
+Displays a value from an options source,Exibe um valor a partir de uma fonte de opções 
+Displays an IP address,Exibe um endereço IP 
+Displays for each product all the categories it's associated to,Displays para cada produto de todas as categorias que está associada à 
+Displays formatted date + time,Exibe a data formatada + tempo 
+Displays the number of carts containing each product,Exibe o número de carrinhos contendo cada produto 
+Displays the number of wishlists containing each product,Exibe o número de lista de desejos contendo cada produto 
+Displays the quantity of each product contained in carts,Exibe a quantidade de cada produto contido em carrinhos 
+Displays the quantity of each product contained in wishlists,Exibe a quantidade de cada produto contido na lista de desejos 
+Displays the same items list as the order view page,Exibe a lista mesmos itens como a página de visualização fim 
+Displays the status and colorizes the row,Apresenta o estado e cor à linha 
+Displays the order's store view,Apresenta vista loja da ordem 
+Displays whether a country belongs to the EU,Exibe se um país pertence à UE 
+"Drag'n'drop is the most convenient way for sorting columns, but imposes their order number, and may be slow in some cases.<br />Choose ""<strong>No</strong>"" to specify columns orders numbers directly in corresponding text fields.","Drag'n'drop é a maneira mais conveniente para ordenar as colunas, mas impõe o seu número de ordem, e pode ser lento em alguns casos. <br /> Escolha ""<strong> Não </ strong>"" para especificar colunas ordens números diretamente em campos de texto correspondente. "
+Duplicated,duplicado 
+EAG - Base Configuration,EAG - Configuração base 
+EAG - Errors,EAG - Erros 
+EAG - Messages,EAG - Mensagens 
+EAG - Rewriters Configuration,EAG - Configuração Rewriters 
+EAG - Successes,EAG - Êxitos 
+EAG - Warnings,EAG - Advertências 
+Edit,Editar 
+Edit Columns Values,Editar Colunas Valores 
+Edit Default Parameters,Parâmetros de edição padrão 
+Edit Value,Editar valor 
+Editable,editável 
+Editor - Grid Type : Google Sitemap,Editor - Grade Tipo: Google Sitemap 
+"Eg : ""general/country/eu_countries""","Por exemplo: ""em geral/country/eu_countries"" "
+Eg : simple products associated to their configurable parents,Ex: produtos simples associados aos seus pais configuráveis 
+Email,Email 
+Enable,Ativar 
+Enabled,Ativado 
+Enabled/Disabled,Ativado/Desativado 
+Equal,igual 
+Error messages are written to the exceptions log,As mensagens de erro são escritas para as exceções de log 
+Escape HTML,Fuja HTML 
+EU Countries,Países da UE 
+EU Country,País da UE 
+eval() is not available on your server,eval () não está disponível em seu servidor 
+eval()ed Classes,eval () Classes ed 
+Exact Filter,Filtrar Exact 
+Exceptions Handling Mode,Exceções Modo de Manipulação 
+Exceptions List,Lista de exceções 
+Exclude,Excluir 
+Exclude Child Items,Excluir itens filhos 
+Exclude Child Items From Filter,Excluir itens filhos do filtro 
+Existent,existente 
+existing,existente 
+Export,Export 
+Export:,Exportação: 
+Export Display Format,Exportação Formato de exibição 
+Export Results,Exportar resultados 
+Failed to edit value,Falha ao editar o valor 
+"Failed to edit the value : """%s"""","Falha ao editar o valor: """%s""" "
+Failed to save value,Falha ao salvar o valor 
+"Failed to save the value : """%s"""","Falha ao salvar o valor: """%s""" "
+Fax,Fax 
+Field Name,Nome do campo 
+Filter,Filtrar 
+Filter images on name,Imagens filtro no nome 
+Filter Mode,Modo de filtro 
+"Filter on ""Use Config""","Filtro em ""Use Config"" "
+Filter on Item Name,Filtrar em Nome do item 
+Filter on Item SKU,Filtro no item SKU 
+"Filtered products will have to belong to a number of categories amongst the chosen ones, that can be verified using this value and the one from the ""Custom Filter - Operator"" field","Produtos filtrados terão de pertencer a um número de categorias entre os escolhidos, que pode ser verificado usando este valor eo do ""Custom Filter - Operadora"" campo "
+"Filtered products will have to belong to a number of categories amongst the chosen ones, that can be verified using this value and the one from the ""Custom Filter - Number"" field","Produtos filtrados terão de pertencer a um número de categorias entre os escolhidos, que pode ser verificado usando este valor eo do ""Custom Filter - Número"" campo "
+Filters,filtros 
+First Name,primeiro nome 
+Flat Value Key,Valor chave plana 
+for filtering only,para a filtragem de apenas 
+"For sources with multiple levels of options, display labels of all levels, and not just last one","Para fontes com vários níveis de opções, rótulos de todos os níveis de exibição, e não apenas última "
+Force Custom Value,Força Valor Personalizado 
+Force Grid Rewrites,Força Grade Rewrites 
+Force Original Value,Força Valor Original 
+Force use of default options source,Forçar uso de opções padrão fonte 
+Forcing a value only applies when it does exist,Forçando um valor só se aplica quando não existe 
+Forcing or merging a value only applies when it does exist,Forçar ou fundir um valor só se aplica quando não existe 
+Format,formato 
+Format:,formato: 
+From Result:,De Resultado: 
+Full,completa 
+General,Geral 
+Global,mundial 
+Global Exclusions,Exclusões globais 
+"Global list of all the grids that must not be rewrited, mostly because of incompatibility problems. This list is likely to be completed in the next versions, whenever new incompatibilities are found.<br />Use "" <strong>*</strong> "" to match any number of characters, "" <strong>.</strong> "" to match exactly one character.","Lista global de todas as grades, que não deve ser rewrited, principalmente por causa de problemas de incompatibilidade. Esta lista deverá ser concluído nas próximas versões, sempre que novas incompatibilidades são encontrados. <br /> Use ""<strong> * </ strong>"" para corresponder a qualquer número de caracteres, ""<strong>. </ Strong>"" para corresponder exatamente um caractere. "
+Google Sitemap,Google Sitemap 
+Greater than or equal to,Maior do que ou igual a 
+Greater than,Mais do que 
+Grid,Grade 
+Grid Customization,Personalizar Grade 
+Grid Informations:,Informações de Rede: 
+Grid Infos,grade Infos 
+Grid Type,Grade Tipo 
+Grids Customization,grids Personalização 
+Group,grupo 
+Height,Altura 
+Help,Ajuda 
+Hide Header,esconder Header 
+ID,ID 
+"If needed, indicate here the level on which to stop ascent for the full paths display. One level will be displayed in all cases, even if the concerned category has a lower level","Se necessário, indicar aqui o nível em que para parar a subida para a exibição caminhos completo. Um nível será exibido em todos os casos, mesmo que a categoria em causa tem um nível mais baixo "
+"If no currency is found with choosen column, then base currency will be used","Se nenhuma moeda é encontrado com a coluna escolhida, em seguida, a moeda base será utilizado "
+"If no ID is found, then the value corresponding to the given key will be displayed. If none is set, ""store_name"" will be used","Se nenhum ID for encontrado, então o valor correspondente à chave fornecida será exibida. Se nada for definido, ""store_name"" será utilizado "
+"If no value is set, "","" will be used","Se nenhum valor for definido, """", será utilizado "
+"If no value is set, then the base display format will be used","Se nenhum valor for definido, o formato de exibição de base serão utilizados "
+"If you choose ""No"", filter will apply on images existence","Se você escolher ""Não"", o filtro será aplicado em imagens existência "
+"If you choose ""No"", only images names will be displayed","Se você escolher ""Não"", apenas imagens os nomes serão apresentados "
+"If you choose ""Yes"", the images/names will point to the original images URLs.","Se você escolher ""Sim"", as imagens/nomes irá apontar para as imagens URLs originais. "
+"If you specify an image height, then you should indicate an image width too","Se você especificar uma altura da imagem, então você deve indicar uma largura de imagem muito "
+"If you specify an image width, then you should indicate an image height too","Se você especificar uma largura de imagem, então você deve indicar uma altura da imagem também "
+Ignore Custom Alignments (Base Grid Columns),Ignorar Personalizado alinhamentos (Base Grid Columns) 
+Ignore Custom Headers (Base Grid Columns),Ignorar Personalizado cabeçalhos (Base Grid Columns) 
+Ignore Custom Widths (Base Grid Columns),Ignorar personalizado larguras (Base Grid Columns) 
+Image Height,Altura da imagem 
+"Images URLs are used as images titles, or as result if images are not displayed or on results export. If you choose ""No"", only the images paths within the media/catalog directory will be displayed.","Imagens URLs são usadas como imagens títulos, ou como resultado que as imagens não são exibidas ou em resultados de exportação. Se você escolher ""Não"", apenas as imagens caminhos dentro do diretório media/catálogo será exibido. "
+Image Width,Largura da imagem 
+Include Inactive Carts,Incluir Carrinhos inativos 
+"Indicate here the position of the column among all ones sharing the same field name. If given position does not exist or is empty, then the first corresponding column will be used","Indicam aqui a posição da coluna entre todos aqueles que partilham o mesmo nome de campo. Se determinada posição não existe ou está vazia, então a primeira coluna correspondente será usado "
+"Indicate here the string that will be used to separate categories in each full path. If none is set, "" > "" will be used","Indicam aqui a cadeia que vai ser utilizado para separar as categorias em cada caminho completo. Se nada for definido, "">"" será utilizado "
+"Indicate here the string that will be used each product's category values. If none is set, "", "" will be used","Indique aqui a corda que será usada valores de categoria de cada produto. Se nada for definido, """", será utilizado "
+Instance,Instância 
+"Invalid dimension given : """%s"""","Dimensão é inválido: """%s""" "
+IP Address,Endereço IP 
+Items,itens 
+Label,Etiqueta 
+Label Key,chave Etiqueta 
+Last Name,sobrenome 
+Left,esquerda 
+Lesser than,menos do que 
+Lesser than or equal to,Menor do que ou igual a 
+Levels Separator,níveis Separator 
+List,lista 
+Log Error Messages,Entrar Mensagens de erro 
+Log Error Messages If Rewrite Success,Log mensagens de erro se Rewrite Sucesso 
+Long,longa 
+Magento Model,Magento Modelo 
+Manage Custom Grids,Gerenciar Personalizado Grids 
+Manage Options Source,Gerenciar Opções de Fonte 
+Maximum Qty in Cart,Qtde máxima no carrinho 
+Medium,Médio 
+Merge Base Pagination Values,Mesclar Valores Base de Paginação 
+Merge Values (Custom on Original),Mesclar Valores (Custom no original) 
+Merge Values (Natural Order),Mesclar Valores (ordem natural) 
+Merge Values (Original on Custom),Mesclar Valores (Original em Custom) 
+Merged Values,Valores incorporadas 
+Method,método 
+Middle,Médio 
+Middle Name,nome do meio 
+Minimum Qty in Cart,Qtde mínima no carrinho 
+Missing,faltando 
+Model,Modelo 
+Module Name,Nome do Módulo 
+More Options,mais opções 
+Must be a valid CSS color,Deve ser uma cor CSS válido 
+"Must be exactly one character. If none is set, no wildcard of this kind will be available at all","Deve ser exatamente um caractere. Se nada for definido, não curinga deste tipo estará disponível em todos os "
+"Must be exactly one character, differing from the wildcard for single character. If no valid value is set, no wildcard of this kind will be available at all","Deve ser exatamente um personagem, diferenciando-se do curinga para um único caractere. Se nenhum valor válido é definido, nenhum curinga deste tipo estará disponível em todos os "
+Name,nome 
+New Options Source,Opções Fonte Nova 
+No,Não 
+No Description,Não Descrição 
+No parameter to save,Nenhum parâmetro para salvar 
+No value given,Nenhum valor dado 
+None,Nenhum 
+none,nenhum 
+Not equal,não igual 
+FVets_CustomGrid::Number,FVets_CustomGrid :: Número 
+Number in Carts,Número de carros 
+Numeric values separated by commas,Os valores numéricos separados por vírgulas 
+Numeric values separated by commas (default values will be overridden),Os valores numéricos separados por vírgulas (valores padrão serão substituídas) 
+"Numeric values separated by commas. If none is set, base pagination values will be used (ie 20, 30, 50, 100, 200)","Os valores numéricos separados por vírgulas. Se nada for definido, os valores de base de paginação serão utilizados (isto é, 20, 30, 50, 100, 200) "
+Only Colorize Status Cell,Só celular Estado Colorize 
+Only for columns with time values,Apenas para colunas com valores de tempo 
+Only Logged In Carts,Só logados Carrinhos 
+Only Shared Wishlists,Somente Lista de desejos compartilhados 
+Options,opções 
+Options Array,opções da Matriz 
+Options Hash,opções Hash 
+Options List,Lista de opções 
+Options Separator,opções Separator 
+Options Source,opções de Fonte 
+Options Source Creation Settings,Opções de origem Definições de Criação 
+Order Amounts,valores de pedidos 
+Order View Tab,Ordem de tabulação Ver 
+Orders,encomendas 
+Origin,origem 
+Original Currency,Moeda Original 
+Original Image Link,Imagem Original link 
+Other,outros 
+Others,outros 
+Page Number,Número da página 
+Page Size,Tamanho da página 
+Pagination Values,Valores de paginação 
+Parse CMS Tags,Analisa CMS Marcações 
+Payment,pagamento 
+Permissions,Permissão 
+Pin Pager And Mass-Actions Block,Pin Pager e massa-Ações Bloco 
+Please select grids to update,Por favor seleccione grades para atualizar 
+Please select options sources to update,Por favor seleccione fontes opções para atualizar 
+Polls,Enquetes 
+Prefix,prefixo 
+Prefix that will be prepended to the values coming from config,Prefixo que será anexado aos valores provenientes de configuração 
+Price,Preço 
+Product,Produtos 
+Products,produtos 
+Product Edit Tab,Produtos Editar Tab 
+Product Image,imagem do Produto 
+Product Widget Chooser,Produtos Widget Chooser 
+Products Widget Chooser,Produtos Widget Chooser 
+Profiles,perfis 
+Profiles:,perfis: 
+"Put here the name of the parameter where to look for store view IDs, it will be used when the current store view ID could not be found in the rewrited grid.<br />If none is set, ""<strong>store</strong>"" value will be used.","Coloque aqui o nome do parâmetro para onde olhar para a loja ver os IDs, ele será usado quando a corrente de loja view ID não pode ser encontrado na rede rewrited. <br /> Se nada for definido, ""<strong> loja </ forte ""valor> é utilizado. "
+Quantity in Carts,Quantidade em Carrinhos 
+Quantity in Wishlists,Quantidade em Lista de desejos 
+Qty to become Out of Stock,Qtde de se tornar Esgotado 
+Remove Custom Default Grid Parameters:,Remover personalizado padrão de grade Parâmetros: 
+Remove Empty Value,Remover Valor Vazio 
+Renderer is not specified,Processador não for especificado 
+Rendering,Renderização 
+Required,Necessário 
+Resource Model,Modelo de Recursos 
+Return Type,Tipo de retorno 
+Reviews,comentários 
+Rewriting classes are automatically eval()ed at runtime.<br /><strong>eval() must be available on your server</strong>.,Aulas de reescrita são automaticamente eval () ed em tempo de execução. <br /> <Strong> eval () deve estar disponível no seu servidor </ strong>. 
+Rewriters Configuration,Configuração rewriters 
+Rewriters Configuration (Menu Link),Rewriters de configuração (Menu Link) 
+Rewriters with lower priority values are used first,Rewriters com valores de prioridade mais baixa são utilizados pela primeira vez 
+Rewriting Class,reescrevendo Classe 
+Rewriting classes are automatically generated in corresponding files inside the <span>app/code/community/BL/CustomGrid/Block/Rewrite</span> directory.<br />Each file is only re-generated when the rewrite code is significantly changed.<br /><strong>Check your folder permissions before using this method.</strong>,Aulas de reescrita são gerados automaticamente em arquivos correspondentes dentro do <span> app/code/comunidade/BL/CustomGrid/Bloco/Rewrite </ span> diretório. <br /> Cada arquivo é apenas re-gerada quando o código de reescrita é significativamente alterado . <br /> <strong> Verifique as permissões da pasta antes de usar este método. </ strong> 
+Right,direito 
+Role Users,Usuários de função 
+Save,Salvar 
+Save As Custom Default Grid Parameters:,Salvar como parâmetros de rede padrão personalizado: 
+Save Profile,save Profile 
+Search Terms,Termos de Pesquisa 
+Select All,selecionar tudo 
+Selectable Store View,Loja selecionável Ver 
+Selectable Renderer,Renderer selecionável 
+Settings,configurações 
+Setup,Setup 
+Shipping,Remessa 
+Shipping Address,Endereço para envio 
+Short,Curto 
+Show Missing Option Values,Mostrar Valores de Opção Desaparecidas 
+Show Number Sign,Mostrar Número Entrar 
+Singleton,Singleton 
+Size:,tamanho: 
+"Skip ""All Store Views"" Label","Ir ""Todos Store Vistas"" Etiqueta "
+Skip Store Label,Ir etiqueta da loja 
+Skip Store View Label,Ir Loja Ver Etiqueta 
+Skip Website Label,Ir site Etiqueta 
+Sort,Ordenar 
+Sort Direction,Direção de classificação 
+"Sorting does not take config values into account, so that products that use config may not be sorted consistently","O Sorting não levar em conta os valores de configuração, de modo que os produtos que utilizam configuração não pode ser resolvido de forma consistente "
+Sorting is based on a csv string of category IDs,A classificação é baseada em uma corda csv de IDs de categoria 
+Special,especial 
+State/Province,Estado/Província 
+Status (With Color),Estado (com cor) 
+Store View,loja Vista 
+Store View Base Currency,Loja Moeda vista base 
+Store View ID Parameter,Guarde View ID Parâmetro 
+Store View:,Ver loja: 
+Store Views,Store Vistas 
+Street Address,endereço da Rua 
+Suffix,sufixo 
+Suffix that will be appended to the values coming from config,Sufixo que será anexado aos valores provenientes de configuração 
+System,sistema 
+System Configuration Source,Sistema Fonte de Configuração 
+System Configuration Source Path,Sistema Fonte Configuração Path 
+Tax Classes,Classes fiscais 
+Tax Rates,Taxas de Imposto 
+Tax Rules,Regras fiscais 
+Telephone,telefone 
+Terms and Conditions,Termos e Condições 
+"Test this option when the customization button does not appear whereas it should (usually, when this error message is shown: ""The [grid type] grid was not rewrited"").","Teste esta opção quando o botão de personalização não parece que deve (geralmente, quando esta mensagem de erro é mostrada: ""O [tipo grade] grade não foi rewrited""). "
+Text,texto 
+"The """%s""" custom column could not be applied : """%s"""","A coluna personalizada """%s""" não poderia ser aplicada: """%s""" "
+"The """%s""" grid was not rewrited","A grade """%s""" não foi rewrited "
+"The ""Mage_CatalogInventory"""" module is disabled","O ""Mage_CatalogInventory"" ""módulo está desativado "
+"The behaviour of this list depends on the value of ""<strong>Complementary Exceptions Handling Mode</strong>""<br />""<strong>Exclude</strong>"" :<br />List here all the grids that should not be rewrited.<br />""<strong>Allow</strong>"" :<br />List here only the grids that should be rewrited. Notice that if the list is empty, no grid at all will be rewrited.<br /><br />Use "" <strong>*</strong> "" to match any number of characters, "" <strong>.</strong> "" to match exactly one character.","O comportamento desta lista depende do valor de ""<strong> Exceções Complementares Manipulação Modo </ strong>"" <br /> ""<strong> Excluir </ strong>"": <br /> Lista aqui todas as grades, que não deve ser rewrited <br /> ""<strong> Permitir </ strong>"":. <br /> Lista aqui apenas as grades que devem ser rewrited. Observe que, se a lista estiver vazia, nenhuma grade em tudo será rewrited. <br /> <br /> Use ""<strong> * </ strong>"" para corresponder a qualquer número de caracteres, ""<strong> <./Strong > ""para corresponder exatamente um caractere. "
+The block is not valid,O bloco não é válido 
+The block collection is not valid,A coleção de bloco não é válido 
+The custom grid has been successfully deleted,A grade de costume foi excluído com sucesso 
+The custom grid has been successfully disabled,A grade de costume foi desativada com sucesso 
+The custom grid has been successfully enabled,A grade de costume foi ativado com sucesso 
+The custom grid has been successfully updated,A grade de costume foi atualizado com sucesso 
+The edited entity could not be loaded,A entidade editado não pôde ser carregado 
+The filtered products must belong to all chosen categories,Os produtos filtrados deve pertencer a todas as categorias escolhidas 
+The filtered products must belong to at least one chosen category,Os produtos filtrados devem pertencer à categoria pelo menos um escolhido 
+The filtered products must not belong to any of the chosen categories,Os produtos filtrados não deve pertencer a qualquer uma das categorias escolhidas 
+"The generated rewriting class """%s""""" can not be found","A classe reescrever gerado """%s""" ""não pode ser encontrado "
+The name is not editable for this customer group,O nome não é editável para este grupo de clientes 
+The options source has been successfully deleted.,A fonte opções foi excluído com sucesso. 
+The options source has been successfully saved.,A fonte opções foi salva com sucesso. 
+"The original class """%s""" does not exist","A classe original """%s""" não existe "
+The product is not associated to the corresponding website,O produto não está associado com o site correspondente 
+The quantity is not editable for composite products,A quantidade não é editável para produtos compostos 
+The quantity is not editable for this product,A quantidade não é editável para este produto 
+The quantity is read-only for this product,A quantidade é de somente leitura para este produto 
+The requested attribute renderer does not exist...,O representante do atributo solicitado não existe ... 
+The requested column type does not exist...,O tipo de coluna solicitada não existe ... 
+The requested custom column does not exist...,A coluna de costume solicitou não existe ... 
+"The rewriting class """%s""" already exists","A classe reescrita """%s""" já existe "
+The value could not be saved,O valor não pode ser salvo 
+The value edit block could not be retrieved,O bloco valor edição não pôde ser recuperada 
+This attribute is locked,Esse atributo está bloqueado 
+This attribute is not editable for bundle products,Este atributo não é editável para produtos pacote 
+This attribute is not editable for this product,Este atributo não é editável para este produto 
+This custom grid no longer exists,Essa grade costume não existe mais 
+"This grid does not seem to be compatible with the custom export. If you wish to report this problem, please indicate this class name : """%s"""","Essa grade não parece ser compatível com a exportação personalizado. Se você quiser denunciar este problema, por favor indique-nome da classe: """%s""" "
+This options source no longer exists.,Esta fonte opções não existe mais. 
+This options source will be used if no options are found for choosen attribute,Esta fonte de opções será utilizada se não houver opções encontradas para o atributo escolhido 
+This value is not editable,Este valor não é editável 
+This value is not editable for rewrites corresponding to a product and/or a category,Este valor não é editável para regravações correspondentes a um produto e/ou categoria 
+This value is not editable for system rewrites,Este valor não é editável para regravações de sistema 
+"This value will replace the original default value from the grids. If the default value (either this one or, if it is not set, the original) can not be found in the pagination values used for the current grid, the smallest available pagination value will be used by default","Este valor irá substituir o valor padrão original das grades. Se o valor padrão (seja este ou, se não estiver definido, o original) não pode ser encontrado nos valores de paginação usado para a rede atual, o menor valor de paginação disponível será usado por padrão "
+Total ("%s"),Total ("%s") 
+Total of %d grid(s) have been deleted.,Total da rede (s)% d ter sido excluído. 
+Total of %d grid(s) have been disabled.,Total da rede (s)% d ter sido desativado. 
+Total of %d grid(s) have been enabled.,Total da rede (s)% d foram habilitados. 
+Total of %d options source(s) have been deleted.,Total de% fonte (s) opções d ter sido excluído. 
+Truncate at n-th character,Truncar no n º de caracteres 
+Truncate ending string,Truncar terminando cadeia 
+Truncate text,truncar o texto 
+Truncate without breaking words,Truncar sem divisão de palavras 
+Type,tipo 
+Unknown Attribute Renderer,Atributo desconhecido Renderer 
+Unknown Column Type,Coluna Desconhecido Tipo 
+Unknown Custom Column,Desconhecido coluna personalizada 
+Unknown custom grid,Grade personalizada Unknown 
+Unknown grid,grade Unknown 
+"Unless you know there is a difference, you can consider that blocks and pages templates processors are the same","A menos que você sabe que há uma diferença, você pode considerar que bloqueia e páginas templates processadores são os mesmos "
+Unselect All,Desmarcar tudo 
+URL Rewrite,Rewrite URL 
+URL Rewrites,URL Reescreve 
+Use Base Currency,Taxas de uso base 
+Use Column Currency,Use moedas Coluna 
+Use Config,Use Configuração 
+Use Customized Columns,Use Colunas personalizadas 
+Use Default Behaviour,Comportamento Use Default 
+Use Default Parameters,Use parâmetros predefinidos 
+Use Default Value,Usar o valor padrão 
+Use drag'n'drop for sorting columns,Use drag'n'drop para ordenar as colunas 
+Use Grid Store View,Use loja Grid View 
+"Used when image dimensions are specified.<br />If you choose ""Yes"", the original full-size images will be used and resized, when needed, by your web browser only (regarding images URLs, only the original ones will likewise be displayed in all cases)","Usado quando as dimensões da imagem são especificados. <br /> Se você escolher ""Sim"", as imagens em tamanho real originais serão usadas e redimensionado, quando necessário, pelo seu navegador web apenas (sobre as imagens URLs, apenas os originais serão igualmente apresentado em todos os casos) "
+Value,valor 
+Value Key,valor chave 
+Values Separator,valores Separator 
+Varien_Object Collection,Varien_Object coleção 
+View Grids Informations,Exibir Grades Informations 
+Visible,visível 
+Width,largura 
+Wildcard for single character,Wildcard para um único caractere 
+Wildcard for multiple characters,Wildcard para vários personagens 
+Will display nothing when exporting results,Irá exibir nada na exportação de resultados 
+Wishlists Number,Lista de desejos Número 
+With,com 
+With CMS blocks templates processor,Com CMS processador bloqueia modelos 
+With CMS pages templates processor,Com CMS processador modelos de páginas 
+With/Without Filter,Com/Sem Filtro 
+Without,sem 
+Wrong options source was specified.,Errado opções de fonte foi especificado. 
+Yes,Sim 
+Yes/No,Sim/Não 
+You have no access to this grid,Você não tem acesso a esta rede 
+You must enter a custom size,Você deve digitar um formato personalizado 
+You must select an export format,Você deve selecionar um formato de exportação 
+Zip/Postal Code,CEP/Código Postal
+,Criar perfil 
+,Moedas por atributo 
+,Personalizado 
+,Colunas personalizadas 
+,Colunas personalizados: 
+,Personalizada padrão Parâmetros de Comportamento 
+,Personalizada padrão Parâmetros de Comportamento - Valores Padrão 
+,Filtro personalizado - Número 
+,Custom Filter - Operador 
+,Personalizado Grade 
+,Personalizado Grade:"%s" 
+,Personalizado Grids 
+,Configuração Personalizada Grids 
+,Lista Personalizada 
+,Valores Personalizado Paginação 
+,Fonte personalizada 
+,cliente 
+,Grupos de clientes 
+,clientes 
+,Cliente Editar Tab 
+,customizáveis 
+,Personalização:"%s" 
+,Parâmetros de personalização 
+,Parâmetros Personalização - Valores Padrão 
+,Personalize Colunas 
+,Personalize Grid Columns 
+,Data 
+,Data + Hora 
+,Data/Data + Hora 
+,padrão 
+,Padrão (Última valor definido é utilizado) 
+,Opções padrão de Fonte 
+,Valor Paginação Padrão 
+,Valores Padrão 
+,excluir 
+,Excluir arquivo antes de salvar 
+,apagar Perfil 
+,decrescente 
+,Descrição 
+,pessoas com mobilidade condicionada 
+,desativar 
+,Modo de descoberta 
+,"Display """%s""" "
+,Mostrar imagens completas URLs 
+,Mostrar Moeda 
+,Mensagens de erro de exibição 
+,Mensagens Indicação de erro Se Rewrite Sucesso 
+,Formato de exibição 
+,Exibir caminho completo 
+,Mostrar caminhos completos 
+,IDs de exibição 
+,exibir imagens 
+,Exibe um nome de país a partir do seu código 
+,Exibe uma data formatada 
+,Exibe um número 
+,Exibe um preço 
+,Exibe uma visualização da loja de seu ID 
+,Exibe um texto 
+,Exibe um valor a partir de uma fonte de opções 
+,Exibe um endereço IP 
+,Displays para cada produto de todas as categorias que está associada à 
+,Exibe a data formatada + tempo 
+,Exibe o número de carrinhos contendo cada produto 
+,Exibe o número de lista de desejos contendo cada produto 
+,Exibe a quantidade de cada produto contido em carrinhos 
+,Exibe a quantidade de cada produto contido na lista de desejos 
+,Exibe a lista mesmos itens como a página de visualização fim 
+,Apresenta o estado e cor à linha 
+,Apresenta vista loja da ordem 
+,Exibe se um país pertence à UE 
+,"Drag'n'drop é a maneira mais conveniente para ordenar as colunas, mas impõe o seu número de ordem, e pode ser lento em alguns casos. <br /> Escolha ""<strong> Não </ strong>"" para especificar colunas ordens números diretamente em campos de texto correspondente. "
+,duplicado 
+,EAG - Configuração base 
+,EAG - Erros 
+,EAG - Mensagens 
+,EAG - Configuração Rewriters 
+,EAG - Êxitos 
+,EAG - Advertências 
+,Editar 
+,Editar Colunas Valores 
+,Parâmetros de edição padrão 
+,Editar valor 
+,editável 
+,Editor - Grade Tipo: Google Sitemap 
+,"Por exemplo: ""em geral/country/eu_countries"" "
+,Ex: produtos simples associados aos seus pais configuráveis 
+,Email 
+,Ativar 
+,Ativado 
+,Ativado/Desativado 
+,igual 
+,As mensagens de erro são escritas para as exceções de log 
+,Fuja HTML 
+,Países da UE 
+,País da UE 
+,eval () não está disponível em seu servidor 
+,eval () Classes ed 
+,Filtrar Exact 
+,Exceções Modo de Manipulação 
+,Lista de exceções 
+,Excluir 
+,Excluir itens filhos 
+,Excluir itens filhos do filtro 
+,existente 
+,existente 
+,FVets_CustomGrid :: Export 
+,FVets_CustomGrid :: Exportação: 
+,Exportação Formato de exibição 
+,Exportar resultados 
+,Falha ao editar o valor 
+,"Falha ao editar o valor: """%s""" "
+,Falha ao salvar o valor 
+,"Falha ao salvar o valor: """%s""" "
+,Fax 
+,Nome do campo 
+,Filtrar 
+,Imagens filtro no nome 
+,Modo de filtro 
+,"Filtro em ""Use Config"" "
+,Filtrar em Nome do item 
+,Filtro no item SKU 
+,"Produtos filtrados terão de pertencer a um número de categorias entre os escolhidos, que pode ser verificado usando este valor eo do ""Custom Filter - Operadora"" campo "
+,"Produtos filtrados terão de pertencer a um número de categorias entre os escolhidos, que pode ser verificado usando este valor eo do ""Custom Filter - Número"" campo "
+,filtros 
+,primeiro nome 
+,Valor chave plana 
+,para a filtragem de apenas 
+,"Para fontes com vários níveis de opções, rótulos de todos os níveis de exibição, e não apenas última "
+,Força Valor Personalizado 
+,Força Grade Rewrites 
+,Força Valor Original 
+,Forçar uso de opções padrão fonte 
+,Forçando um valor só se aplica quando não existe 
+,Forçar ou fundir um valor só se aplica quando não existe 
+,formato 
+,formato: 
+,De Resultado: 
+,completa 
+,Geral 
+,mundial 
+,Exclusões globais 
+,"Lista global de todas as grades, que não deve ser rewrited, principalmente por causa de problemas de incompatibilidade. Esta lista deverá ser concluído nas próximas versões, sempre que novas incompatibilidades são encontrados. <br /> Use ""<strong> * </ strong>"" para corresponder a qualquer número de caracteres, ""<strong>. </ Strong>"" para corresponder exatamente um caractere. "
+,Google Sitemap 
+,Maior do que ou igual a 
+,Mais do que 
+,Grade 
+,Personalizar Grade 
+,Informações de Rede: 
+,grade Infos 
+,Grade Tipo 
+,grids Personalização 
+,grupo 
+,Altura 
+,Ajuda 
+,esconder Header 
+,ID 
+,"Se necessário, indicar aqui o nível em que para parar a subida para a exibição caminhos completo. Um nível será exibido em todos os casos, mesmo que a categoria em causa tem um nível mais baixo "
+,"Se nenhuma moeda é encontrado com a coluna escolhida, em seguida, a moeda base será utilizado "
+,"Se nenhum ID for encontrado, então o valor correspondente à chave fornecida será exibida. Se nada for definido, ""store_name"" será utilizado "
+,"Se nenhum valor for definido, """", será utilizado "
+,"Se nenhum valor for definido, o formato de exibição de base serão utilizados "
+,"Se você escolher ""Não"", o filtro será aplicado em imagens existência "
+,"Se você escolher ""Não"", apenas imagens os nomes serão apresentados "
+,"Se você escolher ""Sim"", as imagens/nomes irá apontar para as imagens URLs originais. "
+,"Se você especificar uma altura da imagem, então você deve indicar uma largura de imagem muito "
+,"Se você especificar uma largura de imagem, então você deve indicar uma altura da imagem também "
+,Ignorar Personalizado alinhamentos (Base Grid Columns) 
+,Ignorar Personalizado cabeçalhos (Base Grid Columns) 
+,Ignorar personalizado larguras (Base Grid Columns) 
+,Altura da imagem 
+,"Imagens URLs são usadas como imagens títulos, ou como resultado que as imagens não são exibidas ou em resultados de exportação. Se você escolher ""Não"", apenas as imagens caminhos dentro do diretório media/catálogo será exibido. "
+,Largura da imagem 
+,Incluir Carrinhos inativos 
+,"Indicam aqui a posição da coluna entre todos aqueles que partilham o mesmo nome de campo. Se determinada posição não existe ou está vazia, então a primeira coluna correspondente será usado "
+,"Indicam aqui a cadeia que vai ser utilizado para separar as categorias em cada caminho completo. Se nada for definido, "">"" será utilizado "
+,"Indique aqui a corda que será usada valores de categoria de cada produto. Se nada for definido, """", será utilizado "
+,Instância 
+,"Dimensão é inválido: """%s""" "
+,Endereço IP 
+,itens 
+,Etiqueta 
+,chave Etiqueta 
+,sobrenome 
+,esquerda 
+,menos do que 
+,Menor do que ou igual a 
+,níveis Separator 
+,lista 
+,Entrar Mensagens de erro 
+,Log mensagens de erro se Rewrite Sucesso 
+,longa 
+,Magento Modelo 
+,Gerenciar Personalizado Grids 
+,Gerenciar Opções de Fonte 
+,Qtde máxima no carrinho 
+,Médio 
+,Mesclar Valores Base de Paginação 
+,Mesclar Valores (Custom no original) 
+,Mesclar Valores (ordem natural) 
+,Mesclar Valores (Original em Custom) 
+,Valores incorporadas 
+,método 
+,Médio 
+,nome do meio 
+,Qtde mínima no carrinho 
+,faltando 
+,Modelo 
+,Nome do Módulo 
+,mais opções 
+,Deve ser uma cor CSS válido 
+,"Deve ser exatamente um caractere. Se nada for definido, não curinga deste tipo estará disponível em todos os "
+,"Deve ser exatamente um personagem, diferenciando-se do curinga para um único caractere. Se nenhum valor válido é definido, nenhum curinga deste tipo estará disponível em todos os "
+,nome 
+,Opções Fonte Nova 
+,Não 
+,Não Descrição 
+,Nenhum parâmetro para salvar 
+,Nenhum valor dado 
+,Nenhum 
+,nenhum 
+,não igual 
+,FVets_CustomGrid :: Número 
+,Número de carros 
+,Os valores numéricos separados por vírgulas 
+,Os valores numéricos separados por vírgulas (valores padrão serão substituídas) 
+,"Os valores numéricos separados por vírgulas. Se nada for definido, os valores de base de paginação serão utilizados (isto é, 20, 30, 50, 100, 200) "
+,Só celular Estado Colorize 
+,Apenas para colunas com valores de tempo 
+,Só logados Carrinhos 
+,Somente Lista de desejos compartilhados 
+,opções 
+,opções da Matriz 
+,opções Hash 
+,Lista de opções 
+,opções Separator 
+,opções de Fonte 
+,Opções de origem Definições de Criação 
+,valores de pedidos 
+,Ordem de tabulação Ver 
+,encomendas 
+,origem 
+,Moeda Original 
+,Imagem Original link 
+,outros 
+,outros 
+,Número da página 
+,Tamanho da página 
+,Valores de paginação 
+,Analisa CMS Marcações 
+,pagamento 
+,Permissão 
+,Pin Pager e massa-Ações Bloco 
+,Por favor seleccione grades para atualizar 
+,Por favor seleccione fontes opções para atualizar 
+,Enquetes 
+,prefixo 
+,Prefixo que será anexado aos valores provenientes de configuração 
+,Preço 
+,Produtos 
+,produtos 
+,Produtos Editar Tab 
+,imagem do Produto 
+,Produtos Widget Chooser 
+,Produtos Widget Chooser 
+,perfis 
+,perfis: 
+,"Coloque aqui o nome do parâmetro para onde olhar para a loja ver os IDs, ele será usado quando a corrente de loja view ID não pode ser encontrado na rede rewrited. <br /> Se nada for definido, ""<strong> loja </ forte ""valor> é utilizado. "
+,Quantidade em Carrinhos 
+,Quantidade em Lista de desejos 
+,Qtde de se tornar Esgotado 
+,Remover personalizado padrão de grade Parâmetros: 
+,Remover Valor Vazio 
+,Processador não for especificado 
+,Renderização 
+,Necessário 
+,Modelo de Recursos 
+,Tipo de retorno 
+,comentários 
+,Aulas de reescrita são automaticamente eval () ed em tempo de execução. <br /> <Strong> eval () deve estar disponível no seu servidor </ strong>. 
+,Configuração rewriters 
+,Rewriters de configuração (Menu Link) 
+,Rewriters com valores de prioridade mais baixa são utilizados pela primeira vez 
+,reescrevendo Classe 
+,Aulas de reescrita são gerados automaticamente em arquivos correspondentes dentro do <span> app/code/comunidade/BL/CustomGrid/Bloco/Rewrite </ span> diretório. <br /> Cada arquivo é apenas re-gerada quando o código de reescrita é significativamente alterado . <br /> <strong> Verifique as permissões da pasta antes de usar este método. </ strong> 
+,direito 
+,Usuários de função 
+,Salvar 
+,Salvar como parâmetros de rede padrão personalizado: 
+,save Profile 
+,Termos de Pesquisa 
+,selecionar tudo 
+,Loja selecionável Ver 
+,Renderer selecionável 
+,configurações 
+,Setup 
+,Remessa 
+,Endereço para envio 
+,Curto 
+,Mostrar Valores de Opção Desaparecidas 
+,Mostrar Número Entrar 
+,Singleton 
+,tamanho: 
+,"Ir ""Todos Store Vistas"" Etiqueta "
+,Ir etiqueta da loja 
+,Ir Loja Ver Etiqueta 
+,Ir site Etiqueta 
+,Ordenar 
+,Direção de classificação 
+,"O Sorting não levar em conta os valores de configuração, de modo que os produtos que utilizam configuração não pode ser resolvido de forma consistente "
+,A classificação é baseada em uma corda csv de IDs de categoria 
+,especial 
+,Estado/Província 
+,Estado (com cor) 
+,loja Vista 
+,Loja Moeda vista base 
+,Guarde View ID Parâmetro 
+,Ver loja: 
+,Store Vistas 
+,endereço da Rua 
+,sufixo 
+,Sufixo que será anexado aos valores provenientes de configuração 
+,sistema 
+,Sistema Fonte de Configuração 
+,Sistema Fonte Configuração Path 
+,Classes fiscais 
+,Taxas de Imposto 
+,Regras fiscais 
+,telefone 
+,Termos e Condições 
+,"Teste esta opção quando o botão de personalização não parece que deve (geralmente, quando esta mensagem de erro é mostrada: ""O [tipo grade] grade não foi rewrited""). "
+,texto 
+,"A coluna personalizada """%s""" não poderia ser aplicada: """%s""" "
+,"A grade """%s""" não foi rewrited "
+,"O ""Mage_CatalogInventory"" ""módulo está desativado "
+,"O comportamento desta lista depende do valor de ""<strong> Exceções Complementares Manipulação Modo </ strong>"" <br /> ""<strong> Excluir </ strong>"": <br /> Lista aqui todas as grades, que não deve ser rewrited <br /> ""<strong> Permitir </ strong>"":. <br /> Lista aqui apenas as grades que devem ser rewrited. Observe que, se a lista estiver vazia, nenhuma grade em tudo será rewrited. <br /> <br /> Use ""<strong> * </ strong>"" para corresponder a qualquer número de caracteres, ""<strong> <./Strong > ""para corresponder exatamente um caractere. "
+,O bloco não é válido 
+,A coleção de bloco não é válido 
+,A grade de costume foi excluído com sucesso 
+,A grade de costume foi desativada com sucesso 
+,A grade de costume foi ativado com sucesso 
+,A grade de costume foi atualizado com sucesso 
+,A entidade editado não pôde ser carregado 
+,Os produtos filtrados deve pertencer a todas as categorias escolhidas 
+,Os produtos filtrados devem pertencer à categoria pelo menos um escolhido 
+,Os produtos filtrados não deve pertencer a qualquer uma das categorias escolhidas 
+,"A classe reescrever gerado """%s""" ""não pode ser encontrado "
+,O nome não é editável para este grupo de clientes 
+,A fonte opções foi excluído com sucesso. 
+,A fonte opções foi salva com sucesso. 
+,"A classe original """%s""" não existe "
+,O produto não está associado com o site correspondente 
+,A quantidade não é editável para produtos compostos 
+,A quantidade não é editável para este produto 
+,A quantidade é de somente leitura para este produto 
+,O representante do atributo solicitado não existe ... 
+,O tipo de coluna solicitada não existe ... 
+,A coluna de costume solicitou não existe ... 
+,"A classe reescrita """%s""" já existe "
+,O valor não pode ser salvo 
+,O bloco valor edição não pôde ser recuperada 
+,Esse atributo está bloqueado 
+,Este atributo não é editável para produtos pacote 
+,Este atributo não é editável para este produto 
+,Essa grade costume não existe mais 
+,"Essa grade não parece ser compatível com a exportação personalizado. Se você quiser denunciar este problema, por favor indique-nome da classe: """%s""" "
+,Esta fonte opções não existe mais. 
+,Esta fonte de opções será utilizada se não houver opções encontradas para o atributo escolhido 
+,Este valor não é editável 
+,Este valor não é editável para regravações correspondentes a um produto e/ou categoria 
+,Este valor não é editável para regravações de sistema 
+,"Este valor irá substituir o valor padrão original das grades. Se o valor padrão (seja este ou, se não estiver definido, o original) não pode ser encontrado nos valores de paginação usado para a rede atual, o menor valor de paginação disponível será usado por padrão "
+,Total ("%s") 
+,Total da rede (s)% d ter sido excluído. 
+,Total da rede (s)% d ter sido desativado. 
+,Total da rede (s)% d foram habilitados. 
+,Total de% fonte (s) opções d ter sido excluído. 
+,Truncar no n º de caracteres 
+,Truncar terminando cadeia 
+,truncar o texto 
+,Truncar sem divisão de palavras 
+,tipo 
+,Atributo desconhecido Renderer 
+,Coluna Desconhecido Tipo 
+,Desconhecido coluna personalizada 
+,Grade personalizada Unknown 
+,grade Unknown 
+,"A menos que você sabe que há uma diferença, você pode considerar que bloqueia e páginas templates processadores são os mesmos "
+,Desmarcar tudo 
+,Rewrite URL 
+,URL Reescreve 
+,Taxas de uso base 
+,Use moedas Coluna 
+,Use Configuração 
+,Use Colunas personalizadas 
+,Comportamento Use Default 
+,Use parâmetros predefinidos 
+,Usar o valor padrão 
+,Use drag'n'drop para ordenar as colunas 
+,Use loja Grid View 
+,"Usado quando as dimensões da imagem são especificados. <br /> Se você escolher ""Sim"", as imagens em tamanho real originais serão usadas e redimensionado, quando necessário, pelo seu navegador web apenas (sobre as imagens URLs, apenas os originais serão igualmente apresentado em todos os casos) "
+,valor 
+,valor chave 
+,valores Separator 
+,Varien_Object coleção 
+,Exibir Grades Informations 
+,visível 
+,largura 
+,Wildcard para um único caractere 
+,Wildcard para vários personagens 
+,Irá exibir nada na exportação de resultados 
+,Lista de desejos Número 
+,com 
+,Com CMS processador bloqueia modelos 
+,Com CMS processador modelos de páginas 
+,Com/Sem Filtro 
+,sem 
+,Errado opções de fonte foi especificado. 
+,Sim 
+,Sim/Não 
+,Você não tem acesso a esta rede 
+,Você deve digitar um formato personalizado 
+,Você deve selecionar um formato de exportação 
+,CEP/Código Postal

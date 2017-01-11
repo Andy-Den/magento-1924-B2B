@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Page>
+            <version>1.0.0</version>
+        </FVets_Page>
+    </modules>
+    <global>
+        <blocks>
+            <fvets_page>
+                <class>FVets_Page_Block</class>
+            </fvets_page>
+            <page>
+                <rewrite>
+                    <html_header>FVets_Page_Block_Html_Header</html_header>
+                </rewrite>
+            </page>
+        </blocks>
+        <helpers>
+            <page>
+                <class>FVets_Page_Helper</class>
+            </page>
+        </helpers>
+    </global>
+    <default>
+        <design>
+            <header>
+                <header_customers_message>Seus preços, descontos e condições exclusivas serão mostrados somente na FINALIZAÇÃO DO PEDIDO</header_customers_message>
+            </header>
+        </design>
+    </default>
+</config>

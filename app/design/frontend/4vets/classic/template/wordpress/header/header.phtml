@@ -1,0 +1,81 @@
+<div class="row pre-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 first"><i class="fa fa-phone"></i>&nbsp;<?php echo Mage::getStoreConfig('general/store_information/phone'); ?></div>
+			<?php if(Mage::helper('customer')->isLoggedIn()): ?>
+			<div class="col-md-3 welcome-message">
+				<?php
+					if(strlen(Mage::getSingleton('customer/session')->getCustomer()->getName()) > 3){
+						$name = Mage::getSingleton('customer/session')->getCustomer()->getName();
+					}else{
+						$name = explode('@',Mage::getSingleton('customer/session')->getCustomer()->getEmail());
+						$name = $name[0];
+					}
+				?>
+				<span>Olá <strong><?php echo $name ?></strong> <?php echo $this->getAdditionalHtml() ?> <a href="<?php echo $this->getUrl('customer/account/logout'); ?>">(sair)</a></span>
+			</div>
+			<!--block type="page/template_links" name="top.links" as="topLinks"/-->
+			<div class="col-md-3">
+				<ul class="links list-inline">
+                    <li class="first"><a href="http://4vets.localhost.com/customer/account/" title="Minha Conta"><i class="fa fa-user"></i>&nbsp;Minha Conta</a></li>
+                    <li class=" last"><a href="/wishlist/" title="Favoritos"><i class="fa fa-gift"></i>&nbsp;Favoritos</a></li>
+                </ul>
+            </div>
+			<div class="col-md-4 last text-right pull-right no-border"><?php echo $this->getLayout()->createBlock('ajaxcart/cart')->setTemplate('O2TI/ajaxcart/cart.phtml')->toHtml() ?></div>
+			<?php else: ?>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="col-md-3 register-link">
+						<a href="javascript:void(0)" class="customer modal-login" data-modal-target="forgot" onClick="getOverlay('/PrivateSales/register#cadastro', 'cadastro');return false;">Cadastre-se&nbsp;></a>
+					</div>
+					<div class="col-md-6">
+						<?php echo $this->getLayout()->createBlock('customer/form_login')->setTemplate('customer/form/mini.login.phtml')->toHtml() ?>
+					</div>
+					<div class="col-md-2">
+						<a href="javascript:void(0)" class="customer modal-login" data-modal-target="forgot" onClick="getOverlay('/PrivateSales/register#senha', 'senha');return false;">Esqueci a minha senha</a>
+					</div>
+					<script type="text/javascript">
+						jQuery(document).ready(function(){
+							jQuery(".pre-header .block.block-login > form").on("submit", function(e) {
+								e.preventDefault();
+								var formid = jQuery(this).attr('id');
+								var curentForm = jQuery(this);
+								jQuery.ajax({
+									url: "<?php echo $this->getUrl('PrivateSales/account/ajaxLogin'); ?>",
+									type: jQuery(this).attr("method"),
+									data: jQuery(this).serialize(),
+									beforeSend: function() {
+										jQuery("#loading-mask").show();
+                                                                                document.cookie = "<?php echo Mage_Core_Controller_Front_Action::SESSION_NAMESPACE; ?>=deleted; domain=www.4vets.com.br; Expires=" + new Date(-1).toUTCString() + '; Path=/';
+                                                                                document.cookie = "<?php echo Mage_Core_Controller_Front_Action::SESSION_NAMESPACE; ?>=deleted; domain=4vets.com.br; Expires=" + new Date(-1).toUTCString() + '; Path=/';
+                                                                                document.cookie = "<?php echo Mage_Core_Controller_Front_Action::SESSION_NAMESPACE; ?>=deleted; domain=.www.4vets.com.br; Expires=" + new Date(-1).toUTCString() + '; Path=/';
+                                                                                document.cookie = "<?php echo Mage_Core_Controller_Front_Action::SESSION_NAMESPACE; ?>=deleted; domain=.4vets.com.br; Expires=" + new Date(-1).toUTCString() + '; Path=/';
+									},
+									success: function(data) {
+										if (data.indexOf('<head') > -1) {
+											location.reload();
+										}
+										var response = eval("(" + data + ")");
+										if (response.success) {
+											location.reload();
+										} else {
+											jQuery("#loading-mask").hide();
+											if ((typeof response.message) == 'string') {
+												alert(response.message);
+											}
+											return false;
+										}
+									}
+								});
+								return false;
+							});
+
+						});
+					</script>
+				</div>
+			</div>
+			<div class="col-md-3 not-logged-in last text-right pull-right no-border"><?php echo $this->getLayout()->createBlock('ajaxcart/cart')->setTemplate('O2TI/ajaxcart/cart.phtml')->toHtml() ?></div>
+			<?php endif;?>
+		</div>
+	</div>
+</div>

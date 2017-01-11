@@ -1,0 +1,96 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $_customer = $this->getCustomer(); ?>
+<?php $_razaoSocial = $_customer->getRazaoSocial();
+			$_nomeResponsavel = $_customer->getName();
+?>
+
+<div>
+	<h1><?php echo $this->__('Activate your account'); ?></h1>
+	<div class="customer-activate-line"></div>
+</div>
+
+<div class="customer-activate-container">
+
+<div class="customer-data">
+	<p class="greetings"><?php echo ($this->__('Hello') . ' ' . $_nomeResponsavel); ?></p>
+	<p><?php echo $this->__('You were registered in our website, to activate your account just check a few informations.'); ?></p>
+	<br><br>
+</div>
+
+<div class="user-data">
+	<label for=""><strong><?php echo $this->__('Email') ?>*</strong> <?php $this->__('(Already registered in our company)'); ?></label>
+	<br>
+	<span><?php echo $_customer->getEmail() ?></span>
+</div>
+
+<div class="user-data">
+	<label><strong><?php echo $this->__('Store Name') ?>*</strong> <?php $this->__('(Already registered in our company)'); ?></label>
+	<br>
+	<span><?php echo ($_razaoSocial ? $_razaoSocial : $_nomeResponsavel) ?></span>
+</div>
+
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+<form action="<?php echo $this->getUrl('*/*/activatepost', array('_query' => array('id' => $this->getCustomerId(), 'token' => $this->getResetPasswordLinkToken()))); ?>" method="post" id="form-validate">
+    <div class="fieldset">
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="password" class="required"><em>*</em><?php echo $this->__('Create Password'); ?></label>
+                    <div class="input-box">
+                        <input type="password" class="input-text required-entry validate-password" name="password" id="password" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password'); ?></label>
+                    <div class="input-box">
+                        <input type="password" class="input-text required-entry validate-cpassword" name="confirmation" id="confirmation" />
+                    </div>
+                </div>
+							<br/><br/><br/><br/>
+								<div class="field check-email">
+									<input id="receive-contact-by-company" name="receive-contact-by-company" type="checkbox"/>
+									<label for="email-by-company"><?php echo $this->__('I wish a contact by the company to change my account information.'); ?></label>
+								</div>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <p class="required" style="text-align: left"><?php echo $this->__('* Required Fields'); ?></p>
+        <button type="submit" title="<?php echo $this->__('Activate my account'); ?>" class="button btn-action"><span><span><?php echo $this->__('Activate my account'); ?></span></span></button>
+    </div>
+</form>
+
+</div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+    var dataForm = new VarienForm('form-validate', true);
+/*]]>*/
+</script>

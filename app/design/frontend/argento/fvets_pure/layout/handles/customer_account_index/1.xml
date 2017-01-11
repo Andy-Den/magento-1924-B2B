@@ -1,0 +1,27 @@
+<include_layout version="0.1.0">
+    <customer_account_index>
+        <update handle="page_two_columns_left"/>
+        <update handle="customer_account_navigation_1" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_index/1.less</name></action>
+        </reference>
+        <reference name="head" ifhandle="customer_tipopessoa_RC">
+            <action method="addItem"><type>skin_css</type><name>css/jquery.quickselect.css</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.quicksilver.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.quickselect.js</name></action>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+        <reference name="customer_account_dashboard">
+            <action method="setTemplate"><template>customer/account/dashboard/1.phtml</template></action>
+            <block type="page/html" name="salesrep.form" template="customer/account/dashboard/salesrep/form/1.phtml" />
+        </reference>
+        <reference name="customer_account_dashboard_info">
+            <action method="setTemplate"><template>customer/account/dashboard/info/1.phtml</template></action>
+        </reference>
+        <reference name="customer_account_dashboard_address">
+            <action method="setTemplate"><template>customer/account/dashboard/address/1.phtml</template></action>
+        </reference>
+    </customer_account_index>
+</include_layout>

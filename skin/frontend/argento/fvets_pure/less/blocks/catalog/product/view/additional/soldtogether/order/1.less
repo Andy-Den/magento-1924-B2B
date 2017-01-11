@@ -1,0 +1,80 @@
+.soldtogether-block
+{
+
+  .subtitle
+  {
+    font-weight: normal !important;
+  }
+
+  .amazonstyle-images
+  {
+    li
+    {
+      background: none;
+      padding: 0;
+
+      .image-sum
+      {
+        display: block;
+        float: left;
+        margin: 64px 15px;
+        width: 20px;
+        height: 21px;
+        background: url(@{iconsUrl}) no-repeat -139px 0;
+      }
+    }
+  }
+
+  .amazonstyle-checkboxes
+  {
+    margin-top: 20px;
+    margin-bottom:20px;
+    border:@defaultBorder;
+    border-radius: @defaultBorderRadius;
+
+    li
+    {
+      &.product-name
+      {
+        padding: 20px;
+
+        &:nth-of-type(odd)
+        {
+          background:@defaultBackgroundColor2;
+        }
+
+        .divQtd
+        {
+          margin: 0;
+        }
+      }
+
+      &.totalprice
+      {
+        padding: 20px;
+        float: right;
+
+        .price-box
+        {
+          margin-right: 20px;
+
+          .price-label
+          {
+            display: inline;
+            text-transform: uppercase;
+          }
+
+          .price
+          {
+            font-weight: bold;
+          }
+        }
+
+        .button-cart
+        {
+          display: inline;
+        }
+      }
+    }
+  }
+}

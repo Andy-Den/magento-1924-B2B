@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * Widget Slider
+ */
+$widget = Mage::getModel('widget/widget_instance')->load(1);
+$widgetSlider = $this
+	->getLayout()
+	->createBlock($widget->getType(),
+		$widget->getTitle(),
+		$widget->getWidgetParameters());
+
+
+/**
+ * Widget Banners
+ */
+$widget = Mage::getModel('widget/widget_instance')->load(2);
+$widgetBanners = $this
+	->getLayout()
+	->createBlock($widget->getType(),
+		$widget->getTitle(),
+		$widget->getWidgetParameters());
+
+?>
+
+
+<div class="callout-home-top col2-set">
+	<div class="col-1"><?php echo $widgetSlider->toHtml(); ?></div>
+	<div class="col-2"><?php echo $widgetBanners->toHtml(); ?></div>
+</div>
+
+<div class="col-main"><?php echo $this->getChildHtml('brands_list') ?></div>
+
+</div>
+</div>
+<hr />
+<div class="main">
+	<div>
+
+
+<div class="bigBlock">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/1.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			QUEM SOMOS
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque convallis, ligula ac ullamcorper ultrices, lectus ante feugiat nisi, eget elementum ipsum dolor sit amet nunc. Morbi sit amet tincidunt lorem, ac porttitor neque. Nulla semper neque sit amet bibendum pretium. Curabitur tincidunt lorem dolor, id vulputate eros scelerisque sit amet. Cras pulvinar tellus ut magna tristique fermentum. Praesent gravida blandit lacus id vehicula. Aliquam vitae nulla libero. Ut malesuada ligula viverra lacus vestibulum, et dapibus diam volutpat. Mauris porttitor venenatis tincidunt. In hac habitasse platea dictumst. Nunc lectus eros, tincidunt in ullamcorper id, lobortis vel eros. Nam nulla lacus, laoreet vitae rutrum et, tristique vehicula mi.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="bigBlock">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/2.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			Nossas instalações
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque convallis, ligula ac ullamcorper ultrices, lectus ante feugiat nisi, eget elementum ipsum dolor sit amet nunc. Morbi sit amet tincidunt lorem, ac porttitor neque. Nulla semper neque sit amet bibendum pretium. Curabitur tincidunt lorem dolor, id vulputate eros scelerisque sit amet. Cras pulvinar tellus ut magna tristique fermentum. Praesent gravida blandit lacus id vehicula. Aliquam vitae nulla libero. Ut malesuada ligula viverra lacus vestibulum, et dapibus diam volutpat. Mauris porttitor venenatis tincidunt. In hac habitasse platea dictumst. Nunc lectus eros, tincidunt in ullamcorper id, lobortis vel eros. Nam nulla lacus, laoreet vitae rutrum et, tristique vehicula mi.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+
+<div class="bigBlock">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/3.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			Nossos Profissionais
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque convallis, ligula ac ullamcorper ultrices, lectus ante feugiat nisi, eget elementum ipsum dolor sit amet nunc. Morbi sit amet tincidunt lorem, ac porttitor neque. Nulla semper neque sit amet bibendum pretium. Curabitur tincidunt lorem dolor, id vulputate eros scelerisque sit amet. Cras pulvinar tellus ut magna tristique fermentum. Praesent gravida blandit lacus id vehicula. Aliquam vitae nulla libero. Ut malesuada ligula viverra lacus vestibulum, et dapibus diam volutpat. Mauris porttitor venenatis tincidunt. In hac habitasse platea dictumst. Nunc lectus eros, tincidunt in ullamcorper id, lobortis vel eros. Nam nulla lacus, laoreet vitae rutrum et, tristique vehicula mi.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+<div class="smallBlock first">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/4.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			<a href="/nossaempresa">Sobre a empresa</a>
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="smallBlock">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/5.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			Marcas
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+<div class="smallBlock last">
+	<div class="image">
+		<img src="<?php echo $this->getSkinUrl('images/_tmp/home/6.jpg'); ?>" width="430" height="230" />
+	</div>
+	<div class="text">
+		<div class="title">
+			<a href="/entreemcontato">Contato</a>
+		</div>
+		<div class="description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fermentum facilisis sapien, ut condimentum diam lobortis rhoncus. Vestibulum gravida turpis eget fringilla suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+<!-- biscoito -->
+<style>
+	.bigBlock {
+		width: 100%;
+		margin-bottom: 70px;
+	}
+
+	.bigBlock .image {
+		float:left;
+		width: 45%;
+	}
+
+	.bigBlock .text {
+		float: left;
+		width: 53%;
+		margin-left: 2%;
+	}
+
+	.bigBlock .text .title {
+		font-size: 14px;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #294e87;
+		margin-bottom: 15px;
+	}
+
+	.bigBlock .text .description {
+		font-weight: normal;
+		line-height: 1.7;
+	}
+
+	.smallBlock {
+		width: 32%;
+		margin-bottom: 70px;
+		float: left;
+		padding: 1%;
+	}
+
+	.smallBlock.first {
+		padding-left: 0;
+	}
+
+	.smallBlock.last {
+		padding-right: 0;
+	}
+
+	.smallBlock .image {
+		margin-bottom: 20px;
+	}
+
+	.smallBlock .text {
+	}
+
+	.smallBlock .text .title {
+		font-size: 14px;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #294e87;
+		margin-bottom: 15px;
+	}
+
+	.smallBlock .text .title a {
+		font-size: 14px;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #294e87;
+		margin-bottom: 15px;
+	}
+
+	.smallBlock .text .description {
+		font-weight: normal;
+		line-height: 1.7;
+	}
+</style>

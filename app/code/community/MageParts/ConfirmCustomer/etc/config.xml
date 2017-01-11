@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageParts
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This code is copyrighted by MageParts and may not be reproduced
+ * and/or redistributed without a written permission by the copyright 
+ * owners. If you wish to modify and/or redistribute this file please
+ * contact us at info@mageparts.com for confirmation before doing
+ * so. Please note that you are free to modify this file for personal
+ * use only.
+ *
+ * If you wish to make modifications to this file we advice you to use
+ * the "local" file scope in order to aviod conflicts with future updates. 
+ * For information regarding modifications see http://www.magentocommerce.com.
+ *  
+ * DISCLAIMER
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF 
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY 
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * @category   MageParts
+ * @package    MageParts_ConfirmCustomer
+ * @copyright  Copyright (c) 2009 MageParts (http://www.mageparts.com/)
+ * @author 	   MageParts Crew
+ */
+-->
+<config>
+    <modules>
+        <MageParts_ConfirmCustomer>
+            <version>1.0.0</version>
+        </MageParts_ConfirmCustomer>
+    </modules>
+    
+    <global>
+        <models>
+            <confirmcustomer>
+                <class>MageParts_ConfirmCustomer_Model</class>
+            </confirmcustomer>
+			<customer>
+				<rewrite>
+					<customer>MageParts_ConfirmCustomer_Model_Customer</customer>
+				</rewrite>
+			</customer>
+			<customer_resource>
+				<rewrite>
+					<customer>MageParts_ConfirmCustomer_Model_Customer_Entity_Customer</customer>
+				</rewrite>
+			</customer_resource>
+        </models>
+		<blocks>
+			<confirmcustomer>
+				<class>MageParts_ConfirmCustomer_Block</class>
+			</confirmcustomer>
+			<adminhtml>
+				<rewrite>
+					<customer_grid>MageParts_ConfirmCustomer_Block_Adminhtml_Customer_Grid</customer_grid>
+					<customer_edit>MageParts_ConfirmCustomer_Block_Adminhtml_Customer_Edit</customer_edit>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+        <helpers>
+        	<confirmcustomer>
+        		<class>MageParts_ConfirmCustomer_Helper</class>
+        	</confirmcustomer>
+        </helpers>
+		<template>
+            <email>
+                <confirmcustomer_email_template translate="label" module="confirmcustomer">
+                    <label>Customer Account Approved</label>
+                    <file>mageparts/confirmcustomer/account_approved.html</file>
+                    <type>html</type>
+                </confirmcustomer_email_template>
+				<confirmcustomer_admin_notification_template translate="label" module="confirmcustomer">
+					<label>Account Creation Notification</label>
+					<file>mageparts/confirmcustomer/admin/account_notification.html</file>
+					<type>html</type>
+				</confirmcustomer_admin_notification_template>
+            </email>
+        </template>
+        <resources>
+            <confirmcustomer_setup>
+                <setup>
+                    <module>MageParts_ConfirmCustomer</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </confirmcustomer_setup>
+            <confirmcustomer_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </confirmcustomer_write>
+            <confirmcustomer_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </confirmcustomer_read>
+        </resources>
+    </global>
+    
+	<adminhtml>
+    	<acl>
+            <resources>
+                <admin>
+                    <children>
+						<customer>
+							<children>
+								<approve translate="title">
+									<title>Approve / Disapprove Customers</title>
+									<sort_order>999</sort_order>
+								</approve>
+							</children>
+						</customer>
+                        <system>
+                            <children>
+                            	<config>
+                            		<children>
+		                                <confirmcustomer>
+		                                    <title>MageParts - Approve Customer Section</title>
+		                                    <sort_order>900</sort_order>
+		                                </confirmcustomer>
+		                    		</children>
+		                    	</config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+		<translate>
+            <modules>
+                <MageParts_ConfirmCustomer>
+                    <files>
+                        <default>MageParts_ConfirmCustomer.csv</default>
+                    </files>
+                </MageParts_ConfirmCustomer>
+            </modules>
+        </translate>
+
+        <layout>
+            <updates>
+                <confirmcustomer>
+                    <file>confirmcustomer.xml</file>
+                </confirmcustomer>
+            </updates>
+        </layout>
+	</adminhtml>
+    
+    <frontend>
+    	<events>
+			<customer_login>
+				<observers>
+					<mageparts_confirmcustomer_observer>
+						<type>singleton</type>
+						<class>MageParts_ConfirmCustomer_Model_Observer</class>
+						<method>checkApproveStatus</method>
+					</mageparts_confirmcustomer_observer>
+				</observers>
+			</customer_login>
+			<customer_new_account_email_sent>
+				<observers>
+					<mageparts_confirmcustomer_observer>
+						<type>singleton</type>
+						<class>MageParts_ConfirmCustomer_Model_Observer</class>
+						<method>customerNewAccountCompleted</method>
+					</mageparts_confirmcustomer_observer>
+				</observers>
+			</customer_new_account_email_sent>
+		</events>
+    </frontend>
+
+	<admin>
+    	<routers>
+    		<confirmcustomer>
+    			<use>admin</use>
+    			<args>
+    				<module>MageParts_ConfirmCustomer</module>
+    				<frontName>confirmcustomer</frontName>
+    			</args>
+    		</confirmcustomer>
+    	</routers>
+    </admin>
+
+    <default>
+		<confirmcustomer>
+			<general>
+				<enabled>0</enabled>
+				<welcome_email>1</welcome_email>
+			</general>
+			<redirect>
+				<enabled>1</enabled>
+				<cms_page>account-awaiting-approval</cms_page>
+			</redirect>
+			<error_msg>
+				<enabled>0</enabled>
+				<text>Your account needs to be approved before you can access this part of the site!</text>
+			</error_msg>
+			<email>
+				<enabled>1</enabled>
+				<identity>general</identity>
+                <template>confirmcustomer_email_template</template>
+			</email>
+			<admin_notification>
+				<enabled>1</enabled>
+				<identity>general</identity>
+				<template>confirmcustomer_admin_notification_template</template>
+			</admin_notification>
+	    </confirmcustomer>
+    </default>
+
+</config>

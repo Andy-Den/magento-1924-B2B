@@ -1,0 +1,8 @@
+<include_layout version="0.1.0">
+    <customer_account_changeforgotten>
+        <update handle="page_one_column"/>
+        <reference name="resetPassword">
+            <action method="setTemplate"><template>customer/account/resetpassword/1.phtml</template></action>
+        </reference>
+    </customer_account_changeforgotten>
+</include_layout>

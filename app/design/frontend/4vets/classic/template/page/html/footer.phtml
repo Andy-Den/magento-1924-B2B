@@ -1,0 +1,124 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml() ?>
+
+<div class="" id="footer">
+	<div class="container">
+		<div class="text-left text-center-xs">
+		    <div class="col-md-12">
+		    	<div class="row">
+					<div class="col-md-2 col-sm-4">
+						<h4>Institucional</h4>
+						<ul class="list-unstyled">
+							<li><a href="/sobre-nos/">Sobre Nós</a></li>
+<!--							<li><a href="/contato/">Contato</a></li>-->
+							<?php /*<li><a href="#">Política de Privacidade</a></li>*/ ?>
+<!--							<li><a href="/politica-de-garantia/">Política de Garantia</a></li>-->
+							<?php /*<li><a href="#">Politica de Troca</a></li>*/ ?>
+<!--							<li><a href="/seguranca/">Segurança</a></li>-->
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-4">
+						<h4>Ajuda e Atendimento</h4>
+						<ul class="list-unstyled">
+							<li><a href="/como-funciona/">Como Funciona</a></li>
+							<li><a href="/contato/">Contato</a></li>
+<!--							<li><a href="/perguntas-frequentes/">Perguntas Frequentes</a></li>-->
+<!--							<li><a href="/sales/order/history/">Meus Pedidos</a></li>-->
+							<?php /*<li><a href="#">Compra Segura</a></li>
+							<li><a href="#">Termos e Condições</a></li>
+							<li><a href="#">Depoimentos</a></li>
+							<li><a href="http://mktplace.o2ti.com/index.php/udropship/vendor/">Quero Vender</a></li>
+							<li><a href="http://mktplace.o2ti.com/udpo/vendor/">Painel de Vendedor</a></li>*/ ?>
+						</ul>
+					</div>
+						<div class="col-md-2 col-sm-4">
+							<h4>Parceiros</h4>
+							<ul class="list-unstyled">
+								<li><a href="http://www.peclamonline.com.br" target="_blank">Pec-Lam</a></li>
+								<li><a href="http://www.distribuidoromega.com.br" target="_blank">Ômega</a></li>
+								<li><a href="http://msd.4vets.com.br" target="_blank">MSD</a></li>
+								<li><a href="http://www.doctorsvetonline.com.br" target="_blank">Doctors Vet</a></li>
+								<?php /*<li><a href="#">Compra Segura</a></li>
+							<li><a href="#">Termos e Condições</a></li>
+							<li><a href="#">Depoimentos</a></li>
+							<li><a href="http://mktplace.o2ti.com/index.php/udropship/vendor/">Quero Vender</a></li>
+							<li><a href="http://mktplace.o2ti.com/udpo/vendor/">Painel de Vendedor</a></li>*/ ?>
+							</ul>
+						</div>
+<div class="fb-container">
+	<h4 class="fb-header">ACOMPANHE PELAS REDES SOCIAIS :)</h4>
+	<div class="fb-page" data-href="https://www.facebook.com/4vetsbrasil" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/4vetsbrasil"><a href="https://www.facebook.com/4vetsbrasil">4Vets</a></blockquote></div></div>
+</div>
+				</div>
+		        <?php //echo $this->getChildHtml() ?>
+		        <address><?php echo $this->getCopyright() ?></address>
+		    </div>
+	    </div>
+    </div>
+</div>
+<div class="conheca-integravet">
+	<div class="container">
+		<h4>CONHEÇA A:</h4>
+		<img src="<?php echo $this->getSkinUrl('images/footer/integravet.jpg') ?>" alt="Integravet"/>
+	</div>
+</div>
+
+<script type="text/javascript">
+function popupCenter(url, title, w, h) {
+    // Fixes dual-screen position                       Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+    var left = ((screen.width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((screen.height / 2) - (h / 2)) + dualScreenTop;
+    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+        newWindow.focus();
+    }
+}
+ jQuery(document).ready(function(){
+	jQuery('.mais_info').bind({
+		click: function(){
+			if(jQuery(this).find('span').html() == '+'){
+				jQuery(this).find('span').html('-');
+			}else{
+				jQuery(this).find('span').html('+');
+			}
+			jQuery('.mais_info_conteudo').slideToggle();
+		}
+	});
+});
+</script>
+
+<!-- Use to show the popupoverlay -->
+<div id="overlay">
+  <div class="inner"></div>
+</div>

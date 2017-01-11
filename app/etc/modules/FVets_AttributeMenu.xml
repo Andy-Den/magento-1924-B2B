@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_AttributeMenu extension
+ * 
+ * @category       FVets
+ * @package        FVets_AttributeMenu
+ * @copyright      Copyright (c) 2015
+ */
+-->
+<config>
+    <modules>
+        <FVets_AttributeMenu>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core />
+             </depends>
+        </FVets_AttributeMenu>
+    </modules>
+</config>

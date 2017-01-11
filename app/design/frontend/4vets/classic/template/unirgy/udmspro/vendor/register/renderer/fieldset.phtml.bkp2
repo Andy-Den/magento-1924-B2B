@@ -1,0 +1,227 @@
+<div class="generic-box">
+    <h3>Dados Cadastrais</h3>
+
+    <ul class="form-list">
+        <li id="vendor_tipo-container" class="field"><label class="required" for="vendor_tipo">Tipo de Cadastro<em>*</em></label>
+        	<div class="input-box">
+		        <select id="vendor_tipo" name="vendor_tipo" class=" form-control required-entry required-entry select">
+		            <option value="" selected="selected">Please select</option>
+		            <option value="fisica">Pessoa Física</option>
+		            <option value="juridica">Pessoa Jurídica</option>
+		        </select>
+        	</div>
+        </li>
+
+        <li id="vendor_name-container" class="field">
+        	<label class="required" for="vendor_name">Vendor Name<em>*</em></label>
+        	<div class="input-box">
+				<input id="vendor_name" name="vendor_name" value="" type="text" class="udvendor_name-unique form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="vendor_contact_surname-container" class="field">
+        	<label class="required" for="vendor_contact_surname">Contact Surname <em>*</em></label>
+			<div class="input-box">
+		        <input id="vendor_contact_surname" name="vendor_contact_surname" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="telephone-container" class="field">
+	        <label class="required" for="telephone">Phone Number <em>*</em></label>
+			<div class="input-box">
+		        <input id="telephone" name="telephone" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="vendor_birthday-container" class="field">
+	        <label class="required" for="vendor_birthday">Birthday <em>*</em></label>
+			<div class="input-box">
+	        	<input id="vendor_birthday" name="vendor_birthday" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="vendor_rg-container" class="field">
+	        <label class="required" for="vendor_rg">RG <em>*</em></label>
+	        <div class="input-box">
+		        <input id="vendor_rg" name="vendor_rg" value="" type="text" class=" form-control required-entry form-control required-entry">
+	        </div>
+        </li>
+
+        <li id="vendor_cpf-container" class="field">
+        	<label class="required" for="vendor_cpf">CPF <em>*</em></label>
+        	<div class="input-box">
+				<input id="vendor_cpf" name="vendor_cpf" value="" type="text" class=" form-control required-entry form-control required-entry">
+        	</div>
+        </li>
+
+        <li id="email-container" class="field">
+	        <label class="required" for="email">Endereço de Email <em>*</em></label>
+	        <div class="input-box">
+		        <input id="email" name="email" value="" type="text" class="validate-email udemail-unique form-control required-entry form-control required-entry">
+	        </div>
+        </li>
+
+        <li id="password-container" class="field">
+	        <label class="required" for="password">Senha <em>*</em></label>
+			<div class="input-box">
+		        <input id="password" name="password" value="" type="password" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="zip-container" class="field">
+        	<label class="required" for="zip">Cep <em>*</em></label>
+        	<div class="input-box">
+				<input id="zip" name="zip" value="" type="text" class=" form-control required-entry form-control required-entry">
+        	</div>
+        </li>
+
+        <li id="street1-container" class="field">
+	        <label class="required" for="street1">Rua <em>*</em></label>
+			<div class="input-box">
+		        <input id="street1" name="street1" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="street2-container" class="field">
+	        <label class="required" for="street2">Número <em>*</em></label>
+			<div class="input-box">
+		        <input id="street2" name="street2" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="vendor_address_complemento-container" class="field">
+	        <label class="required" for="vendor_address_complemento">Complemento</label>
+			<div class="input-box">
+	        	<input id="vendor_address_complemento" name="vendor_address_complemento" value="" type="text" class=" form-control form-control">
+			</div>
+        </li>
+
+        <li id="vendor_address_bairro-container" class="field">
+	        <label class="required" for="vendor_address_bairro">Bairro <em>*</em></label>
+			<div class="input-box">
+	        	<input id="vendor_address_bairro" name="vendor_address_bairro" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="city-container" class="field">
+	        <label class="required" for="city">Cidade <em>*</em></label>
+			<div class="input-box">
+	        	<input id="city" name="city" value="" type="text" class=" form-control required-entry form-control required-entry">
+			</div>
+        </li>
+
+        <li id="region_id-container" class="field">
+	        <label class="required" for="region_id">Estado <span class="required" style="display: none;">*</span></label>
+	        <div class="input-box">
+		        <select id="region_id" name="region_id" class="form-control required-entry select">
+		            <option value="" selected="selected">Selecione o Estado...</option>
+		            <option value="1" title="Acre">Acre</option>
+		            <option value="2" title="Alagoas">Alagoas</option>
+		            <option value="3" title="Amapá">Amapá</option>
+		            <option value="4" title="Amazonas">Amazonas</option>
+		            <option value="5" title="Bahia">Bahia</option>
+		            <option value="6" title="Ceará">Ceará</option>
+		            <option value="7" title="Distrito Federal">Distrito Federal</option>
+		            <option value="8" title="Espírito Santo">Espírito Santo</option>
+		            <option value="9" title="Goiás">Goiás</option>
+		            <option value="10" title="Maranhão">Maranhão</option>
+		            <option value="11" title="Mato Grosso">Mato Grosso</option>
+		            <option value="12" title="Mato Grosso do Sul">Mato Grosso do Sul</option>
+		            <option value="13" title="Minas Gerais">Minas Gerais</option>
+		            <option value="14" title="Pará">Pará</option>
+		            <option value="15" title="Paraíba">Paraíba</option>
+		            <option value="16" title="Paraná">Paraná</option>
+		            <option value="17" title="Pernambuco">Pernambuco</option>
+		            <option value="18" title="Piauí">Piauí</option>
+		            <option value="19" title="Rio de Janeiro">Rio de Janeiro</option>
+		            <option value="20" title="Rio Grande do Norte">Rio Grande do Norte</option>
+		            <option value="21" title="Rio Grande do Sul">Rio Grande do Sul</option>
+		            <option value="22" title="Rondônia">Rondônia</option>
+		            <option value="23" title="Roraima">Roraima</option>
+		            <option value="24" title="Santa Catarina">Santa Catarina</option>
+		            <option value="25" title="São Paulo">São Paulo</option>
+		            <option value="26" title="Sergipe">Sergipe</option>
+		            <option value="27" title="Tocantins">Tocantins</option>
+		        </select>
+	        </div>
+			<input type="text" id="region" name="region" value="" title="Estado" class="form-control" style="display: none;">
+        </li>
+
+        <li id="country_id-container" class="field" style="display:none;">
+	        <label class="required" for="country_id">País</label>
+	        <div class="input-box">
+		        <select name="country_id" id="country_id" class="validate-select" title="País">
+		            <option value="BR" selected="selected">Brasil</option>
+		        </select>
+	        </div>
+        </li>
+    </ul>
+</div>
+
+<div class="generic-box">
+    <h3>Dados da Loja</h3>
+    <ul class="form-list">
+        <li id="vendor_moip-container" class="field">
+	        <label class="required" for="vendor_moip">Login Moip</label>
+	        <div class="input-box">
+		        <input id="vendor_moip" name="vendor_moip" value="" type="text" class=" form-control form-control">
+	        </div>
+        </li>
+
+        <li id="vendor_image_banner-container" class="field">
+	        <label class="required" for="vendor_image_banner">Banner da Loja</label>
+			<div class="input-box">
+		        <input id="vendor_image_banner" name="vendor_image_banner" value="" type="file" class="input-file">
+			</div>
+        </li>
+
+        <li id="vendor_insc_estadual-container" class="field" style="display: none;">
+            <label class="required" for="vendor_insc_estadual">Inscrição Estadual</label>
+            <div class="input-box">
+            	<input id="vendor_insc_estadual" name="vendor_insc_estadual" value="" type="text" class="form-control form-control">
+            </div>
+            <div id="vendor_insc_estadual_isento_container">
+                <input type="checkbox" id="vendor_insc_estadual_isento" value="1"> <label class="required" for="vendor_insc_estadual_isento">Isento?</label>
+            </div>
+        </li>
+
+        <li id="vendor_cnpj-container" class="field" style="display: none;">
+	        <label class="required" for="vendor_cnpj">CNPJ</label>
+	        <div class="input-box">
+		        <input id="vendor_cnpj" name="vendor_cnpj" value="" type="text" class=" form-control form-control">
+	        </div>
+        </li>
+
+        <li id="vendor_razao_social-container" class="field" style="display: none;">
+	        <label class="required" for="vendor_razao_social">Razão Social</label>
+	        <div class="input-box">
+		        <input id="vendor_razao_social" name="vendor_razao_social" value="" type="text" class=" form-control form-control">
+	        </div>
+        </li>
+
+        <li id="url_key-container" class="field">
+	        <label class="required" for="url_key">Preferred subdomain name <em>*</em></label>
+	        <div class="input-box input-append">
+		        <input id="url_key" name="url_key" value="" type="url_key" class=" form-control required-entry required-entry"><strong class="input-group-addon">.mktplace.o2ti.com</strong>
+	        </div>
+
+        </li>
+
+        <li id="logo-container" class="field">
+	        <label class="required" for="logo">Logo Image</label>
+	        <div class="input-box">
+		        <input id="logo" name="logo" value="" type="file" class="input-file">
+	        </div>
+        </li>
+    </ul>
+</div>
+
+<div class="buttons-set">
+    <button class="form-button btn btn-success btn-lg" type="button" onclick="udRegForm.submit()" name="send"><span>Cadastrar</span>&nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+
+    <div class="clearer"></div>
+
+    <ul class="links">
+        <li><a href="http://mktplace.o2ti.com/udropship/vendor/">&laquo; Return to log in</a></li>
+    </ul>
+</div>

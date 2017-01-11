@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Allpago - Gwap. 
+ *
+ * @title      Magento Allpago Gwap
+ * @category   Payment
+ * @package    Allpago_Gwap
+ * @author     Allpago Development Team
+ * @copyright  Copyright (c) 2013 Allpago
+ */
+ -->
+<config>
+    <modules>
+        <Allpago_Gwap>
+            <version>0.1.3</version>
+        </Allpago_Gwap>
+    </modules>
+    <global>
+        <fieldsets>
+            <sales_convert_quote_payment>
+                <gwap_boleto_type>
+                    <to_order_payment>*</to_order_payment>
+                </gwap_boleto_type>
+            </sales_convert_quote_payment>
+        </fieldsets>
+        <models>
+            <gwap>
+                <class>Allpago_Gwap_Model</class>
+                <resourceModel>gwap_mysql4</resourceModel>
+            </gwap>
+            <gwap_mysql4>
+                <class>Allpago_Gwap_Model_Mysql4</class>
+                <entities>
+                    <order>
+                        <table>allpago_payment_orders</table>
+                    </order>
+                    <oneclick>
+                        <table>allpago_oneclick</table>
+                    </oneclick>                     
+                </entities>
+            </gwap_mysql4>
+            <sales>
+                <rewrite>
+                    <order>Allpago_Gwap_Model_Sales_Order</order>
+                </rewrite>
+            </sales>    
+        </models>
+        
+        <blocks>
+            <gwap>
+                <class>Allpago_Gwap_Block</class>
+            </gwap>
+        </blocks>
+        <helpers>
+            <gwap>
+                <class>Allpago_Gwap_Helper</class>
+            </gwap>
+        </helpers>
+        <resources>
+            <allpago_gwap_setup>
+                <setup>
+                    <module>Allpago_Gwap</module>                    
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </allpago_gwap_setup>
+        </resources>
+        <events>
+            <!--sales_order_save_before>
+            	<observers>
+                    <gwap_sales_order_pagamento>
+                        <class>gwap/observer</class>
+                        <method>setPagamento</method>
+                    </gwap_sales_order_pagamento>
+                </observers>
+            </sales_order_save_before-->
+            <!-- @TODO
+            //Melhorar o desconto por boleto bancário.
+            //Está fazendo o load de toda a collection, isso deixa essa parte muito lenta.
+            //Não usar promoções para fazer o desconto por boleto, inventar outra maneira.
+            -->
+            <!--controller_action_predispatch_onestepcheckout_ajax_set_methods_separate>
+                <observers>
+                    <allpago_gwap_onepagecheckout>
+                        <type>singleton</type>
+                        <class>gwap/observer</class>
+                        <method>descontoBoleto</method>
+                    </allpago_gwap_onepagecheckout>
+                </observers>
+            </controller_action_predispatch_onestepcheckout_ajax_set_methods_separate>            
+            <controller_action_predispatch_onepagecheckout_index_updateCheckout>
+                <observers>
+                    <allpago_gwap_onepagecheckout>
+                        <type>singleton</type>
+                        <class>gwap/observer</class>
+                        <method>descontoBoleto</method>
+                    </allpago_gwap_onepagecheckout>
+                </observers>
+            </controller_action_predispatch_onepagecheckout_index_updateCheckout-->
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <gwap_sales_order_submit_all_after>
+                        <class>gwap/observer</class>
+                        <method>salesOrderSave</method>
+                    </gwap_sales_order_submit_all_after>
+                </observers>                   
+                <observers>
+                    <allpago_gwap_add_boleto_link>
+                        <type>singleton</type>
+                        <class>gwap/observer</class>
+                        <method>addBoletoLink</method>
+                    </allpago_gwap_add_boleto_link>
+                </observers>             
+            </checkout_type_onepage_save_order_after>
+            
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <reversal_or_refund_button>
+                        <type>model</type>
+                        <class>gwap/observer</class>
+                        <method>addRvOrRfButton</method>
+                    </reversal_or_refund_button>
+                </observers>
+            </core_block_abstract_to_html_before>
+                                        
+        </events>   
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <gwap>
+                    <file>allpago_gwap.xml</file>
+                </gwap>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <gwap>
+                <use>standard</use>
+                <args>
+                    <module>Allpago_Gwap</module>
+                    <frontName>allpago_gwap</frontName>
+                </args>
+            </gwap>
+        </routers>
+        <layout>
+            <updates>
+                <allpago_gwap>
+                    <file>allpago_gwap.xml</file>
+                </allpago_gwap>
+            </updates>
+        </layout>
+    </frontend>   
+    <admin>
+        <routers>
+            <gwap>
+                <use>admin</use>
+                <args>
+                    <module>Allpago_Gwap</module>
+                    <frontName>gwap</frontName>
+                </args>
+            </gwap>
+        </routers>
+    </admin>           
+    <default>
+        <payment>
+            <gwap_auth>
+                <security_sender>ff8080813af4bee5013b04f0dccb0e2b</security_sender>			      	      	
+                <user_login>ff8080813af4bee5013b04f0dccc0e2f</user_login>							
+                <!--user_pwd>e4Bg9PQG</user_pwd-->
+                <ambiente>CONNECTOR_TEST</ambiente>
+            </gwap_auth>
+            <gwap_cc>
+                <active>0</active>
+                <transaction_channel_cielo>ff8080813af4bee5013b04f23a760e33</transaction_channel_cielo>
+                <autorizacao>1</autorizacao>
+                <acao>1</acao>
+                <cctypes_cielo>VISA_C</cctypes_cielo>
+                <model>gwap/methods_cc</model>
+                <title>Cartão de Crédito</title>
+                <order_status>pending</order_status>
+                <campo_documento>taxvat,cpf,cnpj,customer_taxvat,customer_cpf,customer_cnpj</campo_documento>
+                <nautorizado><![CDATA[ Seu pagamento não foi autorizado, para maiores informações entre em contato com a sua operadora. ]]></nautorizado>
+                <cancelamento>1</cancelamento> 
+                <idioma>1</idioma>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <sort_order>2</sort_order>
+                <!-- Allpago MC variables -->
+                <mc_active>1</mc_active>
+                <mc_tries>1</mc_tries>
+                <mc_type>cc</mc_type>
+                <mc_log_error>1</mc_log_error>
+            </gwap_cc>
+            <!--<gwap_2cc>-->
+                <!--<active>0</active>-->
+                <!--<model>gwap/methods_2cc</model>-->
+                <!--<title>Pagamento com 2 Cartões de Crédito</title>-->
+                <!--<order_status>pending</order_status>-->
+                <!--<campo_documento>taxvat,cpf,cnpj,customer_taxvat,customer_cpf,customer_cnpj</campo_documento>             -->
+                <!--<sort_order>3</sort_order>-->
+                <!--<mc_type>2cc</mc_type> -->
+                <!--<mc_tries>1</mc_tries> -->
+            <!--</gwap_2cc>            -->
+            <!--<gwap_oneclick>-->
+                <!--<active>0</active>-->
+                <!--<model>gwap/methods_oneclick</model>-->
+                <!--<title>One-click</title>-->
+                <!--<order_status>pending</order_status>-->
+                <!--<campo_documento>taxvat,cpf,cnpj,customer_taxvat,customer_cpf,customer_cnpj</campo_documento>-->
+                <!--<idioma>1</idioma>-->
+                <!--<allowspecific>1</allowspecific>-->
+                <!--<specificcountry>BR</specificcountry>-->
+                <!--<sort_order>1</sort_order>-->
+                <!--&lt;!&ndash; Allpago MC variables &ndash;&gt;-->
+                <!--<mc_active>1</mc_active>    -->
+                <!--<mc_tries>1</mc_tries>            -->
+                <!--<mc_type>oneclick</mc_type>                -->
+                <!--<mc_log_error>0</mc_log_error>-->
+            <!--</gwap_oneclick>            -->
+            <gwap_boleto>
+                <active>0</active>
+                <transaction_channel_itau>ff8080813af4bee5013b04f576110e3b</transaction_channel_itau>
+                <transaction_channel_bradesco>ff8080813af4bee5013b04f91f060e45</transaction_channel_bradesco>
+                <model>gwap/methods_boleto</model>
+                <title>Boleto Bancário</title>
+                <order_status>pending</order_status>
+                <campo_documento>taxvat,cpf,cnpj,customer_taxvat,customer_cpf,customer_cnpj</campo_documento>
+                <idioma>1</idioma>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <texto_desconto>10% no Boleto</texto_desconto>
+                <sort_order>90</sort_order>
+                <!-- Allpago MC variables -->
+                <mc_active>1</mc_active> 
+                <mc_tries>0</mc_tries>               
+                <mc_type>boleto</mc_type>                
+                <mc_log_error>0</mc_log_error>
+                <checkout_information>O boleto sera enviado junto com a mercadoria.</checkout_information>
+            </gwap_boleto>
+            <gwap_deposito>
+                <active>0</active>
+                <model>gwap/methods_deposito</model>
+                <title>Depósito Bancário</title>
+                <order_status>pending</order_status>
+                <sort_order>90</sort_order>
+                <!-- Allpago MC variables -->
+                <mc_active>1</mc_active>
+                <mc_tries>0</mc_tries>
+                <mc_type>boleto</mc_type>
+                <mc_log_error>0</mc_log_error>
+                <checkout_information>Teste teste teste deposito</checkout_information>
+            </gwap_deposito>
+        </payment>
+    </default>
+    <crontab>
+        <jobs>
+            <allpago_gwap_cancel_boleto>
+                <schedule>
+                    <cron_expr>0 6 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>gwap/observer::cancelBoleto</model>
+                </run>
+            </allpago_gwap_cancel_boleto>
+        </jobs>
+    </crontab>
+</config>
+     

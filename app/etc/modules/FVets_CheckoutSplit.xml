@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_CheckoutSplit>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core />
+                <Mage_Checkout />
+                <Mage_Sales />
+                <FVets_Salesrep />
+            </depends>
+        </FVets_CheckoutSplit>
+    </modules>
+</config>

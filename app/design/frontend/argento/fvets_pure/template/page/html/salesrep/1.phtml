@@ -1,0 +1,83 @@
+<?php
+
+$collection  = $this->getCollection();
+
+if (count($collection) < 1)
+{
+	return;
+}
+
+if (count($collection) == 1) :
+
+	$salesrep = $this->getSalesrep();
+?>
+
+<div class="sales_rep">
+	<div class="info">
+		<div class="name"><?php echo $this->__('Seu(a) representante comercial') ?></div>
+		<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/name')) { ?>
+			<?php echo $this->escapeHtml($salesrep->getName()); ?> <br />
+		<?php } ?>
+		<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/email')) { ?>
+			<?php echo $this->escapeHtml($salesrep->getEmail()); ?><br/>
+		<?php } ?>
+		<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/phone')) { ?>
+			<?php echo $this->escapeHtml($salesrep->getTelephone()); ?> <br />
+		<?php } ?>
+	</div>
+	<div class="image">
+		<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 50, 50); ?>" height="50" />
+	</div>
+	<div class="clear"></div>
+</div>
+
+<?php else  : ?>
+
+<ul class="sales_rep">
+	<?php foreach($collection as $salesrep) : ?>
+		<li class="">
+			<?php $_brands = $salesrep->getSelectedCategories(); ?>
+			<?php if (count($collection) < 3) : ?>
+			<div class="info">
+				<?php if (count($_brands) > 0) : ?>
+					<?php $count = 0; ?>
+					<?php foreach($_brands as $_brand) : ?>
+						<?php if (++$count > 3) : continue; endif; ?>
+						<div class="lineheight<?php echo min(3, count($_brands)); ?>"><?php echo $this->escapeHtml($_brand->getName()); ?></div>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<div class="lineheight1"><?php echo $this->escapeHtml($salesrep->getName()); ?></div>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+			<div class="image">
+				<img src="<?php echo Mage::helper('page')->resizeImg($this->getImageUrl($salesrep), 50, 50); ?>" height="50" width="50" />
+			</div>
+			<div class="popup">
+				<i class="fa fa-angle-up fa-stack-2x"></i>
+				<div class="clear"></div>
+				<div class="inner">
+					<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/name')) { ?>
+						<strong><?php echo $this->escapeHtml($salesrep->getName()); ?></strong> <br />
+					<?php } ?>
+					<?php if(!Mage::getStoreConfig('fvets_salesrep/exibition_fields/email')) { ?>
+						<?php echo $this->escapeHtml($salesrep->getEmail()); ?><br />
+					<?php } ?>
+					<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/phone')) { ?>
+						<?php echo $this->escapeHtml($salesrep->getTelephone()); ?> <br />
+					<?php } ?>
+					<?php if (count($_brands) > 0) : ?>
+						<br />
+						<?php foreach($_brands as $_brand) : ?>
+							<?php echo $this->escapeHtml($_brand->getName()); ?><br />
+						<?php endforeach; ?>
+					<?php endif; ?>
+
+				</div>
+			</div>
+			<div class="clear"></div>
+		</li>
+	<?php endforeach; ?>
+</ul>
+
+<?php endif; ?>

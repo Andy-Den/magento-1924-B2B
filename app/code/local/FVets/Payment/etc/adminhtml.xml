@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_Payment extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       FVets
+ * @package        FVets_Payment
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fvets_payment translate="title" module="fvets_payment">
+                                        <title>Payment</title>
+                                    </fvets_payment>
+                                    <payment_condition translate="title" module="fvets_payment">
+                                        <title>Payment Condition</title>
+                                    </payment_condition>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <sales>
+                        <children>
+                            <fvets_payment translate="title" module="fvets_payment">
+                                <title>Payment Conditions</title>
+                                <children>
+                                    <condition translate="title" module="fvets_payment">
+                                        <title>Condition</title>
+                                        <sort_order>0</sort_order>
+                                    </condition>
+                                </children>
+                            </fvets_payment>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <sales>
+            <children>
+                <fvets_payment translate="title" module="fvets_payment">
+                    <title>Payment Conditions</title>
+                    <sort_order>15</sort_order>
+                    <action>adminhtml/payment_condition</action>
+                </fvets_payment>
+            </children>
+        </sales>
+    </menu>
+</config>

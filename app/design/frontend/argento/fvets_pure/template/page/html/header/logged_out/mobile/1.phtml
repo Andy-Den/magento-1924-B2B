@@ -1,0 +1,30 @@
+<div class="header-mobile">
+	<div class="top">
+		<div class="logos">
+			<?php if ($this->getUseBrandLogo()): ?>
+				<div class="brand-logo">
+					<a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $this->getBrandLogo(true); ?>" alt="<?php echo $this->getBrandLogoAlt() ?>" /></a>
+					<div class="clear"></div>
+				</div>
+			<?php endif; ?>
+			<div class="vendor-logo">
+				<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getVendorLogo(true) ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="register">
+			<button class="button btn-action" title="<?php echo $this->__('Faça Seu Cadastro'); ?>" onclick="window.location='<?php echo Mage::helper('customer')->getRegisterUrl(); ?>'"><span><span><?php echo $this->__('Faça Seu Cadastro'); ?></span></span></button>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="header-bottom">
+		<ul>
+			<li>
+				<?php echo $this->__('Already a member'); ?>
+			</li>
+			<li>
+				<a href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>" alt="<?php echo $this->__('Faça o Login'); ?>" class="featured"><?php echo $this->__('Faça o Login'); ?> ></a>
+			</li>
+		</ul>
+	</div>
+</div>

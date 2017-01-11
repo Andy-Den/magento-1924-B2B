@@ -1,0 +1,214 @@
+<?php $isValidationActive = Mage::getStoreConfig('validate_customer/general/enabled');
+if ($isValidationActive) {
+	$storeName = Mage::getStoreConfig('general/store_information/name');
+	$validateUrl = Mage::getUrl('customer/account/validatecustomer', array('_secure' => true));
+	$confirmOrRequestConfirmRegisterUrl = Mage::getUrl('customer/account/confirmorrequestconfirmregister', array('_secure' => true));
+	?>
+	<div class="awesome-loading">
+		<i class="fa fa-spinner fa-spin fa-2x"></i>
+	</div>
+	<div class="customer-validate">
+
+		<div class="container-form-customer-validate">
+			<div class="header">
+				<p><?php echo $this->__('O e-mail não confere com o e-mail cadastrado <strong>na distribuidora.</strong>') ?></p>
+
+				<p><?php echo $this->__('Por favor, preencha os campos abaixo para solicitar uma <strong>confirmação de cadastro</strong>.') ?></p>
+			</div>
+			<br>
+
+			<div class="containerField">
+				<input type="text" class="input-text validate-cnpj required-entry mask-cnpj" title="CNPJ" value=""
+							 onblur="validateField('cnpj', this.value);"
+							 placeholder="CNPJ *"
+							 data-gafocus="cnpj" id="cnpj" name="cnpj">
+                    <span class="input-group-addon cnpj"><a href="#" onclick="clearElement('cnpj');"><i
+													class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+			</div>
+			<div class="containerField"><span>ou</span></div>
+			<div class="containerField">
+				<input type="text" class="input-text validate-cpf required-entry mask-cpf" title="CPF" value=""
+							 onblur="validateField('cpf', this.value);"
+							 placeholder="CPF *"
+							 data-gafocus="cpf" id="cpf" name="cpf">
+                <span class="input-group-addon cpf"><a href="#" onclick="clearElement('cpf');"><i
+											class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+			</div>
+			<div class="container-errors-customer-validation">
+				<span class="errors-customer-validation"></span>
+			</div>
+
+			<div class="clear"></div>
+
+			<div class="containerField">
+				<input type="codigo" class="input-text validate-codigo required-entry" title="Código do Cliente"
+							 value=""
+							 onblur="validateField('codigo', this.value);" data-gafocus="codigo"
+							 placeholder="Cód. na <?php echo $storeName ?>"
+							 id="codigo" name="codigo">
+                <span class="input-group-addon codigo"><a href="#" onclick="clearElement('codigo');"><i
+											class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+			</div>
+
+			<div class="containerField">
+				<button type="button" title="<?php echo $this->__('PESQUISAR'); ?>"
+								class="button btn-doToAction" onclick="return false;">
+					<span><span><?php echo $this->__('PESQUISAR'); ?></span></span></button>
+			</div>
+
+			<div class="clear"></div>
+
+			<div class="containerField">
+				<p class="required" style="text-align: left"><?php echo $this->__('* Required Fields'); ?></p>
+				<button type="button" disabled="disabled" title="<?php echo $this->__('CONFIRMAR CADASTRO'); ?>"
+								class="main-btn button btn-doToAction disabled" onclick="requestOrConfirmRegister();">
+					<span><span><?php echo $this->__('CONFIRMAR CADASTRO'); ?></span></span></button>
+				<input id="registerType" name="registerType" type="hidden" value=""/>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<script type="text/javascript">
+		jQuery(document).ready(function () {
+
+			jQuery('#form-validate #btn-submit-forgotpassword').attr('type', 'button');
+			jQuery('#form-validate #btn-submit-forgotpassword').click(function () {
+				validateEmail(jQuery('#form-validate #email_address').val());
+			});
+			jQuery('#form-validate #email_address').click(function () {
+				jQuery('#form-validate .action-buttons').show();
+			});
+		});
+
+		function validateField(type, value) {
+			if (type == 'cnpj' || type == 'cpf' || type == 'codigo') {
+				value = value.replace(/[^a-z0-9\s]/gi, '');
+			}
+
+			if (!value) {
+				return;
+			}
+
+			jQuery('.awesome-loading .fa-spinner').css('display', 'inline-block');
+
+			var container = jQuery('.customer-validate');
+
+			jQuery.ajax({
+				url: "<?php echo $validateUrl ?>",
+				context: document.body,
+				data: {type: type, value: encodeURI(value)}
+			}).done(function (msg) {
+				if (msg == 'valid') {
+					container.find('.validate-' + type).removeClass('validation-success');
+					container.find('.validate-' + type).removeClass('validation-unsuccess');
+					container.find('.validate-' + type).addClass('validation-success');
+					container.find('.input-group-addon' + '.' + type + ' .fa-times').css('display', 'none');
+					container.find('.input-group-addon' + '.' + type + ' .fa-check').css('display', 'inherit');
+				} else {
+					container.find('.validate-' + type).removeClass('validation-success');
+					container.find('.validate-' + type).removeClass('validation-unsuccess');
+					container.find('.validate-' + type).addClass('validation-unsuccess');
+
+					container.find('.input-group-addon' + '.' + type + ' .fa-check').css('display', 'none');
+					container.find('.input-group-addon' + '.' + type + ' .fa-times').css('display', 'inherit');
+
+					jQuery('.errors-customer-validation').html('* ' + type.toUpperCase() + ' não encontrado');
+					jQuery('.errors-customer-validation').css('visibility', 'inherit');
+				}
+				//verifica se pode liberar o botão de avançar no cadastro
+				checkValidatedFields();
+
+				jQuery('.awesome-loading .fa-spinner').hide();
+			});
+		}
+
+		function validateEmail(value) {
+			if (!dataForm.validator.validate()) {
+				return;
+			}
+
+			//jQuery('.awesome-loading .fa-spinner').css("display", "inline-block");
+
+			jQuery.ajax({
+				url: "<?php echo $validateUrl ?>",
+				async: true,
+				data: {type: 'email', value: encodeURI(value)},
+				beforeSend: function () {
+					jQuery('.awesome-loading .fa-spinner').css("display", "inline-block");
+				},
+				success: function (msg) {
+					if (msg == 'valid') {
+						jQuery('#form-validate #btn-submit-forgotpassword').unbind("click");
+						jQuery('#form-validate #btn-submit-forgotpassword').attr('type', 'submit');
+						jQuery('#form-validate #btn-submit-forgotpassword').click(function () {
+							jQuery('#form-validate').submit();
+						});
+						jQuery('#form-validate #btn-submit-forgotpassword').click();
+					} else {
+						jQuery('.customer-validate').show();
+						jQuery('#form-validate .action-buttons').hide();
+					}
+					//jQuery('.awesome-loading .fa-spinner').hide();
+					jQuery('.awesome-loading .fa-spinner').css("display", "none");
+				}
+			})
+		}
+
+		function checkValidatedFields() {
+			var actionButton = jQuery('.customer-validate').find('.main-btn');
+			var container = jQuery('.customer-validate');
+			$cnpj = container.find('.validate-cnpj');
+			$cpf = container.find('.validate-cpf');
+			if (($cnpj.hasClass('validation-success') || $cpf.hasClass('validation-success'))) {
+				actionButton.removeClass('disabled');
+				actionButton.removeClass('btn-doToAction');
+				actionButton.addClass('btn-action');
+				actionButton.removeAttr('disabled');
+				actionButton.find('span span').html('CONFIRMAR CADASTRO');
+				container.find('#registerType').attr('value', 'confirmregister');
+			} else {
+				var list1 = container.find('.validation-success');
+				var list2 = container.find('.validation-unsuccess');
+				if (list1.length + list2.length >= 1) {
+					actionButton.removeClass('disabled');
+					actionButton.removeClass('btn-doToAction');
+					actionButton.addClass('btn-action');
+					actionButton.removeAttr('disabled');
+					actionButton.find('span span').html('SOLICITAR CONFIRMAÇÃO DE CADASTRO');
+
+					container.find('.errors-customer-validation').css('visibility', 'inherit');
+					container.find('#registerType').attr('value', 'requestregister');
+				} else {
+					actionButton.removeClass('btn-action');
+					actionButton.addClass('btn-doToAction');
+					actionButton.addClass('disabled');
+					actionButton.attr('disabled', 'disabled');
+				}
+			}
+		}
+
+		function requestOrConfirmRegister() {
+			jQuery('.awesome-loading .fa-spinner').css('display', 'inline-block');
+			jQuery.ajax({
+				url: "<?php echo $confirmOrRequestConfirmRegisterUrl ?>",
+				context: document.body,
+				data: jQuery('#form-validate').serialize()
+			}).done(function (msg) {
+				jQuery('#form-validate .fieldset').html(msg);
+				jQuery('.awesome-loading .fa-spinner').hide();
+				jQuery('.customer-validate').hide();
+			});
+		}
+
+		function showCreateForm() {
+			jQuery('.account-create').show();
+		}
+
+		function clearElement(element) {
+			jQuery('.customer-validate .validate-' + element).val('');
+			jQuery('.customer-validate').find('.validate-' + element).removeClass('validation-success');
+			jQuery('.customer-validate').find('.validate-' + element).removeClass('validation-unsuccess');
+			jQuery('.customer-validate').find('.input-group-addon' + '.' + element + ' .fa-times').css('display', 'none');
+		}
+	</script>
+<?php } ?>

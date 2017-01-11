@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Updater>
+            <version>0.1.2</version>
+        </FVets_Updater>
+    </modules>
+    <global>
+        <resources>
+            <fvets_updater_setup>
+                <setup>
+                    <module>FVets_Updater</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </fvets_updater_setup>
+            <fvets_updater_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </fvets_updater_write>
+            <fvets_updater_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </fvets_updater_read>
+        </resources>
+    </global>
+</config>

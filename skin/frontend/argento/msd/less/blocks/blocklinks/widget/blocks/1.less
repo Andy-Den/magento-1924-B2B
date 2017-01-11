@@ -1,0 +1,246 @@
+@import "../../../../mixins";
+
+.blocklinks-blocks {
+
+  .title {
+    text-align: center;
+    color: @defaultColor2!important;
+  }
+
+  .subtitle {
+    color: @defaultColor1;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  ul {
+    &.cols-2 {
+      .item {
+        width: 49.1%;
+        max-width: 464px;
+        display: inline-block;
+        margin-top: 20px;
+        box-sizing: border-box;
+        padding:0 2.8%;
+        font-size: 14px;
+        line-height:1.3;
+
+        &.line1 {
+          height:355px;
+
+          &.first {
+            margin-top: 4px;
+            padding-top:138px;
+
+            .block-title {
+              margin-bottom: 46px;
+            }
+          }
+
+          &.last {
+            margin-top: 3px;
+            padding-top:143px;
+
+            .block-title {
+              margin-bottom: 35px;
+            }
+          }
+        }
+
+        &.line2 {
+          height:372px;
+
+          &.first {
+            margin-top: 2px;
+            padding-top:153px;
+
+            .block-title {
+              margin-bottom: 46px;
+            }
+          }
+
+          &.last {
+            margin-top: 0px;
+            padding-top:153px;
+
+            .block-title {
+              margin-bottom: 46px;
+            }
+          }
+        }
+
+        &.first {
+          float:left;
+        }
+
+        &.last {
+          float:right;
+        }
+
+        .prolabel-wrapper {
+          margin-bottom: 20px;
+          .rounded();
+          overflow: hidden;
+        }
+
+        .block-title {
+          margin-bottom: 10px;
+          text-align: center;
+          a {
+            text-transform: uppercase;
+            color: white;
+            font-size: 22px;
+          }
+        }
+      }
+    }
+    &.cols-3 {
+      .item {
+        width: 31.2%;
+        display: inline-block;
+        margin-top: 20px;
+        box-sizing: border-box;
+        float: left;
+
+        .blocklinks-text {
+          border-top: 1px solid #f1f1f1;
+          padding-top: 15px;
+          margin-top: 16px;
+        }
+
+        h4 {
+          text-align: center;
+          a {
+            color: @defaultColor2;
+          }
+        }
+
+        &.first {
+          margin-right: 2.8%;
+        }
+
+        &.last {
+          margin-left: 2.8%;
+        }
+
+        .prolabel-wrapper {
+          margin-bottom: 20px;
+          .rounded();
+          overflow: hidden;
+        }
+
+        .block-title {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .block-content {
+    margin-top: 3%;
+    ul {
+      li {
+        &.with-awesome {
+          padding: 2%;
+          border: 1px solid white;
+          &:hover {
+            background-color: #f8f8f8;
+            border: 1px solid #f1f1f1;
+          }
+          .prolabel-wrapper {
+            text-align: center;
+            .category-image {
+              img {
+                width: 55px;
+              }
+
+              .icon-awesome {
+                color: @defaultColor4;
+                border: 1px solid @defaultColor4;
+                padding: 7px;
+                .rounded(50%);
+                width: 40px;
+                margin: 0 auto;
+              }
+            }
+          }
+        }
+
+        &.with-image {
+          .prolabel-wrapper {
+            .category-image {
+              img {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .blocklinks-blocks ul.cols-2 .item {
+    font-size: 12px;
+    &.line1 {
+      &.first {
+        padding-top: 141px;
+      }
+      &.last {
+        padding-top: 145px;
+      }
+    }
+    &.line2 {
+      &.first {
+        padding-top: 156px;
+      }
+      &.last {
+        padding-top: 157px;
+      }
+    }
+    .block-title {
+      a {
+        font-size: 17px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .blocklinks-blocks ul.cols-2 .item {
+    float: none;
+    width: 100%;
+    margin:20px auto 0 !important;
+    font-size: 14px;
+    display: block;
+
+    &.first {
+      float:none;
+    }
+
+    &.last {
+      float:none;
+    }
+
+    &.line1 {
+      &.first .block-title {
+        margin-bottom: 43px;
+      }
+
+      &.last .block-title {
+        margin-bottom: 29px;
+      }
+    }
+
+    &.line2 {
+      &.first .block-title {
+        margin-bottom: 36px;
+      }
+
+      &.last .block-title {
+        margin-bottom: 37px;
+      }
+    }
+  }
+}

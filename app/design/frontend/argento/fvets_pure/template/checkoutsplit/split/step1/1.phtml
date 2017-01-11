@@ -1,0 +1,178 @@
+<?php $salesrep = $this->getQuote()->getSalesrep(); ?>
+<?php $disabled = $this->getIsDisabled($salesrep); ?>
+<?php $brands  = Mage::helper('fvets_salesrep/category')->getRepBrands($salesrep, true); ?>
+
+<div class="order order-<?php echo $salesrep->getId(); ?> <?php if ($disabled) : ?>disabled<?php endif; ?>">
+
+	<?php if ($disabled) : ?>
+		<div>
+			<strong><?php echo $this->__('Este pedido não será enviado, os itens continuarão em seu carrinho até que você atinja o mínimo de x reais.'); ?></strong>
+		</div>
+	<?php endif; ?>
+
+	<div class="order-header two-columns">
+		<div class="column first salesrep">
+			<div class="salesrep-image">
+				<img src="<?php echo Mage::helper('fvets_salesrep')->getImageUrl($salesrep); ?>" width="60" height="60" STYLE="width: 60px;height: 60px" />
+			</div>
+			<div class="salesrep-information">
+				<div class="first-line">
+					<?php echo $this->getOrderNumber(); ?>º <?php echo $this->__('PEDIDO'); ?>
+					-
+					<?php echo $this->__('MARCAS: '); ?>
+					<?php $html = array(); ?>
+					<?php foreach($brands as $brand) : ?>
+						<?php if($brand->getIsActive()) : ?>
+							<?php $html[] = $brand->getName(); ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?php echo implode(', ',$html); ?>
+
+					<?php /*echo $this->helper('checkout')->formatPrice($this->getQuote()->getGrandTotal());*/ ?>
+
+				</div>
+				<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/name')) { ?>
+					<div class="salesrep-name"><?php echo $salesrep->getName(); ?></div>
+				<?php } ?>
+				<?php if (!Mage::getStoreConfig('fvets_salesrep/exibition_fields/email')) { ?>
+					<div class="salesrep-email"><?php echo $salesrep->getEmail(); ?></div>
+				<?php } ?>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="column last edit">
+			<a href="/checkout/cart/#rep-<?php echo $salesrep->getId(); ?>"><?php echo $this->__('Editar pedido'); ?></a>
+		</div>
+	</div>
+
+	<div class="before-inner">
+
+		<?php /*
+		<div class="progress">
+			<img src="<?php echo $this->getSkinUrl('images/handles/onestepcheckout_index_index/progress1.png'); ?>" />
+		</div> */ ?>
+
+		<div class="inner two-columns">
+			<div class="column first config-column">
+			<?php if(Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
+				<?php if(!empty($this->formErrors['payment_method'])): ?>
+					<div class="onestepcheckout-error onestepcheckout-payment-method-error">
+						<?php echo $this->__('Please choose a payment method.'); ?>
+					</div>
+				<?php endif; ?>
+				<?php if(!empty($this->formErrors['payment_method_error'])): ?>
+					<div class="onestepcheckout-error onestepcheckout-payment-method-error">
+						<?php echo $this->__('Please enter valid details below.'); ?>
+					</div>
+				<?php endif; ?>
+				<?php echo $this->getChildHtml('choose-payment-method', false); ?>
+			<?php else: ?>
+				<?php if(isset($this->formErrors['payment_method']) && $this->formErrors['payment_method']): ?>
+					<div class="onestepcheckout-error onestepcheckout-payment-method-error">
+						<?php echo $this->__('Please choose a payment method.'); ?>
+					</div>
+				<?php else: ?>
+					<?php if(isset($this->formErrors['payment_method_error'])): ?>
+						<div class="onestepcheckout-error onestepcheckout-payment-method-error">
+							<?php echo $this->__('Please enter valid details below.'); ?>
+						</div>
+					<?php endif; ?>
+				<?php endif; ?>
+
+				<?php echo $this->getChildHtml('choose-payment-method', false); ?>
+
+				<?php if(!$this->isVirtual()): ?>
+					<?php if(Mage::getStoreConfig('onestepcheckout/general/hide_shipping_method')):?>
+						<?php if(isset($this->formErrors['shipping_method']) && $this->formErrors['shipping_method']): ?>
+							<div class="onestepcheckout-error onestepcheckout-shipment-method-error">
+								<?php echo $this->__('Please choose a shipping method.'); ?>
+							</div>
+						<?php endif; ?>
+						<?php echo $this->getChildHtml('choose-shipping-method'); ?>
+					<?php else:?>
+						<div class="shipping-method">
+							<p class="onestepcheckout-numbers">
+								1.4 <?php echo $this->__('Shipping method'); ?>
+							</p>
+
+							<?php if(isset($this->formErrors['shipping_method']) && $this->formErrors['shipping_method']): ?>
+								<div class="onestepcheckout-error onestepcheckout-shipment-method-error">
+									<?php echo $this->__('Please choose a shipping method.'); ?>
+								</div>
+							<?php endif; ?>
+
+							<div class="onestepcheckout-shipping-method-block">
+								<?php echo $this->getChildHtml('choose-shipping-method'); ?>
+							</div>
+						</div>
+					<?php endif; ?>
+				<?php endif; ?>
+
+				<div class="tool-tip" id="payment-tool-tip" style="display:none;">
+					<div class="btn-close">
+						<a href="javascript:void(0);" id="payment-tool-tip-close"><img src="<?php echo $this->getSkinUrl('images/btn_window_close.gif') ?>" alt="<?php echo $this->__('Close') ?>" /></a>
+					</div>
+					<div class="block-content">
+						<img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" />
+					</div>
+				</div>
+			<?php endif; ?>
+				<?php if($this->settings['enable_comments']): ?>
+					<div class="onestepcheckout-comments">
+						<div class="block-header">3 - <?php echo $this->__('Customer condition'); ?></div>
+						<br />
+						<textarea id="id_comments" class="customer_comments" rows="4" placeholder="Digite aqui as observações que deseja informar a <?php echo $store = Mage::app()->getStore()->getFrontendName() ?>" name="onestepcheckout_comments"><?php if(isset($_POST['onestepcheckout_comments'])) { echo Mage::helper('core')->escapeHtml($_POST['onestepcheckout_comments']); } ?></textarea>
+					</div>
+				<?php endif; ?>
+				<div class="clear"></div>
+			</div>
+			<div class="column last summary-column summary-column-<?php echo $salesrep->getId(); ?>">
+				<?php /*echo $this->getChildHtml('checkout_split_step2', false);*/ ?>
+				<div style="text-align:center">Carregando...</div>
+				<script>
+					jQuery(document).ready(function()
+					{
+						//checkoutShowNextFrame(<?php echo $salesrep->getId(); ?>);
+					})
+				</script>
+				<div class="clear"></div>
+			</div>
+
+			<div class="clear"></div>
+
+		</div>
+
+		<?php $obsCheckout = Mage::getStoreConfig('checkout_split/general/checkout_total_obs');
+		if ($obsCheckout) {
+			?>
+			<p class="obs-checkout"><?php echo $obsCheckout; ?></p>
+		<?php } ?>
+
+		<?php /*
+		<div class="onestepcheckout-split-summary onestepcheckout-summary-<?php echo $salesrep->getId(); ?> openned">
+			<?php echo $this->getChildHtml('split_summary_resume', false); ?>
+		</div> */ ?>
+
+		<div class="three-columns order-footer">
+			<div class="column first">
+				<?php /*<a href="javascript://" onclick="disableChecktout('<?php echo $salesrep->getId(); ?>')" class="link-disable-checkout"><?php echo $this->__('Não quero completar este pedido no momento'); ?></a>*/ ?>
+			</div>
+			<div class="column middle"></div>
+			<div class="column last">
+				<button href="javascript://" class="button btn-superAction checkout-show-next-frame" data-salesrep="<?php echo $salesrep->getId(); ?>" onclick="finishCheckout('<?php echo $salesrep->getId(); ?>'); return false"><span><span><?php echo $this->__('Finalizar este pedido'); ?> <i class="fa fa-chevron-right"></i></span></span></button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<?php /*
+<script>
+	jQuery(document).ready(function() {
+		jQuery('.order-<?php echo $salesrep->getId(); ?>-container').height(jQuery('.order-<?php echo $salesrep->getId(); ?>-step1').height() + 'px');
+	});
+	jQuery(window).load(function() {
+		jQuery('.order-<?php echo $salesrep->getId(); ?>-container').height(jQuery('.order-<?php echo $salesrep->getId(); ?>-step1').height() + 'px');
+	});
+</script> */ ?>

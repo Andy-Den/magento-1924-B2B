@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_CatalogRestrictionGroup extension
+ * 
+ * @category       FVets
+ * @package        FVets_CatalogRestrictionGroup
+ * @copyright      Copyright (c) 2016
+ */
+-->
+<config>
+    <modules>
+        <FVets_CatalogRestrictionGroup>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Customer />
+             </depends>
+        </FVets_CatalogRestrictionGroup>
+    </modules>
+</config>

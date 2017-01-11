@@ -1,0 +1,121 @@
+@import '../../default';
+.cms-index-index {
+  .page {
+    background-image: url("@{skinUrl}images/home-background.jpg"), url("@{skinUrl}images/home-background-top.jpg");
+    background-repeat: no-repeat, repeat-x;
+    background-position: center 505px, center 88px;
+    .main-container {
+      padding-bottom: 0;
+      .main {
+        background: none;
+        margin-top:5px;
+        padding: 0;
+      }
+      .callout-home-top {
+
+        &.mobile-slider {
+          display:none;
+        }
+        .easyslideslider-id {
+          background: none;
+          padding: 0;
+        }
+
+        .easybanner-banner {
+          width: 50%;
+          box-sizing: border-box;
+          margin: 0;
+          height: 135px;
+          overflow: hidden;
+
+          img {
+            max-width: 100%;
+          }
+
+          &.col-1 {
+            text-align: left;
+            float: left;
+          }
+
+          &.col-2 {
+            text-align: right;
+            float: right;
+          }
+        }
+      }
+      .carousel-products {
+        .block-content {
+          .jcarousel {
+            .products-grid {
+              .item {
+                .actions {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.logged-in {
+    .page {
+      background-position:center 529px, center 112px;
+
+      .callout-home-top {
+        margin-bottom: 80px;
+      }
+
+      .carousel-products {
+        background: white;
+      }
+
+      .blocklinks-onepage-catalog {
+        background: white;
+        margin-top: 0;
+        padding-top: 60px;
+      }
+    }
+  }
+  &.user-agent-mobile .page .main-container .callout-home-top.mobile-slider .master-banner {
+    margin:20px 0;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .cms-index-index .page .main-container .callout-home-top {
+
+    &.desktop-slider {
+      display:none;
+    }
+    &.mobile-slider {
+      display:block;
+
+      .master-banner {
+        margin: 15px 0;
+      }
+    }
+    .easybanner-banner {
+      float: none !important;
+      width: 100%;
+      height: auto;
+      max-width: 464px;
+      margin: 0 auto;
+
+      &.col-2 {
+        display: none;
+      }
+    }
+  }
+}
+
+.user-agent-mobile.cms-index-index .page .main-container .callout-home-top {
+  &.mobile-slider {
+    display: block;
+  }
+  &.desktop-slider {
+    display: none;
+  }
+}
+

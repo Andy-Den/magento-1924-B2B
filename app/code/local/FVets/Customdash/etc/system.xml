@@ -1,0 +1,100 @@
+<config>
+    <sections>
+        <customdash translate="label" module="fvets_customdash">
+            <class>separator-top</class>
+            <label>Dashboard</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_customdash">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <view_id translate="label" module="fvets_customdash">
+                            <label>View ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>ID da visão do Analytics</comment>
+                        </view_id>
+                        <metrics translate="label" module="fvets_customdash">
+                            <label>Metrics</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Tipo de métrica.</comment>
+                        </metrics>
+                    </fields>
+                </general>
+                <bestsellerbrands translate="label" module="fvets_customdash">
+                    <label>Bestseller Brands</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <excluded_brands_ids translate="label" module="fvets_customdash">
+                            <label>Marcas a não serem <contabilizadas></contabilizadas></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Ids das marcas que não devem ser contabilizadas, separadas por vírgula</comment>
+                        </excluded_brands_ids>
+                    </fields>
+                </bestsellerbrands>
+                <bestsellerlines translate="label" module="fvets_customdash">
+                    <label>Bestseller Lines</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <excluded_lines_ids translate="label" module="fvets_customdash">
+                            <label>Linhas a não serem contabilizadas</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Ids das linhas que não devem ser contabilizadas, separadas por vírgula</comment>
+                        </excluded_lines_ids>
+                    </fields>
+                </bestsellerlines>
+                <bestsellersubcategories translate="label" module="fvets_customdash">
+                    <label>Bestseller Subcategories</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <excluded_subcategories_ids translate="label" module="fvets_customdash">
+                            <label>Subcategorias a não serem contabilizadas</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Ids das subcategorias que não devem ser contabilizadas, separadas por vírgula</comment>
+                        </excluded_subcategories_ids>
+                    </fields>
+                </bestsellersubcategories>
+            </groups>
+        </customdash>
+    </sections>
+</config>

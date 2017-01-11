@@ -1,0 +1,18 @@
+<include_layout version="0.1.0">
+    <contacts_index_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/contacts_index_index/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="content_heading" template="cms/content_heading/1column/1.phtml" before="-">
+                <action method="setContentHeading"><content_heading>Contact</content_heading></action>
+            </block>
+            <block type="cms/block" name="contact_content" after="content_heading">
+                <action method="setBlockId"><block_id>contact_content</block_id></action>
+            </block>
+        </reference>
+        <reference name="contactForm">
+            <action method="setTemplate"><template>contacts/form/inline/1.phtml</template></action>
+        </reference>
+    </contacts_index_index>
+</include_layout>

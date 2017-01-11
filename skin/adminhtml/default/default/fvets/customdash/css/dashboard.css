@@ -1,0 +1,91 @@
+.dashboard {
+    width: 1080px;
+    margin: 0 auto;
+}
+.dashboard h1 {
+    text-align: center;
+    line-height: 0.4em;
+    margin-bottom: 0.2em;
+}
+.dashboard .no-data {
+    width: 100%;
+    text-align: center;
+}
+.dashboard .no-data:nth-child(2) {
+    display: none;
+}
+.dashboard .no-data:nth-child(3) {
+    display: none;
+}
+.dash-header {
+    max-width: 500px;
+}
+.filterContainer {
+    float: left;
+    margin-bottom: 10px;
+}
+.filterContainer h3 {
+    text-align: center;
+}
+.filterContainer .date {
+    width: 80px;
+}
+.container {
+    float: left;
+    min-width: 300px;
+    /*min-height: 310px;*/
+}
+.container h3 {
+    text-align: center;
+}
+.container .date {
+    width: 80px;
+}
+.chart {
+    float: left;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+
+.separador {
+    width: 100%;
+    border-top: solid 2px #f1f1f1;
+    margin-bottom: 40px;
+    clear: both;
+}
+
+#html-body .wrapper {
+    min-width: 1080px;
+}
+
+/*#### Tabs ####*/
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    border-radius: 4px!important;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    margin: 1px 0.2em 3px 0!important;
+    border-bottom-width: 1px!important;
+}
+
+.ui-tabs .ui-tabs-nav {
+    background: none!important;
+    background-color: #fff9e9!important;
+}
+
+/*#### Buttons ####*/
+div.dashboard div.filterContainer form#dashboard-filter input#date_from.date {
+    margin-left: 2px;
+}
+
+.link-store-scope {
+    display: none;
+}
+
+div.charts-tooltip div {
+    color: #000000!important;
+    background-color: #ffffff!important;
+    border: 1px solid #2f2f2f!important;
+}

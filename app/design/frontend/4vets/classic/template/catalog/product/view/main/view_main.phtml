@@ -1,0 +1,15 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+//Dropship
+//$_hlp = Mage::helper('udmultiprice');
+//$region_ok = $_hlp->isAllowedZipcode($_product);
+?>
+
+<div class="product-shop">
+
+	<h3>Quem distribui este produto?</h3>
+	<br />
+	<?php echo $this->getChildHtml('product_type_table_data'); ?>
+
+  </div>

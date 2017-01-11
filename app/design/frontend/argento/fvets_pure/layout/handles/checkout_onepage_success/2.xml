@@ -1,0 +1,63 @@
+<include_layout version="0.1.0">
+    <checkout_onepage_success>
+        <update handle="v2_less_variables_importer"/>
+        <update handle="page_one_column" />
+        <remove name="header"></remove>
+        <remove name="top_toolbar"></remove>
+
+        <reference name="head">
+            <!-- Elementos da versão 2 do site -->
+            <action method="addItem"><type>skin_css</type><name>less/common.less</name></action>
+
+            <action method="removeItem"><type>skin_css</type><name>less/custom.less</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/theme.css</name></action>
+
+            <!-- Alteração de senha no checkout -->
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/checkout/password-change/1.less</name></action>
+            <!--Fim-->
+
+            <action method="addItem"><type>skin_css</type><name>less/handles/checkout_onepage_success/2.less</name></action>
+
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customerlocator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabel.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabels-tooltip.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/css/easyslide.css </name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/styles-ee.css</name></action>
+        </reference>
+
+        <reference name="content">
+            <remove name="checkout.success" />
+            <block type="fvets_checkoutsplit/checkout_onepage_success" name="checkout.split.success" template="checkoutsplit/checkout/success/1.phtml">
+                <block type="fvets_checkoutsplit/checkout_onepage_success_order" name="checkout.split.success.order" as="checkout_split_success_order" template="checkoutsplit/checkout/success/order/1.phtml">
+                    <block type="fvets_checkoutsplit/sales_order_totals" name="order_totals" template="checkoutsplit/checkout/success/order/totals/1.phtml">
+                        <action method="setLabelProperties"><value>colspan="4" class="a-right"</value></action>
+                        <action method="setValueProperties"><value>class="last a-right"</value></action>
+                        <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml" />
+                    </block>
+                </block>
+                <block type="page/html" name="checkout-password-change" as="checkout-password-change" template="onestepcheckout/password_change/1.phtml"/>
+            </block>
+        </reference>
+    </checkout_onepage_success>
+</include_layout>

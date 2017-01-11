@@ -1,0 +1,67 @@
+<?php
+	$questions = explode("-----",Mage::getModel('core/variable')->loadByCode('contact_frequent_questions')->getValue('plain'));
+?>
+
+<div id="frequent-questions" class="frequent-questions">
+	<div class="block1">
+		<h3>PERGUNTAS FREQUENTES</h3>
+		<fieldset class="row">
+			<div class="col-md-9 left">
+				<ul>
+				<?php
+					foreach ($questions as $key => $question) :
+						$question = explode('=====', $question);
+						?>
+							<li>
+								<span class="question">
+									<a href="#question<?php echo $key; ?>" class="anchor" ><?php echo $question[0]; ?></a>
+								</span>
+							</li>
+						<?php
+					endforeach;
+				?>
+				</ul>
+			</div>
+			<div class="col-md-3 right">
+				<?php echo Mage::getModel('core/variable')->loadByCode('contact_info')->getValue('html'); ?>
+			</div>
+		</fieldset>
+	</div>
+<br /><br />
+	<div class="block2">
+		<ul>
+		<?php
+			foreach ($questions as $key => $question) :
+			$question = explode('=====', $question);
+			?>
+			<li>
+				<span class="question pull-left">
+					<h4><?php echo $question[0]; ?></h4>
+				</span>
+				<span class="link pull-right">
+					<a href="#frequent-questions" class="anchor" id="question<?php echo $key; ?>">voltar ao topo</a>
+				</span>
+				<div class="clear"></div>
+				<hr />
+				<span class="answer">
+					<?php echo $question[1]; ?>
+				</span>
+				<br /><br />
+			</li>
+			<?php
+			endforeach;
+		?>
+		</ul>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		jQuery('.anchor').click(function(){
+			jQuery('html, body').animate({
+				scrollTop: jQuery( jQuery.attr(this, 'href') ).offset().top - jQuery('#fixed-menu').outerHeight()
+			}, 500);
+			return false;
+		});
+	});
+</script>

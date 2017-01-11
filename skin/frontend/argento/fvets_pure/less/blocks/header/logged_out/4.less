@@ -1,0 +1,221 @@
+@import "../../../mixins";
+
+.logged-out {
+  .header-container {
+    .header {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      .vendor-logo {
+        width: 14%;
+        float: left;
+      }
+
+      .sub-header {
+        margin-top: 2%;
+        margin-right: 1%;
+        float: left;
+        .nav-container {
+          width: auto;
+        }
+      }
+
+      .top-search {
+        float: left;
+        width: 400px;
+        margin-top: 2%;
+
+        form {
+          display: inline;
+
+          fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+
+            legend {
+              display: none;
+            }
+
+            .mini-search {
+              height: 45px;
+
+              .search-label {
+                display: none;
+              }
+
+              .input-text {
+                border: @defaultBorder;
+                width: 86%;
+                height: 100%;
+                -moz-border-bottom-colors: none;
+                -moz-border-left-colors: none;
+                -moz-border-right-colors: none;
+                -moz-border-top-colors: none;
+                text-indent: 7px;
+                box-sizing: border-box;
+                font-size: 14px;
+                line-height: 1.3;
+                border-right: none;
+                border-radius: 3px 0 0 3px;
+                float: left;
+              }
+
+              .button {
+                width: 14%;
+                display: block;
+                height: 100%;
+                float: left;
+                background: none;
+                border: @defaultBorder;
+                margin-left: -3px;
+                border-radius: 0 3px 3px 0;
+                border-left: none;
+
+                span {
+                  background: none;
+                  color: @defaultTextColor;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .logged-out {
+        margin-top: 2%;
+
+        .header-login {
+          float: right;
+          .registered-users {
+            .form-list {
+              margin: 0;
+              padding: 0;
+
+              .login-span {
+                text-transform: uppercase;
+                .btn-lessAction {
+                  background: @defaultColor4;
+                }
+
+                a {
+                  font-weight: bold;
+                }
+              }
+
+              .signin-span {
+                background: @defaultColor8;
+              }
+
+              li {
+                margin: 0 0 0 10px;
+                vertical-align: middle;
+                display: inline-block;
+              }
+
+              .btn-lessAction {
+                border: none;
+                padding: 3px 10px;
+
+                span {
+                  background: none;
+
+                  box-shadow: none;
+                  background: none;
+
+                  span {
+                    color: white;
+                    font-weight: normal;
+                  }
+                }
+                }
+              .btn-lessAction {
+                &:hover {
+                  background: @buttonHoverBtnCartGradientEnd !important;
+                  span {
+                    span {
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .forgot-password {
+            display: none;
+          }
+        }
+
+        .messages {
+          overflow: auto;
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .header-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 970px) {
+  .page {
+    .header-container {
+      .header {
+        &.container {
+          width: auto;
+        }
+      }
+    }
+    width: auto;
+  }
+
+  div.institutionals-menu {
+    width: auto;
+
+    ul {
+      li {
+        a {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  div.registered-users {
+    margin-right: 5%;
+  }
+}
+
+@media (max-width: 400px) {
+  .logged-out {
+    .header-container {
+      .header {
+        .vendor-logo {
+          width: 100%;
+          float: none;
+          text-align: center;
+        }
+      }
+    }
+    div.header {
+      .logged-out {
+        float: none!important;
+        .header-login {
+          float: none;
+        }
+      }
+    }
+  }
+
+  div.institutionals-menu {
+    ul {
+      li {
+        a {
+          font-size: 9px;
+        }
+      }
+    }
+  }
+}

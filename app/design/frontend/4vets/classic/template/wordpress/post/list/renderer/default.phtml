@@ -1,0 +1,31 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<div class="post-list-item">
+	<?php echo $this->getBeforePostContentHtml() ?>
+	<div class="post-entry entry<?php if ($post->getFeaturedImage()): ?> post-entry-with-image<?php endif; ?> row">
+		<?php if ($post->isViewableForVisitor()): ?>
+			<?php if ($featuredImage = $post->getFeaturedImage()): ?>
+				<div class="featured-image col-md-4">
+					<a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img src="<?php echo $featuredImage->getMediumImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" width="100%" /></a>
+				</div>
+				<div class="col-md-8">
+					<h3><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h3>
+					<div class="details"><?php echo $this->getPostDetails(); ?></div>
+					<div class="short-text"><?php echo $this->getPostExcerpt() ?></div>
+				</div>
+			<?php else: ?>
+				<h3><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h3>
+				<?php echo $this->getPostExcerpt() ?>
+			<?php endif; ?>
+		<?php else: ?>
+			<?php echo $this->getPasswordProtectHtml($post) ?>
+		<?php endif; ?>
+	</div>
+</div>

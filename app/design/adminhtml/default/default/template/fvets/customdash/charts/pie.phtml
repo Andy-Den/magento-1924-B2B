@@ -1,0 +1,43 @@
+<?php $_function = $this->getMethodData(); ?>
+<?php $_data = $this->$_function(); ?>
+
+<?php
+if (!$_data || count($_data) === 0) {
+	echo '<div class="no-data"><h3>' . Mage::helper('fvets_customdash')->__('No Data') . '</h3></div>';
+	return;
+}
+?>
+
+<?php $_columns = $this->getColumns(); ?>
+<?php $_noDataLabel = $this->getNoDataLabel(); ?>
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+<script type="text/javascript">
+	//google.load('visualization', '1.0', {'packages': ['corechart']});
+	//google.setOnLoadCallback(drawChart);
+	function drawChart<?php echo $this->getId(); ?>() {
+		var data = new google.visualization.DataTable();
+		<?php foreach ($_columns as $_column) { ?>
+			data.addColumn(<?php echo '\'' . $_column[0] . '\'' ?>, <?php echo '\'' . $_column[1] . '\''?>);
+		<?php } ?>
+		data.addRows([
+			<?php foreach ($_data as $_item) { ?>
+			<?php echo '[\'' . ($_item->getLabel() == '' ? $_noDataLabel : $_item->getLabel()) . '\'' ?>, <?php echo $_item->getValue() . '],' ?>
+			<?php } ?>
+		]);
+		var options = {'title': <?php echo '\'' . $this->__($this->getName()) . '\''; ?>,
+			'width': <?php echo $this->getWidth() ?>,
+			'height': <?php echo $this->getHeight() ?>};
+		var chart = new google.visualization.PieChart(document.getElementById('<?php echo $this->getId() ?>'));
+		chart.draw(data, options);
+	}
+</script>
+
+<div class="container">
+    <div class="dash-header"><h1><?php echo $this->__($this->getName()); ?></h1></div>
+	<div id="<?php echo $this->getId() ?>" class="chart"></div>
+</div>
+
+<script type="text/javascript">
+    //executa a função que desenha o Chart;
+    drawChart<?php echo $this->getId(); ?>();
+</script>

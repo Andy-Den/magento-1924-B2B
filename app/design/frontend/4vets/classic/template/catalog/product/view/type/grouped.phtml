@@ -1,0 +1,17 @@
+<?php
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see FVets_Catalog_Block_Product_View_Type_Grouped
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+
+<div class="price-box">
+  <span class="regular-price" id="product-price-<?php echo $_product->getId(); ?>">
+    <span class="price-label">A partir de</span>
+    <span class="price">R$<?php echo $this->getMinimalPrice($_product); ?></span>
+  </span>
+</div>
+

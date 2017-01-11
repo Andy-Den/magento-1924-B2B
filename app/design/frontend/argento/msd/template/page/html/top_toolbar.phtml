@@ -1,0 +1,10 @@
+<div class="top-toolbar-container">
+	<div class="top-toolbar">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_links')->toHtml() ?>
+		<?php echo $this->getChildHtml('store_language') ?>
+		<div class="quick-links">
+			<p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+			<?php echo $this->getChildHtml('topLinks') ?>
+		</div>
+	</div>
+</div>

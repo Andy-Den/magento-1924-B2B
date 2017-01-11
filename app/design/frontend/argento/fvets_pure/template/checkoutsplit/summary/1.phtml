@@ -1,0 +1,98 @@
+<?php
+$_coreHelper = $this->helper('core');
+$checkoutHelper = Mage::helper('onestepcheckout/checkout');
+$salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep();
+?>
+<div class="clear"></div>
+<div class="block-header">4 - <?php echo $this->__('Revise seu pedido'); ?></div>
+<div class="onestepcheckout-summary-complete onestepcheckout-summary-complete-<?php echo $salesrep->getId(); ?>">
+	<table class="onestepcheckout-summary" width="100%">
+		<thead>
+			<tr>
+				<th class="name"><div class="first-child"><?php echo $this->__('Product'); ?></div></th>
+				<th class="total"><?php echo $this->__(''); ?></th>
+				<th class="qty"><?php echo $this->__('Qty'); ?></th>
+				<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+					<th class="total"><?php echo $this->__('Subtotal'); ?></th>
+					<th class="total"><div class="last-child"><?php echo $this->__('Total'); ?></div></th>
+				<?php else: ?>
+					<th class="total"><div class="last-child"><?php echo $this->__('Subtotal'); ?></div></th>
+				<?php endif; ?>
+			</tr>
+		</thead>
+		<?php foreach($this->getItems() as $item): ?>
+		<tr>
+			<td class="name">
+				<div class="first-child">
+				<?php echo $item->getName(); ?>
+				<?php if($checkoutHelper->settings['show_custom_options']): ?>
+					<?php $options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct()); ?>
+					<?php if(isset($options['options']) && count($options['options']) > 0): ?>
+					<ul class="onestepcheckout-custom-options">
+					<?php foreach($options['options'] as $option): ?>
+						<li><b><?php echo $option['label'] . ':</b> ' . $option['value']; ?></li>
+					<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+
+					<?php if($item->getProduct()->isConfigurable()): ?>
+
+					<?php
+					$configurable_options = $item->getProduct()->getTypeInstance(true)->getSelectedAttributesInfo($item->getProduct());
+					?>
+
+					<?php if(is_array($configurable_options) && count($configurable_options) > 0): ?>
+					<ul class="onestepcheckout-custom-options">
+					<?php foreach($configurable_options as $option): ?>
+						<li><b><?php echo $option['label']; ?>:</b> <?php echo $option['value']; ?></li>
+					<?php endforeach; ?>
+					</ul>
+					<?php endif; ?>
+
+					<?php endif; ?>
+
+				<?php endif; ?>
+				</div>
+			</td>
+
+			<td>
+				<?php $_product = Mage::getModel('catalog/product')->load($item->getData('product_id')); ?>
+				<?php echo Mage::helper('fvets_salesrule')->getLabelHtml($_product) ?>
+			</td>
+
+			<td class="qty"><?php echo $item->getQty(); ?></td>
+			<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+				<td class="total">
+					<?php if ($item->getOriginalPrice() * $item->getQty() > $this->helper('checkout')->getSubtotalInclTax($item)) : ?>
+						<?php echo str_replace('R$', '', $this->helper('checkout')->formatPrice($item->getOriginalPrice() * $item->getQty(), true)); ?>
+					<?php else : ?>
+						<?php echo str_replace('R$', '', $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item), true)); ?>
+					<?php endif; ?>
+				</td>
+			<?php endif; ?>
+			<td class="total">
+				<div class="last-child">
+				<?php if($checkoutHelper->settings['display_tax_included']): ?>
+					<?php $_price = $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item)); ?>
+				<?php else: ?>
+					<?php $_price = $this->helper('checkout')->formatPrice($item->getRowTotal()); ?>
+				<?php endif; ?>
+				<?php if(Mage::getStoreConfig('onestepcheckout/general/show_tableprice_price')): ?>
+					<?php echo str_replace('R$', '', $_price); ?>
+				<?php else: ?>
+					<?php echo $_price; ?>
+				<?php endif; ?>
+				</div>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+</div>
+
+<script>
+	//<![CDATA[
+	jQuery(document).ready(function () {
+		initProlabels();
+	});
+	//]]>
+</script>

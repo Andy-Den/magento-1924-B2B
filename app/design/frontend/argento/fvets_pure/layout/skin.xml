@@ -1,0 +1,557 @@
+<layout version="0.1.0">
+
+    <customer_logged_in>
+        <reference name="root">
+            <action method="addBodyClass"><classname>logged-in</classname></action>
+        </reference>
+    </customer_logged_in>
+
+    <customer_logged_out>
+        <reference name="root">
+            <action method="addBodyClass"><classname>logged-out</classname></action>
+        </reference>
+    </customer_logged_out>
+
+    <cms_page_view_1column_1>
+        <reference name="page_content_heading">
+            <action method="setTemplate"><template>cms/content_heading/1column/1.phtml</template></action>
+        </reference>
+    </cms_page_view_1column_1>
+
+    <cms_page_view_2columns_1>
+        <reference name="page_content_heading">
+            <action method="setTemplate"><template>cms/content_heading/2columns/1.phtml</template></action>
+        </reference>
+    </cms_page_view_2columns_1>
+
+    <header_logged_in_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/animate.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_in/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/page/html/salesrep/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/blocks/header/logged_in/1.js</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate"><template>page/html/header/logged_in/1.phtml</template></action>
+            <block type="fvets_salesrep/info" name="sales.rep" as="sales_rep" template="page/html/salesrep/1.phtml"/>
+            <remove name="headerLogin"></remove>
+            <remove name="wishlist_link" />
+            <block type="page/html_header" name="header.mobile" as="header_mobile" template="page/html/header/logged_in/mobile/1.phtml">
+                <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
+                    <label>Navigation Bar</label>
+                    <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
+                </block>
+                <block type="checkout/cart_sidebar" name="mobileCart" as="mobileCart" template="checkout/cart/top/mobile/1.phtml" />
+                <block type="core/template" name="top.search.mobile" as="topSearchMobile" template="tm/ajaxsearch/topsearch/1.phtml"/>
+            </block>
+        </reference>
+        <reference name="top.search">
+            <action method="setTemplate"><template>tm/ajaxsearch/topsearch/1.phtml</template></action>
+        </reference>
+        <reference name="top.links">
+            <remove name="checkout_cart_link" />
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+            <action method="removeLinkByUrl"><url helper="fvets_customer/getAccountUrl"/></action>
+            <action method="addLink" translate="label title" module="customer"><label>My Account</label><url helper="fvets_customer/getAccountUrl"/><title>My Account</title><prepare/><urlParams/><position>10</position></action>
+        </reference>
+    </header_logged_in_1>
+
+    <header_logged_in_2>
+        <update handle="header_logged_in_1" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_in/2.less</name></action>
+        </reference>
+    </header_logged_in_2>
+
+    <header_logged_in_3>
+        <!--idexx-->
+    </header_logged_in_3>
+
+    <header_logged_in_4>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/animate.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_in/5.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/page/html/salesrep/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/attributemenu/menu/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/blocks/header/logged_in/1.js</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate"><template>page/html/header/logged_in/3.phtml</template></action>
+            <block type="fvets_salesrep/info" name="sales.rep" as="sales_rep" template="page/html/salesrep/1.phtml"/>
+            <remove name="headerLogin"></remove>
+            <remove name="wishlist_link" />
+            <block type="page/html_header" name="header.mobile" as="header_mobile" template="page/html/header/logged_in/mobile/1.phtml">
+                <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
+                    <label>Navigation Bar</label>
+                    <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
+                </block>
+                <block type="checkout/cart_sidebar" name="mobileCart" as="mobileCart" template="checkout/cart/top/mobile/1.phtml" />
+                <block type="core/template" name="top.search.mobile" as="topSearchMobile" template="tm/ajaxsearch/topsearch/1.phtml"/>
+            </block>
+
+            <block type="fvets_attributemenu/menu" name="institutionals.menu" as="institutionals_menu" template="attributemenu/menu/1.phtml"/>
+        </reference>
+        <reference name="top.search">
+            <action method="setTemplate"><template>tm/ajaxsearch/topsearch/1.phtml</template></action>
+        </reference>
+        <reference name="top.links">
+            <remove name="checkout_cart_link" />
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+            <action method="removeLinkByUrl"><url helper="fvets_customer/getAccountUrl"/></action>
+            <action method="addLink" translate="label title" module="customer"><label>My Account</label><url helper="fvets_customer/getAccountUrl"/><title>My Account</title><prepare/><urlParams/><position>1000</position><liParams>class="toplinks"</liParams></action>
+            <action method="addLink" translate="label title" module="customer"><label>Ajuda</label><url helper="fvets_customer/getHelpUrl"/><title>Ajuda</title><prepare/><urlParams/><position>1000</position><liParams>class="toplinks"</liParams></action>
+        </reference>
+    </header_logged_in_4>
+
+    <header_logged_out_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/login/loginbox/1.less</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate"><template>page/html/header/logged_out/1.phtml</template></action>
+            <block type="customer/form_login" name="headerLogin" as="headerLogin" template="page/html/header/logged_out/login/1.phtml"/>
+            <remove name="top.links"></remove>
+            <block type="page/html_header" name="header.mobile" as="header_mobile" template="page/html/header/logged_out/mobile/1.phtml"/>
+
+            <block type="customer/form_login" name="login.box" as="loginBox"
+                   template="customer/account/login/loginbox/1.phtml"/>
+        </reference>
+        <reference name="content">
+            <remove name="custommenu.toggle" />
+        </reference>
+    </header_logged_out_1>
+
+    <header_logged_out_2>
+        <update handle="header_logged_out_1" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/2.less</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/createaccount/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/login/loginbox/1.less</name></action>
+        </reference>
+        <reference name="headerLogin">
+            <action method="setTemplate"><template>page/html/header/logged_out/login/2.phtml</template></action>
+        </reference>
+
+        <reference name="header">
+            <block type="customer/form_login" name="login.box" as="loginBox"
+                   template="customer/account/login/loginbox/1.phtml"/>
+        </reference>
+
+        <reference name="content">
+            <block type="page/html" name="modal-account-create" template="page/html/header/logged_out/createaccount/1.phtml"/>
+        </reference>
+    </header_logged_out_2>
+
+    <header_logged_out_3>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/3.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/blocks/header/logged_out/1.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/login/loginbox/1.less</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate"><template>page/html/header/logged_out/2.phtml</template></action>
+
+            <block type="customer/form_login" name="login.box" as="loginBox"
+                   template="customer/account/login/loginbox/1.phtml"/>
+        </reference>
+
+        <reference name="top.search">
+            <action method="setTemplate"><template>tm/ajaxsearch/topsearch/1.phtml</template></action>
+        </reference>
+
+    </header_logged_out_3>
+
+    <header_logged_out_4>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/4.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/attributemenu/menu/1.less</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/createaccount/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/login/loginbox/1.less</name></action>
+        </reference>
+
+        <reference name="header">
+            <action method="setTemplate">
+                <template>page/html/header/logged_out/3.phtml</template>
+            </action>
+            <block type="customer/form_login" name="headerLogin" as="headerLogin"
+                   template="page/html/header/logged_out/login/3.phtml"/>
+            <block type="page/html_header" name="header.mobile" as="header_mobile"
+                   template="page/html/header/logged_in/mobile/1.phtml">
+            </block>
+            <block type="fvets_attributemenu/menu" name="institutionals.menu" as="institutionals_menu" template="attributemenu/menu/1.phtml"/>
+            <block type="customer/form_login" name="login.box" as="loginBox"
+                   template="customer/account/login/loginbox/1.phtml"/>
+            <remove name="top.links"></remove>
+        </reference>
+
+        <reference name="content">
+            <block type="page/html" name="modal-account-create" template="page/html/header/logged_out/createaccount/1.phtml"/>
+        </reference>
+    </header_logged_out_4>
+
+    <!--header para para sites com catálogo aberto-->
+    <header_logged_out_5>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/5.less</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_out/createaccount/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/login/loginbox/1.less</name></action>
+
+            <action method="addItem"><type>skin_css</type><name>css/animate.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/header/logged_in/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/blocks/header/logged_in/1.js</name></action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate"><template>page/html/header/logged_out/5.phtml</template></action>
+            <block type="customer/form_login" name="headerLogin" as="headerLogin" template="page/html/header/logged_out/login/2.phtml"/>
+            <remove name="top.links"></remove>
+            <remove name="headerCart"></remove>
+            <block type="page/html_header" name="header.mobile" as="header_mobile" template="page/html/header/logged_out/mobile/1.phtml"/>
+
+            <block type="customer/form_login" name="login.box" as="loginBox"
+                   template="customer/account/login/loginbox/1.phtml"/>
+        </reference>
+
+        <reference name="top.search">
+            <action method="setTemplate"><template>tm/ajaxsearch/topsearch/1.phtml</template></action>
+        </reference>
+
+        <reference name="content">
+            <block type="page/html" name="modal-account-create" template="page/html/header/logged_out/createaccount/1.phtml"/>
+        </reference>
+    </header_logged_out_5>
+
+    <footer_logged_in_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/footer/logged_in/1.less</name></action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate"><template>page/html/footer/1.phtml</template></action>
+            <block type="cms/block" name="footer_links">
+                <action method="setBlockId"><block_id>logged_footer_links</block_id></action>
+            </block>
+        </reference>
+    </footer_logged_in_1>
+
+    <footer_logged_out_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/footer/logged_out/1.less</name></action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate"><template>page/html/footer/1.phtml</template></action>
+            <block type="cms/block" name="footer_links">
+                <action method="setBlockId"><block_id>notlogged_footer_links</block_id></action>
+            </block>
+        </reference>
+    </footer_logged_out_1>
+
+    <footer_logged_out_2>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/footer/logged_out/2.less</name></action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate"><template>page/html/footer/2.phtml</template></action>
+            <block type="cms/block" name="footer_links">
+                <action method="setBlockId"><block_id>notlogged_footer_links</block_id></action>
+            </block>
+
+            <block type="newsletter/subscribe" name="up_footer" template="page/html/footer/up/1.phtml" />
+        </reference>
+    </footer_logged_out_2>
+
+    <footer_logged_out_3>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/footer/logged_out/3.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/blocks/footer/logged_out/1.js</name></action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate"><template>page/html/footer/1.phtml</template></action>
+            <block type="cms/block" name="footer_links">
+                <action method="setBlockId"><block_id>notlogged_footer_links</block_id></action>
+            </block>
+        </reference>
+    </footer_logged_out_3>
+
+    <catalog_topnav_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/page/custommenu/top/1.less</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/page/custommenu.js</name></action>
+        </reference>
+        <reference name="catalog.topnav">
+            <action method="setTemplate"><template>page/custommenu/top/1.phtml</template></action>
+        </reference>
+    </catalog_topnav_1>
+
+    <header_cart_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/checkout/cart/top/1.less</name></action>
+        </reference>
+        <reference name="headerCart">
+            <action method="setTemplate"><template>checkout/cart/top/1.phtml</template></action>
+        </reference>
+    </header_cart_1>
+
+    <header_cart_2>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/checkout/cart/top/2.less</name></action>
+        </reference>
+        <reference name="headerCart">
+            <action method="setTemplate"><template>checkout/cart/top/2.phtml</template></action>
+        </reference>
+    </header_cart_2>
+
+    <!-- Customer -->
+    <customer_account_navigation_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/navigation/1.less</name></action>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByName"><name>billing_agreements</name></action>
+            <action method="removeLinkByName"><name>recurring_profiles</name></action>
+            <action method="removeLinkByName"><name>tags</name></action>
+            <action method="removeLinkByName"><name>OAuth Customer Tokens</name></action>
+            <action method="removeLinkByName"><name>downloadable_products</name></action>
+            <action method="removeLinkByName"><name>wishlist</name></action>
+            <action method="removeLinkByName"><name>account_edit</name></action>
+            <action method="removeLinkByName"><name>order_pending_payment</name></action>
+            <action method="removeLinkByName"><name>newsletter</name></action>
+        </reference>
+    </customer_account_navigation_1>
+
+    <!-- Defaults -->
+    <page_one_column translate="label">
+        <label>All One-Column Layout Pages</label>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/page_one_column/1.less</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column/1.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_one_column>
+
+    <page_two_columns_left translate="label">
+        <label>All Two-Column Layout Pages (Left Column)</label>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/page_two_columns_left/1.less</name></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left/1.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_two_columns_left>
+    
+    <product_grid_bestseller_carousel_1>
+        <label>Show products as list and carousel</label>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-core.min.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-control.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/product/carousel.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/carousel/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="highlight/product_bestseller" name="homepage.bestseller" as="home_bestseller" template="catalog/product/list/carousel/1.phtml" after="-">
+                <action method="setTitle"><title>Best Seller</title></action>
+                <action method="setProductsCount"><products_count>16</products_count></action>
+                <action method="setCategoryFilter"><category_filter></category_filter></action>
+                <action method="setAllLink"><value>highlight/index/index/type/bestsellers</value></action>
+                <action method="setAllTitle"><value>Ver todos os Mais Vendidos</value></action>
+            </block>
+        </reference>
+    </product_grid_bestseller_carousel_1>
+
+    <product_grid_new_carousel_1>
+        <label>Show products as list and carousel</label>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-core.min.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-control.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/product/carousel.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/carousel/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="highlight/product_new" name="homepage.new" as="home_new" template="catalog/product/list/carousel/1.phtml" after="-">
+                <action method="setTitle"><title>New Products</title></action>
+                <action method="setProductsCount"><products_count>16</products_count></action>
+                <action method="setCategoryFilter"><category_filter></category_filter></action>
+                <action method="setAllLink"><value>highlight/index/index/type/new</value></action>
+                <action method="setAllTitle"><value>Ver todas as Novidades</value></action>
+                <action method="setRandomItems"><value>1</value></action>
+            </block>
+        </reference>
+    </product_grid_new_carousel_1>
+
+    <product_grid_featured_carousel_1>
+        <label>Show products as list and carousel</label>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-core.min.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-control.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/product/carousel.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/carousel/1.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="highlight/product_featured" name="homepage.featured" as="home_featured" template="catalog/product/list/carousel/1.phtml" after="-">
+                <action method="setTitle"><title>Featured</title></action>
+                <action method="setProductsCount"><products_count>16</products_count></action>
+                <action method="setCategoryFilter"><category_filter></category_filter></action>
+                <action method="setAllLink"><value>highlight/index/index/type/featured</value></action>
+                <action method="setAllTitle"><value>Ver todos os Recomendados</value></action>
+            </block>
+        </reference>
+    </product_grid_featured_carousel_1>
+
+    <block_product_view_tabs_1>
+        <reference name="product.info.tabs">
+            <action method="unsetChild">
+                <child>tags_tabbed</child>
+            </action>
+            <action method="unsetChild">
+                <child>review_tabbed</child>
+            </action>
+            <action method="unsetChild">
+                <child>additional_tabbed</child>
+            </action>
+            <action method="addTab" translate="title" module="easytabs">
+                <alias>review_tabbed_local</alias>
+                <title><![CDATA[Reviews&nbsp;({{eval code="getReviewsCollection()->count()"}})]]></title>
+                <block>easytabs/tab_product_review</block>
+                <template>tm/easytabs/tab/review/product/view/list.phtml</template>
+            </action>
+        </reference>
+        <reference name="review_tabbed_local">
+            <block type="core/template" name="product_review_list.count" template="review/product/view/count.phtml" />
+        </reference>
+    </block_product_view_tabs_1>
+
+    <page_homepage_sidebar_categories_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/homepage/sidebar/categories/1.less</name></action>
+        </reference>
+        <reference name="left">
+            <block type="page/html" name="page.homepage.sidebar.categories" template="page/homepage/sidebar/categories/1.phtml" />
+        </reference>
+    </page_homepage_sidebar_categories_1>
+
+    <page_homepage_login_1>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/page/newsletter/login/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/page/homepage/login/1.js</name></action>
+        </reference>
+        <reference name="root">
+            <action method="addBodyClass"><classname>cms-index-index</classname></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="page.homepage.login.lightbox" template="page/homepage/login/1.phtml" before="-" />
+        </reference>
+    </page_homepage_login_1>
+
+    <!-- product_info -->
+
+    <product_info>
+        <reference name="product.info">
+            <action method="setTemplate"><template>catalog/product/view/1.phtml</template></action>
+        </reference>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate"><template>catalog/product/view/addtocart/1.phtml</template></action>
+        </reference>
+    </product_info>
+
+    <tm_lihgtboxpro_product_info_media>
+        <reference name="product.info.media">
+            <action method="setTemplate" ifconfig="lightboxpro/general/enabled">
+                <template>catalog/product/view/media/1.phtml</template>
+            </action>
+        </reference>
+    </tm_lihgtboxpro_product_info_media>
+
+    <product_info_soldtogetherorder_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/view/additional/soldtogether/order/1.less</name></action>
+        </reference>
+        <reference name="product.info.soldtogetherorder">
+            <action method="setTemplate" ifconfig="soldtogether/general/enabled"><template>catalog/product/view/additional/soldtogether/order/1.phtml</template></action>
+        </reference>
+    </product_info_soldtogetherorder_1>
+
+    <product_info_soldtogethercustomer_1>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/carousel/1.less</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-core.min.js</name></action>
+            <action method="addItem"><type>js</type><name>jquery/jquery.jcarousel-control.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/product/carousel.js</name></action>
+        </reference>
+        <reference name="product.info.soldtogethercustomer">
+            <action method="setTemplate" ifconfig="soldtogether/general/enabled"><template>catalog/product/list/carousel/1.phtml</template></action>
+            <action method="setProductsCount"><products_count>16</products_count></action>
+            <action method="setTitle"><title>Customers Who Bought This Item Also Bought</title></action>
+        </reference>
+    </product_info_soldtogethercustomer_1>
+
+    <choose_payment_method_gwap_boleto_1>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>allpago_gwap/form/boleto/1.phtml</template></action>
+            <block type="fvets_payment/condition_allpago_boleto" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="payment/condition/allpago/boleto/1.phtml"/>
+        </reference>
+    </choose_payment_method_gwap_boleto_1>
+
+    <choose_payment_method_gwap_boleto_2>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>allpago_gwap/form/boleto/2.phtml</template></action>
+            <block type="fvets_payment/condition_allpago_boleto" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="payment/condition/allpago/boleto/2.phtml"/>
+        </reference>
+    </choose_payment_method_gwap_boleto_2>
+
+    <contacts_form_inline_3>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/contacts/form/inline/3.less</name></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="contacts.form.inline.3" as="contact_form_inline_3" template="contacts/form/inline/3.phtml" after="-" />
+        </reference>
+    </contacts_form_inline_3>
+
+    <page_html_breadcrumbs_1>
+        <reference name="breadcrumbs">
+            <action method="setTemplate">
+                <template>page/html/breadcrumbs/1.phtml</template>
+            </action>
+        </reference>
+    </page_html_breadcrumbs_1>
+
+
+    <v2_less_variables_importer>
+    </v2_less_variables_importer>
+
+    <choose_payment_method_gwap_methods_1>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </choose_payment_method_gwap_methods_1>
+</layout>

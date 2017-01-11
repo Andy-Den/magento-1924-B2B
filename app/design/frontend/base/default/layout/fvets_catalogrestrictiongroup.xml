@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_CatalogRestrictionGroup extension
+ * 
+ * @category       FVets
+ * @package        FVets_CatalogRestrictionGroup
+ * @copyright      Copyright (c) 2016
+ */
+-->
+<layout>
+    
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="fvets_catalogrestrictiongroup/catalog_product_list_catalogrestrictiongroup" name="product.info.catalogrestrictiongroups" as="product_catalogrestrictiongroups" template="fvets_catalogrestrictiongroup/catalog/product/list/catalogrestrictiongroup.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value" module="fvets_catalogrestrictiongroup"><value>Restriction Groups</value></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <catalog_customer_view>
+        <reference name="customer.info">
+            <block type="fvets_catalogrestrictiongroup/customer_list_catalogrestrictiongroup" name="customer.info.catalogrestrictiongroups" as="customer_catalogrestrictiongroups" template="fvets_catalogrestrictiongroup/customer/list/catalogrestrictiongroup.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value" module="fvets_catalogrestrictiongroup"><value>Restriction Groups</value></action>
+            </block>
+        </reference>
+    </catalog_customer_view>
+</layout>

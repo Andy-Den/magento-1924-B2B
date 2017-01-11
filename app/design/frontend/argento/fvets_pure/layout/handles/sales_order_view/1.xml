@@ -1,0 +1,11 @@
+<include_layout version="0.1.0">
+    <sales_order_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/sales_order_view/1.less</name></action>
+        </reference>
+        <reference name="sales.order.info">
+            <action method="setTemplate"><template>sales/order/info/1.phtml</template></action>
+            <action method="setChild"><name>sales_order_view</name><block>sales.order.view</block></action>
+        </reference>
+    </sales_order_view>
+</include_layout>

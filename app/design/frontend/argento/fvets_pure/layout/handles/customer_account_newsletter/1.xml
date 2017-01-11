@@ -1,0 +1,32 @@
+<include_layout version="0.1.0">
+<customer_account_newsletter>
+    <update handle="page_one_column"/>
+    <reference name="head">
+        <action method="setTitle"><title>Distribuidor Online</title></action>
+        <action method="addItem"><type>skin_css</type><name>less/handles/cms_index_index/1.less</name></action>
+        <action method="addItem"><type>skin_css</type><name>less/blocks/tm/easyslide/1.less</name></action>
+        <action method="addItem"><type>skin_css</type><name>less/blocks/blocklinks/widget/blocks/1.less</name></action>
+    </reference>
+    <reference name="content">
+        <remove name="cms_page" />
+        <block type="page/html" name="loggedout.homepage.widtget.banners" as="homepage_widget_banenrs" template="page/homepage/banners/1.phtml" before="-">
+            <action method="setSliderName"><slider_name></slider_name></action>
+        </block>
+        <block type="blocklinks/widget_html" name="loggedout.home.grid" as="home_grid" after="-"/>
+    </reference>
+
+	<reference name="head">
+		<action method="addItem"><type>js</type><name>jquery/jquery.js</name></action>
+		<action method="addItem"><type>js</type><name>jquery/jquery.featherlight.js</name></action>
+		<action method="addItem"><type>js_css</type><name>jquery/jquery.featherlight.css</name></action>
+		<action method="addItem"><type>skin_css</type><name>less/blocks/page/newsletter/login/1.less</name></action>
+	</reference>
+	<reference name="root">
+		<action method="addBodyClass"><classname>cms-index-index</classname></action>
+	</reference>
+	<reference name="content">
+		<remove name="cms_page" />
+		<block type="page/html" name="newsletter.login.lightbox" template="page/newsletter/login/1.phtml" before="-" />
+	</reference>
+</customer_account_newsletter>
+</include_layout>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_ManualIntegration>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Log/>
+            </depends>
+        </FVets_ManualIntegration>
+    </modules>
+</config>

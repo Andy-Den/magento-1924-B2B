@@ -1,0 +1,82 @@
+<?php $_code = $this->getMethodCode() ?>
+<?php $boletoOptions = $this->getAvailableTypes(); ?>
+<?php $salesrep = Mage::getSingleton('checkout/session')->getQuote()->getSalesrep(); ?>
+
+<div class="form-list" id="payment_form_<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>">
+	<div class="step step-bank-slip">
+		<div class="block-header">
+			<?php if (count($boletoOptions) > 1) : ?>
+				2 - <?php echo $this->__('Select the bank slip'); ?>
+			<?php else : ?>
+				2 - <?php echo $this->__('Bank slip'); ?>
+			<?php endif; ?>
+		</div>
+		<br />
+		<dt>
+			<ul>
+				<?php foreach ($boletoOptions as $_typeCode => $_typeName): ?>
+					<li>
+						<?php /*<div class="payment-option-<?php echo $_code ?>-<?php echo $salesrep->getId(); ?> payment-option-<?php echo $_code ?> <?php if( $this->htmlEscape($this->getInfoData('gwap_boleto_type') ) == $_typeCode || count($boletoOptions) == 1) echo 'selected'; ?>">*/ ?>
+							<label for="<?php echo $_code ?>_type_<?php echo $_typeCode ?>-<?php echo $salesrep->getId(); ?>">
+								<span class="vertical-align"> <input id="<?php echo $_code ?>_type_<?php echo $_typeCode ?>-<?php echo $salesrep->getId(); ?>" value="<?php echo $_typeCode ?>" class="validate-one-required-by-name" name="payment[<?php echo $salesrep->getId(); ?>][<?php echo $_code ?>_type]" type="radio" <?php if( $this->htmlEscape($this->getInfoData('gwap_boleto_type') ) == $_typeCode || count($boletoOptions) == 1 ) echo 'checked'; ?> /></span>
+								<?php /*<img src="<?php echo $this->getSkinUrl("images/allpago_gwap/cards/ico_{$_typeCode}.png"); ?>" alt="<?php echo $_typeName ?>" title="<?php echo $_typeName ?>" class="gwapico" />*/ ?>
+								<span class="vertical-align"> <?php echo $_typeName; ?></span>
+							</label>
+						<?php /*</div>*/ ?>
+					</li>
+				<?php endforeach; ?>
+				<li>
+					<a href="javascript://" id="allpago-boleto-more-link-<?php echo $salesrep->getId(); ?>">Mais informações <i class="fa fa-angle-down"></i></a>
+					<script>
+						jQuery(document).ready(function() {
+
+							var invoiceFormStatus = 0;
+
+							jQuery('#allpago-boleto-more-link-<?php echo $salesrep->getId(); ?>').click(function(){
+
+								if (invoiceFormStatus == 0)
+								{
+									jQuery('#invoice-form-<?php echo $salesrep->getId(); ?>').show('fast');
+									invoiceFormStatus = 1;
+									jQuery('#allpago-boleto-more-link-<?php echo $salesrep->getId(); ?> .fa').removeClass('fa-angle-down').addClass('fa-angle-up');
+								}
+								else
+								{
+									jQuery('#invoice-form-<?php echo $salesrep->getId(); ?>').hide('fast');
+									invoiceFormStatus = 0;
+									jQuery('#allpago-boleto-more-link-<?php echo $salesrep->getId(); ?> .fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+								}
+
+							});
+
+						});
+					</script>
+				</li>
+				<li>
+					<ul id="invoice-form-<?php echo $salesrep->getId(); ?>" style="display: none;">
+						<?php foreach(explode("\n", Mage::getStoreConfig('payment/gwap_boleto/checkout_information')) as $information) : ?>
+							<li><?php echo $information; ?></li>
+						<?php endforeach; ?>
+					</ul>
+					<script type="text/javascript">
+						payment_elements<?php echo $salesrep->getId(); ?> = $$('div.payment-option-<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>');
+						if( payment_elements<?php echo $salesrep->getId(); ?>.length > 0 ){
+							for(i=0;i<payment_elements<?php echo $salesrep->getId(); ?>.length;i++){
+								payment_elements<?php echo $salesrep->getId(); ?>[i].observe('click', function (){paymentSelected(this, 'div.payment-option-<?php echo $_code ?>-<?php echo $salesrep->getId(); ?>')});
+							}
+						}
+
+					</script>
+				</li>
+				<?php /*endif;*/ ?>
+			</ul>
+		</dt>
+		<br />
+	</div>
+	<br />
+	<div class="step step-payment-conditions">
+		<?php echo $this->getChildHtml('gwap_boleto_condition', false); ?>
+		<br />
+	</div>
+</div>
+

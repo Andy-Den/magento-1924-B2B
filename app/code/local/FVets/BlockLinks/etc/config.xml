@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_BlockLinks>
+            <version>1.0.0</version>
+        </FVets_BlockLinks>
+    </modules>
+    <global>
+        <helpers>
+            <blocklinks>
+                <class>FVets_BlockLinks_Helper</class>
+            </blocklinks>
+        </helpers>
+        <blocks>
+            <blocklinks>
+                <class>FVets_BlockLinks_Block</class>
+            </blocklinks>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <blocklinks>
+                    <file>blocklinks.xml</file>
+                </blocklinks>
+            </updates>
+        </layout>
+    </frontend>
+</config>

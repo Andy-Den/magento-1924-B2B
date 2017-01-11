@@ -1,0 +1,161 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_WarehousePlus
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<?php $helper               = $this->helper('warehouse'); ?>
+<?php $element              = $this->getElement(); ?>
+<?php $elementHtmlId        = $element->getHtmlId(); ?>
+<?php $elementName          = $element->getName(); ?>
+<?php $elementClass         = $element->getClass(); ?>
+<?php $baseCurrencyCode     = $this->getStoreBaseCurrencyCode(); ?>
+<?php $scope                = $this->getPriceScopeStr(); ?>
+
+<tr>
+    <td class="label"><?php echo $element->getLabel() ?></td>
+    <td id="batch_price_grid" colspan="10" class="grid batch-price-grid">
+    <p>
+        <input type="checkbox" id="recalculate_batch_price" name="recalculate_batch_price" value="1" onclick="" class="checkbox"/>
+        &nbsp;<?php echo $helper->__('Recalculate by') ?>&nbsp;
+        <select id="recalculate_batch_price_currency" name="recalculate_batch_price_currency">
+            <?php foreach ($this->getCurrencyCodes() as $currency): ?>
+            <option value="<?php echo $currency ?>"<?php if ($currency == $baseCurrencyCode): ?> selected="selected"<?php endif; ?>>
+                <?php echo $currency ?>
+            </option>
+            <?php endforeach ?>
+        </select>
+    </p>
+    <table cellspacing="0" class="data border" id="batch_price_table">
+        <col width="175"/>
+        <col width="55" />
+        <col width="120" />
+        <col width="65" />
+        <thead>
+            <tr class="headings">
+                <th><?php echo $helper->__('Warehouse'); ?></th>
+                <th><?php echo $helper->__('Currency'); ?></th>
+                <th>
+                    <?php echo $helper->__('Price'); ?><br/>
+                    <?php echo $helper->__($scope) ?>
+                </th>
+                <th>
+                    <?php echo $helper->__('Default Price'); ?><br/>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="<?php echo $elementHtmlId ?>_container">
+            <?php foreach ($this->getValues() as $index => $item) : ?>
+				<?php $stockId          = $item['stock_id']; ?>
+				<?php $currency         = $item['currency']; ?>
+				<?php $price            = $item['price']; ?>
+				<?php $rate             = $item['rate']; ?>
+				<?php $useDefault       = (int) $item['use_default']; ?>
+				<?php $defaultPrice     = $item['default_price']; ?>
+				<?php $stores 			= $helper->getWarehouseByStockId($stockId)->getStores(); ?>
+				<?php $rule = Mage::helper('amrolepermissions')->currentRule(); ?>
+				<?php $cssDisplay = 'style="display:none"'; ?>
+				<?php foreach ($stores as $store)
+				{
+					if($rule->storeAccessible($store))
+					{
+						$cssDisplay = '';
+						break;
+					}
+				}
+				?>
+				<tr <?php echo $cssDisplay; ?>>
+					<td>
+						<input class="stock" type="hidden" name="<?php echo $elementName ?>[<?php echo $index ?>][stock_id]" value="<?php echo $stockId ?>"/>
+						<strong><?php echo $helper->getWarehouseTitleByStockId($stockId) ?></strong>
+					</td>
+					<td>
+						<?php if (count($rate)) : ?>
+						<?php foreach ($rate as $_currency => $_rate) : ?>
+						<input class="rate <?php echo $_currency ?>-rate" type="hidden" name="<?php echo $elementName ?>[<?php echo $index ?>][rate][<?php echo $_currency ?>]" value="<?php echo $_rate ?>"/>
+						<?php endforeach; ?>
+						<?php endif; ?>
+						<input class="currency" type="hidden" name="<?php echo $elementName ?>[<?php echo $index ?>][currency]" value="<?php echo $currency ?>"/>
+						<strong><?php echo $currency ?></strong>
+					</td>
+					<td class="nobr">
+						<input class="<?php echo $elementClass ?> price validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $index ?>][price]" value="<?php echo $price ?>"<?php if ($useDefault) : ?> disabled="disabled"<?php endif; ?> onchange="currencyPriceControl.changePrice(event);"/>&nbsp;
+						<input type="checkbox" name="<?php echo $elementName ?>[<?php echo $index ?>][use_default]" value="1"<?php if ($useDefault) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+						<label class="normal"><?php echo $helper->__('Default') ?></label>
+					</td>
+					<td class="a-right">
+						<?php echo $defaultPrice ?>
+					</td>
+				</tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+<script type="text/javascript">
+//<![CDATA[
+var currencyPriceControl = {
+
+    changePrice: function(event) {
+        if ($('recalculate_batch_price').checked) {
+            var baseCurrency = $('recalculate_batch_price_currency').value;
+            var currentTr = Event.findElement(event, 'tr');
+            if (currentTr) {
+                var currentCurrency = null;
+                Element.select(currentTr, '.currency').each(function(elem){ currentCurrency = elem.value });
+                var currentStockId = null;
+                Element.select(currentTr, '.stock').each(function(elem){ currentStockId = elem.value });
+                if (baseCurrency && (baseCurrency == currentCurrency)) {
+                    var basePrice = null;
+                    Element.select(currentTr, '.price').each(function(elem){ basePrice = elem.value });
+                    if (basePrice) {
+                        var table = $('batch_price_table');
+                        if (table) {
+                            Element.select(table, 'tr').each(function(trElem) {
+                                var currency = null;
+                                Element.select(trElem, '.currency').each(function(elem){ currency = elem.value });
+                                var stockId = null;
+                                Element.select(trElem, '.stock').each(function(elem){ stockId = elem.value });
+                                if (
+                                    currency && (currentCurrency != currency) && 
+                                    stockId && (currentStockId == stockId)
+                                ) {
+                                    var rate = null;
+                                    Element.select(trElem, '.' + baseCurrency + '-rate').each(function(elem){ rate = elem.value });
+                                    if (rate) {
+                                        Element.select(trElem, '.price').each(function(elem){ 
+                                            var price = Number(basePrice) * Number(rate);
+                                            if (price) {
+                                                price = Math.round(price * 100) / 100;
+                                                elem.value = String(price);
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+//]]>
+</script>    
+    </td>
+</tr>

@@ -1,0 +1,313 @@
+@import "../../mixins";
+
+.catalog-product-view
+{
+  .product-view
+  {
+    .product-essential
+    {
+      margin-bottom:30px;
+
+      .product-shop
+      {
+        margin-left: 45%;
+        .product-sku,
+        .product-rating
+        {
+          float:left;
+        }
+
+        .product-sku
+        {
+          padding: 7px 3% 7px 0;
+          border-right: @defaultBorder;
+        }
+
+        .product-rating
+        {
+          margin-left: 3%;
+          min-width:200px;
+          padding: 7px 3% 7px 0;
+          .rating-box
+          {
+            margin-right: 5%;
+          }
+        }
+
+        .product-options-wrapper {
+          .last {
+            dt, dd {
+              float:left;
+            }
+          }
+        }
+
+        .add-to-cart-wrapper, .product-options-bottom {
+          .price-box {
+            max-width: 27%;
+            line-height: 2;
+
+            .old-price {
+              font-size: 12px;
+            }
+            .special-price {
+              font-size: 16px;
+            }
+          }
+          .add-to-links {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .product-collateral
+    {
+      .easytabs-wrapper
+      {
+        li
+        {
+
+          background: none;
+          border: none;
+          box-shadow:none;
+
+          &.active
+          {
+            background: none;
+            border:none;
+
+            a
+            {
+              .featuredLink();
+            }
+          }
+          a
+          {
+            .link();
+          }
+        }
+
+        .easytabs-content
+        {
+
+          border:@defaultBorder;
+          border-left: 0;
+          border-right: 0;
+          background: none;
+
+        }
+      }
+
+      .box-collateral
+      {
+        margin-top:50px;
+      }
+
+      .carousel-products
+      {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-product-view {
+    .main {
+      width: 95% !important;
+    }
+  }
+
+  .product-collateral {
+    .box-collateral {
+      .amazonstyle-images {
+        li {
+          .image-sum {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .carousel-products {
+    .block-content {
+      .jcarousel {
+        .products-grid {
+          li {
+            .price-box {
+              max-width: 100% !important;
+              height: auto !important;
+              width: 100% !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .add-to-box {
+    width: 100%;
+    .add-to-cart {
+      width: 107%;
+      min-width: 0 !important;
+    }
+  }
+  .jcarousel {
+    margin: 0 auto !important;
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalog-product-view {
+    .main-container {
+      .product-view {
+        .product-img-box {
+          width: 100% !important;
+          display: block !important;
+          float: left !important;
+          .highslide-gallery {
+            .prolabel-wrapper {
+              width: 100% !important;
+            }
+            .more-views {
+              display: none;
+            }
+          }
+        }
+        #product_addtocart_form {
+          width: 95%;
+          display: block !important;
+          float: none !important;
+          margin: 0 auto;
+
+          .product-shop {
+            margin: 0 auto;
+            padding-top: 0 !important;
+
+            .add-to-cart-wrapper {
+              .add-to-box {
+                width: 100%;
+                float: none;
+                .add-to-cart {
+                  min-width: auto;
+                  width: 100%;
+                  .text {
+                    display: none;
+                  }
+                  .btnAddCart {
+                    button {
+                      margin-left: 2%;
+                      margin-top: -2%;
+                    }
+                  }
+                }
+              }
+            }
+
+            .product-sku, .product-rating, .product-rating, .short-description {
+              display: none;
+            }
+          }
+        }
+      }
+      .product-collateral {
+        .amazonstyle-images {
+          .image-sum {
+            display: none;
+          }
+        }
+        .carousel-products {
+          .block-content {
+            .jcarousel {
+              width: 100% !important;
+              .products-grid {
+                li {
+                  width: 173px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .catalog-product-view {
+    min-width: 320px;
+    .main-container {
+      .product-view {
+        .product-img-box {
+          width: 100% !important;
+          display: block !important;
+          float: left !important;
+          .highslide-gallery {
+            .prolabel-wrapper {
+              width: 100% !important;
+            }
+            .more-views {
+              display: none;
+            }
+          }
+        }
+        #product_addtocart_form {
+          width: 95%;
+          display: block !important;
+          float: none !important;
+          margin: 0 auto;
+
+          .product-shop {
+            margin: 0 auto;
+            padding-top: 0 !important;
+
+            .add-to-cart-wrapper {
+              .add-to-box {
+                width: 100%;
+                float: none;
+                .add-to-cart {
+                  min-width: auto;
+                  width: 100%;
+                  .text {
+                    display: none;
+                  }
+                  .btnAddCart {
+                    button {
+                      margin-left: 2%;
+                      margin-top: -2%;
+                    }
+                  }
+                }
+              }
+            }
+
+            .product-sku, .product-rating, .product-rating, .short-description {
+              display: none;
+            }
+          }
+        }
+      }
+      .product-collateral {
+        .amazonstyle-images {
+          .image-sum {
+            display: none;
+          }
+        }
+      }
+      .carousel-products {
+        .products-grid {
+          li {
+            &.item {
+              width: 212px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

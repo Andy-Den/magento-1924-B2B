@@ -1,0 +1,27 @@
+<include_layout version="0.1.0">
+    <checkout_cart_index>
+        <update handle="page_one_column"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/checkout_cart_index/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/checkout.js</name></action>
+        </reference>
+        <reference name="checkout.cart">
+            <action method="setTemplate"><template>checkout/cart/1.phtml</template></action>
+            <remove name="checkout.cart.shipping" />
+            <remove name="checkout.cart.methods.multishipping" />
+            <action method="addItemRender">
+                <type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/item/default/1.phtml</template>
+            </action>
+        </reference>
+        <reference name="checkout.cart.methods.onepage">
+            <action method="setTemplate"><template>checkout/cart/onepage/link/1.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.coupon">
+            <action method="setTemplate"><template>checkout/cart/coupon/1.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.totals">
+            <block type="tax/checkout_subtotal" name="subtotal_total_renderer" template="tax/checkout/subtotal/1.phtml"/>
+            <block type="tax/checkout_grandtotal" name="grand_total_total_renderer" template="tax/checkout/grandtotal/1.phtml"/>
+        </reference>
+    </checkout_cart_index>
+</include_layout>

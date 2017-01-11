@@ -1,0 +1,231 @@
+/**
+* Constants
+*/
+
+@skinUrl:"/skin/frontend/argento/fvets_pure/";
+@iconsUrl:"@{skinUrl}images/icons.png";
+
+//Colors
+@defaultColor1:#262626;
+@defaultColor2:#00948f;
+@defaultColor3:#f1f1f1;
+@defaultColor4:#8f8f8f;
+@defaultColor5:#768dc1;
+@defaultColor6:#e6e6e7;
+@defaultColor7:#fff;
+
+//Text
+
+@defaultTextColor:@defaultColor1;
+@defaultTextSize:12px;
+@defaultTextFontFamily:Helvetica, Arial, sans-serif;
+
+//Link
+
+@defaultLinkColor:@defaultTextColor;
+@defaultLinkSize:@defaultTextSize;
+@defaultLinkDecoration:none;
+
+@defaultLinkHoverColor:@defaultColor5;
+@defaultLinkHoverSize:@defaultTextSize;
+@defaultLinkHoverDecoration:underline;
+
+//Featured Link
+
+@defaultFeaturedLinkColor:@defaultColor5;
+@defaultFeaturedLinkSize:14px;
+@defaultFeaturedLinkDecoration:none;
+@defaultFeaturedLinkWeight:normal;
+
+@defaultFeaturedLinkHoverColor:@defaultFeaturedLinkColor;
+@defaultFeaturedLinkHoverSize:@defaultFeaturedLinkSize;
+@defaultFeaturedLinkHoverDecoration:underline;
+@defaultFeaturedLinkHoverWeight:@defaultFeaturedLinkWeight;
+
+//Border
+
+@defaultBorderRadius: 3px;
+@defaultBorderBoxColor: @defaultColor6;
+
+@defaultBorder: 1px solid @defaultBorderBoxColor;
+
+//Backgrounds
+
+@defaultBackgroundColor1:@defaultColor2;
+@defaultBackgroundColor2:@defaultColor3;
+@defaultBackgroundColor3:@defaultColor4;
+@defaultBackgroundColor4:@defaultColor5;
+@defaultBackgroundColor5:rgba(0,0,0,0.6);
+@defaultBackgroundColor6:@defaultColor7;
+
+//Shadow
+@defaultBoxShadowDirection:3px 3px;
+@defaultBoxShadowSmooth:  3px 0;
+@defaultBoxShadowColor: rgba(0, 0, 0, 0.5);
+@defaultBoxShadow:@defaultBoxShadowDirection @defaultBoxShadowSmooth @defaultBoxShadowColor;
+
+
+/**
+* Titles
+*/
+
+@defaultTitleColor:@defaultColor5;
+@defaultTitleFontWeight:bold;
+@defaultTitleFontFamily:@defaultTextFontFamily;
+
+@titleH1FontFamily:@defaultTitleFontFamily;
+@titleH1Color:@defaultTitleColor;
+@titleH1FontWeight:@defaultTitleFontWeight;
+@titleH1FontSize:30px;
+@titleH1TextTransform:none;
+
+@titleH2FontFamily:@defaultTitleFontFamily;
+@titleH2Color:@defaultTitleColor;
+@titleH2FontWeight:bold;
+@titleH2FontSize:23px;
+@titleH2TextTransform:none;
+
+@titleH3FontFamily:@defaultTitleFontFamily;
+@titleH3Color:@defaultTitleColor;
+@titleH3FontWeight:bold;
+@titleH3FontSize:18px;
+@titleH3TextTransform:none;
+
+@titleH4FontFamily:@defaultTitleFontFamily;
+@titleH4Color:@defaultTitleColor;
+@titleH4FontWeight:@defaultTitleFontWeight;
+@titleH4FontSize:14px;
+@titleH4TextTransform:uppercase;
+
+@titleH5FontFamily:@defaultTitleFontFamily;
+@titleH5Color:@defaultTextColor;
+@titleH5FontWeight:@defaultTitleFontWeight;
+@titleH5FontSize:14px;
+@titleH5TextTransform:none;
+
+@titleH6FontFamily:@defaultTitleFontFamily;
+@titleH6Color:@defaultTitleColor;
+@titleH6FontWeight:@defaultTitleFontWeight;
+@titleH6FontSize:12px;
+@titleH6TextTransform:none;
+
+
+/**
+* Buttons
+*/
+
+@buttonBorderRadius: 3px;
+@buttonBoxShadow:2px 2px 0 0 #000000;
+
+// Add to cart normal
+@buttonBtnCartGradientStart:@defaultColor5;
+@buttonBtnCartGradientEnd:@buttonBtnCartGradientStart;
+@buttonBtnCartTextShadow:none;
+@buttonBtnCartBoxShadow:@buttonBoxShadow;
+@buttonBtnCartWeight:bold;
+@buttonBtnCartColor:#fff;
+
+@buttonHoverBtnCartGradientStart:@buttonBtnCartGradientStart;
+@buttonHoverBtnCartGradientEnd:darken(@buttonHoverBtnCartGradientStart, 10%);
+@buttonHoverBtnCartTextShadow:none;
+@buttonHoverBtnCartBoxShadow:@buttonBtnCartBoxShadow;
+@buttonHoverBtnCartWeight:@buttonBtnCartWeight;
+@buttonHoverBtnCartColor:@buttonBtnCartColor;
+
+// Do to action normal
+@buttonDoToActionGradientStart:@defaultColor4;
+@buttonDoToActionGradientEnd:@buttonDoToActionGradientStart;
+@buttonDoToActionTextShadow:none;
+@buttonDoToActionBoxShadow:@buttonBoxShadow;
+@buttonDoToActionWeight:bold;
+@buttonDoToActionColor:#fff;
+
+// Do to action hover
+@buttonHoverDoToActionGradientStart:@defaultColor4;
+@buttonHoverDoToActionGradientEnd:darken(@buttonHoverDoToActionGradientStart, 10%);
+@buttonHoverDoToActionTextShadow:@buttonDoToActionTextShadow;
+@buttonHoverDoToActionBoxShadow:@buttonDoToActionBoxShadow;
+@buttonHoverDoToActionWeight:@buttonDoToActionWeight;
+@buttonHoverDoToActionColor:@buttonDoToActionColor;
+
+// Do to action disabled
+@buttonDisabledDoToActionGradientStart:lighten(@defaultColor4, 25%);
+@buttonDisabledDoToActionGradientEnd:@buttonDisabledDoToActionGradientStart;
+@buttonDisabledDoToActionTextShadow:@buttonDoToActionTextShadow;
+@buttonDisabledDoToActionBoxShadow:2px 2px 0 0 darken(@buttonDisabledDoToActionGradientStart, 20%);
+@buttonDisabledDoToActionWeight:@buttonDoToActionWeight;
+@buttonDisabledDoToActionColor:@buttonDoToActionColor;
+
+// Action normal
+@buttonActionGradientStart:#00958f;
+@buttonActionGradientEnd:#00958f;
+@buttonActionTextShadow:none;
+@buttonActionBoxShadow:@buttonBoxShadow;
+@buttonActionWeight:bold;
+@buttonActionColor:#fff;
+@buttonActionFontSize:12px;
+@buttonActionTextTransform:uppercase;
+
+// Action hover
+@buttonHoverActionGradientStart:@defaultColor2;
+@buttonHoverActionGradientEnd:#017772;
+@buttonHoverActionTextShadow:none;
+@buttonHoverActionBoxShadow:@buttonBoxShadow;
+@buttonHoverActionWeight:bold;
+@buttonHoverActionColor:#fff;
+@buttonHoverActionFontSize:12px;
+@buttonHoverActionTextTransform:@buttonActionTextTransform;
+
+// Less Action normal
+@buttonLessActionGradientStart:@defaultColor5;
+@buttonLessActionGradientEnd:@defaultColor5;
+@buttonLessActionTextShadow:none;
+@buttonLessActionBoxShadow:@buttonBoxShadow;
+@buttonLessActionWeight:bold;
+@buttonLessActionColor:#fff;
+@buttonLessActionFontSize:12px;
+@buttonLessActionTextTransform:uppercase;
+
+// Less LessAction hover
+@buttonHoverLessActionGradientStart:@defaultColor5;
+@buttonHoverLessActionGradientEnd:darken(@defaultColor5, 10%);
+@buttonHoverLessActionTextShadow:@buttonLessActionTextShadow;
+@buttonHoverLessActionBoxShadow:@buttonLessActionBoxShadow;
+@buttonHoverLessActionWeight:@buttonLessActionWeight;
+@buttonHoverLessActionColor:@buttonLessActionColor;
+@buttonHoverLessActionFontSize:@buttonLessActionFontSize;
+@buttonHoverLessActionTextTransform:@buttonLessActionTextTransform;
+
+// SuperAction normal
+@buttonSuperActionGradientStart:#00958f;
+@buttonSuperActionGradientEnd:#00958f;
+@buttonSuperActionTextShadow:none;
+@buttonSuperActionBoxShadow:@buttonBoxShadow;
+@buttonSuperActionWeight:bold;
+@buttonSuperActionColor:#fff;
+@buttonSuperActionFontSize:18px;
+@buttonSuperActionTextTransform:uppercase;
+
+// SuperAction hover
+@buttonHoverSuperActionGradientStart:@defaultColor2;
+@buttonHoverSuperActionGradientEnd:#017772;
+@buttonHoverSuperActionTextShadow:none;
+@buttonHoverSuperActionBoxShadow:@buttonSuperActionBoxShadow;
+@buttonHoverSuperActionWeight:bold;
+@buttonHoverSuperActionColor:#fff;
+@buttonHoverSuperActionFontSize:18px;
+@buttonHoverSuperActionTextTransform:@buttonSuperActionTextTransform;
+
+/**
+* Forms
+*/
+
+@formInputBackground:none;
+@formInputBorder:@defaultBorder;
+
+@defaultPageWidth:950px;
+@fullPageWidth:100%;
+@contentPageWidth:@defaultPageWidth;
+
+// Footer
+@defaultFooterBackgroundColor:@defaultBackgroundColor2;

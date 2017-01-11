@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <customdash>
+                                        <title>FVets - Dashboard</title>
+                                        <sort_order>900</sort_order>
+                                    </customdash>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+                <children>
+                    <customdash>
+                        <title>FVets - Dashboard Ajax</title>
+                        <sort_order>900</sort_order>
+                    </customdash>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

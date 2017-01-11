@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Updater>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Innoexts_WarehousePlus />
+            </depends>
+        </FVets_Updater>
+    </modules>
+</config>

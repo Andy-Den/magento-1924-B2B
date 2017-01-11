@@ -1,0 +1,188 @@
+<include_layout version="0.1.0">
+    <onestepcheckout_index_index>
+        <update handle="page_one_column" />
+        <remove name="header"></remove>
+        <remove name="top_toolbar"></remove>
+
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>onestepcheckout/js/onestepcheckout.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/handles/onestepcheckout_index_index/3.js</name></action>
+
+            <action method="removeItem"><type>skin_css</type><name>onestepcheckout/onestepcheckout.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/theme.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/onestepcheckout_index_index/3.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/checkout/2.less</name></action>
+
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customer_locator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/ajaxsearch.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabel.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/prolabels-tooltip.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/css/easyslide.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/highlight.css </name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/styles-ee.css</name></action>
+
+        </reference>
+
+        <reference name="onestepcheckout.checkout">
+            <action method="setIsSplitCheckout">
+                <value>true</value>
+            </action>
+            <action method="setTemplate">
+                <template>checkoutsplit/checkout/1.phtml</template>
+            </action>
+            <block type="fvets_checkoutsplit/onestepcheckout_split" name="checkout.split" as="checkout_split" template="checkoutsplit/split/1.phtml">
+                <block type="fvets_checkoutsplit/onestepcheckout_split_steps" name="checkout.split.step1" as="checkout_split_step1" template="checkoutsplit/split/step1/1.phtml">
+                    <action method="setStep">
+                        <step>1</step>
+                    </action>
+                    <block type="fvets_checkoutsplit/onestepcheckout_split_steps" name="checkout.split.step2" as="checkout_split_step2" template="checkoutsplit/split/step2/1.phtml">
+                        <action method="setStep">
+                            <step>2</step>
+                        </action>
+                        <block type="fvets_checkoutsplit/onestepcheckout_split_summary" as="split_summary" name="onestepcheckout.split.summary" template="checkoutsplit/summary/1.phtml"/>
+                        <block type="fvets_checkoutsplit/onestepcheckout_summary" as="summary_totals" name="onestepcheckout.summary.totals" template="checkoutsplit/summary/totals/1.phtml"/>
+                    </block>
+                    <block type="checkout/onepage_shipping_method_available" name="choose-shipping-method" template="onestepcheckout/shipping_method.phtml" as="choose-shipping-method"/>
+                    <block type="onestepcheckout/onepage_payment_methods" name="choose-payment-method" template="checkoutsplit/payment/method/1.phtml" as="choose-payment-method">
+                        <action method="setMethodFormTemplate">
+                            <method>purchaseorder</method>
+                            <template>payment/form/purchaseorder.phtml</template>
+                        </action>
+                    </block>
+                </block>
+                <block type="fvets_checkoutsplit/onestepcheckout_split_steps" name="checkout.split.minimun.value" as="checkout_split_minimun_value" template="checkoutsplit/split/minimum_value/1.phtml">
+                </block>
+            </block>
+            <block type="fvets_checkoutsplit/checkout_salesrep" name="sales.rep.checkout" as="sales_rep_checkout" template="checkoutsplit/salesrep/1.phtml"/>
+            <block type="onestepcheckout/coupon_coupon" name="coupon" as="coupon" template="checkoutsplit/checkout/coupon/1.phtml"/>
+
+        </reference>
+
+        <reference name="onestepcheckout.billing.address">
+            <action method="setTemplate"><template>checkoutsplit/checkout/billing_fields/1.phtml</template></action>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+    </onestepcheckout_index_index>
+
+    <onestepcheckout_ajax_save_billing>
+        <reference name="billing">
+            <action method="setTemplate"><template>onestepcheckout/billing/1.phtml</template></action>
+            <block type="onestepcheckout/fields" as="billing_address" name="onestepcheckout.billing.address" template="checkoutsplit/checkout/billing_fields/1.phtml" />
+        </reference>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>checkoutsplit/payment/method/1.phtml</template></action>
+        </reference>
+        <reference name="onestepcheckout.summary">
+            <action method="setTemplate"><template>onestepcheckout/summary/2.phtml</template></action>
+        </reference>
+        <update handle="choose_payment_method_gwap_boleto_2"></update>
+    </onestepcheckout_ajax_save_billing>
+
+    <onestepcheckout_ajax_set_methods_separate>
+        <reference name="onestepcheckout.summary">
+            <action method="setTemplate"><template>onestepcheckout/summary/2.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </onestepcheckout_ajax_set_methods_separate>
+
+    <onestepcheckout_ajax_paymentrefresh>
+        <reference name="choose-payment-method">
+            <action method="setTemplate"><template>onestepcheckout/payment_method/1.phtml</template></action>
+        </reference>
+    </onestepcheckout_ajax_paymentrefresh>
+
+    <checkoutsplit_ajax_add_coupon>
+        <reference name="content">
+            <block type="onestepcheckout/coupon_coupon" name="coupon" as="coupon" template="checkoutsplit/checkout/coupon/1.phtml"/>
+        </reference>
+    </checkoutsplit_ajax_add_coupon>
+
+    <checkoutsplit_ajax_get_checkout_next_step>
+        <block type="fvets_checkoutsplit/onestepcheckout_split_steps" name="checkout.split.step2" as="checkout_split_step2" template="checkoutsplit/split/step2/1.phtml">
+            <action method="setStep"><step>2</step></action>
+            <block type="fvets_checkoutsplit/onestepcheckout_split_summary" as="split_summary" name="onestepcheckout.split.summary" template="checkoutsplit/summary/1.phtml" />
+            <block type="fvets_checkoutsplit/onestepcheckout_summary" as="summary_totals" name="onestepcheckout.summary.totals" template="checkoutsplit/summary/totals/1.phtml" />
+        </block>
+    </checkoutsplit_ajax_get_checkout_next_step>
+
+    <checkoutsplit_ajax_disable_checkout_order>
+        <block type="fvets_checkoutsplit/onestepcheckout_split_steps" name="checkout.split.step1" as="checkout_split_step1" template="checkoutsplit/split/step1/1.phtml">
+            <action method="setStep"><step>1</step></action>
+            <block type="fvets_checkoutsplit/onestepcheckout_split_summary" as="split.summary.resume" name="onestepcheckout.split.summary.resume" template="checkoutsplit/summary/resume/1.phtml" />
+            <block type="checkout/onepage_shipping_method_available" name="choose-shipping-method" template="onestepcheckout/shipping_method.phtml" as="choose-shipping-method" />
+            <block type="onestepcheckout/onepage_payment_methods" name="choose-payment-method" template="checkoutsplit/payment/method/1.phtml" as="choose-payment-method">
+                <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+            </block>
+        </block>
+        <reference name="choose-payment-method-gwap_boleto">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_boleto.condition" as="gwap_boleto_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_cc">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_cc.condition" as="gwap_cc_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+
+        <reference name="choose-payment-method-gwap_deposito">
+            <action method="setTemplate"><template>checkoutsplit/allpago_gwap/form/1.phtml</template></action>
+            <block type="fvets_checkoutsplit/payment_condition_allpago_abstract" name="choose-payment-method-gwap_deposito.condition" as="gwap_deposito_condition" template="checkoutsplit/allpago_gwap/condition/1.phtml"/>
+        </reference>
+    </checkoutsplit_ajax_disable_checkout_order>
+
+    <checkoutsplit_ajax_success>
+        <block type="fvets_checkoutsplit/checkout_onepage_success" name="checkout.split.success" as="checkout_split_success" template="checkoutsplit/checkout/success/mini/1.phtml">
+
+        </block>
+    </checkoutsplit_ajax_success>
+
+</include_layout>

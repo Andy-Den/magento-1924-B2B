@@ -1,0 +1,23 @@
+.category-fornecedores .main-container .vendors h5{
+    font-size: 16px;
+    font-weight: bold;
+    color:#262626;
+}
+
+.category-fornecedores .main-container .vendors ul{
+    list-style: none;
+    margin-left: 0;
+}
+
+.category-fornecedores .main-container .vendors ul li a{
+    color:#262626;
+    display: block;
+    padding: 5px 10px;
+}
+
+.category-fornecedores .main-container .vendors ul li a:hover{
+    background: #00afe3;
+    color:white;
+    font-weight: bold;
+    text-decoration: none;
+}

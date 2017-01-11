@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <promo>
+            <children>
+                <importpromotions translate="title" module="fvets_importpromotions">
+                    <title>Integravet - Import Promotions</title>
+                    <action>adminhtml/system_convert_profile</action>
+                </importpromotions>
+            </children>
+        </promo>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <promo>
+                        <children>
+                            <importpromotions translate="title" module="fvets_importpromotions">
+                                <title>Integravet - Import Promotions</title>
+                            </importpromotions>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,23 @@
+<div class="salesrep-totals">
+	<?php if ($this->canApplyMsrp()): ?>
+		<div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
+	<?php else: ?>
+		<table id="shopping-cart-totals-table">
+			<col />
+			<col width="1" />
+			<tbody>
+			<?php echo 'Maiores detalhes no final da página.'; ?>
+			</tbody>
+			<tfoot>
+			<?php echo $this->renderTotals('footer'); ?>
+			</tfoot>
+		</table>
+	<?php endif; ?>
+	<div class="clear"></div>
+</div>
+
+<script>
+	jQuery(document).ready(function() {
+		jQuery('#<?php echo $this->getParentBlock()->getBlockMessageId(); ?>').append('<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>');
+	})
+</script>

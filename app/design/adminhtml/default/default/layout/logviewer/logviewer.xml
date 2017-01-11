@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <logviewer_adminhtml_index_index>
+        <reference name="content">
+            <block type="logviewer/adminhtml_viewer" name="logviewer.viewer" />
+        </reference>
+    </logviewer_adminhtml_index_index>
+    <logviewer_adminhtml_index_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>logviewer/linedtextarea.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>logviewer/linedtextarea.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>logviewer/load.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="logviewer/adminhtml_viewer_view" name="logviewer.view" />
+        </reference>
+    </logviewer_adminhtml_index_view>
+</layout>

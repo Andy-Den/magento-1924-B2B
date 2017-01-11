@@ -1,0 +1,72 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $currentUser 		= Mage::getSingleton('admin/session')->getUser();	?>
+<?php $userCollections 	= Mage::getModel('admin/user')->getCollection()->load(); ?>
+<?php 
+$productUserId	= '';
+if($currentProductId = Mage::registry('current_product')->getId()){
+	$dbConnection 	= Mage::getSingleton('core/resource')->getConnection('core_write');
+	$tableName		= Mage::getConfig()->getTablePrefix()."catalog_product_entity";
+	$checkResult	= $dbConnection->query("SELECT * FROM ".$tableName);
+	$checkRow		= $checkResult->fetch(PDO::FETCH_ASSOC);
+	$checkArr		= array_key_exists('vender_id', $checkRow);	
+	if($checkArr == false){	$dbConnection->query("ALTER TABLE ".$tableName." ADD vender_id INT(11)"); }
+	$result			= $dbConnection->query("SELECT vender_id FROM ".$tableName." WHERE entity_id='".$currentProductId."'");
+	$row			= $result->fetch(PDO::FETCH_ASSOC);
+	$productUserId	= $row['vender_id'];
+}
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Vendor') ?></h4>
+    </div>
+    <fieldset>
+        <legend><?php echo Mage::helper('catalog')->__('Vendor') ?></legend>
+        <table cellspacing="0" class="form-list" id="table_cataloginventory">
+        <tr>
+            <td class="label"><label for="inventory_manage_stock"><?php echo Mage::helper('catalog')->__('Assign Vendor') ?></label></td>
+            <td class="value">
+			<select id="" name="product[vender_id]" style="background-color: rgb(242, 242, 242); height: 25px;">
+                <?php if($currentUser->getUsertype() != 'vender_user'){ ?>
+					<option value="" style="height: 25px; background-color: rgb(230, 230, 230); margin-top: 5px;">Please Select Vender</option>		
+					<?php foreach($userCollections as $userCollection){ ?>
+						<?php if($userCollection->getUsertype() != NULL && $userCollection->getUsertype() == 'vender_user'){ ?>
+							<option value="<?php echo $userCollection->getUserId(); ?>"<?php if($productUserId){ if($productUserId == $userCollection->getUserId()){ echo "selected=selected"; } } ?> style="height: 25px; background-color: rgb(230, 230, 230); margin-top: 5px;"><?php echo $userCollection->getFirstname().'&nbsp;'.$userCollection->getLastname().'&nbsp;['.$userCollection->getEmail().']'; ?></option>
+						<?php } ?>
+					<?php } ?>
+				<?php } else { ?>
+					<?php if($currentUser->getUsertype() == 'vender_user'){ ?>
+						<option value="<?php echo $currentUser->getUserId(); ?>"  style="height: 25px; background-color: rgb(230, 230, 230); margin-top: 5px;" selected="selected"><?php echo $currentUser->getFirstname().'&nbsp;'.$currentUser->getLastname().'&nbsp;['.$currentUser->getEmail().']'; ?></option>
+					<?php } ?>
+				<?php } ?>
+			</select>            
+			<td class="value scope-label"><?php echo Mage::helper('adminhtml')->__('[GLOBAL]') ?></td>
+        </tr>
+		</table>
+    </fieldset>
+</div>
+ 

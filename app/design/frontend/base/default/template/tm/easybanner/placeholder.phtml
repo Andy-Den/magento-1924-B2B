@@ -1,0 +1,34 @@
+<?php
+    $_banners = $this->getBanners();
+    if (!$_banners || !count($_banners)):
+        return;
+    endif;
+
+    $_isPopupMode = $this->getPlaceholder()->isPopupMode();
+    $_collection = $this->getBannerCollection();
+    $_conditions = array();
+?>
+
+<div class="box box-easybanner-placeholder <?php echo $this->getClassName() ?>"<?php echo $_isPopupMode ? ' style="display:none;"' : ''; ?>>
+    <div class="easybanner-placeholder-wrapper col2-set">
+    <?php $count = 1; foreach ($_banners as $_bannerData): ?>
+        <?php
+            $banner = $_collection->getItemById($_bannerData['banner_id']);
+            $bannerBlock = Mage::helper('easybanner/banner')->load($_bannerData);
+            $_id = $bannerBlock->getHtmlId();
+            if ($_isPopupMode) :
+                $_conditions[$_id] = $banner->getJsConditions();
+            endif;
+        ?>
+        <div class="col-<?php echo $count; ?> easybanner-banner <?php echo $bannerBlock->getClassName() ?>" <?php echo $_isPopupMode ? " id='{$_id}'" : '' ?>>
+            <?php echo $bannerBlock->toHtml() ?>
+        </div>
+    <?php $count++; endforeach ?>
+    </div>
+</div>
+
+<?php if ($_isPopupMode) : ?>
+<script type="text/javascript">
+Easybanner.Rule.addConditions(<?php echo Mage::helper('core')->jsonEncode($_conditions); ?>);
+</script>
+<?php endif ?>

@@ -1,0 +1,148 @@
+<?php
+$order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$payment = $order->getPayment();
+$gwap = Mage::getModel('gwap/order')->load($payment->getOrder()->getId(), 'order_id');
+$data = new Varien_Object(unserialize(Mage::helper('core')->decrypt($gwap->getInfo())));
+$boletoLink = $data->getBoletoLink();
+$salesrep = Mage::getModel('fvets_salesrep/salesrep')->load($order->getSalesrepId());
+?>
+
+
+<div class="inner">
+
+    <div class="box3 order-number">
+        <h5>Pedido #<?php echo $this->escapeHtml($this->getOrderId()); ?> <br class="hidden-md" /> REP: <?php echo $salesrep->getName(); ?></h5>
+    </div>
+
+    <div class="box1 box-payment">
+        <div class="col-md-6 col-sm-12">
+            <div class="text-highlight">Dados de cobrança e pagamento:</div>
+            <div class="text-highlight"><?php echo $order->getCustomerName(); ?></div>
+            <div><span class="text-highlight">Forma de pagamento:</span> <span
+                    class="text-highlight-regular"><?php echo $this->__($payment->getMethod()); ?></span></div>
+            <div>ATENÇÃO: o boleto será emitido pela distribuidora</div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <?php if ($condition = $data->getConditionData()) : ?>
+                <div class="text-highlight">Condição de pagamento:</div>
+                <div class="text-highlight-regular"><?php echo $condition['name']; ?></div>
+                <?php if ($condition['discount']) : ?>
+                    <div>
+                        <small>(<?php echo $condition['discount']; ?>% de desconto)</small>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <?php $summary_class = uniqid('summary-class-'); ?>
+    <div class="summary box1 <?php echo $summary_class; ?>">
+        <div width="100%" class="table items">
+            <div class="thead hidden-sm show-md">
+                <div class="tr">
+                    <div class="first align-md-left th">
+                        Produto
+                    </div>
+                    <div class="th align-md-center">
+                        Qtde
+                    </div>
+                    <div class="th align-md-center">
+                        Preço Unit
+                    </div>
+                    <div class="th align-md-center">
+                        Subtotal
+                    </div>
+                    <div class="th align-md-center">
+                        Desconto
+                    </div>
+                    <div class="last th align-md-center">
+                        Total
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-md thead">
+                <div class="tr">
+                    <div class="td">
+                        <h6>Produtos</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="tbody">
+            <?php $items = $order->getItemsCollection(); ?>
+
+            <?php $count = 0;
+            foreach ($items as $_item) : $data = $_item->getData();
+                $count++; ?>
+                <div class="tr <?php if ($count > 3) : echo 'item-hidden'; endif; ?>">
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-left first col-sm-12">
+                        <?php echo $data['name']; ?>
+                    </div>
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-center col-sm-4">
+                        <span class="hidden-md text-highlight">Qtde:</span> <?php echo (int)$data['qty_ordered']; ?>
+                    </div>
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-center col-sm-8">
+                        <span class="hidden-md text-highlight">Preço Unit:</span> <?php echo Mage::helper('core')->currency($data['price']); ?>
+                    </div>
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-center col-sm-12">
+                        <span class="hidden-md text-highlight">Subtotal:</span> <?php echo Mage::helper('core')->currency($data['row_total']); ?>
+                    </div>
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-center col-sm-12">
+                        <span class="hidden-md text-highlight">Desconto:</span> <?php echo Mage::helper('core')->currency($data['discount_amount']); ?>
+                    </div>
+                    <div class="td <?php if ($count % 2 == 0) : echo 'odd';
+                    else : echo 'even'; endif; ?> align-md-center last col-sm-12">
+                        <span class="hidden-md text-highlight">Total:</span> <?php echo Mage::helper('core')->currency($data['row_total'] - $data['discount_amount']); ?>
+                    </div>
+                    <div class="clear hidden-md"></div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="table box2">
+            <?php echo $this->getChildHtml('order_totals', false); ?>
+        </div>
+    </div>
+
+    <?php if ($count > 3) : ?>
+        <?php $class = uniqid('class-'); ?>
+        <div class="box1 align-sm-center box-view-all-items <?php echo $class; ?> closed">
+            Veja todos os itens do seu pedido <i class="fa fa-angle-down"></i>
+        </div>
+
+        <script>
+            //Animação das linhas de produtos acima
+            jQuery(document).ready(function() {
+                jQuery('.<?php echo $class; ?>').click(function(e) {
+                    e.preventDefault();
+
+                    //if (jQuery(this).hasClass('closed')) {
+                        //jQuery(this).removeClass('closed');
+                        //jQuery(this).addClass('opened');
+                        //jQuery(this).find('.fa').removeClass('fa-angle-down');
+                        //jQuery(this).find('.fa').addClass('fa-angle-up');
+                        <?php /*jQuery('.<?php echo $summary_class; ?> .item-hidden').slideDown();*/ ?>
+                        jQuery('.<?php echo $summary_class; ?> .item-hidden').removeClass('item-hidden');
+                        jQuery('.<?php echo $summary_class; ?> .item-hidden').addClass('animated bounceIn');
+                        jQuery('.<?php echo $summary_class; ?> .item-hidden').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                            jQuery(this).removeClass('animated bounceIn');
+                        });
+                        jQuery(this).hide();
+                    //}
+                })
+            })
+        </script>
+    <?php endif; ?>
+
+    <?php $obsCheckoutSuccess = Mage::getStoreConfig('checkout_split/general/checkout_success_total_obs');?>
+    <?php if ($obsCheckoutSuccess):?>
+        <p><?php echo $obsCheckoutSuccess;?></p>
+    <?php endif;?>
+
+</div>

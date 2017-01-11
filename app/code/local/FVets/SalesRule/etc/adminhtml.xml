@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_SalesRule extension
+ * 
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fvets_salesrule translate="title" module="fvets_salesrule">
+                                        <title>SalesRule</title>
+                                    </fvets_salesrule>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <promo>
+                        <children>
+                            <fvets_salesrule translate="title" module="fvets_salesrule">
+                                <title>FVets_Salesrule</title>
+                                <children>
+                                    <salesrule translate="title" module="fvets_salesrule">
+                                        <title>SalesRule</title>
+                                        <sort_order>0</sort_order>
+                                    </salesrule>
+                                </children>
+                            </fvets_salesrule>
+                        </children>
+                    </promo>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <!--menu>
+        <promo>
+            <children>
+                <fvets_salesrule translate="title" module="fvets_salesrule">
+                    <title>FVets_Salesrule</title>
+                    <sort_order>0</sort_order>
+                    <children>
+                        <salesrule translate="title" module="fvets_salesrule">
+                            <title>SalesRule</title>
+                            <action>adminhtml/salesrule</action>
+                            <sort_order>0</sort_order>
+                        </salesrule>
+                    </children>
+                </fvets_salesrule>
+            </children>
+        </promo>
+    </menu-->
+</config>

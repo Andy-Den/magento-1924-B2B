@@ -1,0 +1,157 @@
+<layout version="0.1.0">
+
+    <default>
+        <reference name="root">
+            <reference name="top.links">
+                <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+                <remove name="wishlist_link"/>
+                <!-- Add custom links. Pretty self-explanatory.
+                Dig into app/code/core/Mage/Page/Block/Template/Links.php for more info -->
+                <action method="addLink" translate="label title">
+                    <label>Minha Conta</label>
+                    <url>customer/account/</url>  <!-- can use full url also -->
+                    <title>Minha Conta</title>
+                    <prepare>true</prepare> <!-- set true if adding base url param -->
+                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
+                    <position>1</position>
+                </action>
+                <action method="addLink" translate="label title">
+                    <label>Meus pedidos</label>
+                    <url>sales/order/history/</url>  <!-- can use full url also -->
+                    <title>Meus pedudos</title>
+                    <prepare>true</prepare> <!-- set true if adding base url param -->
+                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
+                    <!-- there are a few param you can send to do different things in <urlParams>
+                             dig into app/code/core/Mage/Core/Model/Url.php, around line 803 -->
+
+                    <!-- below adds #add-fragment to the end of your url -->
+                    <!-- <urlParams><_fragment>add-fragment</_fragment></urlParams> -->
+
+                    <!-- below adds ?add-query to the end of your url -->
+                    <!-- <urlParams><_query>add-fragment</_query></urlParams> -->
+
+                    <!-- below gives you a new session id (i think...)-->
+                    <!-- <urlParams><_nosid>true</_nosid></urlParams> -->
+
+                    <!-- below replaces double quotes, single quotes, greater than, and less than signs
+                             to their respective url escaped replacements (%22, %27, %3E, %3C) -->
+                    <!-- <urlParams><_escape>i'm-a-blog-url</_escape></urlParams> -->
+
+                    <position>2</position>
+                    <liParams/>
+                    <aParams></aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>
+            </reference>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/page/html/header.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/local.css</stylesheet>
+            </action>
+            <action method="addItem"><type>skin_js</type><name>js/page/html/header.js</name></action>
+
+            <action method="removeItem">
+                <type>js</type><script>jquery/jquery.mask.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/animate.css</stylesheet>
+            </action>
+            <action method="addItem"><type>skin_js</type><name>js/local.js</name></action>
+        </reference>
+    </default>
+
+    <!--cms_index_index ifhandle="customer_logged_out">
+        <reference name="root">
+            <remove name="left"/>
+            <remove name="right"/>
+            <action method="setIsHandle">
+                <applied>1</applied>
+            </action>
+            <block type="core/template" name="header" as="header" template="page/notlogged/html/header.phtml"/>
+        </reference>
+        <reference name="head">
+
+                <action method="removeItem">
+                    <type>js_css</type>
+                    <name>calendar/calendar-win2k-1.css</name>
+                </action>
+
+            <action method="addCss"><stylesheet>css/homepage_v3.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/page/html/home/categories.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/homepage.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>O2TI/PrivateSales/js/quicklogin.js</name></action>
+        </reference>
+        <reference name="content">
+            <remove name="page_content_heading" />
+            <block type="core/template" name="default_home_page" template="page/notlogged/home.phtml">
+                <block type="O2TI_PrivateSales_Block_Quicklogin"  name="O2TI_Quicklogin" as="O2TI_Quicklogin" template="page/html/quicklogin_inline.phtml"/>
+                <block type="core/template"  name="home_categories" as="home_categories" template="page/html/home/categories.phtml"/>
+            </block>
+
+        </reference>
+    </cms_index_index-->
+    <cms_index_index>
+        <reference name="header">
+            <reference name="head">
+                <action method="addCss"><stylesheet>css/cms/home.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/page/html/home/categories2.css</stylesheet></action>
+                <action method="addItem"><type>skin_js</type><name>js/catalog/product.js</name></action>
+                <action method="addItem"><type>skin_js</type><name>js/home.js</name></action>
+            </reference>
+            <block type="core/template" name="header_banners" template="page/html/banners/home.phtml" />
+            <!--block type="core/template" name="header_banners" template="page/html/banners/home.phtml">
+                <block type="bannerslider/default" name="bannerslider.bannerslider" as="banner_promocao" template="bannerslider/bannerslider.phtml" bannerslider_id="1">
+                    <action method="setData"><name>bannerslider_id</name><value>1</value></action>
+                </block>
+            </block-->
+        </reference>
+        <reference name="content">
+
+            <!--block type="page/html" name="homepage.widtget.banners" as="homepage_widget_banners" template="page/homepage/banners/1.phtml" before="-">
+                <action method="setSliderName"><slider_name>classic_slider_1</slider_name></action>
+            </block-->
+
+            <block type="page/html" name="homepage.widtget.banners2" as="homepage_widget_banners" template="page/homepage/banners/1.phtml" after="homepage.widtget.banners">
+                <action method="setSliderName"><slider_name>classic_slider_2</slider_name></action>
+            </block>
+
+            <block type="core/template"  name="home_categories" as="home_categories" template="page/html/home/categories2.phtml"/>
+            <!--block type="catalog/product_list" name="home.catalog.product.list" column_count="4" products_count="30" alias="products_homepage" category_id="2" template="udmultiprice/product/list.phtml">
+                <block type="catalog/product_list" name="product_grid_block" alias="products_homepage" category_id="2" template="catalog/product/list/grid.phtml">
+                    <action method="setColumnCount"><count>4</count></action>
+                </block>
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block-->
+
+            <block type="page/html" name="category.products_brands" template="catalog/category/brands.phtml" after="-">
+                <!--<action method="setCategoryId"><category_id>8</category_id></action>-->
+                <action method="setTitle"><category_id>Marcas</category_id></action>
+                <block type="page/html" name="brands_list" template="catalog/category/brands/list.phtml">
+                    <action method="setCategoryId"><category_id>655</category_id></action>
+                </block>
+            </block>
+        </reference>
+    </cms_index_index>
+
+    <catalog_category_layered>
+        <!--reference name="left">
+            <block type="fvets_report/category_topsell" template="fvets/report/category/topsell.phtml" name="category_topsell" before="-" />
+            <block type="fvets_report/category_topcategoryviewed" template="fvets/report/category/topcategoryviewed.phtml" name="category_topcategoryviewed" before="-" />
+            <block type="fvets_report/category_topproductviewed" template="fvets/report/category/topproductviewed.phtml" name="category_topproductviewed" before="-" />
+        </reference-->
+    </catalog_category_layered>
+    <catalog_category_default>
+        <!--reference name="left">
+            <block type="fvets_report/category_topsell" template="fvets/report/category/topsell.phtml" name="category_topsell" before="-" />
+            <block type="fvets_report/category_topcategoryviewed" template="fvets/report/category/topcategoryviewed.phtml" name="category_topcategoryviewed" before="-" />
+            <block type="fvets_report/category_topproductviewed" template="fvets/report/category/topproductviewed.phtml" name="category_topproductviewed" before="-" />
+        </reference-->
+    </catalog_category_default>
+</layout>

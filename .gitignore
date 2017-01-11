@@ -1,0 +1,8 @@
+/media/
+/var/
+/downloader/.cache/
+/new/
+sitemap.xml
+/nbproject/
+/app/etc/local.xml
+/.idea/

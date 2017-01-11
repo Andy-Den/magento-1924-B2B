@@ -1,0 +1,42 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+
+<?php $_category = $this->getCategory() ?>
+<?php if ($_category): ?>
+	<div class="page-title">
+		<h1>
+			<?php if ($_category->getParentId()) : ?>
+				<?php
+					$id = $_category->getId();
+					echo $this->escapeHtml($_category->load($_category->getParentId())->getName());
+					$_category->load($id);
+				?>
+				>
+			<?php endif; ?>
+			<?php echo $this->escapeHtml($_category->getName()) ?>
+		</h1>
+	</div>
+	<?php if ($description = $_category->getDescription()): ?>
+		<p class="blog-desc"><?php echo $description ?></p>
+	<?php endif; ?>
+	
+	<?php echo $this->getChildHtml('highlights'); ?>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<?php echo $this->getChildHtml('latest'); ?>
+			</div>
+			<div class="col-md-4">
+				<?php echo $this->getChildHtml('popular'); ?>
+				<?php echo $this->getChildHtml('more'); ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

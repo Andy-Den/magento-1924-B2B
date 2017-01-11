@@ -1,0 +1,154 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$hlp = Mage::helper('sales');
+?>
+<div id="sales-order-view">
+	<div class="row">
+		<div class="buttons-set col-md-12">
+			<p class="back-link"><a href="<?php echo $this->getUrl('*/*/history');?>"><< Voltar para todos os Pedidos</a></p>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="col-md-6">
+			<?php if ($hlp->getPrevOrder()->getId()) : ?>
+				<a href="<?php echo $this->getLayout()->getBlockSingleton('sales/order_history')->getViewUrl($hlp->getPrevOrder()) ?>">< Pedido anterior <?php echo $this->__('%s', $this->formatDate($hlp->getPrevOrder()->getCreatedAtStoreDate(), 'short')) ?></a>
+			<?php endif; ?>
+		</div>
+		<div class="col-md-6 text-right">
+			<?php if ($hlp->getNextOrder()->getId()) : ?>
+				<a href="<?php echo $this->getLayout()->getBlockSingleton('sales/order_history')->getViewUrl($hlp->getNextOrder()) ?>">Próximo pedido <?php echo $this->__('%s', $this->formatDate($hlp->getNextOrder()->getCreatedAtStoreDate(), 'short')) ?> ></a>
+			<?php endif; ?>
+		</div>
+	</div>
+
+	<table width="100%" id="order-paper-table">
+		<tr>
+			<td class="top-left">
+			</td>
+			<td class="top-center">
+			</td>
+			<td class="top-right">
+			</td>
+		</tr>
+		<tr>
+			<td class="middle-left">
+			</td>
+			<td>
+		<?php /** @var $this Mage_Sales_Block_Order_Info */ ?>
+		<?php $_order = $this->getOrder() ?>
+		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<div id="order-information" class="row">
+			<div class="page-title title-buttons row">
+				<div class="col-md-9">
+					<h2 class="table-caption"><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h2>
+				</div>
+				<div class="col-md-3 text-right">
+					<h2 class="table-caption"><?php echo $this->__('Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'short')) ?></h2>
+				</div>
+			</div>
+
+			<br />
+
+			<?php $_links = $this->getLinks(); ?>
+			<?php if (count($_links) > 1) : ?>
+			<div class="order-info">
+					<ul id="order-info-tabs" class="list-inline">
+						<li><?php echo $this->__('About This Order:') ?></li>
+					<?php foreach ($_links as $_link): ?>
+							<?php if($_link->getUrl()): ?>
+									<li><a href="<?php echo $_link->getUrl() ?>"><?php echo $_link->getLabel() ?></a></li>
+							<?php else: ?>
+									<li class="current"><?php echo $_link->getLabel() ?></li>
+							<?php endif; ?>
+					<?php endforeach; ?>
+					</ul>
+					<script type="text/javascript">decorateGeneric($('order-info-tabs').select('LI'),['first','last']);</script>
+			</div>
+			<?php endif; ?>
+
+			<?php if (!$_order->getIsVirtual()): ?>
+			<div class="order-info-box">
+				<address>
+					<div class="row">
+					<?php $_address = $_order->getBillingAddress(); ?>
+					<?php $_customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
+						<div class="col-md-6">
+							<p><strong>Destinatário: </strong> <?php echo $_address->getName(); ?></p>
+							<p><strong>Nome / Razão Social: </strong> <?php echo $_customer->getRazaoSocial(); ?></p>
+							<p><strong>Endereço: </strong> <?php echo $_address->getStreetFull(); ?> - <?php echo $_address->getCity(); ?> - <?php echo $_address->getRegion(); ?></p>
+							<p><strong>CEP: </strong> <?php echo $_address->getPostcode(); ?></p>
+							<p><strong>CNPJ: </strong> <?php echo $_customer->getCnpj(); ?></p>
+						</div>
+						<div class="col-md-6">
+							<p><strong>Pedido realizado em: </strong> <?php echo $this->__('%s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
+							<p><strong><?php echo $this->__('Payment Method') ?>: </strong> <?php echo strip_tags($this->getPaymentInfoHtml()) ?></p>
+							<p><strong><?php echo $this->__('Shipping Method') ?>: </strong>
+								<?php if ($_order->getShippingDescription()): ?>
+									<?php echo $_order->getShippingDescription() ?>
+								<?php else: ?>
+									<?php echo $this->helper('sales')->__('No shipping information available'); ?>
+								<?php endif; ?>
+							</p>
+							<p><strong>Status: </strong> <?php echo $_order->getStatusLabel() ?></p>
+						</div>
+					</div>
+				</address>
+			</div>
+			<?php endif; ?>
+			<br />
+			<?php echo $this->getChildHtml('sales.order.view'); ?>
+			<?php echo $this->getChildHtml('buttons') ?>
+			<?php echo $this->getStatusHistoryRssUrl($_order) ?>
+
+			<br />
+			<br />
+			<br />
+			<br />
+
+			<hr />
+
+			<div class="text-center">
+				<img src="<?php echo $this->getSkinUrl(Mage::getStoreConfig('design/header/logo_src')) ?>" alt="<?php echo Mage::getStoreConfig('design/header/logo_alt') ?>" />
+			</div>
+			<br />
+			<div>
+				A 4Vets é uma plataforma online que facilita a compra de diversos produtos em diferentes distribuidores, todas as notas fiscais e entrega de produtos é de total responsabilidade da distribuidora.
+			</div>
+
+		</div>
+		</td>
+		<td class="middle-right">
+		</td>
+		</tr>
+		<tr>
+			<td class="bottom-left"></td>
+			<td class="bottom-center"></td>
+			<td class="bottom-right"></td>
+		</tr>
+	</table>
+</div>

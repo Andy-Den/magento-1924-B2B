@@ -1,0 +1,39 @@
+<!-- <h1>Marcas</h1>
+<hr /> -->
+<div class="brandContainer">
+	<h1 class="block-title"><span><?php echo $this->__('Brands'); ?></span></h1>
+	<?php $helper = $this->helper('catalog/category') ?>
+	<?php $categories = $this->getStoreCategories() ?>
+
+	<?php	$totalRegisters = count($categories->getNodes());
+	?>
+	<?php if ($totalRegisters > 0): ?>
+		<ul class="brands-list">
+			<?php foreach ($categories as $category): ?>
+				<?php $category = Mage::getModel('catalog/category')->load($category->getId()); ?>
+				<?php $urlImg = Mage::getBaseUrl('media') . 'catalog/category/' . $category->getThumbnail(); ?>
+				<li>
+					<a class="link-brands featherlight-login" href="<?php echo $helper->getCategoryUrl($category) ?>">
+						<img src="<?php echo $urlImg ?>" alt="<?php echo $category->getName(); ?>"
+								 title="<?php echo $category->getName(); ?>"></a>
+					<?php if ($this->isCategoryActive($category)): ?>
+						<?php $subcategories = $category->getChildren() ?>
+						<?php if (count($subcategories) > 0): ?>
+							<ul id="brands">
+								<?php foreach ($subcategories as $subcategory): ?>
+									<li>
+										<a class="link-brands featherlight-login"
+											 href="<?php echo $helper->getCategoryUrl($subcategory) ?>"><?php echo $this->escapeHtml(trim($subcategory->getName(), '- ')) ?></a>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+							<!--							<script type="text/javascript">decorateList('leftnav-tree---><?php //echo $category->getId() ?><!--', 'recursive')</script>-->
+						<?php endif; ?>
+					<?php endif; ?>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<!--		<script type="text/javascript">decorateList('leftnav-tree', 'recursive')</script>-->
+	<?php endif; ?>
+	<div class="clear"></div>
+</div>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <overrides_index_index>
+    	<reference name="root">
+		    <action method="setTemplate"><template>page/1column.phtml</template></action>
+    	</reference>
+    	<reference name="head">
+			  <action method="setForcedTitle"><title>4Vets - Seu fornecedor veterinário</title></action>
+		  </reference>
+    	<reference name="head">
+
+			<action method="addCss"><stylesheet>css/homepage_v2.css</stylesheet><params>media="all"</params></action>
+      <action method="addItem"><type>skin_js</type><name>js/homepage.js</name></action>
+    	</reference>
+      <reference name="header">
+         <block type="page/header" name="header">
+             <action method="setTemplate"><template>vets/loggedout/page/html/header.phtml</template></action>
+         </block>
+      </reference>
+	  <reference name="content">
+    		<block type="Vets_Overrides_Block_Loggedout_Home" name="loggedout_home" template="vets/loggedout/homepage.phtml">
+				<block type="O2TI_PrivateSales_Block_Quicklogin"  name="O2TI_Quicklogin" as="O2TI_Quicklogin"></block>
+	    		<block type="page/html_footer" name="footer.custom" as="footer.custom" template="page/html/footer.phtml">
+				<block type="newsletter/subscribe" name="newsletter" template="newsletter/subscribe.phtml"/>
+				    <block type="page/html_wrapper" name="bottom.container" as="bottomContainer" translate="label">
+				        <label>Page Footer</label>
+				        <action method="setElementClass"><value>bottom-container</value></action>
+				    </block>
+				    <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml"/>
+				    <block type="page/template_links" name="footer_links" as="footer_links" template="page/template/links.phtml"/>
+				</block>
+			</block>
+		</reference>
+    </overrides_index_index>
+</layout>

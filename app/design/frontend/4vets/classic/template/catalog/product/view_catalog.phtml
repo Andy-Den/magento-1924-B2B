@@ -1,0 +1,239 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<div class="listing-box-mark-arrow"></div>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+//Dropship
+$_hlp = Mage::helper('udmultiprice');
+$_umsHlp = Mage::helper('umicrosite');
+//forca exibir o maior preco do produto
+//$_hlp->setMajorPrice($_product);
+//$region_ok = $_hlp->isAllowedZipcode($_product);
+?>
+<script type="text/javascript">
+	var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	var showRowBoxQty = false;
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<form class="product_addtocart_form" action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+	  id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+	<div class="col-md-4">
+		<div class="product-name row">
+			<a href="<?php echo $_product->getProductUrl(); ?>">
+				<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+			</a>
+		</div>
+		<div class="product-img-box row">
+			<div class="no-display">
+				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+				<input type="hidden" name="related_product" id="related-products-field" value=""/>
+			</div>
+			<a href="<?php echo $_product->getProductUrl(); ?>">
+				<?php echo $this->getChildHtml('media'); ?>
+			</a>
+		</div>
+	</div>
+	<div class="col-md-1 text-right pull-right">
+		<a href="javascript://" class="closeProductQuick"><img src="<?php echo $this->getSkinUrl('images/listing-close.png'); ?>" /></a>
+	</div>
+	<div class="product-shop col-md-8">
+
+		<?php echo $this->getChildHtml('product_type_table_data') ?>
+
+		<br /><br />
+
+
+		<div class="row">
+			<div class="max-height">
+				<?php echo nl2br($_product->getShortDescription()); ?>
+			</div>
+		</div>
+
+		<br /><br />
+	</div>
+
+	<?php echo $this->getChildHtml('extrahint') ?>
+
+	<?php echo $this->getChildHtml('other'); ?>
+	</div>
+
+</form>
+
+<div class="bottom">
+	<div class="row">
+		<div class="col-md-5 link-complete-view">
+			<a href="<?php echo $_product->getProductUrl(); ?>">Mais detalhes deste produto >></a>
+			<br /><br />
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	//<![CDATA[
+	var productAddToCartForm = new VarienForm('product_addtocart_form');
+	productAddToCartForm.submit = function (button, url) {
+		if (this.validator.validate()) {
+			if (showRowBoxQty) {
+				if (jQuery('#use-box').is(':checked')) {
+					var boxQty = <?php echo ($_product->getBoxQty() > 1) ? $_product->getBoxQty() : 1; ?>;
+					jQuery('#qty').val(parseInt(jQuery('#qty').val()) * boxQty);
+				}
+			}
+			var form = this.form;
+			var oldUrl = form.action;
+
+			if (url) {
+				form.action = url;
+			}
+			var e = null;
+			try {
+				this.form.submit();
+			} catch (e) {
+			}
+			this.form.action = oldUrl;
+			if (e) {
+				throw e;
+			}
+
+			if (button && button != 'undefined') {
+				button.disabled = true;
+			}
+		}
+	}.bind(productAddToCartForm);
+
+	productAddToCartForm.submitLight = function (button, url) {
+		if (this.validator) {
+			var nv = Validation.methods;
+			delete Validation.methods['required-entry'];
+			delete Validation.methods['validate-one-required'];
+			delete Validation.methods['validate-one-required-by-name'];
+			// Remove custom datetime validators
+			for (var methodName in Validation.methods) {
+				if (methodName.match(/^validate-datetime-.*/i)) {
+					delete Validation.methods[methodName];
+				}
+			}
+
+			if (this.validator.validate()) {
+				<?php if((int)$_product->getBoxQty() > 1): ?>
+				if (jQuery('#use-box').is(':checked')) {
+					var boxQty = <?php echo ($_product->getBoxQty() > 1) ? $_product->getBoxQty() : 1; ?>;
+					jQuery('#qty').val(parseInt(jQuery('#qty').val()) * boxQty);
+				}
+				<?php endif; ?>
+				if (url) {
+					this.form.action = url;
+				}
+				this.form.submit();
+			}
+			Object.extend(Validation.methods, nv);
+		}
+	}.bind(productAddToCartForm);
+	//]]>
+</script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+
+		ajaxCartBind();
+		productBind();
+
+		jQuery('.closeProductQuick').bind({
+			click: function () {
+				jQuery('.productViewLine').slideUp('medium', function() {
+					openLine = null;
+					jQuery(this).html('');
+				})
+
+			}
+		});
+
+		jQuery('.button-collateral').bind({
+			click: function () {
+				jQuery('.button-collateral').removeClass('active');
+				jQuery('.box-collateral').removeClass('active');
+				jQuery(this).addClass('active');
+				jQuery('.' + jQuery(this).attr('data-target')).addClass('active');
+			}
+		});
+		//changeItensToPruchase();
+		jQuery('.qty').bind({
+			change: function () {
+				changeItensToPruchase();
+			}
+		});
+
+		/*jQuery('.products-page-add-to-cart .relative a').bind({
+		 click: function () {
+		 var qty = parseInt(jQuery(this).parent().find('.qty').val());
+		 if (jQuery(this).is('.increase')) {
+		 jQuery(this).parent().find('.qty').val(qty + 1);
+		 } else {
+		 if (qty > 0) {
+		 jQuery(this).parent().find('.qty').val(qty - 1);
+		 }
+		 }
+		 changeItensToPruchase();
+		 }
+		 });*/
+
+		jQuery('.quantity-all-box .qty-action').bind({
+			click: function() {
+				if (jQuery(this).hasClass('sum')) {
+					jQuery('.item-box-'+jQuery(this).attr('data-id')+' .quantity').val(parseInt(jQuery('.item-box-'+jQuery(this).attr('data-id')+' .quantity').val()) + 1);
+				}
+				if (jQuery(this).hasClass('subtraction')) {
+					if(parseInt(jQuery('.item-box-'+jQuery(this).attr('data-id')+' .quantity').val()) > 0)
+						jQuery('.item-box-'+jQuery(this).attr('data-id')+' .quantity').val(parseInt(jQuery('.item-box-'+jQuery(this).attr('data-id')+' .quantity').val()) - 1);
+				}
+				changeItensToPruchase();
+			}
+		})
+
+
+	});
+
+
+
+	if (showRowBoxQty) {
+		jQuery('.rowBoxQty').show();
+	}
+	else {
+		jQuery('.rowBoxQty').hide();
+	}
+
+</script>

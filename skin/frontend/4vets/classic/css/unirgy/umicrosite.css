@@ -1,0 +1,27 @@
+h3 {
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: 0;
+}
+
+.std {
+    display: none;
+}
+
+
+.vendor-attributes {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: none repeat scroll 0 0 #f8f8f8;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.vendor-attributes [class*="span"]:first-child{
+    border-right: 1px solid #adadad;
+}
+
+.vendor-attributes ul {
+    margin: 0;
+}

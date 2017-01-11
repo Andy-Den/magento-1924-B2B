@@ -1,0 +1,381 @@
+<?php $salesrep = $this->getQuote()->getSalesrep(); ?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if(isset($this->formErrors['billing_error']) && count($this->formErrors['billing_errors']) > 0): ?>
+	<ul class="messages"><li class="notice-msg"><ul><li><span><?php echo $this->__('Please check red fields below and try again.'); ?></span></li></ul></li></ul>
+<?php endif; ?>
+<?php if(isset($this->formErrors['unknown_source_error'])): ?>
+	<ul class="messages"><li class="error-msg"><ul><li><span><?php echo $this->formErrors['unknown_source_error']; ?></span></li></ul></li></ul>
+<?php endif; ?>
+
+<div class="order-<?php echo $salesrep->getId(); ?>-container order-container">
+	<?php if ($this->getQuote()->validateMinimumAmount()): ?>
+		<div class="order-<?php echo $salesrep->getId(); ?>-step1 order-step1 order-step">
+			<?php echo $this->getChildHtml('checkout_split_step1', false); ?>
+		</div>
+	<?php else: ?>
+		<div>
+			<?php echo $this->getChildHtml('checkout_split_minimun_value', false); ?>
+		</div>
+	<?php endif; ?>
+
+</div>
+
+<div class="clear"></div>
+
+<script type="text/javascript">
+
+	var url_save_billing;
+	var url_set_methods;
+	var update_payments;
+
+	Event.observe(window, 'load', function() {
+
+		if ($$('div.shopping-cart-totals').length == 1) {
+		}
+		else    {
+
+			already_placing_order = false;
+			review = false;
+			reviewmodal = false;
+
+			var salesrep = '<?php echo $salesrep->getId(); ?>';
+
+			/* Handle place order click event */
+			$$('.onestepcheckout-place-order').each(function(elem){
+				elem.observe('click', function(e)   {
+					Event.stop(e);
+
+					// First validate the form
+					var form = new VarienForm('onestepcheckout-form');
+
+					if(!form.validator.validate())  {
+						Event.stop(e);
+					} else {
+						if(!already_placing_order && $$('.loading-ajax').length <= 0 ) {
+							<?php if(!empty($helper->settings['addressreview']['enable_addressreview'])):?>
+							var addressTemplates = {
+								shipping: '<?php echo str_replace("\r", '', str_replace("\n", '', $helper->settings['addressreview']['shipping_template']));?>',
+								billing: '<?php echo str_replace("\r", '', str_replace("\n", '', $helper->settings['addressreview']['billing_template']));?>'
+							};
+							addressPreview(addressTemplates, 'addressreview');
+							if(!review){
+								review = true;
+								if(!reviewmodal){
+									reviewmodal = new Control.Modal($('addressreview'),{
+										overlayOpacity: 0.75,
+										className: 'oscmodal',
+										fade: true,
+										closeOnClick: false
+									});
+								}
+								reviewmodal.open();
+								reviewmodal.observe('beforeClose',function(){
+									review = false;
+								});
+								return true;
+								Event.stop(e);
+							} else {
+								reviewmodal.close();
+							}
+							<?php endif;?>
+							already_placing_order = true;
+
+							var submitelement = $('onestepcheckout-place-order');
+							/* Disable button to avoid multiple clicks */
+							submitelement.removeClassName('orange').addClassName('grey');
+							submitelement.disabled = true;
+
+							//travando a tela inteira para prevenir cliques em botões
+							$$('.loading-overlay').show();
+							//fim
+
+							var loaderelement = new Element('span').
+								addClassName('onestepcheckout-place-order-loading').
+								update('<?php echo $this->__('Please wait, processing your order...'); ?>');
+
+							submitelement.parentNode.appendChild(loaderelement);
+
+							/* Submit the form */
+							$('onestepcheckout-form').submit();
+						}
+					}
+				});
+			});
+
+
+			// This is a separate page
+			var methodsSeparateUrl = '<?php echo $this->getUrl('checkoutsplit/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+			var update_payments = <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+
+			//$$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments, salesrep));
+
+			//$$('div.payment-methods-'+salesrep+' input[name="payment\['+salesrep+'\]\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url, undefined, salesrep));
+
+			$$('div.payment-methods-'+salesrep+' input[name="payment\['+salesrep+'\]\[method\]"]').invoke('observe', 'click', function() {
+				$$('div.onestepcheckout-payment-method-error').each(function(item) {
+					new Effect.Fade(item);
+				});
+			});
+
+			//refresh payment section by ajax
+			var urltmp = '<?php echo $this->getUrl('checkoutsplit/ajax/paymentmethodsrefresh', array('_secure'=>true)); ?>';
+			paymentrefresh2(urltmp, salesrep, methodsSeparateUrl);
+			//$$('div.payment-methods-'+salesrep+' input[name="payment\['+salesrep+'\]\[method\]"]').invoke('observe', 'click', paymentrefresh2(urltmp, salesrep));
+//			$$('div.payment-methods-'+salesrep+' input[name="payment\['+salesrep+'\]\[method\]"]').invoke('observe', 'click', function(event) {
+//				paymentrefresh2(url, salesrep);
+//			});
+
+			$$('dl.shipment-methods input').invoke('observe', 'click', function() {
+				$$('div.onestepcheckout-shipment-method-error').each(function(item) {
+					new Effect.Fade(item);
+				});
+			});
+
+			var has_hidden_terms = false;
+
+			if($('id_accept_terms') != null)    {
+
+				$('id_accept_terms').observe('click', function(e)   {
+					var element = e.element();
+
+					if(element.checked) {
+						$$('div.onestepcheckout-terms-error').each(function(item) {
+							new Effect.Fade(item);
+							has_hidden_terms = true;
+						});
+					}
+					else    {
+						if(has_hidden_terms)    {
+							$$('div.onestepcheckout-terms-error').each(function(item) {
+								new Effect.Appear(item);
+								has_hidden_terms = false;
+							});
+						}
+					}
+				});
+			}
+		}
+
+		var form = $('onestepcheckout-form');
+
+		/* Highlight selected payment method if one set */
+		if($RF(form, 'payment['+salesrep+'][method]') != null)    {
+			try {
+				var payment_method = $RF(form, 'payment['+salesrep+'][method]');
+				$('container_payment_method_' + payment_method).show();
+				$('payment_form_' + payment_method).show();
+			} catch(err)    {
+
+			}
+		}
+
+		/* Set default shipping method if not set */
+		if($RF(form, 'shipping_method') == null)    {
+			try {
+				var method = '<?php echo $this->_getDefaultShippingMethod(); ?>';
+				if(method != '')    {
+					$('s_method_' + method).checked = true;
+					get_separate_save_methods_function(methodsSeparateUrl);
+				}
+			} catch(err)    {
+
+			}
+		}
+		//submit what's available on load
+		//get_separate_save_methods_function(url)();
+
+		<?php if($this->differentShippingAvailable()): ?>
+		$('billing:use_for_shipping_yes').observe('click', function(e)  {
+			var element = e.element();
+			if(element.checked){
+				$('shipping_address').hide();
+			} else {
+				if($('shipping-address-select') && $('shipping-address-select').value == ''){
+					$('shipping_address_list').show()
+				}
+				$('shipping_address').show();
+				<?php if(!$this->isCustomerLoggedIn()):?>
+				$('shipping_address_list').show()
+				<?php endif;?>
+				<?php if($this->isCustomerLoggedIn()):?>
+				if(!$('shipping-address-select') && $('shipping_address_list').getStyle('display')=='none'){
+					$('shipping_address_list').show()
+				}
+				<?php endif;?>
+			}
+
+			<?php if($this->settings['enable_ajax_save_billing']): ?>
+			get_save_billing_function('<?php echo $this->getUrl('checkoutsplit/ajax/save_billing', array('_secure'=>true)); ?>', '<?php echo $this->getUrl('checkoutsplit/ajax/set_methods_separate', array('_secure'=>true)); ?>', <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>, true)();
+			<?php endif; ?>
+
+		});
+		<?php endif; ?>
+		<?php
+				$triggers = Mage::getStoreConfig('onestepcheckout/ajax_update/ajax_save_billing_fields');
+				if(!empty($triggers)){
+						$triggers = str_replace('country', 'country_id', $triggers);
+						$triggers = str_replace('state/region', 'region_id', $triggers);
+						$triggers = explode(',',$triggers);
+						if(in_array('region_id',$triggers)){
+								$triggers[] = 'region';
+						}
+				}
+		?>
+
+		<?php if(Mage::getStoreConfig('onestepcheckout/ajax_update/enable_ajax_save_billing') && !empty($triggers)):?>
+
+		url_save_billing = '<?php echo $this->getUrl('checkoutsplit/ajax/save_billing', array('_secure'=>true)); ?>';
+		url_set_methods = '<?php echo $this->getUrl('checkoutsplit/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+		update_payments = (update_payments) ? update_payments : <?php echo $this->settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+		var update_on_initial = false;
+
+		var euvat = $('euvat_action_validate_taxvat');
+
+		if(euvat !== null){
+			euvat.observe('change', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
+		}
+
+		var euvatid = $('billing:vat_id');
+
+		if(euvatid !== null){
+			euvatid.observe('click', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
+		}
+
+		triggers = ['<?php echo implode ('\',\'',$triggers)?>'];
+		btriggered = [];
+		striggered = [];
+
+		<?php
+		foreach($triggers as $value){
+				echo (($this->getQuote()->getBillingAddress()->getData($value)) ? 'btriggered.push(\'billing:'.$value.'\');' : '');
+				echo (($this->getQuote()->getShippingAddress()->getData($value)) ? 'striggered.push(\'shipping:'.$value.'\');' : '');
+		}
+		?>
+
+
+		bcountry_id = $('billing:country_id');
+		if(bcountry_id){
+			if(bcountry_id.getValue()){
+				if(!btriggered.include('billing:country_id')){
+					btriggered.push('billing:country_id');
+				}
+			}
+		}
+		scountry_id = $('shipping:country_id');
+		if(scountry_id){
+			if(scountry_id.getValue()){
+				if(!striggered.include('shipping:country_id')){
+					striggered.push('shipping:country_id');
+				}
+			}
+		}
+
+		batriggered = false;
+		satriggered = false;
+
+		changeTimer = false;
+		changeInterval = 1000;
+
+		triggers.each(function(item){
+			var belement = $('billing:'+item);
+			if(belement){
+				belement.observe('change', function(e){
+					var element = e.element();
+					var id = element.id;
+					var tagname = element.tagName;
+					if(tagname === 'SELECT'){
+						clearTimeout(changeTimer);
+						changeTimer = setTimeout(bcallbackEvent, changeInterval, id);
+					} else {
+						bcallbackEvent(id);
+					}
+				});
+			}
+
+			var selement = $('shipping:'+item);
+			if(selement){
+				selement.observe('change', function(e){
+					var element = e.element();
+					var id = element.id;
+					var tagname = element.tagName;
+					if(tagname === 'SELECT'){
+						clearTimeout(changeTimer);
+						changeTimer = setTimeout(scallbackEvent, changeInterval, id);
+					} else {
+						scallbackEvent(id);
+					}
+				});
+			}
+		});
+
+		function scallbackEvent (id){
+			if(!striggered.include(id)){
+				striggered.push(id);
+			}
+			if(striggered.length >= triggers.length-1){
+				satriggered = true;
+			}
+			get_save_billing_function(url_save_billing, url_set_methods, update_payments, satriggered)();
+		}
+
+
+		function bcallbackEvent (id){
+			if(!btriggered.include(id)){
+				btriggered.push(id);
+			}
+			if(btriggered.length >= triggers.length-1){
+				batriggered = true;
+			}
+			get_save_billing_function(url_save_billing, url_set_methods, update_payments, batriggered)();
+		}
+
+
+		<?php if($this->isCustomerLoggedIn()):?>
+		var bselect = $('billing-address-select');
+		var sselect = $('shipping-address-select');
+		if(bselect){
+			bselect.observe('change', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
+		}
+		if(sselect){
+			sselect.observe('change', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
+		}
+		<?php endif;?>
+
+		<?php endif; ?>
+
+	});
+
+	/*if($('billing:save_billing')){
+	 Event.observe($('billing:save_billing'), 'click', save_billing_trigger);
+	 }*/
+
+	if($('payment-tool-tip-close')){
+		Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
+	}
+
+	function save_billing_trigger()
+	{
+		//Remove validation class from fields not used now
+		var hasClass = new Array();
+		if ($('id_accept_terms').hasClassName('required-entry'))
+		{
+			hasClass.push(new Array($('id_accept_terms'), 'required-entry'))
+			$('id_accept_terms').removeClassName('required-entry');
+		}
+
+		var myForm = new VarienForm('onestepcheckout-form', true);
+		if (myForm.validator.validate()) {
+			get_save_billing_function(url_save_billing,url_set_methods,update_payments, true)();
+		}
+
+		//Return validation class
+		for(var i = 0; i < hasClass.length; i++)
+		{
+			hasClass[i][0].addClassName(hasClass[i][1]);
+		}
+
+	}
+
+</script>

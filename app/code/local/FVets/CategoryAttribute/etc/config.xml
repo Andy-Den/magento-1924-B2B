@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    FVets
+ * @package     FVets_Module
+ * @author      Douglas Ianitsky <ianitsky@gmail.com>
+ */
+-->
+<config>
+    <modules>
+        <FVets_CategoryAttribute>
+            <version>0.1.3</version>
+        </FVets_CategoryAttribute>
+    </modules>
+    <global>
+        <resources>
+            <categoryattribute_setup>
+                <setup>
+                    <module>FVets_CategoryAttribute</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>default_setup</use>
+                </connection>
+            </categoryattribute_setup>
+        </resources>
+
+        <helpers>
+            <categoryattribute>
+                <class>FVets_CategoryAttribute_Helper</class>
+            </categoryattribute>
+        </helpers>
+    </global>
+</config>

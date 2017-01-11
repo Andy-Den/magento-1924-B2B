@@ -1,0 +1,24 @@
+.cms-home .brands-banner{
+    border:1px solid #d6d6d6;
+    border-left: none;
+    border-right: none;
+}
+
+.cms-home .brands-block h1
+{
+    background: none repeat scroll 0 0 white;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 200px;
+    z-index: 1;
+    color:#262626;
+}
+
+.cms-home .brands-block hr {
+    margin-top: -13px;
+    margin-bottom: 70px;
+}

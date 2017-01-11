@@ -1,0 +1,512 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Core
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Model helper
+ * 
+ * @category   Innoexts
+ * @package    Innoexts_Core
+ * @author     Innoexts Team <developers@innoexts.com>
+ */
+class Innoexts_Core_Helper_Model 
+    extends Mage_Core_Helper_Abstract 
+{
+    /**
+     * Get core helper
+     * 
+     * @return Innoexts_Core_Helper_Data
+     */
+    public function getCoreHelper()
+    {
+        return Mage::helper('innoexts_core');
+    }
+    /**
+     * Get version helper
+     * 
+     * @return Innoexts_Core_Helper_Version
+     */
+    public function getVersionHelper()
+    {
+        return $this->getCoreHelper()->getVersionHelper();
+    }
+    /**
+     * Cast value
+     * 
+     * @param mixed $value
+     * @param string $type
+     * 
+     * @return mixed
+     */
+    public function castValue($value, $type)
+    {
+        switch ($type) {
+            case 'int': 
+                $value = (int) $value;
+                break;
+            case 'float': 
+                $value = (float) $value;
+                break;
+            case 'string': 
+                $value = (string) $value;
+                break;
+            case 'array': 
+                $value = (is_array($value)) ? $value : array($value);
+                break;
+            default: 
+                $value = (string) $value;
+                break;
+        }
+        return $value;
+    }
+    /**
+     * Save child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function saveChildData(
+        $model, $modelClass, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    )
+    {
+        if (!$model || !($model instanceof $modelClass)) {
+            return $this;
+        }
+        $modelId        = $model->getId();
+        $resource       = $model->getResource();
+        $dataTable      = $resource->getTable($dataTableName);
+        $adapter        = $resource->getWriteConnection();
+        $_data          = $model->getData($dataAttributeCode);
+        if (!$_data) {
+            $_data = array();
+        }
+        $data           = array();
+        $oldData        = array();
+        foreach ($_data as $value) {
+            $value = $this->castValue($value, $dataValueType);
+            if (($dataValueType == 'string') && !$value) {
+                continue;
+            }
+            $data[$value] = array(
+                $modelIdAttributeCode   => $modelId, 
+                $dataValueAttributeCode => $value, 
+            );
+        }
+        $select = $adapter
+            ->select()
+            ->from($dataTable)
+            ->where($modelIdAttributeCode.' = ?', $modelId);
+        $query = $adapter->query($select);
+        while ($item = $query->fetch()) {
+            $value = $item[$dataValueAttributeCode];
+            $oldData[$value] = $item;
+        }
+        foreach ($oldData as $value => $item) {
+            if (!isset($data[$value])) {
+                $adapter->delete($dataTable, array(
+                    $adapter->quoteInto($modelIdAttributeCode.' = ?', $modelId), 
+                    $adapter->quoteInto($dataValueAttributeCode.' = ?', $value)
+                ));
+            }
+        }
+        foreach ($data as $value => $item) {
+            if (!isset($oldData[$value])) {
+                $adapter->insert($dataTable, $item);
+            }
+        }
+        return $this;
+    }
+    /**
+     * Save child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataKeyAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function saveChildData2(
+        $model, $modelClass, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataKeyAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    )
+    {
+        if (!$model || !($model instanceof $modelClass)) {
+            return $this;
+        }
+        $modelId        = $model->getId();
+        $resource       = $model->getResource();
+        $dataTable      = $resource->getTable($dataTableName);
+        $adapter        = $resource->getWriteConnection();
+        $_data          = $model->getData($dataAttributeCode);
+        if (!$_data) {
+            $_data = array();
+        }
+        $__data = array();
+        foreach ($_data as $key => $item) {
+            if (
+                is_array($item) && 
+                array_key_exists($dataKeyAttributeCode, $item)
+            ) {
+                $__data[$key] = $item;
+            }
+        }
+        if (count($__data)) {
+            $data           = array();
+            $oldData        = array();
+            foreach ($__data as $item) {
+                if (
+                    is_array($item) && 
+                    array_key_exists($dataKeyAttributeCode, $item) && 
+                    array_key_exists($dataValueAttributeCode, $item)
+                ) {
+                    $key        = $item[$dataKeyAttributeCode];
+                    $value      = ($item[$dataValueAttributeCode]) ? $item[$dataValueAttributeCode] : null;
+                    if (!is_null($value)) {
+                        $value      = $this->castValue($value, $dataValueType);
+                    }
+                    if (
+                        (($dataValueType == 'string') && !$value) || 
+                        (($dataValueType == 'array') && !count($value))
+                    ) {
+                        continue;
+                    }
+                    if ($dataValueType == 'array') {
+                        foreach ($value as $_value) {
+                            $data[$key][$_value] = array(
+                                $modelIdAttributeCode       => $modelId, 
+                                $dataKeyAttributeCode       => $key, 
+                                $dataValueAttributeCode     => $_value, 
+                            );
+                        }
+                    } else {
+                        $data[$key] = array(
+                            $modelIdAttributeCode       => $modelId, 
+                            $dataKeyAttributeCode       => $key, 
+                            $dataValueAttributeCode     => $value, 
+                        );
+                    }
+                }
+            }
+            $select = $adapter
+                ->select()
+                ->from($dataTable)
+                ->where($modelIdAttributeCode.' = ?', $modelId);
+            $query = $adapter->query($select);
+            while ($item = $query->fetch()) {
+                $key = $item[$dataKeyAttributeCode];
+                if ($dataValueType == 'array') {
+                    $value  = $item[$dataValueAttributeCode];
+                    $oldData[$key][$value] = $item;
+                } else {
+                    $oldData[$key] = $item;
+                }
+            }
+            if ($dataValueType == 'array') {
+                foreach ($oldData as $key => $_data) {
+                    foreach ($_data as $value => $item) {
+                        if (!(isset($data[$key]) && isset($data[$key][$value]))) {
+                            $adapter->delete($dataTable, array(
+                                $adapter->quoteInto($modelIdAttributeCode.' = ?', $modelId), 
+                                $adapter->quoteInto($dataKeyAttributeCode.' = ?', $key), 
+                                $adapter->quoteInto($dataValueAttributeCode.' = ?', $value)
+                            ));
+                        }
+                    }
+                }
+            } else {
+                foreach ($oldData as $key => $item) {
+                    if (!isset($data[$key])) {
+                        $adapter->delete($dataTable, array(
+                            $adapter->quoteInto($modelIdAttributeCode.' = ?', $modelId), 
+                            $adapter->quoteInto($dataKeyAttributeCode.' = ?', $key)
+                        ));
+                    }
+                }
+            }
+            if ($dataValueType == 'array') {
+                foreach ($data as $key => $_data) {
+                    foreach ($_data as $value => $item) {
+                        if (!(isset($oldData[$key]) && isset($oldData[$key][$value]))) {
+                            $adapter->insert($dataTable, $item);
+                        }
+                    }
+                }
+            } else {
+                foreach ($data as $key => $item) {
+                    if (!isset($oldData[$key])) {
+                        $adapter->insert($dataTable, $item);
+                    } else {
+                        $adapter->update($dataTable, $item, array(
+                            $adapter->quoteInto($modelIdAttributeCode.' = ?', $modelId), 
+                            $adapter->quoteInto($dataKeyAttributeCode.' = ?', $key), 
+                        ));
+                    }
+                }
+            }
+        }
+        return $this;
+    }
+    /**
+     * Add child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param array $data
+     * @param string $dataAttributeCode
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function addChildData($model, $modelClass, $array, $dataAttributeCode)
+    {
+        if (!$model || !($model instanceof $modelClass)) {
+            return $this;
+        }
+        if (!isset($array[$dataAttributeCode]) || !$array[$dataAttributeCode]) {
+            $model->setData($dataAttributeCode, array());
+        }
+        return $this;
+    }
+    /**
+     * Load child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function loadChildData(
+        $model, $modelClass, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    )
+    {
+        if (
+            !$model || 
+            !($model instanceof $modelClass) || 
+            $model->hasData($dataAttributeCode)
+        ) {
+            return $this;
+        }
+        $resource   = $model->getResource();
+        $dataTable  = $resource->getTable($dataTableName);
+        $adapter    = $resource->getWriteConnection();
+        $select     = $adapter->select()
+            ->from($dataTable)
+            ->where($modelIdAttributeCode.' = ?', $model->getId());
+        $query      = $adapter->query($select);
+        $data       = array();
+        while ($item = $query->fetch()) {
+            $value           = $item[$dataValueAttributeCode];
+            if ($dataValueType == 'string') {
+                $data[] = $value;
+            } else {
+                $data[$value]  = $value;
+            }
+        }
+        $model->setData($dataAttributeCode, $data);
+        return $this;
+    }
+    /**
+     * Load child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataKeyAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function loadChildData2(
+        $model, $modelClass, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataKeyAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    ) 
+    {
+        if (
+            !$model || 
+            !($model instanceof $modelClass) || 
+            $model->hasData($dataAttributeCode)
+        ) {
+            return $this;
+        }
+        $resource       = $model->getResource();
+        $dataTable      = $resource->getTable($dataTableName);
+        $adapter        = $resource->getWriteConnection();
+        $select         = $adapter->select()
+            ->from($dataTable)
+            ->where($modelIdAttributeCode.' = ?', $model->getId());
+        $query          = $adapter->query($select);
+        $data           = array();
+        while ($item = $query->fetch()) {
+            $key            = $item[$dataKeyAttributeCode];
+            $value          = $item[$dataValueAttributeCode];
+            if ($dataValueType == 'array') {
+                $data[$key][$value] = $value;
+            } else {
+                $data[$key]  = $value;
+            }
+        }
+        $model->setData($dataAttributeCode, $data);
+        return $this;
+    }
+    /**
+     * Load collection child data
+     * 
+     * @param Varien_Data_Collection_Db $collection
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function loadCollectionChildData(
+        $collection, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    )
+    {
+        if (!$collection) {
+            return $this;
+        }
+        $modelIds = array();
+        foreach ($collection as $model) {
+            array_push($modelIds, $model->getId());
+        }
+        if (!count($modelIds)) {
+            return $this;
+        }
+        $dataTable  = $collection->getTable($dataTableName);
+        $adapter    = $collection->getConnection();
+        $select     = $adapter->select()
+            ->from($dataTable)
+            ->where($adapter->quoteInto($modelIdAttributeCode.' IN (?)', $modelIds));
+        $query      = $adapter->query($select);
+        $modelData  = array();
+        while ($item = $query->fetch()) {
+            $modelId    = $item[$modelIdAttributeCode];
+            $value      = $item[$dataValueAttributeCode];
+            if ($dataValueType == 'string') {
+                $modelData[$modelId][] = $value;
+            } else {
+                $modelData[$modelId][$value] = $value;
+            }
+        }
+        foreach ($collection as $model) {
+            $modelId  = $model->getId();
+            $data     = array();
+            if (isset($modelData[$modelId])) {
+                $data = $modelData[$modelId];
+            }
+            $model->setData($dataAttributeCode, $data);
+        }
+        return $this;
+    }
+    /**
+     * Load collection child data
+     * 
+     * @param Varien_Data_Collection_Db $collection
+     * @param string $modelIdAttributeCode
+     * @param string $dataTableName
+     * @param string $dataAttributeCode
+     * @param string $dataKeyAttributeCode
+     * @param string $dataValueAttributeCode
+     * @param string $dataValueType
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function loadCollectionChildData2(
+        $collection, $modelIdAttributeCode, 
+        $dataTableName, $dataAttributeCode, $dataKeyAttributeCode, $dataValueAttributeCode, $dataValueType = 'string'
+    )
+    {
+        if (!$collection) {
+            return $this;
+        }
+        $modelIds = array();
+        foreach ($collection as $model) {
+            array_push($modelIds, $model->getId());
+        }
+        if (count($modelIds)) {
+            $dataTable      = $collection->getTable($dataTableName);
+            $adapter        = $collection->getConnection();
+            $select         = $adapter->select()
+                ->from($dataTable)
+                ->where($adapter->quoteInto($modelIdAttributeCode.' IN (?)', $modelIds));
+            $query          = $adapter->query($select);
+            $modelData      = array();
+            while ($item = $query->fetch()) {
+                $modelId        = $item[$modelIdAttributeCode];
+                $key            = $item[$dataKeyAttributeCode];
+                $value          = $item[$dataValueAttributeCode];
+                if ($dataValueType == 'array') {
+                    $modelData[$modelId][$key][$value] = $value;
+                } else {
+                    $modelData[$modelId][$key] = $value;
+                }
+            }
+            foreach ($collection as $model) {
+                $modelId        = $model->getId();
+                $data           = array();
+                if (isset($modelData[$modelId])) {
+                    $data = $modelData[$modelId];
+                }
+                $model->setData($dataAttributeCode, $data);
+            }
+        }
+        return $this;
+    }
+    /**
+     * Remove child data
+     * 
+     * @param Mage_Core_Model_Abstract $model
+     * @param string $modelClass
+     * @param string $dataAttributeCode
+     * 
+     * @return Innoexts_Core_Helper_Model
+     */
+    public function removeChildData($model, $modelClass, $dataAttributeCode)
+    {
+        if (!$model || !($model instanceof $modelClass)) {
+            return $this;
+        }
+        $model->unsetData($dataAttributeCode);
+        return $this;
+    }
+}

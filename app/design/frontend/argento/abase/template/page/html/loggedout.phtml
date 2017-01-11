@@ -1,0 +1,139 @@
+<div class="block1">
+	<div class="bk-image">
+		<div class="bk-title">
+			<h1>Saúde Animal</h1>
+		</div>
+		<div class="bk-text">
+			<div class="bk-text-content">
+				<p>A Abase fornece uma ampla linha de produtos para cuidar, prolongar e melhorar a vida dos animais de companhia e de produção.</p>
+
+				<div class="bk-text-link">
+					<a id="lk-block1" href="#">Saiba mais</a>
+					<i class="fa fa-chevron-down fa-2x"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block2 default-page-width" id="block2">
+	<h2>NOSSA LINHA DE PRODUTOS</h2>
+
+	<div class="line">&nbsp;</div>
+</div>
+<div class="block3 full-page-width">
+	<ul>
+		<li>
+			<a href="/aves?departamento=368" title="Aves">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-1.png'); ?>"/>
+
+				<div class="text"><span>Aves</span></div>
+			</a>
+		</li>
+		<li>
+			<a href="/diagnosticos?departamento=370" title="Diagnósticos">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-2.png'); ?>"/>
+
+				<div class="text"><span>Diagnósticos</span></div>
+			</a>
+		</li>
+		<li>
+			<a href="/pet?departamento=367" title="Pet">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-3.png'); ?>"/>
+
+				<div class="text"><span>Pet</span></div>
+			</a>
+		</li>
+		<li>
+			<a href="/suinos?departamento=369" title="Suínos">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-4.png'); ?>"/>
+
+				<div class="text"><span>Suínos</span></div>
+			</a>
+		</li>
+		<li>
+			<a href="/bovinos?departamento=371" title="Bovinos">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-5.png'); ?>"/>
+
+				<div class="text"><span>Bovinos</span></div>
+			</a>
+		</li>
+		<li>
+			<a href="#" title="Todos os Produtos" class="login-box-marker">
+				<img alt="" src="<?php echo $this->getSkinUrl('images/institucionais/home-3-6.png'); ?>"/>
+
+				<div class="text"><span>Todos os Produtos</span></div>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="block2 default-page-width">
+	<div class="logo"><img alt="Logo" src="<?php echo (Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'logos/' . Mage::getStoreConfig('design/header/logo_src')) ?>"/></div>
+	<div class="line">&nbsp;</div>
+	<p>A Abase Com&eacute;rcio e Representa&ccedil;&otilde;es LTDA, fundada em 1990, tem como miss&atilde;o representar e
+		distribuir produtos de empresas que atendem &agrave;s necessidades do mercado veterin&aacute;rio, sempre focada em
+		qualidade e pontualidade na entrega. Sua estrutura disp&otilde;e de uma &aacute;rea de armazenagem de 2100 m&sup2;,
+		com capacidade para armazenar produtos secos e perec&iacute;veis em temperatura controlada. Seu sistema diferenciado
+		de qualidade e log&iacute;stica permite que os produtos sejam entregues em condi&ccedil;&otilde;es ideais e
+		integridade preservada em tempo recorde.</p>
+</div>
+<div class="block4 full-page-width">
+	<div class="bk-image">
+		<div class="bk-text">
+			<div class="bk-text-content1">
+				<p class="main-text">
+					<i class="fa fa-heart fa-2x"></i><br>
+					A Abase dispõe de uma ampla linha de produtos para cuidar da
+					saúde e do bem-estar dos bichinhos de estimação</p>
+			</div>
+		</div>
+		<a class="lk-block4 lk-default" href="<?php echo Mage::getUrl('customer/account/create') ?>">Faça o seu cadastro</a>
+		<div class="logo"><img alt="Logo" src="<?php echo (Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'logos/' . Mage::getStoreConfig('design/header/logo_src')) ?>"/></div>
+	</div>
+</div>
+
+<div class="block2 default-page-width">
+	<h2>MARCAS</h2>
+
+	<div class="line">&nbsp;</div>
+</div>
+
+<?php echo $this->getChildHtml('cat_list_2') ?>
+
+<div class="block2 default-page-width">
+	<h2>ENTRE EM CONTATO</h2>
+
+	<div class="line">&nbsp;</div>
+</div>
+
+<script>
+	jQuery(document).ready(function () {
+		jQuery('#lk-block1').click(function (el) {
+			el.preventDefault();
+			jQuery('html,body').animate({scrollTop: jQuery("#block2").offset().top}, 'slow');
+			return false;
+		});
+	});
+
+	jQuery(document).ready(function () {
+		jQuery('.link-brands').each(function(el) {
+			jQuery(this).unbind('click');
+		});
+
+		jQuery('.link-brands').click(function (el) {
+			el.preventDefault();
+
+			sendAfterLoginUrl(jQuery(this).attr('href'));
+
+			jQuery.featherlight(jQuery('#account-login-box'));
+			return false;
+
+		});
+	});
+
+	function sendAfterLoginUrl(url) {
+		jQuery.post(
+			'<?php echo str_replace('https', 'http', 'customer/account/loginBoxSendAfterUrlPost') ?>',
+			{url: url});
+	}
+
+</script>

@@ -1,0 +1,64 @@
+<include_layout version="0.1.0">
+
+    <attributemenu_index_index ifhandle="customer_logged_out">
+        <update handle="page_one_column"/>
+
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/attributemenu/content/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_category_view/1.less</name></action>
+        </reference>
+
+        <remove name="customer.address"/>
+        <reference name="content">
+            <block type="fvets_attributemenu/content" name="attributemenu.content" template="attributemenu/content/1.phtml" />
+        </reference>
+
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>page/html/breadcrumbs/1.phtml</template></action>
+        </reference>
+    </attributemenu_index_index>
+
+    <attributemenu_index_index ifhandle="customer_logged_in">
+        <update handle="page_two_columns_left"/>
+        <remove name="customer.address"/>
+        <remove name="subcategories" />
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>page/html/breadcrumbs/1.phtml</template></action>
+        </reference>
+
+        <!--fazendo o handler se comportar como uma layered normal-->
+
+        <update handle="catalog_category_layered" />
+
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/blocks/attributemenu/content/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/attributemenu_index_index/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/category/grid/2.less</name></action>
+
+            <action method="addItem"><type>js</type><name>jquery/jquery.cookie.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_category_view/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/grid/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/list/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/catalog/product/list/toolbar/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/tm/prolabel/1.less</name></action>
+        </reference>
+
+        <reference name="content">
+            <!--block type="fvets_catalog/category_brands_grid" name="cat-list" template="catalog/category/grid/3.phtml" before="-"/-->
+        </reference>
+
+        <reference name="category.products">
+            <action method="setTemplate"><template>catalog/category/view/1.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <action method="setTemplate"><template>catalog/product/list/1.phtml</template></action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate"><template>catalog/product/list/toolbar/1.phtml</template></action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate"><template>page/html/pager/1.phtml</template></action>
+        </reference>
+    </attributemenu_index_index>
+
+</include_layout>

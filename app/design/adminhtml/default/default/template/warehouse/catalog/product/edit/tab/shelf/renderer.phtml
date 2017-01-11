@@ -1,0 +1,58 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+<?php $helper               = $this->helper('warehouse') ?>
+<?php $element              = $this->getElement(); ?>
+<?php $product              = $this->getProduct(); ?>
+<?php $elementHtmlId        = $element->getHtmlId(); ?>
+<?php $elementName          = $element->getName(); ?>
+<?php $elementClass         = $element->getClass(); ?>
+<?php $elementReadonly      = $element->getReadonly(); ?>
+<tr>
+    <td colspan="10" class="grid shelf">
+    <table cellspacing="0" class="data border" id="shelf_table">
+        <col width="150" />
+        <col width="600" />
+        <thead>
+            <tr class="headings">
+                <th><?php echo $helper->__('Warehouse'); ?></th>
+                <th>
+                    <?php echo $helper->__('Name'); ?><br/>
+                    <?php echo $helper->__('[GLOBAL]') ?>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="<?php echo $elementHtmlId ?>_container">
+            <?php foreach ($this->getValues() as $item) : ?>
+            <?php $stockId = $item['stock_id']; ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][stock_id]" value="<?php echo $stockId ?>"/>
+                    <?php echo $helper->getWarehouseTitleByStockId($stockId) ?>
+                </td>
+                <td>
+                    <input class="<?php echo $elementClass ?> name" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][name]" value="<?php echo $item['name'] ?>"/>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    </td>
+</tr>

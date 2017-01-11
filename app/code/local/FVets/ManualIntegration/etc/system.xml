@@ -1,0 +1,44 @@
+<config>
+    <tabs>
+        <fvets translate="label" module="core">
+            <label>4Vets</label>
+            <sort_order>9999999</sort_order>
+        </fvets>
+    </tabs>
+    <sections>
+        <manualintegration translate="label" module="fvets_manualintegration">
+            <class>separator-top</class>
+            <label>Manual Integration</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_manualintegration">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <public_key translate="label" module="fvets_manualintegration">
+                            <label>Chave Pública</label>
+                            <frontend_type>textarea</frontend_type>                            
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </public_key>
+                        <private_key translate="label" module="fvets_manualintegration">
+                            <label>Chave Privada</label>
+                            <frontend_type>textarea</frontend_type>                            
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </private_key>
+                    </fields>
+                </general>
+            </groups>
+        </manualintegration>
+    </sections>
+</config>

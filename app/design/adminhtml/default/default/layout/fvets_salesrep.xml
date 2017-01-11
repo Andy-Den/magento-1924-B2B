@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_fvets_salesrep_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>customer/fvets_salesrep/salesrep</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_salesrep/adminhtml_salesrep_index" name="fvets_salesrep_index" />
+        </reference>
+    </adminhtml_fvets_salesrep_index>
+    <adminhtml_fvets_salesrep_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_grid" name="fvets_salesrep_grid"/>
+        </block>
+    </adminhtml_fvets_salesrep_grid>
+    <!-- Salesrep add/edit action -->
+    <adminhtml_fvets_salesrep_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>customer/fvets_salesrep/salesrep</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit" name="fvets_salesrep_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tabs" name="fvets_salesrep_tabs"></block>
+        </reference>
+    </adminhtml_fvets_salesrep_edit>
+
+    <adminhtml_fvets_salesrep_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tab_categories" name="salesrep.edit.tab.categories"/>
+        </block>
+    </adminhtml_fvets_salesrep_categories>
+    <adminhtml_fvets_salesrep_catalog_category_salesrepsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_catalog_category_tab_salesrep" name="category.edit.tab.salesrep"/>
+        </block>
+    </adminhtml_fvets_salesrep_catalog_category_salesrepsgrid>
+
+    <adminhtml_fvets_salesrep_region_salesreps>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_region_edit_tab_salesrep" name="region.edit.tab.salesrep"/>
+            <block type="adminhtml/widget_grid_serializer" name="salesrep_grid_serializer">
+                <reference name="salesrep_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>region.edit.tab.salesrep</grid_block_name>
+                        <data_callback>getSelectedSalesreps</data_callback>
+                        <hidden_input_name>salesreps</hidden_input_name>
+                        <reload_param_name>region_salesreps</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_fvets_salesrep_region_salesreps>
+    <adminhtml_fvets_salesrep_region_salesrepsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_region_edit_tab_salesrep" name="region.edit.tab.salesrep"/>
+        </block>
+    </adminhtml_fvets_salesrep_region_salesrepsgrid>
+    <adminhtml_fvets_salesrep_regions>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tab_region" name="salesrep.edit.tab.region"/>
+            <block type="adminhtml/widget_grid_serializer" name="region_grid_serializer">
+                <reference name="region_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>salesrep.edit.tab.region</grid_block_name>
+                        <data_callback>getSelectedRegions</data_callback>
+                        <hidden_input_name>regions</hidden_input_name>
+                        <reload_param_name>salesrep_regions</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_fvets_salesrep_regions>
+    <adminhtml_fvets_salesrep_regionsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tab_region" name="salesrep.edit.tab.region"/>
+        </block>
+    </adminhtml_fvets_salesrep_regionsgrid>
+
+    <adminhtml_fvets_salesrep_customer_integrarep>
+        <block type="fvets_salesrep/adminhtml_customer_edit_tab_integrarep" name="customer.edit.tab.integrarep" output="toHtml"/>
+    </adminhtml_fvets_salesrep_customer_integrarep>
+
+
+    <adminhtml_fvets_salesrep_customers>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tab_customer" name="salesrep.edit.tab.customer"/>
+            <block type="adminhtml/widget_grid_serializer" name="customer_grid_serializer">
+                <reference name="customer_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>salesrep.edit.tab.customer</grid_block_name>
+                        <data_callback>getSelectedCustomers</data_callback>
+                        <hidden_input_name>customers</hidden_input_name>
+                        <reload_param_name>salesrep_customers</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_fvets_salesrep_customers>
+    <adminhtml_fvets_salesrep_customersgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="fvets_salesrep/adminhtml_salesrep_edit_tab_customer" name="salesrep.edit.tab.customer"/>
+        </block>
+    </adminhtml_fvets_salesrep_customersgrid>
+</layout>

@@ -1,0 +1,26 @@
+.page
+{
+  .footer-cms-container
+  {
+    color: @defaultTextColor;
+    border-top: @defaultBorder;
+    background: url("@{skinUrl}images/img-footer.png") no-repeat @defaultFooterBackgroundColor;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer-cms-container {
+    .footer-cms {
+      padding-top: 0;
+    }
+    .footer-contacts {
+      div {
+        float: none !important;
+        margin-left: auto !important;
+        max-width: auto !important;
+        min-width: auto !important;
+        padding: 0 5%;
+      }
+    }
+  }
+}

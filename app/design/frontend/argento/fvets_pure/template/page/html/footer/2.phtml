@@ -1,0 +1,9 @@
+<div class="pre-footer-cms-container">
+	<?php echo $this->getChildHtml('up_footer'); ?>
+	<div class="footer-cms-container default-page-width">
+		<div class="footer-cms">
+			<?php echo $this->getChildHtml('footer_links'); ?>
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_contacts')->toHtml(); ?>
+		</div>
+	</div>
+</div>

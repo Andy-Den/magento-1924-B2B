@@ -1,0 +1,189 @@
+<?php
+	$_customer = $this->getCustomer();
+	$_billing = $this->getBillingAddress();
+?>
+
+<div class="success-header default-page-width hidden-sm show-md">
+
+	<div class="text-highlight">Informações da sua loja</div>
+	<div class="clear"></div>
+	<div class="">
+		<div  class="col-sm-12 col-md-4">
+
+			<div class="text-highlight"><?php echo $_customer->getName(); ?></div>
+			<div class="text-highlight-regular">CPF: <?php echo $_customer->getCpf(); ?></div>
+			<div class="text-highlight-regular">Tel: <?php echo $_customer->getTelefone(); ?></div>
+			<div class="text-highlight-regular">Email: <?php echo $_customer->getEmail(); ?></div>
+		</div>
+		<div  class="col-sm-12 col-md-4">
+			<div class="text-highlight">Endereço de entrega</div>
+			<div class="text-highlight-regular"><?php echo implode(', ', $_billing->getStreet()); ?></div>
+			<div class="text-highlight-regular"><?php echo $_billing->getBairro(); ?> - <?php echo $_billing->getPostcode(); ?></div>
+			<div class="text-highlight-regular"><?php echo $_billing->getCity(); ?> - <?php echo $_billing->getRegion(); ?></div>
+		</div>
+		<div  class="col-sm-12 col-md-4">
+			<?php if ($_customer->getTipopessoa() == 'PJ') : ?>
+				<div class="text-highlight">Você comprou com o CNPJ</div>
+				<div class="text-highlight-regular"><?php echo $_customer->getCnpj(); ?></div>
+			<?php endif; ?>
+		</div>
+	</div>
+
+	<div class="clear"></div>
+
+</div>
+
+<div class="box1 align-sm-center hidden-md show-success-header">
+	Informações da sua loja <i class="fa fa-angle-down"></i>
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.show-success-header').click(function(e) {
+				e.preventDefault();
+				jQuery('.success-header').slideToggle();
+				if (jQuery('.show-success-header .fa').hasClass('fa-angle-down')) {
+					jQuery('.show-success-header .fa').removeClass('fa-angle-down');
+					jQuery('.show-success-header .fa').addClass('fa-angle-up');
+				} else {
+					jQuery('.show-success-header .fa').addClass('fa-angle-down');
+					jQuery('.show-success-header .fa').removeClass('fa-angle-up');
+				}
+			})
+		})
+	</script>
+</div>
+
+<div class="inner default-page-width">
+
+	<div class="first-row align-sm-center align-md-left">
+
+		<div class="logo"><a href="<?php echo $this->getUrl() ?>"><img src="<?php echo $this->getLogo(); ?>" alt="<?php echo Mage::helper('page')->getLogoAlt() ?>" /></a></div>
+		<div class="title"><h1><?php echo $this->__('Confirmação') ?></h1></div>
+
+		<div class="clear"></div>
+
+		<!--	validação de limite de crédito e títulos vencidos-->
+		<?php
+		$blockCheckoutOnCreditLimit = Mage::getStoreConfig('checkout_split/financial/checkout_block_on_credit_limit');
+		$customerHasPendencies = false;
+
+		if (!$blockCheckoutOnCreditLimit) {
+			$customerCreditLimit = $this->getCustomer()->getCreditLimit();
+			if ($customerCreditLimit) {
+				$totalSplitOrdersAmmount = Mage::getSingleton('checkout/session')->getTotalSplitOrdersAmmount();
+				if ($totalSplitOrdersAmmount > $customerCreditLimit) { ?>
+					<div class="credit-limit-message default-page-width">
+						<p>
+							<?php
+							echo Mage::getStoreConfig('checkout_split/financial/checkout_block_on_credit_limit_message');
+							$customerHasPendencies = true;
+							?>
+						</p>
+					</div>
+				<?php }
+			}
+		}
+
+		$blockCheckoutOnPaymentBlock = Mage::getStoreConfig('checkout_split/financial/checkout_block_on_payment_block');
+
+		if (!$blockCheckoutOnPaymentBlock) {
+			$customerPaymentBlock = $this->getCustomer()->getPaymentBlock();
+			if ($customerPaymentBlock) { ?>
+				<div class="payment-block-message default-page-width">
+					<p>
+						<?php
+						echo Mage::getStoreConfig('checkout_split/financial/checkout_block_on_payment_block_message');
+						$customerHasPendencies = true;
+						?>
+					</p>
+				</div>
+			<?php }
+		} ?>
+<!--		fim-->
+
+		<div class="clear"></div>
+		<hr class="hidden-md" />
+		<br />
+
+		<?php if ($this->getCheckoutAlertMessage() != '') : ?>
+			<div class="importantMessage align-sm-left">
+				<?php echo $this->getCheckoutAlertMessage(); ?>
+			</div>
+		<?php endif; ?>
+		
+		<?php if(!$customerHasPendencies) { ?>
+		<div>
+			<h1><?php echo $this->__('Todos os seus pedidos foram efetuados com sucesso!'); ?> <i class="fa fa-check"></i></h1>
+		</div>
+		<?php } else { ?>
+			<h1><?php echo $this->__('O seu pedido foi criado! Porém existem pendências'); ?> <i class="fa fa-check"></i></h1>
+		<?php } ?>
+
+		<?php /*echo $this->getMessagesBlock()->getGroupedHtml()*/ ?>
+
+		<div class="text-highlight-regular">
+			<?php echo $this->__('As confirmações dos pedidos foram enviadas para o e-mail:'); ?>
+			<br />
+			<?php echo $this->getCustomer()->getEmail(); ?>
+		</div>
+		<br />
+		<div class="notice-list">
+			<div class="col-sm-12 col-md-6 text-highlight-regular col-1">
+				<div class=""><strong>Atenção</strong></div>
+				<ul>
+					<li>
+						- O boleto será enviado junto com a mercadoria
+					</li>
+					<li>
+						- Os pedidos estão sujeitos à análise de crédito
+					</li>
+				</ul>
+			</div>
+
+			<div class="hidden-sm show-md col-md-6">
+				<button type="button" class="button btn-sub-action-success" title="<?php echo $this->__('Back to homepage') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><i class="fa fa-chevron-left"></i> <?php echo $this->__('Back to homepage') ?></button>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<?php /*<br /><br />
+
+		<div class="box1 align-sm-center multiuser">
+			<h2>QUE TAL APROVEITAR E COMPRAR PRODUTOS PARA SUAS OUTRAS LOJAS/FILIAIS?</h2>
+			<div class="col2-set">
+				<div class="col-sm-12 col-md-6 align-md-right">
+					<select class="">
+						<option>48.851.812/0001-77 - Pet Shop auau</option>
+					</select>
+				</div>
+				<div class="col-sm-12 col-md-6 align-md-left">
+					<button type="button" class="button btn-main-action-success"><?php echo $this->__('Comprar com a loja selecionada'); ?> <i class="fa fa-chevron-right"></i></button>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<br />
+		</div>*/ ?>
+
+	</div>
+
+	<div class="summary">
+
+		<?php echo $this->getChildHtml('checkout_split_success_order'); ?>
+
+	</div>
+
+	<div class="align-sm-center align-md-left">
+		<div class="col-md-6 text-highlight-regular">
+			<div>Caso tenha alguma dúvida, entre em contato</div>
+			<div><?php echo Mage::getStoreConfig('general/store_information/phone'); ?></div>
+			<div><?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?></div>
+		</div>
+		<div class="hidden-md"><br /></div>
+		<div class="col-md-6 align-md-right">
+			<button type="button" class="button btn-sub-action-success" title="<?php echo $this->__('Back to homepage') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><i class="fa fa-chevron-left"></i> <?php echo $this->__('Back to homepage') ?></button>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</div>
+
+<?php echo $this->getChildHtml('checkout-password-change');?>

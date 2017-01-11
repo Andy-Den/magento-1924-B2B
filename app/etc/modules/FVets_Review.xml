@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FVets_Review>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Review />
+            </depends>
+        </FVets_Review>
+    </modules>
+</config>

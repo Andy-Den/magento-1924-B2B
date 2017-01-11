@@ -1,0 +1,210 @@
+@import "../../../mixins";
+
+.brandContainer {
+  .block-title {
+    display: none;
+  }
+  .brands-list {
+    li {
+      max-width: 25%;
+    }
+  }
+}
+
+.brand-type-header {
+  .bk-image {
+    width: 100%;
+    height: 500px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+
+    .bk-text {
+      color: #fff!important;
+      width: 50%;
+      .bk-text-content {
+        width: 475px;
+        float: right;
+        margin-top: 10%;
+
+        .cover-image-link {
+          color: #fff!important;
+          border-color: #fff!important;
+        }
+
+        h3 {
+          color: #fff!important;
+        }
+
+        img {
+          margin-top: 33%;
+        }
+      }
+    }
+  }
+}
+
+//config para logado
+.attributemenu-index-index {
+  &.logged-in {
+    .main {
+      width: @defaultPageWidth;
+      margin: 0 auto;
+    }
+  }
+}
+
+.brand-types {
+  margin-top: 5%!important;
+
+  h2 {
+    text-align: center;
+  }
+
+  .line {
+    border-top: 3px solid @defaultColor4;
+    margin: 2% 0;
+  }
+
+  .brand {
+
+    margin-top: 5%;
+
+    &.not-first {
+      border-top: 1px solid @defaultBorderBoxColor;
+      margin-top: 5%;
+      padding-top: 5%;
+    }
+
+    .image {
+      float: left;
+      width: 30%;
+      img {
+        box-sizing: border-box;
+        padding: 0 15% 15% 0;
+        width: 100%;
+      }
+    }
+
+    .text {
+      float: left;
+      width: 70%;
+      padding-top: 2%;
+      box-sizing: border-box;
+      p {
+
+      }
+    }
+
+    &.unavailable {
+      .grayScale();
+      .opacity(30);
+    }
+  }
+}
+
+.back-container {
+  margin-top: 10%;
+}
+
+.buy-link {
+    border: 1px solid @defaultColor1;
+    padding: 12px 40px 12px 40px;
+    box-sizing: border-box;
+    display: block;
+    max-width: 250px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+@media (max-width: 950px) {
+  div.brand-type-header {
+    div.bk-image {
+      div.bk-text {
+        div.bk-text-content {
+          box-sizing: border-box;
+          padding: 2%;
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  div.brand-types {
+    div.brand {
+      div.image {
+        box-sizing: border-box;
+        padding: 2%;
+        img {
+        }
+      }
+      div.text {
+        box-sizing: border-box;
+        padding: 2%;
+        .buy-link {
+        }
+      }
+    }
+
+    .back-container {
+      padding-left: 2%;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+
+  div.brand-type-header {
+    div.bk-image {
+      background-position: 75% center;
+      div.bk-text {
+        width: 100% !important;
+        div.bk-text-content {
+          box-sizing: border-box;
+          padding: 2%;
+          width: 100% !important;
+          .buy-link {
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+
+  div.brand-types {
+    div.brand {
+      div.image {
+        width: 100%;
+        text-align: center;
+        img {
+          padding: 0;
+          max-width: 300px;
+        }
+      }
+      div.text {
+        width: 100%;
+        text-align: center;
+        padding: 2%;
+        .buy-link {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    div.back-container {
+      text-align: center;
+    }
+  }
+}
+
+.bannerEquinos {
+  display: block;
+  width: 100%;
+  float: left;
+}
+.bannerEquinos img {
+  display: block;
+  width: 100%;
+}

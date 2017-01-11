@@ -1,0 +1,79 @@
+<?php
+/**
+ * Customer Login Template for Community Edition 1.7
+ *
+ * @author     Design:Slider GbR <magento@design-slider.de>
+ * @copyright  (C)Design:Slider GbR <www.design-slider.de>
+ * @license    OSL <http://opensource.org/licenses/osl-3.0.php>
+ * @link       http://www.design-slider.de/magento-onlineshop/magento-extensions/private-sales/
+ * @package    DS_PrivateSales
+ */
+
+$helper = Mage::helper('privatesales');
+/* @var $helper DS_PrivateSales_Helper_Data */
+
+$canShowRegPanel = $helper->canShowRegistrationLoginPanel();
+$customRegPanel = ($helper->getShowRegistrationLoginPanel()==2);
+$customRegHeader = $helper->getRegistrationPanelHeader();
+$customRegText = $helper->getRegistrationPanelText();
+$canShowRegButton = $helper->canShowRegistrationPanelButton();
+$customButtonText = $helper->getRegistrationPanelButtonText();
+$isForgotPasswordEnabled = $helper->canShowForgotPassword();
+$isRegistrationEnabled = $helper->canShowRegistration();
+?>
+<div class="hidden">
+	<div id="newsletter-featherlight-login" class="newsletter-featherlight-login">
+		<?php /* Extensions placeholder */ ?>
+		<?php echo $this->getChildHtml('customer.form.login.extra')?>
+		<form action="<?php echo Mage::getBaseUrl() . 'customer/account/loginPost' ?>" method="post" id="login-lightbox-form">
+			<?php echo $this->getBlockHtml('formkey'); ?>
+			<div>
+				<div class="registered-users">
+					<div class="title">
+						<h2>Faça seu login</h2>
+						<div>
+							Você precisa fazer seu login para navegar pelo site.
+						</div>
+					</div>
+					<div class="content">
+						<ul class="form-list">
+							<li class="input-group featured">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" placeholder="email" class="input-text required-entry validate-email" title="<?php echo Mage::helper('customer')->__('Email Address') ?>" />
+							</li>
+							<li class="input-group featured">
+								<span class="input-group-addon"><i class="fa fa-key"></i></span>
+								<input type="password" name="login[password]" id="pass" placeholder="senha" class="input-text required-entry" title="<?php echo Mage::helper('customer')->__('Email Address') ?>" />
+							</li>
+							<?php echo $this->getChildHtml('form.additional.info'); ?>
+						</ul>
+						<div class="panel-forgot-password">
+							<a class="forgot-password" href="<?php echo Mage::getUrl('customer/account/forgotpassword') ?>">Esqueceu sua senha?</a>
+						</div>
+						<br />
+						<div>
+							<button type="submit" class="button btn-superAction" title="<?php echo Mage::helper('customer')->__('Fazer login') ?>" name="send" id="send2"><span><span><?php echo Mage::helper('customer')->__('Fazer login') ?></span></span></button>
+						</div>
+						<?php $canShowRegPanel = true; ?>
+						<?php if ($canShowRegPanel): ?>
+							<div class="new-users">
+								<h4><span>OU</span></h4>
+								<div class="clear"></div>
+								<?php if (!$customRegPanel || $canShowRegButton): ?>
+									<button type="button" title="<?php echo ($customRegPanel && strlen($customButtonText)) ? $customButtonText : Mage::helper('customer')->__('Register') ?>" class="button btn-doToAction" onclick="window.location='<?php echo Mage::getBaseUrl() . 'customer/account/create' ?>';"><span><span><?php echo ($customRegPanel && strlen($customButtonText)) ? $customButtonText : Mage::helper('customer')->__('Register') ?></span></span></button>
+								<?php else: ?>
+									<button type="button" class="button btn-doToAction" style="visibility:hidden;" disabled="disabled"><span><span></span></span></button>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript">
+			//<![CDATA[
+			var dataForm = new VarienForm('login-lightbox-form', true);
+		</script>
+
+	</div>
+</div>

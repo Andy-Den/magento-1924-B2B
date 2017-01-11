@@ -1,0 +1,26 @@
+<?php
+/**
+ * FVets_SalesRule extension
+ * 
+ * @category       FVets
+ * @package        FVets_SalesRule
+ */
+/**
+ * SalesRule list template on customer page
+ *
+ * @category    FVets
+ * @package     FVets_SalesRule
+ * @author      Douglas Borella Ianitsky
+ */
+?>
+<?php $salesrules = $this->getSalesruleCollection();?>
+<?php if ($salesrules && $salesrules->count() > 0) :?>
+<div class="box-collateral box-salesrules box-up-sell">
+    <?php foreach ($salesrules as $_salesrule) : ?>
+        <div class="item">
+            <?php echo $_salesrule->getName();?>
+<br />
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

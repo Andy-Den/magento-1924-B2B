@@ -1,0 +1,8 @@
+<include_layout version="0.1.0">
+    <suggestpage_view>
+        <reference name="content">
+            <remove name="suggestpage.soldtogetherorder"></remove>
+            <remove name="suggestpage.soldtogethercustomer"></remove>
+        </reference>
+    </suggestpage_view>
+</include_layout>

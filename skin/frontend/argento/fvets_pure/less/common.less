@@ -1,0 +1,543 @@
+@import "mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+hr {
+  border-top: @border1;
+  border-bottom: medium none;
+}
+
+img {
+  border:none;
+}
+
+/*
+ * Widcards / Layout
+ */
+.clear {
+  clear:both;
+}
+
+.content-page-width {
+  width: @contentPageWidth;
+}
+
+.default-page-width {
+  width: @defaultPageWidth;
+  margin: 0 auto;
+}
+
+@media (max-width: @defaultPageWidth)
+{
+  .default-page-width {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.hidden-sm {
+  display: none;
+}
+
+@media (min-width: 641px) {
+  .hidden-md {
+    display: none;
+  }
+
+  .show-md {
+    display:block;
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden-lg {
+    display: none;
+  }
+
+  .show-lg {
+    display: block;
+  }
+}
+
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+  box-sizing: border-box;
+  float:left;
+  padding-left: 15px;
+  padding-right: 15px;
+  position:relative;
+  min-height: 1px;
+}
+
+.col-sm-1 { width: 8.33333333% }
+.col-sm-2 { width: 16.66666667%; }
+.col-sm-3 { width: 25%; }
+.col-sm-4 { width: 33.33333333%; }
+.col-sm-5 { width: 41.66666667%; }
+.col-sm-6 { width: 50%; }
+.col-sm-7 { width: 58.33333333%; }
+.col-sm-8 { width: 66.66666667%; }
+.col-sm-9 { width: 75%; }
+.col-sm-10 { width: 83.33333333%; }
+.col-sm-11 { width: 91.66666667%; }
+.col-sm-12 { width: 100%; }
+
+@media (min-width: 641px) {
+
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    box-sizing: border-box;
+    float:left;
+    padding-left: 15px;
+    padding-right: 15px;
+    position:relative;
+    min-height: 1px;
+  }
+
+  .col-md-1 { width: 8.33333333% }
+  .col-md-2 { width: 16.66666667%; }
+  .col-md-3 { width: 25%; }
+  .col-md-4 { width: 33.33333333%; }
+  .col-md-5 { width: 41.66666667%; }
+  .col-md-6 { width: 50%; }
+  .col-md-7 { width: 58.33333333%; }
+  .col-md-8 { width: 66.66666667%; }
+  .col-md-9 { width: 75%; }
+  .col-md-10 { width: 83.33333333%; }
+  .col-md-11 { width: 91.66666667%; }
+  .col-md-12 { width: 100%; }
+}
+
+@media (min-width: 768px) {
+
+  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    box-sizing: border-box;
+    float:left;
+    padding-left: 15px;
+    padding-right: 15px;
+    position:relative;
+    min-height: 1px;
+  }
+
+  .col-lg-1 { width: 8.33333333% }
+  .col-lg-2 { width: 16.66666667%; }
+  .col-lg-3 { width: 25%; }
+  .col-lg-4 { width: 33.33333333%; }
+  .col-lg-5 { width: 41.66666667%; }
+  .col-lg-6 { width: 50%; }
+  .col-lg-7 { width: 58.33333333%; }
+  .col-lg-8 { width: 66.66666667%; }
+  .col-lg-9 { width: 75%; }
+  .col-lg-10 { width: 83.33333333%; }
+  .col-lg-11 { width: 91.66666667%; }
+  .col-lg-12 { width: 100%; }
+}
+
+.row {margin-left:-15px; margin-right: -15px}
+
+/*
+ * Widcards / Texts
+ */
+
+//#texto-destaque
+.text-highlight {
+  font-size: @highlightTextSize;
+  color: @highlightTextColor;
+  font-weight: @highlightTextFontWeight;
+  text-transform: @highlightTextTransform;
+  text-decoration: @highlightTextDecoration;
+
+  &:hover {
+    @highlightTextHoverDecoration;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-highlight {
+    font-size:@mobileHighlightTextSize;
+  }
+}
+
+//#texto-destaque-regular
+.text-highlight-regular {
+  font-size: @highlightRegularTextSize;
+  color: @highlightRegularTextColor;
+  font-weight: @highlightRegularTextFontWeight;
+  text-transform: @highlightRegularTextFontTransform;
+  text-decoration: @highlightRegularTextDecoration;
+
+  &:hover {
+    @highlightRegularTextHoverDecoration;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-highlight-regular {
+    font-size:@mobileHighlightRegularTextSize;
+  }
+}
+
+.align-sm-center {
+  text-align: center;
+}
+
+.align-sm-left {
+  text-align: left;
+}
+
+.align-sm-right {
+  text-align: right;
+}
+
+@media (min-width: 641px) {
+  .align-md-center {
+    text-align: center;
+  }
+
+  .align-md-left {
+    text-align: left;
+  }
+
+  .align-md-right {
+    text-align: right;
+  }
+}
+
+@media (min-width: 769px) {
+  .align-lg-center {
+    text-align: center;
+  }
+
+  .align-lg-left {
+    text-align: left;
+  }
+
+  .align-lg-right {
+    text-align: right;
+  }
+}
+
+/**
+ * Titles
+ */
+
+h1, .h1 {
+  font-size: @titleH1Size;
+  color:@titleH1Color;
+  font-weight: @titleH1FontWeight;
+  text-transform: @titleH1TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h1, .h1 {
+    font-size: @mobileTitleH1Size;
+  }
+}
+
+h2, .h2 {
+  font-size: @titleH2Size;
+  color:@titleH2Color;
+  font-weight: @titleH2FontWeight;
+  text-transform: @titleH2TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h2, .h2 {
+    font-size: @mobileTitleH2Size;
+  }
+}
+
+h3, .h3 {
+  font-size: @titleH3Size;
+  color:@titleH3Color;
+  font-weight: @titleH3FontWeight;
+  text-transform: @titleH3TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h3, .h3 {
+    font-size: @mobileTitleH3Size;
+  }
+}
+
+h4, .h4 {
+  font-size: @titleH4Size;
+  color:@titleH4Color;
+  font-weight: @titleH4FontWeight;
+  text-transform: @titleH4TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h4, .h4 {
+    font-size: @mobileTitleH4Size;
+  }
+}
+
+h5, .h5 {
+  font-size: @titleH5Size;
+  color:@titleH5Color;
+  font-weight: @titleH5FontWeight;
+  text-transform: @titleH5TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h5, .h5 {
+    font-size: @mobileTitleH5Size;
+  }
+}
+
+h6, .h6 {
+  font-size: @titleH6Size;
+  color:@titleH6Color;
+  font-weight: @titleH6FontWeight;
+  text-transform: @titleH6TextTransform;
+  margin:0;
+}
+
+@media (max-width: 640px) {
+  h6, .h6 {
+    font-size: @mobileTitleH6Size;
+  }
+}
+
+/**
+ * Links
+ */
+a {
+  font-size: @defaultLinkSize;
+  color: @defaultLinkColor;
+  font-weight: @defaultLinkWeight;
+  text-transform: @defaultLinkTransform;
+  text-decoration: @defaultLinkDecoration;
+
+  &:hover {
+    text-decoration: @defaultLinkHoverDecoration;
+  }
+}
+
+a.highlight {
+  font-size: @highlightLinkSize;
+  color: @highlightLinkColor;
+  font-weight: @highlightLinkWeight;
+  text-transform: @highlightLinkTransform;
+  text-decoration: @highlightLinkDecoration;
+
+  &:hover {
+    text-decoration: @highlightLinkHoverDecoration;
+  }
+}
+
+@media (max-width: 640px) {
+  a {
+    font-size: @mobileDefaultLinkSize;
+  }
+
+  a.highlight {
+    font-size: @mobileHighlightLinkSize;
+  }
+}
+
+/*
+ * Widcards / Boxes
+ */
+
+.box1 {
+  background: @box1Background;
+  border: @box1Border;
+}
+
+.box2 {
+  background: @box2Background;
+  border: @box2Border;
+}
+
+.box3 {
+  background: @box3Background;
+  border: @box3Border;
+
+  * {
+    color: @box3Color;
+  }
+}
+
+.importantMessage {
+  background: @importantMessageBackground;
+  padding:10px 20px;
+}
+
+/**
+ * Buttons
+ */
+
+.button
+{
+  cursor:pointer;
+
+  &.btn-main-action
+  {
+    background: @btnMainActionBackground;
+    color: @btnMainActionColor;
+    box-shadow: @btnMainActionBoxShadow;
+    padding:@btnMainActionPadding;
+    border-radius: @btnMainActionBorderRadius;
+    border: @btnMainActionBorder;
+    width: @btnMainActionWidth;
+    text-transform: @btnMainActionTextTransform;
+    font-size: @btnMainActionFontSize;
+    font-weight: @btnMainActionFontWeight;
+
+    &:hover
+    {
+      box-shadow: @btnMainActionBoxShadow;
+      background:@btnMainActionHoverBackground;
+    }
+  }
+
+  &.btn-main-action-success
+  {
+    background: @btnMainActionSucessBackground;
+    color:@btnMainActionSucessColor;
+    box-shadow: @btnMainActionSucessBoxShadow;
+    padding:@btnMainActionSucessPadding;
+    border-radius: @btnMainActionSucessBorderRadius;
+    border:@btnMainActionSucessBorder;
+    width: 80%;
+    text-transform: @btnMainActionSucessTextTransform;
+    font-weight: @btnMainActionSucessFontWeight;
+    font-size: @btnMainActionSucessFontSize;
+
+    &:hover
+    {
+      box-shadow: @btnMainActionSucessHoverBoxShadow;
+      background:@btnMainActionSucessHoverBackground;
+    }
+  }
+
+  &.btn-sub-action
+  {
+    background: @btnSubActionBackground;
+    color: @btnSubActionColor;
+    box-shadow: @btnSubActionBoxShadow;
+    padding:@btnSubActionPadding;
+    border-radius: @btnSubActionBorderRadius;
+    border: @btnSubActionBorder;
+    width: @btnSubActionWidth;
+    text-transform: @btnSubActionTextTransform;
+    font-size: @btnSubActionFontSize;
+    font-weight: @btnSubActionFontWeight;
+
+    &:hover
+    {
+      box-shadow: @btnSubActionBoxShadow;
+      background: @btnSubActionHoverBackground;
+    }
+  }
+
+  &.btn-sub-action-success
+  {
+    background: @btnSubActionSuccessBackground;
+    color: @btnSubActionSuccessColor;
+    box-shadow: @btnSubActionSuccessBoxShadow;
+    padding:@btnSubActionSuccessPadding;
+    border-radius: @btnSubActionSuccessBorderRadius;
+    border: @btnSubActionSuccessBorder;
+    width: 80%;
+    text-transform: @btnSubActionSuccessTextTransform;
+    font-size: @btnSubActionSuccessFontSize;
+    font-weight: @btnSubActionSuccessFontWeight;
+
+    &:hover
+    {
+      box-shadow: @btnSubActionSuccessBoxShadow;
+      background: @btnSubActionHoverBackground;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .button
+  {
+    &.btn-main-action-success
+    {
+      width: 100%;
+    }
+
+    &.btn-sub-action-success
+    {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .button
+  {
+    &.btn-main-action-success
+    {
+      width: 100%;
+      font-size: @mobileBtnMainActionSucessFontSize;
+    }
+
+    &.btn-sub-action-success
+    {
+      width: 100%;
+      font-size: @mobileBtnSubActionSuccessFontSize;
+    }
+  }
+}
+
+/**
+ * Html elements
+ */
+
+select
+{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: @elSelectBackground;
+  border:@elSelectBorder;
+  font-size: @elSelectFontSize;
+  padding:@elSelectPadding;
+}
+
+/**
+ * Default structure
+ */
+
+body
+{
+  font-family: @defaultTextFontFamily;
+  font-size: @defaultTextFontSize;
+  color:@defaultTextColor;
+  font-weight: @defaultTextFontWeight;
+  text-transform: @defaultTextTransform;
+  text-decoration: @defaultTextDecoration;
+  line-height: 1.5;
+  box-sizing: border-box;
+
+  &:hover
+  {
+    text-decoration: @defaultTextHoverDecoration;
+  }
+
+  .page
+  {
+    .container
+    {
+      margin:0 auto;
+    }
+  }
+}
+
+@media (max-width: 640px)
+{
+  body
+  {
+    font-size:@mobileDefaultTextFontSize;
+  }
+}

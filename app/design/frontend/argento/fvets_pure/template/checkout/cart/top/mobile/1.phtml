@@ -1,0 +1,15 @@
+<div id="header-cart-mobile" class="header-cart-mobile">
+	<div id="cartButton">
+		<div class="block-title">
+			<span class="summary">
+				<i class="fa fa-shopping-cart fa-3x"></i>
+				<?php $_cartQty = $this->getSummaryCount() ?>
+				<?php if ($_cartQty == 1): ?>
+					<?php echo '<span class="summary-qty">1</span>' ?>
+				<?php else: ?>
+					<?php echo '<span class="summary-qty">' . ($_cartQty ? $_cartQty : 0) . '</span>' ?>
+				<?php endif ?>
+			</span>
+		</div>
+	</div>
+</div>

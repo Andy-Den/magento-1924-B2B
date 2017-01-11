@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <magefm_customer translate="label" module="magefm_customer">
+            <groups>
+                <general translate="label">
+                    <fields>
+                        <self_customer_addres_phone translate="label">
+                            <label>Customer phone is same of address phone</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </self_customer_addres_phone>
+                    </fields>
+                </general>
+                <redirect>
+                    <label>Redirect customers in wrong provide view</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Redirect customers</label>
+                            <comment>If 'No' is selected customers will be redirected back to the previous page</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <cms_page translate="label">
+                            <label>Redirect to CMS Page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_cms_page</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cms_page>
+                        <use_custom_url translate="label">
+                            <label>Use Custom Redirect URL</label>
+                            <comment>Select 'Yes' to redirect your customers to the URL entered in the 'Custom URL' setting below instead of a CMS page</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_custom_url>
+                        <custom_url translate="label">
+                            <label>Custom Redirect URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </custom_url>
+                    </fields>
+                </redirect>
+                <pages>
+                    <label>Pages</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_login_page>
+                            <label>Show Login Page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <value>1</value>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_login_page>
+                    </fields>
+                </pages>
+            </groups>
+        </magefm_customer>
+        <validate_customer translate="label" module="fvets_customer">
+            <class>separator-top</class>
+            <label>Customer</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="fvets_customer">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <enabled translate="label" module="fvets_customer">
+                            <label>Validação de Cliente x Distribuidor Ativa?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <template_customer_requires_register translate="label">
+                            <label>Email Template - Customer Requires Register</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template_customer_requires_register>
+                        <repository_customer_requires_register translate="label">
+                            <label>Repository</label>
+                            <comment>Email that will receive the request</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </repository_customer_requires_register>
+                        <remove_default_customer_groups_from_presentation translate="label" module="fvets_customer">
+                            <label>Remover grupos de clientes DEFAULT das listagens?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </remove_default_customer_groups_from_presentation>
+                    </fields>
+                </general>
+            </groups>
+        </validate_customer>
+    </sections>
+</config>

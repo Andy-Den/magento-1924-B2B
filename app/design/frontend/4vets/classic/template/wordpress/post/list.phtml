@@ -1,0 +1,29 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+
+$posts = $this->getPosts();
+//$countposts = count($posts);
+//$counter = 0;
+//var_dump(get_class($this));
+?>
+<?php if (count($posts) > 0): ?>
+
+<div class="row blog-post_list">
+
+	<?php foreach($posts as $post): ?>		
+			<div class="item<?php if ($post->isSticky()): ?> featured<?php endif; ?> <?php if(($counter+1) % 4 == 0 || $countposts == $counter):?> last<?php endif;?>">
+				<?php echo $this->getPostRenderer($post)->toHtml() ?>
+			</div>
+			<br />
+			<hr />
+			<br /><br />
+	<?php endforeach; ?>
+	<?php echo $this->getPagerHtml() ?>
+</div>
+
+<?php endif; ?>

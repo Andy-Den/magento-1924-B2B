@@ -1,0 +1,75 @@
+<?php
+$form = $this->getElement()->getForm();
+$topElements = $this->getElement()->getTopColumn();
+$bottomElements = $this->getElement()->getBottomColumn();
+$lcElements = $this->getElement()->getLeftColumn();
+$rcElements = $this->getElement()->getRightColumn();
+$lcElements = $this->getElement()->getLeftColumn();
+$rcElements = $this->getElement()->getRightColumn();
+?>
+<div class="generic-box">
+<h3><?php echo $this->getElement()->getLegend()?></h3>
+
+
+<table width="100%">
+	<tr>
+		<td colsspan="2">
+			<?php if (!empty($topElements)): ?>
+			<ul class="form-list">
+				<?php foreach($topElements as $topElement): ?>
+				<li id="<?php echo $topElement.'-container'?>" class="wide">
+				<?php echo $this->getChildElementJs($topElement); ?>
+				<?php echo $this->getChildElementHtml($topElement); ?>
+				</li>
+				<?php endforeach ?>
+			</ul>
+			<?php endif ?>
+		</td>
+	</tr>
+
+	<tr>
+		<td valign="top">
+			<?php if (!empty($lcElements)): ?>
+			<ul class="form-list">
+				<?php foreach($lcElements as $lcElement): ?>
+				<li id="<?php echo $lcElement.'-container'?>" class="wide">
+				<?php echo $this->getChildElementJs($lcElement); ?>
+				<?php echo $this->getChildElementHtml($lcElement); ?>
+				</li>
+				<?php endforeach ?>
+			</ul>
+			<?php endif ?>
+		</td>
+		<td valign="top">
+			<?php if (!empty($rcElements)): ?>
+			<ul class="form-list">
+				<?php foreach($rcElements as $rcElement): ?>
+				<li id="<?php echo $rcElement.'-container'?>" class="wide">
+				<?php echo $this->getChildElementJs($rcElement); ?>
+				<?php echo $this->getChildElementHtml($rcElement); ?>
+				</li>
+				<?php endforeach ?>
+			</ul>
+			<?php endif ?>
+		</td>
+	</tr>
+	<tr>
+		<td colsspan="2">
+			<?php if (!empty($bottomElements)): ?>
+			<?php foreach($bottomElements as $bottomElement): ?>
+			<ul class="form-list">
+				<li id="<?php echo $bottomElement.'-container'?>" class="wide">
+				<?php echo $this->getChildElementJs($bottomElement); ?>
+				<?php echo $this->getChildElementHtml($bottomElement); ?>
+				</li>
+				<?php endforeach ?>
+			</ul>
+			<?php endif ?>
+		</td>
+	</tr>
+
+
+
+
+</table>
+</div>

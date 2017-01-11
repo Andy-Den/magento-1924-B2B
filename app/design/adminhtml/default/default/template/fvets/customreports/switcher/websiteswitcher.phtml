@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $idsWebsitesAllowed = Mage::app()->getHelper('amrolepermissions')->currentRule()->getPartiallyAccessibleWebsites(); ?>
+<?php $websites = Mage::getModel('core/website')
+                        ->getCollection()
+                        ->addIdFilter($idsWebsitesAllowed); ?>
+
+<?php /* @var $this Mage_Core_Block_Template */ ?>
+<?php if (isset($websites) && !empty($websites)): ?>
+	<p class="switcher"><label for="website_switcher"><?php echo $this->__('Choose Website View:') ?></label>
+		<?php $selectedWebsite = $this->getRequest()->getParam('website_switcher'); ?>
+		<select name="website_switcher" id="website_switcher">
+			<?php if (count($websites) > 1) { ?>
+			<option value="0"><?php echo $this->__('All Websites'); ?></option>
+			<?php } ?>
+			<?php foreach ($websites as $website): ?>
+<!--				--><?php //if ($website->getConfig('general/store_information/is_brand') == 1)
+//				{
+//					continue;
+//				} ?>
+				<?php if ($website->getCode() == 'base') {continue;} ?>
+				<option
+					value="<?php echo $this->escapeHtml($website->getId()) ?>"<?php if (isset($selectedWebsite) && $selectedWebsite == $website->getId()): ?> selected="selected"<?php endif; ?>>
+					&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->escapeHtml($website->getName()) ?></option>
+			<?php endforeach; ?>
+		</select>
+		<?php echo $this->getHintHtml() ?>
+	</p>
+	<div id="store-switcher">
+
+	</div>
+<?php endif; ?>

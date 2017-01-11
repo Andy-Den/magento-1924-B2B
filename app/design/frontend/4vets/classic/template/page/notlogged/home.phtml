@@ -1,0 +1,141 @@
+<?php
+$login = Mage::getSingleton( 'customer/session' )->isLoggedIn(); //Check if User is Logged In
+if($login)
+{
+	//$msg = Mage::getSingleton('core/session')->addError($this->__('Please Sign in / Register first to access this page.'));
+	header('Location: '. Mage::getUrl('/'));
+	exit;
+}
+?>
+<?php
+
+
+$images = json_decode(Mage::getModel('core/cookie')->get('images'));
+if (!is_array($images))
+{
+$images = array(
+	'big-01.jpg',
+	'big-02.jpg',
+	'big-03.jpg',
+	'big-04.jpg',
+	'big-05.jpg',
+	'big-06.jpg'
+);
+	shuffle($images);
+}
+
+Mage::getModel('core/cookie')->set('images', json_encode($images));
+
+$index = Mage::getModel('core/cookie')->get('randimages') + 1;
+if ($index >= count($images) || $index < 0)
+{
+	$index  = 0;
+}
+Mage::getModel('core/cookie')->set('randimages', $index);
+?>
+</div>
+<style>
+	.main-container1{
+		background-image: none;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+
+		-webkit-transition: background-image 1000s ease-in-out;
+		-moz-transition: background-image 1000s ease-in-out;
+		-ms-transition: background-image 1000s ease-in-out;
+		-o-transition: background-image 1000s ease-in-out;
+		transition: background-image 1000s ease-in-out;
+
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $this->getSkinUrl('homepage/'.$images[$index]); ?>', sizingMethod='scale');
+
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $this->getSkinUrl('homepage/'.$images[$index]); ?>', sizingMethod='scale')";
+
+		min-height:580px;
+	}
+</style>
+
+<script>
+	jQuery(window).load(function() {
+		jQuery('.main-container1').css({'background-image' : "url(<?php echo $this->getSkinUrl('homepage/'.$images[$index]); ?>)"});
+	})
+</script>
+
+<div class="row inner main-container1">
+	<div class="container">
+		<div class="col-md-12 block1">
+			<div class="title col-md-7">
+				<div class="inner">
+					<?php echo Mage::getModel('core/variable')->loadByCode('home_block1_message')->getValue('html'); ?>
+				</div>
+			</div>
+			<div class="col-md-4 pull-right" id="quicklogin-inline">
+				<?php echo $this->getChildHtml('O2TI_Quicklogin') ; ?>
+			</div>
+
+			<div class="clear"></div>
+
+
+			<div class="botton-blocks">
+				<div class="row">
+					<div class="col-md-2 image">
+						<img class="lazy" data-original="<?php echo $this->getSkinUrl('homepage/icon-block1-watch.png'); ?>" width="124" height="95" />
+					</div>
+					<div class="col-md-2 image">
+						<img class="lazy" data-original="<?php echo $this->getSkinUrl('homepage/icon-block1-cart.png'); ?>" width="125" height="95" />
+					</div>
+					<div class="col-md-2 image">
+						<img class="lazy" data-original="<?php echo $this->getSkinUrl('homepage/icon-block1-dollar.png'); ?>" width="109" height="92" />
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row banner-marcas">
+		<?php echo Mage::app()->getLayout()->createBlock('bannerslider/default')->setTemplate('bannerslider/bannerslider.phtml')->setBannersliderId(2)->toHtml(); ?>
+	</div>
+
+</div>
+
+
+<div class="clear"></div>
+
+<div class="row inner block3 block home_categories" >
+
+
+	<div id="produtos" class="block-title">categorias</div>
+
+
+	<div class="clear"></div>
+	<br /><br />
+
+	<?php echo $this->getChildHtml('home_categories'); ?>
+
+</div>
+
+	<br /><br />
+
+	<div class="row inner block2 block">
+		<div id="quem-somos" class="block-title">quem somos</div>
+		<div class="row container">
+			<div class="col-md-4 left">
+				<img class="lazy" data-original="<?php echo $this->getSkinUrl('homepage/img-block2.jpg'); ?>" alt="" width="450" height="664" />
+			</div>
+			<div class="col-md-5 text right">
+				<img class="lazy" data-original="<?php echo $this->getSkinUrl('homepage/img-block2-logo.png'); ?>" alt="" width="468" height="137" />
+				<br /><br /><br /><br />
+				A 4Vets é um canal de vendas online que disponibiliza tudo que um petshop, clínica e veterinário(a) autônomo(a) precisa para atender seus clientes e abastecer suas lojas.
+				Trabalhamos com todos os tipos de produtos presentes no mercado: suprimentos veterinários, acessórios, banho & tosa e alimentos. O acesso ao nosso site é restrito a negócios, sendo necessário CRMV e/ou CNPJ para efetuar as compras e visualizar os preços atacado.
+				<br /> <br />
+				<button class="action-btn btn btn-success little" onclick="jQuery('html, body').animate({'scrollTop':0});jQuery('#login-box').slideUp('fast');jQuery('#fpass').slideUp('fast');jQuery('#new-users').slideDown('fast', function() {resizeOverlay();});"><span>Faça seu cadastro agora</span></button>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>

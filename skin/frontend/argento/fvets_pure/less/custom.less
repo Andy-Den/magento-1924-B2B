@@ -1,0 +1,991 @@
+@import "mixins";
+
+//general CSS
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-weight: @defaultTextFontWeight;
+}
+
+strong {
+  font-weight: bold;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  border: 0 none;
+  vertical-align: top;
+}
+
+ul, ol {
+  list-style: outside none none;
+}
+
+form {
+  display: inline;
+}
+
+input, select, textarea {
+  box-sizing: border-box;
+}
+
+input, select, textarea, button {
+  color: @defaultTextColor;
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+input, select, textarea, button {
+  vertical-align: middle;
+}
+
+input.input-text, textarea {
+  font-family: "Open Sans",Verdana,Geneva,Arial,Helvetica,sans-serif;
+  padding: 5px 10px;
+}
+
+input.input-text, select, textarea {
+  background: #fff none repeat scroll 0 0;
+}
+
+/**
+* Special classes
+*/
+.page {
+  text-align: left;
+}
+
+.clear {
+  .clearLine();
+}
+
+.hidden {
+  display: none;
+}
+
+/**
+* Links
+*/
+
+a {
+  color:@defaultLinkColor;
+  font-size: @defaultLinkSize;
+  text-decoration: @defaultLinkDecoration;
+}
+
+//a:hover
+//{
+//  color:@defaultLinkHoverColor;
+//  font-size: @defaultLinkHoverSize;
+//  text-decoration: @defaultLinkHoverDecoration;
+//}
+
+a.featured
+{
+  font-size: 14px;
+}
+
+/**
+* Titles
+*/
+
+h1,
+h1 a,
+h1 a:hover,
+h1 span,
+.page-title h1
+{
+  font-family: @titleH1FontFamily;
+  color:@titleH1Color;
+  font-weight: @titleH1FontWeight;
+  font-size:@titleH1FontSize;
+  text-transform: @titleH1TextTransform;
+  margin-bottom: 15px;
+}
+
+ul, li, fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+h2
+{
+  font-family: @titleH2FontFamily;
+  color:@titleH2Color !important;
+  font-weight: @titleH2FontWeight;
+  font-size:@titleH2FontSize;
+  text-transform: @titleH2TextTransform;
+  margin-bottom: 15px;
+}
+
+h3,
+h3 a,
+h3 a:hover,
+h3 span,
+.fieldset h3,
+.fieldset h3.legend
+{
+  font-family: @titleH3FontFamily;
+  color:@titleH3Color;
+  font-weight: @titleH3FontWeight;
+  font-size:@titleH3FontSize;
+  text-transform: @titleH3TextTransform;
+}
+
+h4,
+h4 a,
+h4 a:hover,
+h4 span,
+.fieldset h4,
+.fieldset h4.legend
+{
+  font-family: @titleH4FontFamily;
+  color:@titleH4Color;
+  font-weight: @titleH4FontWeight;
+  font-size:@titleH4FontSize;
+  text-transform: @titleH4TextTransform;
+}
+
+h5,
+h5 a,
+h5 a:hover
+{
+  font-family: @titleH5FontFamily;
+  color:@titleH5Color;
+  font-weight: @titleH5FontWeight;
+  font-size:@titleH5FontSize;
+  text-transform: @titleH5TextTransform;
+}
+
+h6,
+h6 a,
+h6 a:hover
+{
+  font-family: @titleH6FontFamily;
+  color:@titleH6Color;
+  font-weight: @titleH6FontWeight;
+  font-size:@titleH6FontSize;
+  text-transform: @titleH6TextTransform;
+}
+
+hr
+{
+  border:@defaultBorder;
+  border-bottom: 0;
+}
+
+//Div 100% of page
+.hundred {
+  left:0;
+  right: 0;
+  position: absolute;
+}
+
+.content-page-width {
+  width: @contentPageWidth;
+}
+
+/**
+* Buttons
+*/
+
+.button
+{
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  margin:0;
+  overflow:visible;
+  padding:2px;
+  width:auto;
+
+  span {
+    border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    height: auto;
+    line-height: 20px;
+    transition: all 0.3s ease 0s;
+    float: left;
+    text-align: center;
+    white-space: nowrap;
+
+    span {
+      padding: 0;
+    }
+  }
+
+  > span {
+    border: 0 none;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    height: auto;
+    padding: 4px 10px;
+    text-transform: none;
+    transition: all 0.3s ease 0s;
+    float: left;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  > span > span,
+  > span > span:hover
+  {
+    background: none;
+    text-transform: inherit;
+  }
+
+  &.btn-cart
+  {
+
+    > span
+    {
+      .rounded(@buttonBorderRadius);
+      background: average(@buttonBtnCartGradientStart,@buttonBtnCartGradientEnd);
+      background: -moz-linear-gradient(top, @buttonBtnCartGradientStart 0%, @buttonBtnCartGradientEnd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonBtnCartGradientStart), color-stop(100%,@buttonBtnCartGradientEnd));
+      background: -webkit-linear-gradient(top, @buttonBtnCartGradientStart 0%,@buttonBtnCartGradientEnd 100%);
+      background: -o-linear-gradient(top, @buttonBtnCartGradientStart 0%,@buttonBtnCartGradientEnd 100%);
+      background: -ms-linear-gradient(top, @buttonBtnCartGradientStart 0%,@buttonBtnCartGradientEnd 100%);
+      background: linear-gradient(to bottom, @buttonBtnCartGradientStart 0%,@buttonBtnCartGradientEnd 100%);
+      box-shadow: @buttonBtnCartBoxShadow;
+
+      > span > span
+      {
+        color: @buttonBtnCartColor;
+        text-shadow: @buttonBtnCartTextShadow;
+      }
+    }
+
+    &:hover
+    {
+      > span
+      {
+        background: average(@buttonHoverBtnCartGradientStart,@buttonHoverBtnCartGradientEnd);
+        background: -moz-linear-gradient(top, @buttonHoverBtnCartGradientStart 0%, @buttonHoverBtnCartGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonHoverBtnCartGradientStart), color-stop(100%,@buttonHoverBtnCartGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonHoverBtnCartGradientStart 0%,@buttonHoverBtnCartGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonHoverBtnCartGradientStart 0%,@buttonHoverBtnCartGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonHoverBtnCartGradientStart 0%,@buttonHoverBtnCartGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonHoverBtnCartGradientStart 0%,@buttonHoverBtnCartGradientEnd 100%);
+        box-shadow: @buttonBtnCartBoxShadow;
+      }
+
+      > span > span
+      {
+        color: @buttonHoverBtnCartColor;
+        text-shadow: @buttonHoverBtnCartTextShadow;
+      }
+    }
+  }
+
+  &.btn-doToAction
+  {
+    > span
+    {
+      .rounded(@buttonBorderRadius);
+      background: average(@buttonDoToActionGradientStart,@buttonDoToActionGradientEnd);
+      background: -moz-linear-gradient(top, @buttonDoToActionGradientStart 0%, @buttonDoToActionGradientEnd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonDoToActionGradientStart), color-stop(100%,@buttonDoToActionGradientEnd));
+      background: -webkit-linear-gradient(top, @buttonDoToActionGradientStart 0%,@buttonDoToActionGradientEnd 100%);
+      background: -o-linear-gradient(top, @buttonDoToActionGradientStart 0%,@buttonDoToActionGradientEnd 100%);
+      background: -ms-linear-gradient(top, @buttonDoToActionGradientStart 0%,@buttonDoToActionGradientEnd 100%);
+      background: linear-gradient(to bottom, @buttonDoToActionGradientStart 0%,@buttonDoToActionGradientEnd 100%);
+      box-shadow: @buttonDoToActionBoxShadow;
+    }
+
+    > span > span
+    {
+      color: @buttonDoToActionColor;
+      text-shadow: @buttonDoToActionTextShadow;
+    }
+
+    &:hover
+    {
+      > span
+      {
+        background: average(@buttonHoverDoToActionGradientStart,@buttonHoverDoToActionGradientEnd);
+        background: -moz-linear-gradient(top, @buttonHoverDoToActionGradientStart 0%, @buttonHoverDoToActionGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonHoverDoToActionGradientStart), color-stop(100%,@buttonHoverDoToActionGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonHoverDoToActionGradientStart 0%,@buttonHoverDoToActionGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonHoverDoToActionGradientStart 0%,@buttonHoverDoToActionGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonHoverDoToActionGradientStart 0%,@buttonHoverDoToActionGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonHoverDoToActionGradientStart 0%,@buttonHoverDoToActionGradientEnd 100%);
+        box-shadow: @buttonActionBoxShadow;
+      }
+
+      > span > span
+      {
+        color: @buttonHoverDoToActionColor;
+        text-shadow: @buttonHoverDoToActionTextShadow;
+      }
+    }
+
+    &.disabled
+    {
+      > span
+      {
+        background: average(@buttonDisabledDoToActionGradientStart,@buttonDisabledDoToActionGradientEnd);
+        background: -moz-linear-gradient(top, @buttonDisabledDoToActionGradientStart 0%, @buttonDisabledDoToActionGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonDisabledDoToActionGradientStart), color-stop(100%,@buttonDisabledDoToActionGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonDisabledDoToActionGradientStart 0%,@buttonDisabledDoToActionGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonDisabledDoToActionGradientStart 0%,@buttonDisabledDoToActionGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonDisabledDoToActionGradientStart 0%,@buttonDisabledDoToActionGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonDisabledDoToActionGradientStart 0%,@buttonDisabledDoToActionGradientEnd 100%);
+        box-shadow: @buttonDisabledDoToActionBoxShadow;
+      }
+
+      > span > span
+      {
+        color: @buttonDisabledDoToActionColor;
+        text-shadow: @buttonDisabledDoToActionTextShadow;
+      }
+    }
+  }
+
+  &.btn-action
+  {
+    > span
+    {
+      .rounded(@buttonBorderRadius);
+      color: @buttonActionColor;
+      text-shadow: @buttonActionTextShadow;
+      background: average(@buttonActionGradientStart,@buttonActionGradientEnd);
+      background: -moz-linear-gradient(top, @buttonActionGradientStart 0%, @buttonActionGradientEnd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonActionGradientStart), color-stop(100%,@buttonActionGradientEnd));
+      background: -webkit-linear-gradient(top, @buttonActionGradientStart 0%,@buttonActionGradientEnd 100%);
+      background: -o-linear-gradient(top, @buttonActionGradientStart 0%,@buttonActionGradientEnd 100%);
+      background: -ms-linear-gradient(top, @buttonActionGradientStart 0%,@buttonActionGradientEnd 100%);
+      background: linear-gradient(to bottom, @buttonActionGradientStart 0%,@buttonActionGradientEnd 100%);
+      font-size: @buttonActionFontSize;
+      text-transform: @buttonActionTextTransform;
+      box-shadow: @buttonActionBoxShadow;
+      padding: 4px 10px;
+      transition:all 0.3s ease 0s;
+      line-height:20px;
+      font-weight:bold;
+      height: auto;
+      cursor: pointer;
+      display: inline-block;
+      border: 0 none;
+      float: left;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    &:hover
+    {
+      > span
+      {
+        color: @buttonHoverActionColor;
+        text-shadow: @buttonHoverActionTextShadow;
+        background: average(@buttonHoverActionGradientStart,@buttonHoverActionGradientEnd);
+        background: -moz-linear-gradient(top, @buttonHoverActionGradientStart 0%, @buttonHoverActionGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonHoverActionGradientStart), color-stop(100%,@buttonHoverActionGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonHoverActionGradientStart 0%,@buttonHoverActionGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonHoverActionGradientStart 0%,@buttonHoverActionGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonHoverActionGradientStart 0%,@buttonHoverActionGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonHoverActionGradientStart 0%,@buttonHoverActionGradientEnd 100%);
+        font-size: @buttonActionFontSize;
+        text-transform: @buttonHoverActionTextTransform;
+      }
+    }
+  }
+
+  &.btn-lessAction
+  {
+    > span
+    {
+      .rounded(@buttonBorderRadius);
+      color: @buttonLessActionColor;
+      text-shadow: @buttonLessActionTextShadow;
+      background: average(@buttonLessActionGradientStart,@buttonLessActionGradientEnd);
+      background: -moz-linear-gradient(top, @buttonLessActionGradientStart 0%, @buttonLessActionGradientEnd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonLessActionGradientStart), color-stop(100%,@buttonLessActionGradientEnd));
+      background: -webkit-linear-gradient(top, @buttonLessActionGradientStart 0%,@buttonLessActionGradientEnd 100%);
+      background: -o-linear-gradient(top, @buttonLessActionGradientStart 0%,@buttonLessActionGradientEnd 100%);
+      background: -ms-linear-gradient(top, @buttonLessActionGradientStart 0%,@buttonLessActionGradientEnd 100%);
+      background: linear-gradient(to bottom, @buttonLessActionGradientStart 0%,@buttonLessActionGradientEnd 100%);
+      font-size: @buttonLessActionFontSize;
+      text-transform: @buttonLessActionTextTransform;
+      box-shadow: @buttonLessActionBoxShadow;
+    }
+
+    &:hover
+    {
+      > span
+      {
+        color: @buttonHoverLessActionColor;
+        text-shadow: @buttonHoverLessActionTextShadow;
+        background: average(@buttonHoverLessActionGradientStart,@buttonHoverLessActionGradientEnd);
+        background: -moz-linear-gradient(top, @buttonHoverLessActionGradientStart 0%, @buttonHoverLessActionGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonHoverLessActionGradientStart), color-stop(100%,@buttonHoverLessActionGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonHoverLessActionGradientStart 0%,@buttonHoverLessActionGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonHoverLessActionGradientStart 0%,@buttonHoverLessActionGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonHoverLessActionGradientStart 0%,@buttonHoverLessActionGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonHoverLessActionGradientStart 0%,@buttonHoverLessActionGradientEnd 100%);
+        font-size: @buttonLessActionFontSize;
+        text-transform: @buttonHoverLessActionTextTransform;
+        box-shadow: @buttonHoverLessActionBoxShadow;
+      }
+    }
+  }
+
+  &.btn-superAction
+  {
+    > span
+    {
+      .rounded(@buttonBorderRadius);
+      background: average(@buttonSuperActionGradientStart,@buttonSuperActionGradientEnd);
+      background: -moz-linear-gradient(top, @buttonSuperActionGradientStart 0%, @buttonSuperActionGradientEnd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonSuperActionGradientStart), color-stop(100%,@buttonSuperActionGradientEnd));
+      background: -webkit-linear-gradient(top, @buttonSuperActionGradientStart 0%,@buttonSuperActionGradientEnd 100%);
+      background: -o-linear-gradient(top, @buttonSuperActionGradientStart 0%,@buttonSuperActionGradientEnd 100%);
+      background: -ms-linear-gradient(top, @buttonSuperActionGradientStart 0%,@buttonSuperActionGradientEnd 100%);
+      background: linear-gradient(to bottom, @buttonSuperActionGradientStart 0%,@buttonSuperActionGradientEnd 100%);
+      padding:10px 30px;
+      box-shadow: @buttonSuperActionBoxShadow;
+    }
+
+    > span > span
+    {
+      color: @buttonSuperActionColor;
+      text-shadow: @buttonSuperActionTextShadow;
+      text-transform: @buttonSuperActionTextTransform;
+      font-size: @buttonSuperActionFontSize;
+    }
+
+    &:hover
+    {
+      > span
+      {
+        background: average(@buttonHoverSuperActionGradientStart,@buttonHoverSuperActionGradientEnd);
+        background: -moz-linear-gradient(top, @buttonHoverSuperActionGradientStart 0%, @buttonHoverSuperActionGradientEnd 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@buttonHoverSuperActionGradientStart), color-stop(100%,@buttonHoverSuperActionGradientEnd));
+        background: -webkit-linear-gradient(top, @buttonHoverSuperActionGradientStart 0%,@buttonHoverSuperActionGradientEnd 100%);
+        background: -o-linear-gradient(top, @buttonHoverSuperActionGradientStart 0%,@buttonHoverSuperActionGradientEnd 100%);
+        background: -ms-linear-gradient(top, @buttonHoverSuperActionGradientStart 0%,@buttonHoverSuperActionGradientEnd 100%);
+        background: linear-gradient(to bottom, @buttonHoverSuperActionGradientStart 0%,@buttonHoverSuperActionGradientEnd 100%);
+        box-shadow: @buttonHoverSuperActionBoxShadow;
+      }
+
+      > span > span
+      {
+        color: @buttonHoverSuperActionColor;
+        text-shadow: @buttonHoverSuperActionTextShadow;
+        font-size: @buttonHoverSuperActionFontSize;
+        text-transform: @buttonHoverSuperActionTextTransform;
+      }
+    }
+  }
+}
+
+/**
+* Fieldset
+*/
+.fieldset
+{
+  border:none;
+  margin-top: 45px;
+  padding: 22px 2% 12px;
+  background: none;
+
+  .legend
+  {
+    border:none;
+  }
+
+  .form-list
+  {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+  }
+
+}
+
+/**
+* Formlist
+*/
+
+.form-list
+{
+  li
+  {
+    margin: 20px 0 8px;
+    //width: 50%;
+
+    //padding-right: 1%;
+    box-sizing: border-box;
+
+    label
+    {
+      font-size:14px;
+    }
+
+    input,
+    select,
+    textarea
+    {
+      &.input-text
+      {
+        .rounded(@buttonBorderRadius);
+        background: @formInputBackground;
+        border:@formInputBorder;
+        width: 100%;
+        max-width: none;
+      }
+    }
+
+    &.fields
+    {
+      width: 100%;
+      padding-right: 0;
+      .field
+      {
+        width: 50%;
+        box-sizing: border-box;
+        padding-right:1% ;
+
+        &:last-of-type
+        {
+          padding-right: 0;
+        }
+
+        label
+        {
+          &.clean
+          {
+            visibility: hidden;
+          }
+        }
+
+        .control
+        {
+          label
+          {
+            float: none;
+          }
+        }
+      }
+    }
+
+    &.control
+    {
+      .input-box
+      {
+        &:not(:first-child)
+        {
+          margin-left: 5%;
+        }
+      }
+    }
+
+    &.input-group
+    {
+      border-collapse: separate;
+      display: table;
+      position: relative;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0;
+
+      .input-group-addon
+      {
+        display: table-cell;
+        box-sizing: border-box;
+        line-height: 1;
+        text-align: center;
+        padding: 0 15px;
+        width: 1%;
+        border:@defaultBorder;
+        border-right: 0;
+
+        .fa
+        {
+          color:@defaultColor4;
+        }
+      }
+
+      .input-text
+      {
+        display: table-cell;
+        width: 100%;
+        box-sizing: border-box;
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &.featured
+      {
+        box-shadow: 1px 1px 2px @defaultBackgroundColor5;
+
+        .input-group-addon,
+        .input-text
+        {
+          border:none;
+          line-height: 2;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+/**
+* Qty selector
+*/
+
+.divQtd
+{
+
+  margin-bottom: 10px;
+  float: right;
+  margin-top: 4px;
+  min-width: 90px;
+
+  .qtyButtons
+  {
+    float: right;
+  }
+
+  .qtyLabel
+  {
+    float: left;
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  .qty
+  {
+    border-color: @defaultBackgroundColor3;
+    border-width: 1px 0;
+    border-radius: 0;
+    border-style: solid;
+    float: left;
+    text-align: center;
+    height: 27px;
+    padding: 0 !important;
+  }
+
+  .qtyminus
+  {
+    background: none repeat scroll 0 0 @defaultBackgroundColor3;
+    border-color: @defaultBackgroundColor3;
+    border-radius: @buttonBorderRadius 0 0 @buttonBorderRadius;
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    color: #fff;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    height: 27px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  .qtyplus
+  {
+    background: none repeat scroll 0 0 @defaultBackgroundColor3;
+    border-color: @defaultBackgroundColor3;
+    border-radius: 0 @buttonBorderRadius @buttonBorderRadius 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    color: #fff;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    height: 27px;
+    width: 25px;
+    cursor: pointer;
+  }
+}
+
+/**
+* Tables
+*/
+
+.data-table
+{
+  tr
+  {
+    &.even
+    {
+      background: @defaultColor3;
+    }
+    th,
+    td
+    {
+      border:@defaultBorder;
+    }
+  }
+}
+
+/**
+* Default structure
+*/
+
+body
+{
+  color:@defaultTextColor;
+  font-size: @defaultTextSize;
+  font-family: @defaultTextFontFamily;
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  .page
+  {
+    width:100%;
+    min-width: 320px;
+    padding: 0;
+    border-top:5px solid @defaultColor2;
+
+    .container
+    {
+//      max-width: @defaultPageWidth;
+      margin:0 auto;
+
+      &.col2-left-layout,
+      &.col2-right-layout
+      {
+        .col-main
+        {
+          width:74%;
+        }
+      }
+    }
+  }
+}
+
+div.default-page-width {
+  width: @defaultPageWidth;
+  margin: 0 auto;
+}
+
+@media (max-width: @defaultPageWidth) {
+  div.default-page-width {
+    width: auto;
+  }
+
+  div.content-page-width {
+    width: auto;
+  }
+}
+
+.validation-advice {
+  background: none!important;
+  padding-left: 0;
+  position: absolute;
+  clear: both;
+  color: #f00;
+}
+
+.error-msg {
+  clear: both;
+  color: #f00;
+}
+
+//Default header values
+.logged-out {
+  .header-container {
+//    min-height: 86px;
+//    border-bottom: @defaultBorder;
+    .header {
+      background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      .logo {
+        text-decoration: none!important;
+        strong {
+          font-size: 0;
+          height: 0;
+          left: -999em;
+          line-height: 0;
+          overflow: hidden;
+          position: absolute;
+          text-indent: -999em;
+          top: -999em;
+          width: 0;
+        }
+      }
+    }
+  }
+}
+
+.header-container {
+  .header-login {
+    .form-list {
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  .panel-forgot-password {
+    float: left;
+    text-align: right;
+    width: 389px;
+  }
+}
+
+//.header-container {
+//  .header-login {
+//    margin-top: 9px;
+//    width: 70%;
+//    .form-list {
+//      li {
+//        margin: 0;
+//      }
+//    }
+//  }
+//}
+
+//.top-toolbar, .header, .top-container, .main, .footer, .footer-toolbar, .footer-cms {
+//  border: medium none;
+//  width: 960px;
+//}
+
+.header-cart .summary {
+  width: auto;
+}
+
+//clearers
+.clearer:after,
+.header-container:after,
+.header-container .top-container:after,
+.header:after,
+.header .quick-access:after,
+#nav:after,
+.main:after,
+.footer:after,
+.footer-container .bottom-container:after,
+.col-main:after,
+.col2-set:after,
+.col3-set:after,
+.col4-set:after,
+.search-autocomplete li:after,
+.block .block-content:after,
+.block .actions:after,
+.block li.item:after,
+.block-poll li:after,
+.block-layered-nav .currently li:after,
+.page-title:after,
+.products-grid:after,
+.products-list li.item:after,
+.box-account .box-head:after,
+.dashboard .box .box-title:after,
+.box-reviews li.item:after,
+.box-tags li.item:after,
+.pager:after,
+.sorter:after,
+.ratings:after,
+.add-to-box:after,
+.add-to-cart:after,
+.product-essential:after,
+.product-collateral:after,
+.product-view .product-img-box .more-views ul:after,
+.product-view .product-shop .short-description:after,
+.product-view .box-description:after,
+.product-view .box-tags .form-add:after,
+.product-options .options-list li:after,
+.product-options-bottom:after,
+.product-review:after,
+.cart:after,
+.cart-collaterals:after,
+.cart .crosssell li.item:after,
+.opc .step-title:after,
+.checkout-progress:after,
+.multiple-checkout .place-order:after,
+.group-select li:after,
+.form-list li:after,
+.form-list .field:after,
+.buttons-set:after,
+.page-print .print-head:after,
+.advanced-search-summary:after,
+.gift-messages-form .item:after,
+.send-friend .form-list li p:after {
+  display: block;
+  content: ".";
+  clear: both;
+  font-size: 0;
+  line-height: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+//unknown use of css
+.form-list .input-box {
+  width: auto;
+  clear: both;
+  display: block;
+}
+
+.form-list input.inpu3t-text, .form-list select, .form-list input.input-text, .form-list select, .form-list textarea {
+  font-size: 12px;
+}
+
+.form-list input.input-text, .form-list select, .form-list textarea, .discount .input-text {
+  box-sizing: border-box;
+  padding: 6px 4px;
+}
+
+.logged-out .header .form-list .button > span {
+  line-height: 3;
+}
+
+.links li.first {
+  padding-left: 0 !important;
+}
+
+.tags li::after, .tags-list li::after, .footer ul li::after, .links li::after {
+  content: " ";
+}
+
+.links li.first a {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  padding-left: 0;
+}
+
+.tags li::after, .tags-list li::after, .footer ul li::after, .links li::after {
+  content: " ";
+}
+
+.links li.last {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
+  padding-right: 0 !important;
+}
+
+.loading-overlay
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5) none repeat scroll 0% 0%;
+  z-index: 100;
+
+  .fa-spinner
+  {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+  }
+}

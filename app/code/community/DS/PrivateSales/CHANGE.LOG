@@ -1,0 +1,25 @@
+DS_PrivateSales
+
+1.0.3
+  added options to overwrite error messages when trying to access locked registration / forgot password
+  added compatibility for CE 1.8 / 1.8.1
+
+1.0.2.1
+  fixed a php notice when trying to check the capability of retrieving the magento edition
+
+1.0.2
+  added option to hide or customize registration panel at login page
+  registration panel can be customized by configuring header, text, button visibility and button label
+  registration panel can be hidden or customized even when registration remains enabled
+  disabled registration removes all registration hints when entering onepage checkout as guest
+  disabled forgot password now also removes the links at login and onepage checkout page
+  
+  note: new templates have been added so you may check them to match with your skin after update
+
+1.0.1
+  fixed redirect to startpage not working when customer_startup_redirect_dashboard is disabled
+  fixed hive navigation option not working in ce 1.7
+  fixed fatal error on after login redirect in ce 1.5
+
+1.0.0
+  initial release

@@ -1,0 +1,148 @@
+<?php $_productCollection=$this->getLoadedProductCollection(); ?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_collectionSize = $_productCollection->count() ?>
+<?php $_columnCount = $this->getColumnCount(); ?>
+<?php $line = rand(0, time()); ?>
+<?php $column = 1; ?>
+<?php $_hlp = Mage::helper('udmultiprice'); ?>
+<?php $i=0; foreach ($_productCollection as $_product):
+	//Fix some missing attributes
+	$_product = Mage::getModel('catalog/product')->load($_product->getId());
+	$priceCmp = $_product->getData('PriceComparisonByState');
+	$priceCmpCnt = $_product->getData('PriceComparisonByStateCnt');
+	$priceCmpStates = $_product->getData('PriceComparisonCanonicStates');
+
+
+	//$_product->setRegionOk($_hlp->isAllowedZipcode($_product));
+
+	?>
+	<?php if ($i++%$_columnCount==0): ?>
+	<div class="products-grid row line<?php echo $line; ?>">
+<?php endif ?>
+	<div class="product<?php echo $_product->getId();?> item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> span<?php echo 12/(int)$_columnCount; ?>">
+		<a href="<?php echo $_product->getProductUrl() ?>" onclick="quickProductView(<?php echo $_product->getId() ?>, <?php echo $line; ?>, <?php echo $column; ?>);return false;" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img class="lazy" data-original="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" width="200" height="200" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+		<h1 class="product-name">
+			<span class="brand-name"><?php echo $_product->getAttributeText('manufacturer');//Mage::getModel('udropship/vendor')->load($_product->getUdropshipVendor())->getVendorName() ?></span>
+			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" onclick="quickProductView(<?php echo $_product->getId() ?>, <?php echo $line; ?>, <?php echo $column; ?>);return false;"><?php echo substr($_helper->productAttribute($_product, $_product->getName(), 'name'), 0, 53); ?></a>
+		</h1>
+		<div class="clear"></div>
+			<div class="see-more">
+				<a href="<?php echo $_product->getProductUrl() ?>">Veja +</a>
+			</div>
+
+		<?php
+		$storeId    = Mage::app()->getStore()->getId();
+		$summaryData = Mage::getModel('review/review_summary')
+			->setStoreId($storeId)
+			->load($_product->getId());
+		?>
+		<div class="rating-box" >
+			<div class="rating" style="width: <?php echo $summaryData->getRatingSummary().'%'; ?>"></div>
+		</div>
+
+	</div>
+	<?php $column++; ?>
+	<?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+	<?php $column = 1; ?>
+	<div class="clear"></div>
+	<div id="productViewLine<?php echo $line; ?>" class="productViewLine catalog-product-view">
+	</div>
+	</div>
+	<?php $line = rand(0, time()); ?>
+<?php endif ?>
+<?php endforeach ?>
+
+<script>
+
+
+	/**
+	 * Show Quickview box
+	 * @type {null}
+	 */
+
+	var openLine = null;
+
+	function quickProductView(id, line, column)
+	{
+		jQuery('.quickview-open').removeClass('quickview-open');
+		jQuery('.line'+line+' .product'+id).addClass('quickview-open');
+		if (line == openLine) {
+			jQuery('#productViewLine'+line).append('<div id="listingLoading"></div>');
+			setAjax(id, line, column);
+		} else {
+			jQuery('.productViewLine').hide(function(){
+				jQuery(this).html('');
+				jQuery(this).hide();
+			})
+			jQuery('#productViewLine'+line).append('<div id="listingLoading"></div>');
+			jQuery('#productViewLine'+line).show();
+			setAjax(id, line, column);
+		}
+		jQuery('body, html').animate({scrollTop:jQuery('.line'+line).offset().top - 65}, 'fast');
+	}
+
+	function setAjax(id, line, column)
+	{
+		jQuery.ajax({
+			url: "/product/index/index/id/"+id,
+			success:function(result){
+				jQuery('#productViewLine'+line).html(result);
+				openLine = line;
+				switch(column) {
+					case 1 : jQuery('.listing-box-mark-arrow').css({'background-position': '10% 0'});
+						break;
+					case 2 : jQuery('.listing-box-mark-arrow').css({'background-position': '37% 0'});
+						break;
+					case 3 : jQuery('.listing-box-mark-arrow').css({'background-position': '63% 0'});
+						break;
+					case 4 : jQuery('.listing-box-mark-arrow').css({'background-position': '90% 0'});
+						break;
+				}
+			},
+			beforeSend: function() {
+				switch(column) {
+					case 1 : jQuery('.listing-box-mark-arrow').animate({'background-position': '10%'});
+						break;
+					case 2 : jQuery('.listing-box-mark-arrow').animate({'background-position': '37%'});
+						break;
+					case 3 : jQuery('.listing-box-mark-arrow').animate({'background-position': '63%'});
+						break;
+					case 4 : jQuery('.listing-box-mark-arrow').animate({'background-position': '90%'});
+						break;
+				}
+			}
+		});
+	}
+
+	jQuery(document).load(function() {
+		var line = <?php echo --$line; ?>;
+		var height = 0;
+		if (line > 0) {
+			for(var i = 1; i <= line; i++)
+			{
+				height = 0;
+				jQuery('.line'+i+' .item').each(function(){
+					if (jQuery(this).outerHeight() > height)
+					{
+						height = jQuery(this).outerHeight();
+					}
+				});
+				jQuery('.line'+i+' .item').css({'height':height+'px'});
+			}
+		}
+	})
+</script>
+
+<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+
+<script type="text/javascript">
+	//Set all titles with same height
+	var maxHeight = 0;
+	jQuery('.products-grid .item').each(function(){
+		jQuery(this).children('.product-name').each(function (){
+			var height = jQuery(this).height();
+			if (height > maxHeight) { maxHeight = height; }
+		});
+	});
+	jQuery('.products-grid .product-name').css({'height':maxHeight+'px'});
+</script>

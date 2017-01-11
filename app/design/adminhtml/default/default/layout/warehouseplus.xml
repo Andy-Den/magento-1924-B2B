@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_WarehousePlus
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+-->
+<layout>
+    
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>warehouseplus/boxes.css</name>
+            </action>
+        </reference>
+    </default>
+    
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>innoexts/core/adminhtml/grid.js</script>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    
+    <adminhtml_catalog_product_zone_pricegrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouseplus/adminhtml_catalog_product_edit_tab_zone_price_grid" name="product.edit.tab.zone.price.grid"/>
+        </block>
+    </adminhtml_catalog_product_zone_pricegrid>
+    
+</layout>

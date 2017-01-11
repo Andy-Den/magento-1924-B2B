@@ -1,0 +1,236 @@
+<?php $isValidationActive = Mage::getStoreConfig('validate_customer/general/enabled');
+$isClient = Mage::app()->getRequest()->getParam('cliente');
+if ($isValidationActive && $isClient) {
+    $storeName = Mage::getStoreConfig('general/store_information/name');
+		$validateUrl = Mage::getUrl('customer/account/validatecustomer', array('_secure' => true));
+		$confirmOrRequestConfirmRegisterUrl = Mage::getUrl('customer/account/confirmorrequestconfirmregister', array('_secure' => true));
+    ?>
+    <div class="customer-validate">
+        <div class="header">
+            <h3>
+                <?php echo $this->__('JÁ SOU CLIENTE') ?>
+                <i class="fa fa-spinner fa-spin fa-2x"></i>
+            </h3>
+        </div>
+
+        <div class="container-form-customer-validate">
+            <p><?php echo $this->__('Clientes da %s já estão cadastrados. Por favor, confirme alguns dados:', $this->escapeHtml($storeName)) ?></p>
+
+            <form id="form-customer-validate" class="form-customer-validate" method="post"
+                  action="#">
+                <div class="containerField">
+                    <input type="text" autocomplete="off" class="input-text validate-cnpj required-entry mask-cnpj" title="CNPJ" value=""
+                           onblur="validateField('cnpj-check', this.value);"
+                           placeholder="CNPJ *"
+                           data-gafocus="cnpj-check" id="cnpj-check" name="cnpj-check">
+                    <span class="input-group-addon cnpj"><a href="#" onclick="clearElement('cnpj-check');"><i
+                                class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+                </div>
+                <div class="containerField"><span>ou</span></div>
+                <div class="containerField">
+                    <input type="text" autocomplete="off" class="input-text validate-cpf required-entry mask-cpf" title="CPF" value=""
+                           onblur="validateField('cpf-check', this.value);"
+                           placeholder="CPF *"
+                           data-gafocus="cpf-check" id="cpf-check" name="cpf-check">
+                    <span class="input-group-addon cpf"><a href="#" onclick="clearElement('cpf-check');"><i
+                                class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+                </div>
+                <div class="containerField">
+                    <input type="email" autocomplete="off" class="input-text validate-email required-entry" title="Endereço de e-mail"
+                           value=""
+                           onblur="validateField('email-check', this.value);"
+                           data-gafocus="email-check" placeholder="Email *" id="email_address" name="email-check">
+                    <span class="input-group-addon email"><a href="#" onclick="clearElement('email-check');"><i
+                                class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="containerField">
+                    <input autocomplete="off" class="input-text validate-codigo required-entry" title="Código do Cliente"
+                           value=""
+                           onblur="validateField('codigo-check', this.value);" data-gafocus="codigo-check"
+                           placeholder="Código do Cliente utilizado na <?php echo $storeName ?>"
+                           id="codigo-check" name="codigo-check">
+                    <span class="input-group-addon codigo"><a href="#" onclick="clearElement('codigo-check');"><i
+                                class="fa fa-times"></i></a><i class="fa fa-check"></i></span>
+                </div>
+                <div class="clear"></div>
+
+                <div class="containerField">
+                    <p class="required" style="text-align: left"><?php echo $this->__('* Required Fields'); ?></p>
+                    <button type="button" title="<?php echo $this->__('CONFIRMAR CADASTRO'); ?>"
+                            class="button btn-doToAction disabled" onclick="requestOrConfirmRegister();">
+                        <span><span><?php echo $this->__('CONFIRMAR CADASTRO'); ?></span></span></button>
+                    <input id="registerType" name="registerType" type="hidden" value=""/>
+                </div>
+
+				<div class="container-errors-customer-validation">
+					<span class="errors-customer-validation"></span>
+				</div>
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br><br>
+	<div>
+		<p><a id="cli-already-has-cad" href="#" onclick="">Já possui cadastro? <strong>Clique AQUI</strong></a></p>
+	</div>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('.account-create').hide();
+
+					jQuery('#cli-already-has-cad').click(function (event) {
+						event.preventDefault();
+						jQuery.featherlight(jQuery('#account-login-box'));
+						return false;
+					});
+        });
+
+        function validateField(type, value) {
+			type = type.substring(0, type.length - '-check'.length);
+
+					if (type == 'email') {
+						if (!validateEmail(value)) {
+							jQuery('.errors-customer-validation').html('Email está em um formato inválido');
+							jQuery('.errors-customer-validation').css('visibility', 'inherit');
+							return false;
+						}
+					}
+
+            if (type == 'cnpj' || type == 'cpf' || type == 'codigo') {
+                value = value.replace(/[^a-z0-9\s]/gi, '');
+            }
+
+            if (!value) {
+								//caso o usuario apague os dados de um dos campos sendo que o botao de solicitaçao ja tenha aparecido,
+								//ele coloca o botao de solicitaçao novamente no estado de desabilitado
+								var actionButton = jQuery('#form-customer-validate').find('button');
+								jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-success');
+								jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-unsuccess');
+								actionButton.removeClass('btn-action');
+								actionButton.addClass('btn-doToAction');
+								actionButton.addClass('disabled');
+								//fim
+
+                return;
+            }
+
+            jQuery('.customer-validate .fa-spinner').css('display', 'inline-block');
+
+            jQuery.ajax({
+                url: "<?php echo $validateUrl ?>",
+                context: document.body,
+                data: {type: type, value: encodeURI(value)}
+            }).done(function (msg) {
+                if (msg == 'valid') {
+                    jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-success');
+                    jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-unsuccess');
+                    jQuery('#form-customer-validate').find('.validate-' + type).addClass('validation-success');
+                    jQuery('#form-customer-validate').find('.input-group-addon' + '.' + type + ' .fa-times').css('display', 'none');
+                    jQuery('#form-customer-validate').find('.input-group-addon' + '.' + type + ' .fa-check').css('display', 'inherit');
+                } else {
+                    jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-success');
+                    jQuery('#form-customer-validate').find('.validate-' + type).removeClass('validation-unsuccess');
+                    jQuery('#form-customer-validate').find('.validate-' + type).addClass('validation-unsuccess');
+                    jQuery('#form-customer-validate').find('.input-group-addon' + '.' + type + ' .fa-check').css('display', 'none');
+                    jQuery('#form-customer-validate').find('.input-group-addon' + '.' + type + ' .fa-times').css('display', 'inherit');
+
+                    jQuery('.errors-customer-validation').html('* ' + type.toUpperCase() + ' não encontrado');
+                    jQuery('.errors-customer-validation').css('visibility', 'inherit');
+                }
+                //verifica se pode liberar o botão de avançar no cadastro
+                checkValidatedFields();
+
+                jQuery('.customer-validate .fa-spinner').hide();
+            });
+
+
+        }
+
+        function checkValidatedFields() {
+            var actionButton = jQuery('#form-customer-validate').find('button');
+            $cnpj = jQuery('#form-customer-validate').find('.validate-cnpj');
+            $cpf = jQuery('#form-customer-validate').find('.validate-cpf');
+            $email = jQuery('#form-customer-validate').find('.validate-email');
+
+						var cpfCnpjValidated = ($cnpj.hasClass('validation-success') || $cpf.hasClass('validation-success'));
+						var cpfCnpjFilled = ($cnpj.val() != '' || $cpf.val() != '');
+
+						var emailValidated = ($email.hasClass('validation-success'));
+						var emailFilled = ($email.val() != '');
+
+            if ((cpfCnpjValidated) && emailValidated) {
+                actionButton.removeClass('disabled');
+                actionButton.removeClass('btn-doToAction');
+                actionButton.addClass('btn-action');
+                //actionButton.removeAttr('disabled');
+                actionButton.find('span span').html('CONFIRMAR CADASTRO');
+                jQuery('#form-customer-validate').find('#registerType').attr('value', 'confirmregister');
+								return true;
+            } else {
+                if ((cpfCnpjFilled && emailFilled) && (cpfCnpjValidated || emailValidated)) {
+								//if (list1.length + list2.length >= 2) {
+                    actionButton.removeClass('disabled');
+                    actionButton.removeClass('btn-doToAction');
+                    actionButton.addClass('btn-action');
+                    //actionButton.removeAttr('disabled');
+                    actionButton.find('span span').html('SOLICITAR CONFIRMAÇÃO DE CADASTRO');
+
+                    jQuery('#form-customer-validate').find('.errors-customer-validation').css('visibility', 'inherit');
+                    jQuery('#form-customer-validate').find('#registerType').attr('value', 'requestregister');
+
+										jQuery('.errors-customer-validation').html('Por favor, solicite confirmação de cadastro.');
+
+										return true;
+                } else {
+                    actionButton.removeClass('btn-action');
+                    actionButton.addClass('btn-doToAction');
+                    actionButton.addClass('disabled');
+                    //actionButton.attr('disabled', 'disabled');
+
+									if(cpfCnpjFilled && emailFilled) {
+										jQuery('.errors-customer-validation').html('Por favor, solicite confirmação de cadastro ou <strong><a href="#form-validate" onclick="showCreateForm();">crie uma conta nova</a></strong>');
+									}
+
+										return false;
+                }
+            }
+        }
+
+        function requestOrConfirmRegister() {
+						if (!checkValidatedFields()) {
+							jQuery('#form-customer-validate').find('.errors-customer-validation').css('visibility', 'inherit');
+							jQuery('.errors-customer-validation').html('Pelo menos dois campos devem ser preenchidos com dados válidos para que uma solicitação possa ser realizada.');
+							return false;
+						}
+
+            jQuery('.customer-validate .fa-spinner').css('display', 'inline-block');
+            jQuery.ajax({
+                url: "<?php echo $confirmOrRequestConfirmRegisterUrl ?>",
+                context: document.body,
+                data: jQuery('#form-customer-validate').serialize()
+            }).done(function (msg) {
+                jQuery('.container-form-customer-validate').html(msg);
+                jQuery('.customer-validate .fa-spinner').hide();
+            });
+        }
+
+        function showCreateForm() {
+            jQuery('.account-create').show();
+        }
+
+        function clearElement(element) {
+            jQuery('#form-customer-validate .validate-' + element).val('');
+            jQuery('#form-customer-validate').find('.validate-' + element).removeClass('validation-success');
+            jQuery('#form-customer-validate').find('.validate-' + element).removeClass('validation-unsuccess');
+            jQuery('#form-customer-validate').find('.input-group-addon' + '.' + element + ' .fa-times').css('display', 'none');
+        }
+
+				function validateEmail(email) {
+					var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+					return re.test(email);
+				}
+    </script>
+<?php } ?>

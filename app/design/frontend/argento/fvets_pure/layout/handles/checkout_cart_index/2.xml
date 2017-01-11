@@ -1,0 +1,50 @@
+<include_layout version="0.1.0">
+    <checkout_cart_index>
+        <update handle="page_one_column"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/checkout_cart_index/2.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/checkout.js</name></action>
+
+            <!-- remover css não usados neste handle -->
+            <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>allpago_gwap/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/customerlocator/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/warehouse/styles.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/soldtogether.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/suggestpage.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/askit.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/attributepages.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easybanner/css/easybanner.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easycatalogimg.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>css/tm/easytabs.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/nivo-slider.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/bar/bar.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/dark/dark.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/default/default.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>tm/easyslide/nivo/themes/light/light.css</name></action>
+            <action method="removeItem"><type>skin_css</type><name>chosen/chosen.css</name></action>
+        </reference>
+        <reference name="checkout.cart">
+            <action method="setTemplate"><template>checkoutsplit/checkout/cart/1.phtml</template></action>
+            <remove name="checkout.cart.shipping" />
+            <remove name="checkout.cart.methods.multishipping" />
+            <block type="fvets_checkoutsplit/cart_split" name="checkout.cart.split" as="split" template="checkoutsplit/checkout/cart/split/1.phtml">
+                <action method="addItemRender">
+                    <type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/item/default/1.phtml</template>
+                </action>
+                <!--block type="fvets_checkoutsplit/cart_split_subtotals" name="checkout.cart.split.subtotals" as="checkout_cart_split_subtotals" template="checkoutsplit/checkout/cart/split/subtotals/1.phtml"/-->
+                <block type="fvets_checkoutsplit/cart_split_subtotals" name="checkout.cart.split.subtotals" as="checkout_cart_split_subtotals" template="checkoutsplit/checkout/cart/split/subtotals/1.phtml"/>
+            </block>
+        </reference>
+        <reference name="checkout.cart.methods.onepage">
+            <action method="setTemplate"><template>checkoutsplit/checkout/cart/onepage/link/1.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.coupon">
+            <action method="setTemplate"><template>checkout/cart/coupon/2.phtml</template></action>
+        </reference>
+        <reference name="checkout.cart.totals">
+            <block type="tax/checkout_subtotal" name="subtotal_total_renderer" template="tax/checkout/subtotal/1.phtml"/>
+            <block type="tax/checkout_grandtotal" name="grand_total_total_renderer" template="tax/checkout/grandtotal/1.phtml"/>
+        </reference>
+    </checkout_cart_index>
+</include_layout>

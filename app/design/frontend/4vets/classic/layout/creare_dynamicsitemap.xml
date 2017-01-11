@@ -1,0 +1,23 @@
+<?xml version="1.0"?>   
+<layout version="1.0">   
+   <dynamicsitemap_index_index>
+        <reference name="root">  
+			<action method="unsetChild"><alias>breadcrumbs</alias></action> 
+            <action method="setTemplate"><template>page/1column.phtml</template></action> 
+        </reference>
+		
+		<reference name="head">
+			<action method="setTitle" translate="title"><title>Veja todo o site</title></action>
+			<action method="addCss"><stylesheet>creare/css/dynamicsitemap.css</stylesheet></action>
+		</reference>
+
+        <reference name="content">
+            <block type="dynamicsitemap/dynamicsitemap" name="creare.dynamicsitemap.dynamicsitemap" template="creare/dynamicsitemap/sitemap.phtml">
+                <block type="core/template" name="brands_list" category_id="8" template="catalog/category/brands/list.phtml">
+                    <action method="setData"><name>category_id</name><value>8</value></action>
+                </block>
+                <block type="core/template" name="vendors_list" template="catalog/category/vendors/list.phtml" />
+            </block>
+        </reference>   
+    </dynamicsitemap_index_index>   
+</layout>   

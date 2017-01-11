@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   FVets
+ * @package    FVets_DataImport
+ * @license    http://opensource.org/licenses/osl-3.0.php Open Software Licence 3.0 (OSL-3.0)
+ * @author     Carlos Eduardo Farah <carlosfarah@gmail.com>
+ */
+-->
+<config>
+    <modules>
+        <FVets_DataImport>
+            <version>0.6.0</version>
+        </FVets_DataImport>
+    </modules>
+
+    <global>
+        <models>
+            <fvetsdataimport>
+                <class>FVets_DataImport_Model</class>
+            </fvetsdataimport>
+        </models>
+
+        <helpers>
+            <fvetsdataimport>
+                <class>FVets_DataImport_Helper</class>
+            </fvetsdataimport>
+        </helpers>
+
+        <importexport module="importexport">
+            <import_entities>
+                <catalog_category translate="label">
+                    <model_token>fvetsdataimport/import_entity_category</model_token>
+                    <label>Category</label>
+                </catalog_category>
+            </import_entities>
+
+            <import_product_types>
+                <simple>fvetsdataimport/import_entity_product_type_simple</simple>
+                <configurable>fvetsdataimport/import_entity_product_type_configurable</configurable>
+                <virtual>fvetsdataimport/import_entity_product_type_virtual</virtual>
+                <grouped>fvetsdataimport/import_entity_product_type_grouped</grouped>
+                <bundle>fvetsdataimport/import_entity_product_type_bundle</bundle>
+            </import_product_types>
+        </importexport>
+    </global>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <avs_fvetsdataimport>
+                    <files>
+                        <default>FVets_DataImport.csv</default>
+                    </files>
+                </avs_fvetsdataimport>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <fvetsdataimport>
+            <general>
+                <import_behavior>replace</import_behavior>
+                <partial_indexing>0</partial_indexing>
+                <continue_after_errors>0</continue_after_errors>
+                <error_limit>100</error_limit>
+                <support_nested_arrays>0</support_nested_arrays>
+                <ignore_duplicates>0</ignore_duplicates>
+                <clear_field_on_empty_string>0</clear_field_on_empty_string>
+                <symbol_for_clear_field>###EMPTY###</symbol_for_clear_field>
+            </general>
+            <product>
+                <allow_rename_files>1</allow_rename_files>
+                <status>1</status>
+                <visibility>4</visibility>
+                <weight>0</weight>
+            </product>
+        </fvetsdataimport>
+    </default>
+
+
+    <phpunit>
+        <suite>
+            <modules>
+                <FVets_DataImport/>
+            </modules>
+        </suite>
+    </phpunit>
+</config>

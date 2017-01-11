@@ -1,0 +1,45 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* @var $this Mage_Reports_Block_Product_Viewed */
+?>
+<?php if ($_promos = $this->getPromosMix()): ?>
+<div class="block block-list block-mix">
+    <div class="block-title">
+        <span><span><?php echo $this->__('Mix de produtos') ?></span></span>
+    </div>
+    <dl id="narrow-by-list">
+        <dd>
+            <ol>
+            <?php foreach ($_promos as $_item): ?>
+                <li>
+                    <a href="<?php echo Mage::getUrl('salesrule/mix/index/', array('id' => $_item->getRuleId())) ?>"><?php echo $_item->getDescription() ?></a>
+                </li>
+            <?php endforeach; ?>
+            </ol>
+        </dd>
+    </dl>
+</div>
+<?php endif; ?>

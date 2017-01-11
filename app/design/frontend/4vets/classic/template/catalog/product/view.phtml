@@ -1,0 +1,109 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+//Dropship
+//$_hlp = Mage::helper('udmultiprice');
+//$region_ok = $_hlp->isAllowedZipcode($_product);
+?>
+<!--<script type="text/javascript">-->
+<!--  var optionsPrice = new Product.OptionsPrice(--><?php //echo $this->getJsonConfig() ?><!--);-->
+<!--  var showRowBoxQty = false;-->
+<!--</script>-->
+
+	<a href="javascript:history.go(-1)" class="go-back breadcrumb"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<?php echo $this->__('Voltar'); ?></a>
+
+<div class="clear"></div>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<div class="row">
+	<div class="col-md-6">
+		<h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h1>
+		<?php //echo $this->getReviewsSummaryHtml($_product, "short", true) ?>
+	</div>
+<!--	<div class="col-md-6 right">-->
+<!--		--><?php //echo $this->getReviewsSummaryHtml($_product, "value", true) ?>
+<!--	</div>-->
+</div>
+
+
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+      id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+  <div class="product-img-box col-md-5">
+    <div class="no-display">
+      <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+      <input type="hidden" name="related_product" id="related-products-field" value=""/>
+    </div>
+    <?php echo $this->getChildHtml('media'); ?>
+		<div class="clear"></div>
+		<?php echo $this->getChildHtml('description') ?>
+  </div>
+
+	<?php  echo $this->getChildHtml('simple_product_list'); ?>
+
+	<?php
+		$isBestReviewBlockActive = $this->getChild('latestreview');
+	?>
+
+	<?php if ($isBestReviewBlockActive) { ?>
+		<?php
+			$isBestReviewBlockActive->setProduct($_product);
+			echo $this->getChildHtml('latestreview');
+		?>
+	<?php } ?>
+
+	<?php echo $this->getChildHtml('distributor_product_list'); ?>
+  
+</form>
+
+<br />
+<br />
+
+<?php echo $this->getChildHtml('reviews') ?>
+
+<br />
+<br />
+<br />
+<br />
+<a class="go-back breadcrumb" href="javascript:history.go(-1)"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;<?php echo $this->__('Voltar'); ?></a>
+
+<br />
+<br />
+<br /><br />
+<br />
+<br />
+<br />

@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Rolepermissions
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Rolepermissions>
+            <version>1.1.1</version>
+        </Amasty_Rolepermissions>
+    </modules>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Rolepermissions after="Mage_Adminhtml">Amasty_Rolepermissions_Adminhtml</Amasty_Rolepermissions>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Rolepermissions>
+                    <files>
+                        <default>Amasty_Rolepermissions.csv</default>
+                    </files>
+                </Amasty_Rolepermissions>
+            </modules>
+        </translate>
+        <events>
+            <controller_action_postdispatch_adminhtml_permissions_role_saverole>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/observer</class>
+                        <method>permissionsRoleSaverole</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_postdispatch_adminhtml_permissions_role_saverole>
+
+            <controller_action_predispatch>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>actionPreDispatchAdmin</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch>
+
+            <core_layout_block_create_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>blockCreateAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </core_layout_block_create_after>
+
+            <catalog_product_save_before>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>productSaveBefore</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_product_save_before>
+
+            <catalog_product_save_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>productSaveAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_product_save_after>
+
+            <controller_action_layout_render_before_adminhtml_catalog_product_edit>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>layoutRenderBeforeProductEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_catalog_product_edit>
+
+            <controller_action_layout_render_before_adminhtml_catalog_product_new>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>layoutRenderBeforeProductEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_catalog_product_new>
+
+            <controller_action_layout_render_before_adminhtml_catalog_product_index>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>layoutRenderBeforeProductIndex</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_catalog_product_index>
+
+            <customer_load_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>customerLoadAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </customer_load_after>
+
+            <model_load_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>modelLoadAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </model_load_after>
+
+            <catalog_category_save_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>categorySaveAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_category_save_after>
+
+            <model_save_before>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>modelSaveBefore</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </model_save_before>
+
+            <core_collection_abstract_load_before>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>collectionLoadBefore</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </core_collection_abstract_load_before>
+
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>collectionLoadBefore</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </eav_collection_abstract_load_before>
+
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>blockToHtmlAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </core_block_abstract_to_html_after>
+            <catalog_product_load_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>productLoadAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_product_load_after>
+            <catalog_category_load_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>categoryLoadAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_category_load_after>
+            <catalog_product_collection_load_before>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>productCollectionLoadBefore</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_product_collection_load_before>
+
+            <controller_action_predispatch_adminhtml_catalog_category_edit>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>restrictCategoryEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_category_edit>
+            <controller_action_predispatch_adminhtml_catalog_category_save>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>restrictCategoryEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_category_save>
+            <controller_action_predispatch_adminhtml_catalog_category_delete>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>restrictCategoryEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_category_delete>
+            <catalog_category_prepare_save>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/observer</class>
+                        <method>categoryPrepareSave</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </catalog_category_prepare_save>
+            <adminhtml_catalog_product_edit_prepare_form>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>removeOwnerField</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </adminhtml_catalog_product_edit_prepare_form>
+            <adminhtml_block_html_before>
+                <observers>
+                    <amasty_rolepermissions_massactions>
+                        <class>amrolepermissions/observer</class>
+                        <method>prepareMassaction</method>
+                    </amasty_rolepermissions_massactions>
+                </observers>
+            </adminhtml_block_html_before>
+
+            <controller_action_predispatch_adminhtml_catalog_product_delete>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>restrictProductDelete</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_product_delete>
+            <controller_action_predispatch_adminhtml_catalog_product_massDelete>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/productObserver</class>
+                        <method>restrictProductDelete</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_product_massDelete>
+
+            <core_block_abstract_prepare_layout_after>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/observer</class>
+                        <method>blockPrepareLayoutAfter</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </core_block_abstract_prepare_layout_after>
+            <adminhtml_catalog_category_tree_can_add_sub_category>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/observer</class>
+                        <method>canAddSubCategory</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </adminhtml_catalog_category_tree_can_add_sub_category>
+            <controller_action_predispatch_adminhtml_catalog_category_edit>
+                <observers>
+                    <amasty_rolepermissions_model_observer>
+                        <type>singleton</type>
+                        <class>amrolepermissions/categoryObserver</class>
+                        <method>onPredispatchCatalogCategoryEdit</method>
+                    </amasty_rolepermissions_model_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_catalog_category_edit>
+        </events>
+    </adminhtml>
+
+    <global>
+        <resources>
+            <amrolepermissions_setup>
+                <setup>
+                    <module>Amasty_Rolepermissions</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amrolepermissions_setup>
+
+            <amrolepermissions_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </amrolepermissions_write>
+
+            <amrolepermissions_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </amrolepermissions_read>
+        </resources>
+
+        <models>
+            <amrolepermissions>
+                <class>Amasty_Rolepermissions_Model</class>
+                <resourceModel>amrolepermissions_resource</resourceModel>
+            </amrolepermissions>
+            <amrolepermissions_resource>
+                <class>Amasty_Rolepermissions_Model_Resource</class>
+                <entities>
+                    <rule>
+                        <table>amasty_amrolepermissions_rule</table>
+                    </rule>
+                </entities>
+            </amrolepermissions_resource>
+            <adminhtml>
+                <rewrite>
+                    <system_store>Amasty_Rolepermissions_Model_System_Store</system_store>
+                </rewrite>
+            </adminhtml>
+            <core>
+                <rewrite>
+                    <resource_website_collection>Amasty_Rolepermissions_Model_Resource_Website_Collection</resource_website_collection>
+                </rewrite>
+            </core>
+        </models>
+
+        <blocks>
+            <amrolepermissions>
+                <class>Amasty_Rolepermissions_Block</class>
+            </amrolepermissions>
+            <adminhtml>
+                <rewrite>
+                    <catalog_category_tree>Amasty_Rolepermissions_Block_Adminhtml_Category_Tree</catalog_category_tree>
+                    <catalog_product_edit_tab_categories>Amasty_Rolepermissions_Block_Adminhtml_Product_Edit_Tab_Categories</catalog_product_edit_tab_categories>
+                    <catalog_product_edit_tab_websites>Amasty_Rolepermissions_Block_Adminhtml_Product_Edit_Tab_Websites</catalog_product_edit_tab_websites>
+                    <system_config_switcher>Amasty_Rolepermissions_Block_Adminhtml_System_Config_Switcher</system_config_switcher>
+                    <widget_grid_column_filter_store>Amasty_Rolepermissions_Block_Adminhtml_Filter_Store</widget_grid_column_filter_store>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <helpers>
+            <amrolepermissions>
+                <class>Amasty_Rolepermissions_Helper</class>
+            </amrolepermissions>
+        </helpers>
+    </global>
+
+
+    <default>
+        <amrolepermissions>
+        </amrolepermissions>
+    </default>
+</config>

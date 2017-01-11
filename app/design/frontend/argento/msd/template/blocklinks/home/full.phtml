@@ -1,0 +1,102 @@
+<?php $_categories = $this->getCategories(); ?>
+
+
+<div class="easycatalogimg">
+
+
+	<ul class="easycatalog-grid easycatalogimg-cols-4 first last odd">
+
+
+
+		<li class="item">
+			<h5 class="category-name parent-category">Marcas</h5>
+			<?php if (Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
+				<a class="product-image" title="Marcas" href="<?php echo $this->getLinkBrands(); ?>">
+					<img alt="Marca1" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Brands.jpg') ?>">
+				</a>
+			<?php else: ?>
+				<img alt="Marca1" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Brands.jpg') ?>">
+			<?php endif; ?>
+			<ul class="list-subcategories">
+				<?php foreach ($_categories as $_category): ?>
+					<li>
+						<?php if (Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
+						<a class="category-name child-category" title="<?php echo $_category->getName(); ?>" href="<?php echo $_category->getUrl($_category); ?>">
+							<?php echo $_category->getName(); ?>
+						</a>
+						<?php else: ?>
+							<?php echo $_category->getName(); ?>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</li>
+
+		<li class="item">
+			<h5 class="category-name parent-category">Ofertas</h5>
+			<?php if (trim($this->getLinkOffers()) != '') : ?>
+			<a class="product-image" title="Ofertas" href="<?php echo $this->getLinkOffers(); ?>">
+				<img alt="Ofertas" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Offers.jpg') ?>">
+			</a>
+			<?php else: ?>
+				<img alt="Ofertas" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Offers.jpg') ?>">
+			<?php endif; ?>
+			<div class="text">
+				<?php if (trim($this->getLinkOffers()) != '') : ?>
+				<a title="Ofertas" href="<?php echo $this->getLinkOffers(); ?>">
+					<?php echo $this->getTextOffers(); ?>
+				</a>
+				<?php else: ?>
+					<?php echo $this->getTextOffers(); ?>
+				<?php endif; ?>
+			</div>
+		</li>
+
+
+
+
+
+		<li class="item">
+			<h5 class="category-name parent-category">A empresa</h5>
+				<img width="100" height="100" alt="Marca3" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Company.jpg') ?>">
+			<ul class="list-subcategories">
+				<li>
+					<a class="category-name child-category" title="<?php echo $this->getTextCompany1(); ?>" href="<?php echo $this->getLinkCompany1(); ?>"><?php echo $this->getTextCompany1(); ?></a>
+				</li>
+				<li>
+					<a class="category-name child-category" title="<?php echo $this->getTextCompany2(); ?>" href="<?php echo $this->getLinkCompany2(); ?>"><?php echo $this->getTextCompany2(); ?></a>
+				</li>
+				<li>
+					<a class="category-name child-category" title="<?php echo $this->getTextCompany3(); ?>" href="<?php echo $this->getLinkCompany3(); ?>"><?php echo $this->getTextCompany3(); ?></a>
+				</li>
+				<li>
+					<a class="category-name child-category" title="<?php echo $this->getTextCompany4(); ?>" href="<?php echo $this->getLinkCompany4(); ?>"><?php echo $this->getTextCompany4(); ?></a>
+				</li>
+				<li>
+					<a class="category-name child-category" title="<?php echo $this->getTextCompany5(); ?>" href="<?php echo $this->getLinkCompany5(); ?>"><?php echo $this->getTextCompany5(); ?></a>
+				</li>
+			</ul>
+		</li>
+
+
+
+
+
+		<li class="item">
+			<h5 class="category-name parent-category">Atendimento</h5>
+			<a class="product-image" title="Atendimento" href="<?php echo $this->getLinkCare(); ?>">
+				<img alt="Atendimento" src="<?php echo $this->getSkinUrl('images/blocklinks/home/Care.jpg') ?>">
+			</a>
+			<div class="text">
+				<a title="Atendimento" href="<?php echo $this->getLinkCare(); ?>">
+					<?php echo $this->getTextCare(); ?>
+				</a>
+			</div>
+		</li>
+
+	</ul>
+
+
+
+
+</div>

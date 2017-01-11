@@ -1,0 +1,56 @@
+<?php
+$blockClassName = Mage::getConfig()->getBlockClassName('custommenu/navigation');
+$block = new $blockClassName();
+$allCats = $block->getStoreCategories()->getNodes();
+
+if (!$allCats) {
+	return;
+}
+
+$curCategory = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+
+if (!$curCategory) {
+	return;
+}
+
+?>
+
+<?php if (count($allCats) <= 1)
+{
+	return;
+} ?>
+
+<div class="other-categories">
+	<div class="clear"></div>
+	<h1 class="block-title"><span>
+			<?php echo $this->__('Other Categories'); ?></span></h1>
+
+	<div class="block-content">
+		<ul class="categories-grid">
+			<?php
+			foreach ($allCats as $category)
+			{
+				if ($category->getId() === $curCategory->getId())
+				{
+					continue;
+				}
+				$category = Mage::getModel('catalog/category')->load($category->getId());
+				?>
+				<li class="item">
+					<div class="prolabel-wrapper">
+						<a href="<?php echo $category->getUrl($category); ?>" title="<?php echo $category->getName(); ?>"
+							 class="category-image">
+							<img height="200" width="200"
+									 data-original="<?php echo $category->getResizedThumbnail('200'); ?>"
+									 class="lazy"
+									 alt="<?php echo $category->getName(); ?>"
+									 style="display: inline;">
+						</a>
+					</div>
+				</li>
+			<?php
+			}
+			?>
+		</ul>
+	</div>
+</div>

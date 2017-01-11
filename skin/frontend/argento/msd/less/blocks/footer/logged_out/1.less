@@ -1,0 +1,133 @@
+.page {
+  .footer-cms-container {
+    color: @defaultTextColor;
+    border-top: @defaultBorder;
+    padding: 20px 5px;
+    background-color: @defaultFooterBackgroundColor;
+
+    .footer-cms {
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      .footer-links {
+        li {
+          float: left;
+          margin-right: 20px;
+          width: 150px;
+
+          h5 {
+            margin: 0;
+            padding: 0;
+          }
+
+          li {
+            float: none;
+            line-height: 24px;
+            margin: 0;
+            width: auto;
+          }
+        }
+      }
+
+      .footer-contacts {
+        float: right;
+        width: 260px;
+        line-height: 21px;
+
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .page {
+    div.footer-cms-container {
+      .footer-cms {
+        width: auto;
+        .footer-links {
+          li {
+            margin-right: 0;
+            width: 130px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 790px) {
+  .page {
+    div.footer-cms-container {
+      div.footer-cms {
+        .footer-links {
+          width: 50%;
+          float: left;
+          li {
+            margin: 10px;
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .page {
+    div.footer-cms-container {
+      padding:0;
+      div.footer-cms {
+        .footer-links {
+          width: 100%;
+          text-align: left;
+          padding-left:40%;
+          box-sizing: border-box;
+          li {
+            margin: 0;
+            width: 100%;
+          }
+
+          > li {
+            margin-bottom: 20px;
+          }
+        }
+        .footer-contacts {
+          box-sizing: border-box;
+          padding: 20px;
+          width: 100%;
+          background: #e6e6e6;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .footer-cms-container {
+    padding: 20px 0 !important;
+    .footer-cms {
+      padding-top: 0;
+      .footer-links li {
+        float: none;
+        width: 100%;
+        margin: 0;
+      }
+    }
+    .footer-contacts {
+      float: none;
+      width: 100%;
+      padding: 0 !important;
+      div {
+        float: none !important;
+        margin-left: auto !important;
+        max-width: auto !important;
+        min-width: auto !important;
+        padding: 0 5%;
+      }
+    }
+  }
+}

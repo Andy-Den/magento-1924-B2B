@@ -1,0 +1,31 @@
+<?php
+/**
+ * FVets_CatalogRestrictionGroup extension
+ * 
+ * @category       FVets
+ * @package        FVets_CatalogRestrictionGroup
+ * @copyright      Copyright (c) 2016
+ */
+/**
+ * Restriction Group list template on product page
+ *
+ * @category    FVets
+ * @package     FVets_CatalogRestrictionGroup
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $catalogrestrictiongroups = $this->getCatalogrestrictiongroupCollection();?>
+<?php if ($catalogrestrictiongroups && $catalogrestrictiongroups->count() > 0) :?>
+<div class="box-collateral box-catalogrestrictiongroups box-up-sell">
+    <?php foreach ($catalogrestrictiongroups as $_catalogrestrictiongroup) : ?>
+        <div class="item">
+            <?php
+                if($_catalogrestrictiongroup->getName() === 'Abase - Restrição de Vacinas' ) :
+                    echo $_catalogrestrictiongroup->getName();
+                endif;
+            ?>
+<br />
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <allin_index_accountindex>
+        <reference name="content">
+            <block type="fvets_allin/adminhtml_account_index" name="fvets_allin_account_index"/>
+        </reference>
+    </allin_index_accountindex>
+    <allin_index_edit>
+        <reference name="content">
+            <block type="fvets_allin/adminhtml_account_edit" name="fvets_allin_account_edit"/>
+        </reference>
+    </allin_index_edit>
+
+    <!--atualização de listas-->
+    <allin_updater_index>
+        <reference name="content">
+            <block type="fvets_allin/adminhtml_accountswitcher_accountswitcher" name="fvets_allin_accountswitcher"
+                   template="fvets/allin/accountswitcher/accountswitcher.phtml"/>
+            <block type="fvets_allin/adminhtml_updater_index" name="fvets_allin_updater_index"/>
+        </reference>
+    </allin_updater_index>
+</layout>

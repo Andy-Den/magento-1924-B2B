@@ -1,0 +1,166 @@
+@import "../../../../mixins";
+
+.featherlight {
+  .featherlight-close-icon {
+    font-weight: bold;
+    font-size: 17px;
+    background: none;
+  }
+  .featherlight-content {
+    overflow: inherit;
+    width: 310px;
+    top: -10%;
+    padding: 0;
+    .rounded();
+    .featherlight-inner {
+
+      .title {
+        background: @defaultBackgroundColor3;
+        color: white;
+        padding: 10px 5%;
+
+        h2 {
+          color: white !important;
+          text-transform: uppercase;
+          margin: 0;
+        }
+      }
+
+      .content {
+        padding: 0 5%;
+
+        .input-group {
+          width: 100%;
+        }
+
+        .button {
+          width: 100%;
+
+          span {
+            width: 100%;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+
+    #modal-customer-validate {
+      .modal-customer-validate-header {
+        padding: 3% 0 0 2%;
+      }
+      #form-createaccount-validate {
+        .fieldset {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          padding-top: 0;
+        }
+        .action-buttons {
+          height: 78px;
+          margin-left: 2%;
+          button {
+            display: block;
+            margin: 0 auto;
+            span {
+              width: 380px;
+              font-size: 16px;
+              box-shadow: none;
+              span {
+                margin-right: 9px;
+                i {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .errorMsgs {
+        color: red;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .info-message {
+        p {
+          width: 95%;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    #modal-warehouse-select {
+      .modal-warehouse-select-header {
+        padding: 3% 0 0 2%;
+      }
+      #form-select-warehouse {
+        .fieldset {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          padding-top: 0;
+        }
+        .action-buttons {
+          height: 78px;
+          margin-left: 2%;
+          button {
+            display: block;
+            margin: 0 auto;
+            span {
+              width: 280px;
+              font-size: 16px;
+              span {
+                margin-right: 9px;
+                i {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .errorMsgs {
+        color: red;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .info-message {
+        p {
+          width: 95%;
+          margin: 0 auto;
+        }
+      }
+
+      .warehouse-select {
+        height: 34px;
+        margin: 0 auto;
+        width: 34%;
+      }
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .featherlight {
+    .featherlight-content {
+      width: auto;
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .featherlight {
+    .featherlight-content {
+      .action-buttons {
+        button {
+          span {
+            width: auto!important;
+            span {
+              width: auto!important;
+              font-size: 12px!important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

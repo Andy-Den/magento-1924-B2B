@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * FVets_AttributeMenu extension
+ * 
+ * @category       FVets
+ * @package        FVets_AttributeMenu
+ * @copyright      Copyright (c) 2015
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fvets_attributemenu translate="title" module="fvets_attributemenu">
+                                        <title>AttributeMenu</title>
+                                    </fvets_attributemenu>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <catalog>
+                        <children>
+                            <fvets_attributemenu translate="title" module="fvets_attributemenu">
+                                <title>Attribute Menu</title>
+                                <children>
+                                    <attributemenu translate="title" module="fvets_attributemenu">
+                                        <title>AttributeMenu</title>
+                                        <sort_order>0</sort_order>
+                                    </attributemenu>
+                                </children>
+                            </fvets_attributemenu>                        </children>
+                    </catalog>
+
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <catalog>
+            <children>
+                <fvets_attributemenu translate="title" module="fvets_attributemenu">
+                    <title>Attribute Menu</title>
+                    <sort_order>5</sort_order>
+                    <children>
+                        <attributemenu translate="title" module="fvets_attributemenu">
+                            <title>AttributeMenu</title>
+                            <action>adminhtml/attributemenu</action>
+                            <sort_order>0</sort_order>
+                        </attributemenu>
+                    </children>
+                </fvets_attributemenu>            </children>
+        </catalog>
+
+    </menu>
+</config>

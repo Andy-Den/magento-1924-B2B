@@ -1,0 +1,226 @@
+<layout version="0.1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="../../fvets_pure/layout/handles/default/1.xml" />
+
+    <default>
+        <remove name="catalog.topnav"/>
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>js/webandpeople/custommenu/custommenu.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>fonts/proxima-nova/css/proxima-nova.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/breadcrumb/1.less</name></action>
+             <block type="core/text" name="blockname">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<meta http-equiv="Pragma" content="no-cache"/>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+    <default ifhandle="customer_logged_in">
+        <update handle="header_logged_in_1" />
+        <update handle="catalog_topnav_1" />
+        <update handle="header_cart_1" />
+        <update handle="footer_logged_in_1" />
+    </default>
+
+    <default ifhandle="customer_logged_out">
+        <update handle="header_logged_out_3" />
+        <update handle="footer_logged_out_2" />
+    </default>
+
+    <cms_index_index ifhandle="customer_logged_in">
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/custom.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="home" template="catalog/page/home.phtml" />
+        </reference>
+    </cms_index_index>
+
+    <cms_index_index>
+        <reference name="head">
+            <action method="setTitle"><title>Soluções Inovadoras</title></action>
+            <action method="addItem"><type>skin_js</type><name>js/custom.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html" name="home" template="page/home.phtml">
+                <block type="page/html" name="contact" as="contact" template="contact/contact.phtml"/>
+            </block>
+        </reference>
+    </cms_index_index>
+
+    <xi:include href="../../fvets_pure/layout/handles/cms_page/1.xml" />
+
+    <!--  Catalog -->
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_product_view/2.xml" />
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>jquery/jquery.cookie.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/handles/product_view/1.less</name></action>
+        </reference>
+        <reference name="product.info">
+            <block type="fvets_salesrep/product_list" name="salesrep.product.list" as="salesrep_product_list" template="catalog/product/salesrep/list.phtml">
+                <block type="fvets_salesrep/product_list_selector" name="salesrep.product.list.selector" as="selector" template="catalog/product/salesrep/list/selector.phtml" />
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <xi:include href="../../fvets_pure/layout/handles/catalog_category_layered/2.xml" />
+
+    <catalog_category_default>
+        <update handle="page_one_column"/>
+    </catalog_category_default>
+
+    <catalog_category_level_two>
+        <update handle="page_one_column"/>
+        <remove name="breadcrumbs"></remove>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/catalog_category_level_two/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/breadcrumb/1.less</name></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate">
+                <template>catalog/category/pequenos_animais.phtml</template>
+            </action>
+
+            <block type="page/html" name="contact" as="contact" template="contact/contact.phtml"/>
+        </reference>
+    </catalog_category_level_two>
+
+    <CATEGORY_683>
+        <update handle="page_one_column"/>
+        <remove name="breadcrumbs"></remove>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/category_snaps/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/breadcrumb/1.less</name></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate">
+                <template>catalog/category/snaps.phtml</template>
+            </action>
+        </reference>
+    </CATEGORY_683>
+
+    <CATEGORY_684>
+        <update handle="page_one_column"/>
+        <remove name="breadcrumbs"></remove>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/category_equipamentos/1.less</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/breadcrumb/1.less</name></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate">
+                <template>catalog/category/equipamentos.phtml</template>
+            </action>
+        </reference>
+    </CATEGORY_684>
+
+    <!--xi:include href="../../fvets_pure/layout/handles/catalog_category_level_three/1.xml" /-->
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_result_index/1.xml" />
+
+
+    <catalogsearch_result_index>
+        <update handle="page_one_column"/>
+        <reference name="search_result_list">
+            <action method="setTemplate"><template>catalog/product/list/2.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/catalogsearch_advanced_result/1.xml" />
+
+
+    <xi:include href="../../fvets_pure/layout/handles/suggestpage_view/1.xml" />
+
+    <!-- Cart -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_cart_index/1.xml" />
+
+    <!-- Checkout -->
+
+    <xi:include href="../../fvets_pure/layout/handles/checkout_onepage_success/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/onestepcheckout_index_index/2.xml" />
+
+    <contacts_index_index>
+        <update handle="page_one_column"/>
+    </contacts_index_index>
+
+    <!-- Customer -->
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_create/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_edit/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_login/1.xml" />
+
+    <customer_account_logoutsuccess>
+        <update handle="page_one_column" />
+    </customer_account_logoutsuccess>
+
+    <customer_account_newsletter>
+        <update handle="customer_account_newsletter_1"></update>
+
+        <reference name="loggedin.homepage.widtget.banners">
+            <action method="setSliderName"><slider_name>petvale_slider</slider_name></action>
+        </reference>
+
+        <!-- Loggedout -->
+
+        <reference name="loggedout.homepage.widtget.banners">
+            <action method="setSliderName"><slider_name>petvale_slider</slider_name></action>
+        </reference>
+
+        <reference name="loggedout.home.grid">
+            <action method="addItem"><widget_id>5</widget_id></action>
+            <action method="addItem"><widget_id>6</widget_id></action>
+        </reference>
+    </customer_account_newsletter>
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_forgotpassword/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_address_index/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/newsletter_manage_index/1.xml" />
+
+    <!-- Review -->
+
+    <review_product_list>
+        <update handle="page_one_column"/>
+    </review_product_list>
+
+    <review_product_view>
+        <update handle="page_one_column"/>
+    </review_product_view>
+
+    <tag_list_index>
+        <update handle="page_one_column"/>
+    </tag_list_index>
+
+    <!-- Sales -->
+
+    <xi:include href="../../fvets_pure/layout/handles/customer_account_login/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_history/1.xml" />
+
+    <xi:include href="../../fvets_pure/layout/handles/sales_order_view/1.xml" />
+
+    <!--highlights-->
+
+    <xi:include href="../../fvets_pure/layout/handles/highlight_index_index/1.xml" />
+
+    <!-- modules -->
+    <askit_core>
+        <update handle="page_one_column"/>
+    </askit_core>
+</layout>

@@ -1,0 +1,201 @@
+<config>
+    <tabs>
+        <fvets translate="label" module="core">
+            <label>4Vets</label>
+            <sort_order>9999999</sort_order>
+        </fvets>
+    </tabs>
+    <sections>
+        <datavalidate translate="label" module="datavalidate">
+            <class>separator-top</class>
+            <label>Data Validate Config</label>
+            <tab>fvets</tab>
+            <sort_order>610</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="datavalidate">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <enabled translate="label" module="datavalidate">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </enabled>
+
+                        <sendto translate="label" module="datavalidate">
+                            <label>Send Emails to</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </sendto>
+
+                        <products_managing_stock translate="label" module="datavalidate">
+                            <label>Products Managing Stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_managing_stock>
+
+                        <products_not_managing_stock translate="label" module="datavalidate">
+                            <label>Products NOT Managing Stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_not_managing_stock>
+
+                        <products_with_magento_native_price_zero translate="label" module="datavalidate">
+                            <label>Products with native price zero</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_with_magento_native_price_zero>
+
+                        <products_with_no_categories_assigned translate="label" module="datavalidate">
+                            <label>Products with no categories assigned</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_with_no_categories_assigned>
+
+                        <products_with_no_storeview_scope_price translate="label" module="datavalidate">
+                            <label>Products with no storeview scope price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_with_no_storeview_scope_price>
+
+                        <products_with_no_images_assigned translate="label" module="datavalidate">
+                            <label>Products with no Images Assigned</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_with_no_images_assigned>
+
+                        <products_duplicated_id_erp_for_same_website translate="label" module="datavalidate">
+                            <label>Products with duplicated ID_ERP for same website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_duplicated_id_erp_for_same_website>
+
+                        <products_with_different_prices_between_bigger_group_price_and_normal_price translate="label"
+                                                                                                    module="datavalidate">
+                            <label>Products with different prices between bigger group price and normal price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_with_different_prices_between_bigger_group_price_and_normal_price>
+
+                        <products_without_stock translate="label"
+                                                module="datavalidate">
+                            <label>Products without stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </products_without_stock>
+
+                        <products_without_website_attached translate="label"
+                                                module="datavalidate">
+                            <label>Products without website attached</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </products_without_website_attached>
+
+                        <customer_without_salesrep translate="label" module="datavalidate">
+                            <label>Customers without salesrep</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </customer_without_salesrep>
+
+                        <reps_without_email translate="label" module="datavalidate">
+                            <label>Reps without email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </reps_without_email>
+
+                        <customers_with_stores_without_salesrep translate="label" module="datavalidate">
+                            <label>Clientes com lojas sem representantes</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </customers_with_stores_without_salesrep>
+
+                        <customers_with_duplicated_iderp translate="label" module="datavalidate">
+                            <label>Clientes com o mesmo ID ERP</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </customers_with_duplicated_iderp>
+
+                        <customers_without_default_billing_or_shipping_address>
+                            <label>Clientes sem endereço padrão de cobrança e/ou entrega</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </customers_without_default_billing_or_shipping_address>
+
+                        <salesreps_with_no_images_assigned>
+                            <label>Representantes sem uma imagem vinculada</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </salesreps_with_no_images_assigned>
+
+                        <customers_approved_without_commission>
+                            <label>Clientes Aprovados sem comissão</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </customers_approved_without_commission>
+                    </fields>
+                </general>
+            </groups>
+        </datavalidate>
+    </sections>
+</config>

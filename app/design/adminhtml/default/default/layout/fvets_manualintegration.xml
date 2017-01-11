@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <manualintegration_index_listindex>
+        <reference name="content">
+            <block type="fvets_manualintegration/adminhtml_list_index" name="fvets_allin_list_index"/>
+        </reference>
+    </manualintegration_index_listindex>
+    <manualintegration_index_edit>
+        <reference name="content">
+            <block type="fvets_manualintegration/adminhtml_list_edit" name="fvets_manualintegration_list_edit"/>
+        </reference>
+    </manualintegration_index_edit>    
+</layout>

@@ -1,0 +1,98 @@
+@import "../../../../mixins";
+
+.contacts-form-inline-3 {
+  width: 520px;
+  margin: 0 auto 6%;
+
+  h3 {
+    width: 100%;
+    font-size: 26px;
+    font-weight: lighter;
+    text-align: center;
+  }
+
+  .fieldset {
+    margin: 0;
+    padding: 0;
+
+    h3 {
+      font-size: 26px;
+    }
+
+    .form-list {
+      width: 100% !important;
+
+      .field {
+        width: 100%;
+      }
+
+      .input-box {
+        width: 100%;
+
+        input {
+          height: 50px;
+          font-size: 20px;
+
+          padding-left: 25px;
+        }
+        textarea {
+          font-size: 20px;
+          padding-left: 25px;
+        }
+      }
+    }
+
+    .legend {
+      margin-top: 0;
+    }
+  }
+
+  .buttons-set {
+    padding: 0;
+    .link-enviar {
+      background-color: @defaultColor4;
+      color: @defaultColor3;
+      text-align: center;
+      overflow: auto;
+      padding: 10px 35px;
+      font-size: 26px;
+      width: 100%;
+      margin-top: 5%;
+      border: none;
+      font-weight: bold;
+
+      &:hover {
+        .backgroundGradient(@defaultBackgroundColor1);
+      }
+    }
+  }
+
+  .contacts {
+    div {
+      text-align: center;
+      float: left;
+      margin-top: 3%;
+
+      span {
+        font-size: 1.3em;
+        margin-left: 15px;
+      }
+
+      &.phone {
+        width: 44%;
+        font-weight: lighter;
+        i {
+          color: #4768a4;
+        }
+      }
+
+      &.mail {
+        width: 56%;
+        font-weight: lighter;
+        i {
+          color: #4768a4;
+        }
+      }
+    }
+  }
+}

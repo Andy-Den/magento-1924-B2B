@@ -1,0 +1,5 @@
+config:
+  default/fvetsdataimport/product/weight: 12345
+  default/fvetsdataimport/product/visibility: 3
+  default/fvetsdataimport/product/status: 2
+  default/fvetsdataimport/product/tax_class_id: 4

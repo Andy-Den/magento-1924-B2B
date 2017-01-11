@@ -1,0 +1,72 @@
+@import "../../../../mixins";
+
+.featherlight {
+  .featherlight-close-icon {
+    font-weight: bold;
+    font-size: 17px;
+    background: none;
+  }
+  .featherlight-content {
+    padding: 0;
+    .rounded();
+    .featherlight-inner {
+
+      .title {
+        background: @defaultBackgroundColor3;
+        color: white;
+        padding: 10px 5%;
+
+        h2 {
+          color: white !important;
+          text-transform: uppercase;
+          margin: 0;
+        }
+      }
+
+      .content {
+        padding: 0 5%;
+
+        .input-group {
+          width: 100%;
+        }
+        .action-buttons {
+          height: 45px;
+          .button {
+            width: 100%;
+
+            span {
+              width: 100%;
+              box-sizing: border-box;
+            }
+          }
+        }
+      }
+    }
+
+    #newsletter-featherlight-login {
+      width: 445px;
+      .registered-users {
+        .new-users {
+          text-align: center;
+          h4 {
+            margin: 20px 0 14px 0;
+          }
+          .btn-doToAction {
+            vertical-align: baseline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .featherlight {
+    .featherlight-content {
+      min-width: 290px !important;
+      #newsletter-featherlight-login {
+        width: 100% !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php $comments = $this->getComments() ?>
+<div id="comments" class="comments-wrapper row">
+	<div class="row">
+		<?php echo $this->getFormHtml() ?>
+	</div>
+	<div class="row">
+		<?php if ($comments->count() > 0): ?>
+			<?php echo $this->getCommentsHtml() ?>
+			<?php echo $this->getPagerHtml() ?>
+		<?php endif; ?>
+	</div>
+	
+</div>

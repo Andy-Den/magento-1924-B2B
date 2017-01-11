@@ -1,0 +1,102 @@
+<?php
+$_product = $this->getProduct();
+
+$latestReview = Mage::helper('review')->getLatestReview($_product);
+if ($latestReview && $latestReview->getId())
+{
+	?>
+
+	<div class="bestreview row">
+
+		<div class="col-xs-12 col-md-6">
+			<?php
+			$ratings = $latestReview->getRatingVotes()->getItems();
+			$rating = $ratings[key($ratings)];
+			$ratingValue = $rating->getValue();
+			$_picture = Mage::helper('fvets_customer')->getCustomerImageUrl($latestReview->getCustomerId());
+			?>
+
+			<div class="rating-big">
+				<div class="rating-box">
+					<div class="rating" style="width:<?php echo ceil($rating->getPercent()) ?>%;"></div>
+				</div>
+			</div>
+			<br /><br />
+			<div class="row">
+
+				<div class="col-xs-6 col-md-12">
+					<div class="rater">
+						<?php
+						echo "<img class='avatar' src=" . $_picture . " />";
+						echo "<span class='nickname'>" . $latestReview->getNickname() . "</span>";
+						?>
+						<br>
+						<?php echo Mage::helper('review')->getCustomerLevel($latestReview->getCustomerId()); ?>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-12">
+					<?php
+
+						echo "<span class='review-title-top'>" . $latestReview->getTitle() . "</span>";
+
+						if ($latestReview->getIsRecommended())
+						{
+							echo '&nbsp<i class="fa fa-check"></i><span class="recommended-product">recomendado</span>';
+						}
+
+						echo "<br/><span class='review-detail-top'>" . "\"" . $latestReview->getDetail() . "\"" . "</span><br/><br/>";
+
+
+
+					?>
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="col-xs-12 col-md-6">
+			<div class="row">
+				<div class="col-sm-6 col-md-12">
+					<div class="rating-big">
+						<?php /*<div class="rating-value-container">
+							<span><?php echo number_format($summaryEvaluation['percent'] / 10, 1); ?></span>
+						</div> */ ?>
+						<h2><?php echo $this->__('Pontuação geral dos veterinários'); ?></h2>
+						<?php
+							$votes = Mage::helper('review')->getReviewsVotesArray($_product);
+						?>
+						<?php foreach($votes['votes'] as $key => $vote) : ?>
+							<div style="float:left">
+								<?php
+									echo Mage::helper('review')->getVoteString($key);
+								?>
+							</div>
+							<div class="rating-box" style="float: right">
+								<div class="rating" style="width:<?php echo ceil(($vote *  100) / $votes['max']) ?>%;"></div>
+							</div>
+							<div class="clear"></div>
+						<?php endforeach ?>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-12">
+					<br />
+					<?php if($this->getHandle() == 'product_view') : ?>
+						<a class="btn btn-review" href="#">DÊ SUA AVALIAÇÃO</a>
+						<br />
+					<?php endif; ?>
+					<?php if($this->getHandle() == 'category_layered') : ?>
+						<div class="do-see-review">
+							<a href="<?php echo $_product->getProductUrl() . '?review=true' ?>" id="btn-review" class="btn btn-large btn-primary">DÊ SUA AVALIAÇÃO</a>
+							<br/><br/>
+							<a href="<?php echo $_product->getProductUrl() . '#users-reviews' ?>" class="lnk-outras-avaliacoes">Veja outras avaliações</a>&nbsp;<i class="fa fa-chevron-right"></i>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<?php } ?>

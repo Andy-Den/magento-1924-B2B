@@ -1,0 +1,16 @@
+<include_layout version="0.1.0">
+    <customer_account_create>
+        <update handle="page_one_column"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>less/handles/customer_account_create/1.less</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/customer/account/create.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>less/blocks/customer/account/create/validate/1.less</name></action>
+        </reference>
+        <reference name="customer_form_register">
+            <action method="setTemplate"><template>customer/account/create/1.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="customer/form_register" name="customer-validation" template="customer/account/create/validate/1.phtml" before="-"/>
+        </reference>
+    </customer_account_create>
+</include_layout>

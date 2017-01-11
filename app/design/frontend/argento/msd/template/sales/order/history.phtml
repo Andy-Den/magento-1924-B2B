@@ -1,0 +1,307 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php if (!$this->isRepresentante()) { ?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Orders') ?></h1>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_orders->getSize()): ?>
+<table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Order #') ?></th>
+            <th><?php echo $this->__('Date') ?></th>
+            <th><?php echo $this->__('Information') ?></th>
+			<th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+		<?php $count = 0; ?>
+        <?php foreach ($_orders as $_order): ?>
+        <tr>
+            <td><?php echo $_order->getRealOrderId() ?></td>
+            <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+            <td>
+                <dl class="order-info">
+                    <dt><?php echo $this->__('Ship To') ?></dt>
+                    <dd><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;'?></dd>
+                    <dt><?php echo $this->__('Order Total') ?></dt>
+                    <dd><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></dd>
+                    <dt><?php echo $this->__('Status') ?></dt>
+                    <dd><?php echo $_order->getStatusLabel() ?></dd>
+                </dl>
+
+            </td>
+			<td>
+				<a class="button" href="<?php echo $this->getViewUrl($_order) ?>" class="view-order-link"><?php echo $this->__('View Order') ?></a>
+			</td>
+        </tr>
+		<tr id="order<?php echo $_order->getRealOrderId() ?>" class="full-order-row">
+			<td colspan="4" class="information  information<?php echo $count; ?>">
+				<table width="95%" class="inner-table">
+					<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+						<tr>
+							<td colspan="5" class="a-right">
+								<a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+							</td>
+						</tr>
+					<?php endif ?>
+					<tr>
+						<th>Código</th>
+						<th>Produto</th>
+						<th>Valor Unid.</th>
+						<th>Qtde</th>
+						<th>Total</th>
+					</tr>
+					<?php foreach ($_order->getAllItems() as $_item) : ?>
+						<tr>
+							<td><?php echo $_item->getSku(); ?></td>
+							<td><?php echo $_item->getName(); ?></td>
+							<td><?php echo $_item->getPriceInclTax(); ?></td>
+							<td><?php echo $_item->getData('qty_ordered'); ?></td>
+							<td><?php echo Mage::helper('core')->currency($_item->getPriceInclTax() * $_item->getData('qty_ordered')); ?></td>
+						</tr>
+					<?php endforeach; ?>
+					<tr>
+						<td colspan="5" class="a-right">
+							<strong>Total geral: <?php echo $_order->formatPrice($_order->getGrandTotal()) ?></strong>
+						</td>
+					</tr>
+					<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+						<tr>
+							<td colspan="5" class="a-right">
+								<a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+							</td>
+						</tr>
+					<?php endif ?>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<a href="javascript://" class="order-show" data-id="<?php echo $_order->getRealOrderId() ?>">
+					<span>
+						Baixo
+					</span>
+				</a>
+			</td>
+		</tr>
+		<?php $count++; endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif ?>
+<script>
+	jQuery(document).ready(function() {
+		jQuery('.order-show').bind({
+			click: function() {
+
+				jQuery('.full-order-row').hide();
+
+				if (!jQuery(this).hasClass('opened'))
+				{
+					that = this;
+					jQuery('#order'+jQuery(this).data('id')).show(function() {
+						jQuery('.order-show').removeClass('opened');
+						jQuery(that).addClass('opened');
+					});
+				} else {
+					jQuery('.order-show').removeClass('opened');
+				}
+
+			}
+		});
+	});
+</script>
+
+<?php } else { ?>
+
+	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php $_orders = $this->getOrders(); ?>
+	<div class="page-title">
+		<h1><?php echo $this->__('My Clients Orders') ?></h1>
+	</div>
+	<?php echo $this->getPagerHtml(); ?>
+	<?php if($_orders->getSize()): ?>
+		<?php $ordersCustomers = $this->getOrdersClientsForThisRep(); ?>
+		<div style="float: left; margin-bottom: 5px;">
+			<span>Selecione o cliente:</span>
+			<select id="customer_combo" name="customer" onchange="window.location.href='?user='+this.value">
+				<?php $contador = array(); ?>
+				<option value="-1"><?php echo $this->__("All"); ?></option>
+				<?php foreach ($ordersCustomers as $_order): ?>
+						<?php if (!in_array($_order->getData('customer_id'), $contador)) { ?>
+							<option value="<?php echo $_order->getData('customer_id'); ?>" <?php echo ($this->getRequest()->getParam('user') == $_order->getData('customer_id')) ? 'selected' : '' ?>><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;'?></option>
+						<?php
+							array_push($contador, $_order->getData('customer_id'));
+						} ?>
+				<?php endforeach ?>
+			</select>
+		</div>
+		<table class="data-table" id="my-orders-table">
+			<col width="1" />
+			<col width="1" />
+			<col />
+			<col width="1" />
+			<col width="1" />
+			<col width="1" />
+			<thead>
+			<tr>
+				<th><?php echo $this->__('Order #') ?></th>
+				<th><?php echo $this->__('Date') ?></th>
+				<th><?php echo $this->__('Information') ?></th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php $_odd = ''; ?>
+			<?php $count = 0; ?>
+			<?php $idClientOrder = null; ?>
+			<?php foreach ($_orders as $_order): ?>
+				<?php if (!isset($idClientOrder)) { ?>
+					<tr class="line-customer-name"><td colspan="4"><h2><?php echo $this->__('Customer').': ' ?> <strong><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;'?></strong></h2></td></tr>
+				<?php
+					$idClientOrder = $_order->getCustomerId();
+				} else { ?>
+				<?php
+					if ($_order->getCustomerId() != $idClientOrder) { ?>
+						<tr class="line-customer-name"><td colspan="4"><h2><?php echo $this->__('Customer').': ' ?> <strong><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;'?></strong></h2></td></tr>
+				<?php	}
+				} ?>
+				<tr class="line-sumary-data">
+					<td><?php echo $_order->getRealOrderId() ?></td>
+					<td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+					<td>
+						<dl class="order-info">
+							<dt><?php echo $this->__('Ship To') ?></dt>
+							<dd><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;'?></dd>
+							<dt><?php echo $this->__('Order Total') ?></dt>
+							<dd><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></dd>
+							<dt><?php echo $this->__('Status') ?></dt>
+							<dd><?php echo $_order->getStatusLabel() ?></dd>
+						</dl>
+					</td>
+					<td>
+						<a class="button" href="<?php echo $this->getViewUrl($_order) ?>" class="view-order-link"><?php echo $this->__('View Order') ?></a>
+					</td>
+				</tr>
+				<tr id="order<?php echo $_order->getRealOrderId() ?>" class="full-order-row">
+					<td colspan="4" class="information  information<?php echo $count; ?>">
+						<table width="95%" class="inner-table">
+							<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+								<tr>
+									<td colspan="5" class="a-right">
+										<a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+									</td>
+								</tr>
+							<?php endif ?>
+							<tr>
+								<th>Código</th>
+								<th>Produto</th>
+								<th>Valor Unid.</th>
+								<th>Qtde</th>
+								<th>Total</th>
+							</tr>
+							<?php foreach ($_order->getAllItems() as $_item) : ?>
+								<tr>
+									<td><?php echo $_item->getSku(); ?></td>
+									<td><?php echo $_item->getName(); ?></td>
+									<td><?php echo $_item->getPriceInclTax(); ?></td>
+									<td><?php echo $_item->getData('qty_ordered'); ?></td>
+									<td><?php echo Mage::helper('core')->currency($_item->getPriceInclTax() * $_item->getData('qty_ordered')); ?></td>
+								</tr>
+							<?php endforeach; ?>
+							<tr>
+								<td colspan="5" class="a-right">
+									<strong>Total geral: <?php echo $_order->formatPrice($_order->getGrandTotal()) ?></strong>
+								</td>
+							</tr>
+							<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+								<tr>
+									<td colspan="5" class="a-right">
+										<a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+									</td>
+								</tr>
+							<?php endif ?>
+						</table>
+					</td>
+				</tr>
+				<tr class="line-click-show-complete-data">
+					<td colspan="4">
+						<a href="javascript://" class="order-show" data-id="<?php echo $_order->getRealOrderId() ?>">
+					<span>
+						Baixo
+					</span>
+						</a>
+					</td>
+				</tr>
+				<?php $count++; endforeach; ?>
+			</tbody>
+		</table>
+		<script type="text/javascript">decorateTable('my-orders-table');</script>
+		<?php echo $this->getPagerHtml(); ?>
+	<?php else: ?>
+		<p><?php echo $this->__('You have placed no orders.'); ?></p>
+	<?php endif ?>
+	<script>
+		jQuery(document).ready(function() {
+			jQuery('.order-show').bind({
+				click: function() {
+
+					jQuery('.full-order-row').hide();
+
+					if (!jQuery(this).hasClass('opened'))
+					{
+						that = this;
+						jQuery('#order'+jQuery(this).data('id')).show(function() {
+							jQuery('.order-show').removeClass('opened');
+							jQuery(that).addClass('opened');
+						});
+					} else {
+						jQuery('.order-show').removeClass('opened');
+					}
+
+				}
+			});
+		});
+	</script>
+
+<?php } ?>

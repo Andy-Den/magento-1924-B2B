@@ -1,0 +1,54 @@
+<?php if ($this->validateCustomerGroup())
+{
+	?>
+	<?php $labels = $this->getLabelData(); ?>
+	<?php if (count($labels) > 0)
+{
+	$count = 1;
+
+	$router = Mage::app()->getFrontController()->getRequest()->getRouteName();
+
+	if ($router == 'checkoutsplit')
+	{
+		$router = 'onestepcheckout';
+	}
+
+	?>
+	<?php foreach ($labels as $labelShortName => $data)
+{
+	?>
+	<div class="campaign-label <?php echo('prolabel' . $count); ?> campaign-label-<?php echo $router; ?>">
+		<span class="tooltip">
+			<?php echo($router && $router == 'onestepcheckout' ? $labelShortName[0] : $labelShortName) ?>
+			<span class="block">
+				<div class="inner">
+        <strong><?php echo $labelShortName ?></strong><br/>
+				<?php $description = ''; ?>
+				<?php foreach ($data as $labelData)
+				{
+					if ($labelData['is_mix']) :
+						$description .= ' <a href="'.Mage::getUrl('salesrule/mix/index', array('id' => $labelData['salesrule_id'])).'">';
+					endif;
+
+					$description .= $labelData['description'];
+
+					if ($labelData['is_mix']) :
+						$description .= ' <br /><button class="button btn-lessAction" title="Ver mix" type="button"><span><span>Ver mix ></span></span></button></a>';
+					endif;
+
+					$description .= '<br /><br />';
+				}
+
+				echo $description;
+
+				?>
+				</div>
+    </span>
+		</span>
+	</div>
+	<?php
+	$count++;
+}
+}
+}?>
+

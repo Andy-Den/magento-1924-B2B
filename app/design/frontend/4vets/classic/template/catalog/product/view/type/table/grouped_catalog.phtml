@@ -1,0 +1,65 @@
+<?php $_product = $this->getProduct() ?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+
+<?php if ($_hasAssociatedProducts): ?>
+  <?php foreach ($_associatedProducts as $_item): ?>
+    <tr data-post='<?php echo json_encode(array('product'=>$_item->getId(), 'qty' => 0)); ?>'  data-tier='<?php echo json_encode($_item->getTierPrice()) ?>'>
+      <td width="200">
+        <span class="product-name"><?php echo $_item->getName() ?></span>
+        <?php $this->getChild('product_type_data')->setData('product', $_item); ?>
+      </td>
+			<td class="a-left text-left">
+				<?php if ($_item->isAvailable()): ?>
+					<span class="in-stock"><i class="fa fa-check-circle-o"></i></span>
+				<?php else: ?>
+					<span class="out-of-stock"><i class="fa fa-ban"></i></span>
+				<?php endif; ?>
+			</td>
+			<td>
+				<span class="product-price"><?php echo $this->getChildHtml('product_type_data', false) ?></span>
+			</td>
+
+      <td width="104" class="rowBoxQty">
+        <?php if ($_item->isAvailable()): ?>
+          <?php if((int)$_item->getBoxQty() > 1): ?>
+            <script>showRowBoxQty = true;</script>
+            <div class="buy-box">
+              <label for=""><input type="checkbox" class="use-box" onclick="changeItensToPruchase(<?php echo $_item->getId(); ?>)" data-value="<?php echo $_item->getBoxQty();?>"/>Comprar caixa <?php echo $_item->getBoxQty();?>un / cx</label>
+            </div>
+          <?php endif; ?>
+        <?php endif; ?>
+      </td>
+      <td width="100">
+        <?php if ($_item->isAvailable()): ?>
+          <?php /*<div class="relative">
+						<input type="text" name="qty" maxlength="12" class="text-center qty" value="0" title="<?php echo $this->__('Qty') ?>" class="form-control qty" />
+						<ul>
+							<li class="first">
+								<a href="javascript:void(0)" class="decrease">-</a>
+							</li>
+							<li class="last">
+								<a href="javascript:void(0)" class="increase">+</a>
+							</li>
+						</ul>
+          </div>*/ ?>
+					<div class="quantity-all-box item-box-<?php echo $_item->getId(); ?>">
+						<div class="quantity-box">
+							<input type="text" class="quantity qty" name="qty" value="0">
+						</div>
+						<div class="controls-box">
+							<ul>
+								<li data-id="<?php echo $_item->getId(); ?>" class="sum qty-action increase">
+
+								</li>
+								<li data-id="<?php echo $_item->getId(); ?>" class="subtraction qty-action decrease">
+
+								</li>
+							</ul>
+						</div>
+					</div>
+        <?php endif; ?>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+<?php endif; ?>

@@ -1,0 +1,130 @@
+<?php
+$attribute = Mage::helper('fvets_attributemenu')->getAttribute();
+$attributeOptionId = Mage::app()->getRequest()->getParam($attribute->getAttributeCode());
+$attributeValue = Mage::helper('fvets_attributemenu')->getAttributeValueByAttributeCodeAndOptionId($attribute->getAttributeCode(), $attributeOptionId);
+
+if (!$attributeOptionId)
+{
+	echo 'No product attribute parameter defined on url';
+	return;
+}
+
+$isUserLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn();
+?>
+
+<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl(); ?>
+
+<?php
+$groupedBrands = $this->getGroupedBrandsByAttribute();
+$pageHasBrands = count($groupedBrands) > 0;
+?>
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('attributemenu_' . $attributeValue)->toHtml(); ?>
+
+<?php if ($pageHasBrands)
+{
+	?>
+
+	<div id="brand-types" class="brand-types default-page-width">
+		<h2><?php echo 'Marcas'; ?></h2>
+
+		<div class="line"></div>
+
+		<?php
+
+		$count = 1;
+		foreach ($groupedBrands as $groupedBrand)
+		{
+			$availableForBuying = $groupedBrand->getIsAvailableForBuying();
+
+			?>
+			<div
+				class="brand <?php echo !$availableForBuying && $isUserLoggedIn ? 'unavailable' : '' ?> <?php echo $count != 1 ? 'not-first' : 'first' ?>">
+				<div class="image">
+					<img alt="<?php echo $groupedBrand->getName(); ?>"
+							 src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $groupedBrand->getThumbnail(); ?>"/>
+				</div>
+				<div class="text">
+					<p><?php echo $groupedBrand->getDescription(); ?></p>
+
+					<?php if ($availableForBuying || !$isUserLoggedIn)
+					{
+						$countParam = count(Mage::app()->getRequest()->getParams());
+						?>
+						<div class="clear"></div>
+						<a class="buy-link brand-link" title="<?php echo $groupedBrand->getName() ?>"
+							 href="<?php echo ($currentUrl . ($countParam > 1 ? ('&cat=' . $groupedBrand->getId()) : ('?cat=' . $groupedBrand->getId()))) ?>">Comprar <?php echo $groupedBrand->getName() ?></a>
+					<?php } ?>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<?php
+			$count++;
+		} ?>
+
+		<div class="back-container">
+			<i class="fa fa-angle-left"></i>
+			<a href="javascript:history.back()" title="Voltar">Voltar para a página anterior</a>
+		</div>
+	</div>
+
+
+	<?php if (!$isUserLoggedIn)
+{
+	?>
+	<script>
+		jQuery(document).ready(function () {
+			jQuery('.brand-link').click(function (el) {
+				el.preventDefault();
+
+				sendAfterLoginUrl(jQuery(this).attr('href'));
+
+				jQuery.featherlight(jQuery('#account-login-box'));
+				return false;
+
+			});
+		});
+
+		function sendAfterLoginUrl(url) {
+			jQuery.post(
+				'<?php echo str_replace('https', 'http', 'customer/account/loginBoxSendAfterUrlPost') ?>',
+				{url:url});
+		}
+	</script>
+<?php
+}
+} else
+{
+	if (!$isUserLoggedIn)
+	{
+		?>
+		<script>
+			jQuery(document).ready(function () {
+				jQuery('.cover-image-link').click(function (el) {
+
+					el.preventDefault();
+					jQuery.featherlight(jQuery('#account-login-box'));
+					return false;
+
+				});
+			});
+		</script>
+	<?php
+	}
+} ?>
+
+<?php if ($pageHasBrands)
+{
+	?>
+	<script>
+		jQuery(document).ready(function () {
+			jQuery('.cover-image-link').click(function (el) {
+				el.preventDefault();
+				//jQuery('html,body').animate({scrollTop: jQuery("#brand-types").offset().top}, 'slow');
+				jQuery.featherlight(jQuery('#account-login-box'));
+				return false;
+			});
+		});
+	</script>
+
+<?php } ?>

@@ -1,0 +1,23 @@
+<?php
+
+$_order = $this->getOrder();
+$_payment = $_order->getPayment();
+$_paymentBlock = Mage::helper('payment')->getInfoBlock($_payment)->setIsSecureMode(true);
+$_paymentBlockHtml = $_paymentBlock->toHtml();
+$_additionalData = unserialize($_payment->getAdditionalData());
+
+
+echo $_paymentBlockHtml;
+
+?>
+
+<?php
+	if (isset($_additionalData['payment_conditions'])) :
+		echo '<p><strong>Condiçoes de pagamento:</strong></p>';
+		foreach($this->helper('fvets_payment')->getCashondeliveryConditions() as $condition) :
+			if ($_additionalData['payment_conditions'] == $condition['id']) :
+				echo '<p>'.$condition['value'].'</p>';
+			endif;
+		endforeach;
+	endif;
+?>

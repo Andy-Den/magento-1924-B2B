@@ -1,0 +1,121 @@
+<div class="row">
+	<div class="basic-information">
+		<ul>
+			<li>
+				<div class="box-title">
+					<h3><?php echo $this->__('Informações Básicas') ?></h3>
+				</div>
+			</li>
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Email') ?></span>
+				</div>
+				<div class="field-editable">
+					<input type="text" value="<?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?>" disabled/>
+				</div>
+			</li>
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Name') ?></span>
+				</div>
+				<div class="field-editable">
+					<input type="text" value="<?php echo $this->htmlEscape($this->getCustomer()->getName()) ?>" disabled/>
+				</div>
+			</li>
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Gender') ?></span>
+				</div>
+				<div class="field-editable">
+					<?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+					<?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?>
+				</div>
+			</li>
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Telephone') ?></span>
+				</div>
+				<div class="field-editable">
+					<input type="text" value="<?php echo $this->htmlEscape($this->getCustomer()->getTelefone()) ?>" disabled/>
+				</div>
+			</li>
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Password') ?></span>
+				</div>
+				<div class="field-editable">
+					<a
+						href="<?php echo $this->getChangePasswordUrl() ?>"><?php echo $this->__('Click here to change password') ?></a>
+				</div>
+			</li>
+		</ul>
+
+		<ul>
+			<li>
+				<div class="box-title">
+					<h3><?php echo $this->__('Informaçoes de Perfil') ?></h3>
+				</div>
+			</li>
+
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Imagem do Perfil') ?></span>
+				</div>
+				<div class="field-editable">
+					<div class="customer-img">
+						<?php
+							$imgUrl = Mage::helper('fvets_customer')->getCustomerImageUrl($this->getCustomer()->getId());
+						?>
+						<form action="<?php echo Mage::helper('fvets_customer')->getImagePostActionUrl() ?>" method="post"
+									id="form-change-image" enctype="multipart/form-data">
+							<img
+								src="<?php echo $imgUrl ?>"
+								title="Foto do Cliente"/>
+							<br>
+							<input type="file" onchange="changeImage();" name="prooffile" id="prooffile"
+										 title="<?php echo $this->__('Alterar Imagem') ?>" class="required-entry form-control"
+										 value="Alterar Foto" style="display: none;"/>
+							<a href="#" id="link-change-img">Alterar Imagem</a>
+							<input type="hidden" name="customer_id" id="customer_id"
+										 value="<?php echo $this->getCustomer()->getId() ?>"/>
+						</form>
+					</div>
+				</div>
+			</li>
+
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('CRMV') ?></span>
+				</div>
+				<div class="field-editable">
+					<input type="text" value="<?php echo $this->htmlEscape($this->getCustomer()->getCrmv()) ?>" disabled/>
+				</div>
+			</li>
+
+			<li>
+				<div class="field-label">
+					<span><?php echo $this->__('Nível') ?></span>
+				</div>
+				<div class="field-editable">
+					<?php echo Mage::helper('review')->getCustomerLevel($this->getCustomer()->getId()) ?>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<?php echo $this->getLayout()->createBlock('review/customer_list')->setTemplate('review/customer/list.phtml')->toHtml(); ?>
+</div>
+
+<script>
+	function changeImage() {
+		jQuery('#form-change-image').submit();
+	}
+
+	jQuery(document).ready(function () {
+		jQuery('#link-change-img').click(function () {
+			this.preventDefault;
+			jQuery('#prooffile').click();
+			return false;
+		});
+	});
+</script>
