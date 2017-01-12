@@ -23,6 +23,7 @@
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+ $imgBoleto = $this->getUrl()."media/wysiwyg/Compet/bank/";
 ?>
 
 <div class="dashboard">
@@ -32,6 +33,35 @@
 	</div>
 	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 	<?php echo $this->getChildHtml('hello') ?>
+	
+	<div class="bankSlip box-account">
++               <header class="box-head">
++                       <h2>2&deg; Via Boleto Bancário</h2>
++               </header>
++               <div class="container">
++                       <div class="bank">
++                               <a href="https://www.santander.com.br/br/resolva-on-line/emissao-de-2-via-de-boleto-de-cobranca" alt="2 via de boleto" target="_blank">
++                                       <img src="<?php echo $imgBoleto."santander.jpg" ?>" alt="Santander">
++                               </a>
++                       </div>
++                       <div class="bank">
++                               <a href="https://www.itau.com.br/servicos/boletos/segunda-via/" alt="2 via de boleto" target="_blank">
++                                       <img src="<?php echo $imgBoleto."itau.jpg" ?>" alt="Itaú">
++                               </a>
++                       </div>
++                       <div class="bank">
++                               <a href="https://www63.bb.com.br/portalbb/boleto/boletos/hc21e,802,3322,10343.bbx" alt="2 via de boleto" target="_blank">
++                                       <img src="<?php echo $imgBoleto."bb.jpg" ?>" alt="Banco do Brasil">
++                               </a>
++                       </div>
++                       <div class="bank">
++                               <a href="https://bloquetoexpresso.caixa.gov.br/bloquetoexpresso/index.jsp" alt="2 via de boleto" target="_blank">
++                                       <img src="<?php echo $imgBoleto."caixa.jpg" ?>" alt="Caixa Economica Federal">
++                               </a>
++                       </div>
++               </div>
++       </div>
+	
 	<?php echo $this->getChildHtml('top') ?>
 
 	<div class="box-account box-info">
