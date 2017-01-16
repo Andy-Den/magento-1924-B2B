@@ -1,8 +1,8 @@
-/media/
-/var/
-/downloader/.cache/
-/new/
+media/
+var/
+downloader/.cache/
+new/
 sitemap.xml
-/nbproject/
-/app/etc/local.xml
-/.idea/
+nbproject/
+app/etc/local.xml
+.idea/
