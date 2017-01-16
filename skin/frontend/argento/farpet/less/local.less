@@ -255,6 +255,18 @@ h2 {
   &.btn-action {
     > span {
       background: #535353;
+      box-shadow: 2px 2px 0 0 #000;
+    }
+    &:hover {
+      span {
+        background: darken(#535353, 10%);
+      }
+    }
+  }
+  &.btn-sub-action-success {
+    background: @defaultColor2;
+    &:hover {
+      background: darken(@defaultColor2, 10%);
     }
   }
 }
@@ -270,5 +282,11 @@ h4 {
     &:hover {
       color: inherit !important;
     }
+  }
+}
+
+.checkout-onepage-success {
+  h1 {
+    color: @defaultColor2;
   }
 }
