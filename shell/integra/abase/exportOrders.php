@@ -20,7 +20,7 @@ $config = array(
 		array (
 			array('type' => 'dynamic', 'function' => 'getOrderId', 'params' => array()),//, 'maxsize' => 6), //Codigo do vendedor
 			array('type' => 'dynamic', 'function' => 'getOrderIdErp', 'params' => array()),//, 'maxsize' => 6), //Codigo do vendedor
-			//array('type' => 'dynamic', 'function' => 'getSalesRep', 'params' => array()),//, 'maxsize' => 6), //Codigo do vendedor
+			array('type' => 'dynamic', 'function' => 'getSalesRep', 'params' => array()),//, 'maxsize' => 6), //Codigo do vendedor
 			array('type' => 'dynamic', 'function' => 'getCustomerIdErp', 'params' => array()), //Codigo do Cliente
 			array('type' => 'dynamic', 'function' => 'getPaymentMethod', 'params' => array()), //ID ERP da forma de pagamento. Boleto, cartão, etc.
 			array('type' => 'dynamic', 'function' => 'getPaymentCondition', 'params' => array()),//ID ERP da condição de pagamento. A vista com 3%, etc
